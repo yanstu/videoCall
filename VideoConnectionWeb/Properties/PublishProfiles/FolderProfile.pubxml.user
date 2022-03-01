@@ -1,0 +1,525 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\wht\视频会议\webFB_20211126</_PublishTargetUrl>
+    <History>True|2022-01-21T07:10:01.8334726Z;True|2022-01-21T10:57:39.7715100+08:00;True|2022-01-20T11:10:34.4483678+08:00;True|2022-01-19T10:55:25.5958535+08:00;True|2022-01-19T10:21:59.0919762+08:00;True|2022-01-19T09:50:43.5394705+08:00;True|2022-01-17T16:31:46.8235467+08:00;True|2022-01-04T08:35:48.5187611+08:00;True|2021-12-31T10:20:34.1770729+08:00;True|2021-12-30T15:28:13.1564583+08:00;True|2021-12-29T20:03:53.1044352+08:00;True|2021-12-29T19:53:46.3374335+08:00;True|2021-12-29T18:26:29.4310322+08:00;True|2021-12-29T15:53:04.6012492+08:00;True|2021-12-29T15:44:25.9888184+08:00;True|2021-12-29T15:43:48.0588092+08:00;True|2021-12-29T14:04:25.4738239+08:00;True|2021-12-29T11:01:05.2206343+08:00;True|2021-12-29T10:00:31.3599998+08:00;True|2021-12-29T09:59:54.8950224+08:00;True|2021-12-29T09:53:35.2975133+08:00;True|2021-12-28T18:00:46.7907487+08:00;True|2021-12-28T17:35:42.2782233+08:00;True|2021-12-28T13:43:42.9076476+08:00;True|2021-12-28T11:14:31.0349433+08:00;True|2021-12-28T10:46:01.6016704+08:00;True|2021-12-27T12:22:48.1636848+08:00;True|2021-12-27T12:12:55.5772834+08:00;True|2021-12-27T11:19:32.7758736+08:00;True|2021-12-22T15:19:25.1936478+08:00;True|2021-12-22T14:52:18.6953636+08:00;True|2021-12-22T14:47:50.2665282+08:00;True|2021-12-22T14:47:41.5894212+08:00;True|2021-12-04T17:11:08.8504750+08:00;True|2021-12-04T17:08:39.2932756+08:00;True|2021-12-04T16:58:38.7912643+08:00;True|2021-12-04T16:56:18.3609284+08:00;True|2021-12-04T16:53:11.8043781+08:00;True|2021-12-03T14:51:42.2321614+08:00;True|2021-12-03T11:00:30.5254448+08:00;True|2021-12-03T10:46:26.2655943+08:00;True|2021-12-02T15:38:12.0777553+08:00;True|2021-12-02T15:07:31.5817429+08:00;True|2021-12-02T14:57:18.9572370+08:00;True|2021-12-02T14:44:30.1813897+08:00;True|2021-12-02T08:48:06.2120312+08:00;True|2021-11-29T15:12:07.4204426+08:00;True|2021-11-26T17:17:46.0804776+08:00;True|2021-11-26T17:16:14.9167284+08:00;True|2021-11-26T14:35:00.5344062+08:00;True|2021-11-26T14:25:12.7731736+08:00;True|2021-11-26T14:21:57.0927328+08:00;True|2021-11-26T14:13:53.7230440+08:00;True|2021-11-26T14:12:30.8833896+08:00;True|2021-11-26T14:03:07.2281246+08:00;True|2021-11-26T14:02:23.8743645+08:00;True|2021-11-26T13:41:06.9749173+08:00;True|2021-11-26T13:33:30.3536899+08:00;True|2021-11-26T13:31:16.1215613+08:00;True|2021-11-26T09:30:37.4551727+08:00;True|2021-11-26T09:28:26.7472644+08:00;True|2021-11-26T09:22:41.0155198+08:00;True|2021-11-26T09:19:55.3085750+08:00;True|2021-11-26T09:16:36.4499558+08:00;True|2021-11-26T09:13:47.8743644+08:00;True|2021-11-26T09:11:35.8557007+08:00;True|2021-11-26T09:09:17.6005338+08:00;True|2021-11-26T09:06:43.2336666+08:00;True|2021-11-25T16:55:51.0764825+08:00;True|2021-11-25T15:57:16.9692945+08:00;True|2021-11-25T13:35:12.1912766+08:00;True|2021-11-25T13:32:07.8081232+08:00;True|2021-11-16T09:14:48.4237792+08:00;True|2021-11-16T09:13:36.8485551+08:00;True|2021-11-16T09:09:48.9554069+08:00;True|2021-11-16T09:09:08.1289818+08:00;True|2021-11-16T09:08:14.3953287+08:00;True|2021-11-16T09:08:01.1221198+08:00;True|2021-11-16T09:07:27.1656056+08:00;True|2021-11-16T09:07:05.6153758+08:00;True|2021-11-16T09:00:02.3711630+08:00;True|2021-11-15T17:15:42.6991990+08:00;True|2021-11-15T16:38:18.5995870+08:00;True|2021-11-15T16:12:39.3261581+08:00;True|2021-11-15T16:03:30.6647408+08:00;True|2021-11-15T16:01:50.5903336+08:00;True|2021-11-15T15:59:59.4600642+08:00;True|2021-11-15T15:57:44.6252305+08:00;True|2021-11-15T15:54:44.4123499+08:00;True|2021-11-15T15:51:27.3621691+08:00;True|2021-11-15T15:47:19.0806419+08:00;True|2021-11-15T15:46:46.3483332+08:00;True|2021-11-15T15:40:50.9145603+08:00;True|2021-11-15T15:36:18.6556761+08:00;True|2021-11-15T15:28:28.0712317+08:00;True|2021-11-15T15:26:18.2393376+08:00;True|2021-11-15T15:22:28.4033867+08:00;True|2021-11-15T15:05:08.1876220+08:00;True|2021-11-15T15:04:47.9140804+08:00;True|2021-11-15T15:02:29.0041429+08:00;True|2021-11-15T14:56:30.3300119+08:00;True|2021-11-15T14:55:00.0115387+08:00;True|2021-11-15T14:54:21.3172590+08:00;True|2021-11-15T14:51:05.3567350+08:00;True|2021-11-15T14:47:51.1329377+08:00;True|2021-11-15T14:44:13.7923382+08:00;True|2021-11-15T14:28:01.5879764+08:00;True|2021-11-15T14:24:44.0119541+08:00;True|2021-11-15T14:20:27.0905994+08:00;True|2021-11-15T14:19:24.9727368+08:00;True|2021-11-15T14:18:50.9789548+08:00;True|2021-11-15T14:15:15.6802612+08:00;True|2021-11-15T14:14:42.5019926+08:00;True|2021-11-15T14:09:45.8667409+08:00;True|2021-11-15T14:09:03.8829084+08:00;True|2021-11-15T14:07:27.0322686+08:00;True|2021-11-15T14:06:24.7284225+08:00;True|2021-11-15T14:05:26.2139336+08:00;True|2021-11-15T14:03:20.6552154+08:00;True|2021-11-15T13:49:24.1005595+08:00;True|2021-11-15T13:44:08.9956708+08:00;True|2021-11-15T13:41:44.7218097+08:00;True|2021-11-15T13:40:45.2314519+08:00;True|2021-11-15T13:40:00.1460917+08:00;True|2021-11-15T13:39:41.6419038+08:00;True|2021-11-15T13:38:45.2770992+08:00;True|2021-11-15T13:36:19.4019102+08:00;True|2021-11-15T13:34:56.7686674+08:00;True|2021-11-15T13:33:14.2173288+08:00;True|2021-11-15T13:32:43.9572551+08:00;True|2021-11-15T13:32:07.9262849+08:00;True|2021-11-15T13:25:12.6483816+08:00;True|2021-11-15T13:22:15.7399059+08:00;True|2021-11-15T13:19:52.0827703+08:00;True|2021-11-15T13:17:06.7067243+08:00;True|2021-11-15T13:14:03.0533515+08:00;True|2021-11-15T11:44:36.8363403+08:00;True|2021-11-15T11:40:12.9873664+08:00;True|2021-11-15T11:39:09.9223822+08:00;True|2021-11-15T11:38:34.6150200+08:00;True|2021-11-15T11:32:06.0581071+08:00;True|2021-11-15T11:12:44.9634463+08:00;True|2021-11-15T11:10:14.8637016+08:00;True|2021-11-15T11:08:56.2191512+08:00;True|2021-11-15T11:05:04.2868325+08:00;True|2021-11-15T10:38:13.4290504+08:00;True|2021-11-15T10:16:34.0968406+08:00;True|2021-11-15T09:51:33.5289568+08:00;True|2021-11-14T12:50:20.5422220+08:00;True|2021-11-11T15:34:49.7559047+08:00;True|2021-11-11T15:34:41.9169044+08:00;True|2021-11-11T15:30:20.0883780+08:00;True|2021-11-11T15:25:25.1611903+08:00;True|2021-11-11T15:11:39.5110089+08:00;True|2021-11-11T15:08:25.3377339+08:00;True|2021-11-11T15:07:10.9348157+08:00;True|2021-11-11T15:05:24.8368133+08:00;True|2021-11-11T14:56:31.4407893+08:00;True|2021-11-11T14:50:09.1199229+08:00;True|2021-11-11T14:45:30.1561366+08:00;True|2021-11-11T14:41:36.1199436+08:00;True|2021-11-11T14:39:13.8991053+08:00;True|2021-11-11T14:22:16.7749862+08:00;True|2021-11-11T14:15:34.1530096+08:00;True|2021-11-11T14:13:40.9388783+08:00;True|2021-11-11T14:11:07.4902658+08:00;</History>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Microsoft.AspNet.SignalR.Core.dll">
+      <publishTime>11/25/2021 13:31:23</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.SignalR.Core.pdb">
+      <publishTime>11/25/2021 13:31:23</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.SignalR.StackExchangeRedis.dll">
+      <publishTime>11/25/2021 13:31:23</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.SignalR.StackExchangeRedis.pdb">
+      <publishTime>11/25/2021 13:31:23</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.SignalR.SystemWeb.dll">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.SignalR.SystemWeb.pdb">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
+      <publishTime>11/25/2021 13:31:22</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.dll">
+      <publishTime>11/25/2021 13:31:24</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Host.SystemWeb.dll">
+      <publishTime>11/25/2021 13:31:24</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.dll">
+      <publishTime>11/25/2021 13:31:22</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>11/25/2021 13:31:16</publishTime>
+    </File>
+    <File Include="bin/Owin.dll">
+      <publishTime>11/25/2021 13:31:24</publishTime>
+    </File>
+    <File Include="bin/Pipelines.Sockets.Unofficial.dll">
+      <publishTime>11/25/2021 13:31:17</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.exe">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.exe.config">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.rsp">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/csi.exe">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/csi.exe.config">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/csi.rsp">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.Scripting.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.Scripting.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.amd64.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.x86.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Managed.Core.targets">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Win32.Primitives.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.AppContext.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Collections.Immutable.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Console.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Diagnostics.DiagnosticSource.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Diagnostics.FileVersionInfo.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Diagnostics.StackTrace.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Globalization.Calendars.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.IO.Compression.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.IO.Compression.ZipFile.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.IO.FileSystem.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.IO.FileSystem.Primitives.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Net.Http.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Net.Sockets.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Reflection.Metadata.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Runtime.InteropServices.RuntimeInformation.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Security.Cryptography.Algorithms.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Security.Cryptography.Encoding.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Security.Cryptography.Primitives.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Security.Cryptography.X509Certificates.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Text.Encoding.CodePages.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Threading.Tasks.Extensions.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.ValueTuple.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Xml.ReaderWriter.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Xml.XmlDocument.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Xml.XPath.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Xml.XPath.XDocument.dll">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.exe">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.exe.config">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.rsp">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe.config">
+      <publishTime>11/25/2021 13:31:21</publishTime>
+    </File>
+    <File Include="bin/StackExchange.Redis.dll">
+      <publishTime>11/25/2021 13:31:17</publishTime>
+    </File>
+    <File Include="bin/System.Buffers.dll">
+      <publishTime>11/25/2021 13:31:16</publishTime>
+    </File>
+    <File Include="bin/System.Diagnostics.PerformanceCounter.dll">
+      <publishTime>11/25/2021 13:31:23</publishTime>
+    </File>
+    <File Include="bin/System.IO.Pipelines.dll">
+      <publishTime>11/25/2021 13:31:23</publishTime>
+    </File>
+    <File Include="bin/System.Memory.dll">
+      <publishTime>11/25/2021 13:31:24</publishTime>
+    </File>
+    <File Include="bin/System.Numerics.Vectors.dll">
+      <publishTime>11/25/2021 13:31:23</publishTime>
+    </File>
+    <File Include="bin/System.Runtime.CompilerServices.Unsafe.dll">
+      <publishTime>11/25/2021 13:31:24</publishTime>
+    </File>
+    <File Include="bin/System.Threading.Channels.dll">
+      <publishTime>11/25/2021 13:31:23</publishTime>
+    </File>
+    <File Include="bin/System.Threading.Tasks.Extensions.dll">
+      <publishTime>11/25/2021 13:31:24</publishTime>
+    </File>
+    <File Include="bin/VideoConnectionWeb.dll">
+      <publishTime>01/21/2022 15:10:00</publishTime>
+    </File>
+    <File Include="bin/VideoConnectionWeb.pdb">
+      <publishTime>01/21/2022 15:10:00</publishTime>
+    </File>
+    <File Include="css/bootstrap-material-design.min.css">
+      <publishTime>11/25/2021 13:31:09</publishTime>
+    </File>
+    <File Include="css/index.css">
+      <publishTime>12/28/2021 13:40:37</publishTime>
+    </File>
+    <File Include="css/mobile.css">
+      <publishTime>12/28/2021 13:42:50</publishTime>
+    </File>
+    <File Include="css/room.css">
+      <publishTime>12/29/2021 10:35:41</publishTime>
+    </File>
+    <File Include="css/room_mobile.css">
+      <publishTime>12/29/2021 10:35:36</publishTime>
+    </File>
+    <File Include="data/mock.json">
+      <publishTime>11/25/2021 13:31:12</publishTime>
+    </File>
+    <File Include="font/iconfont.css">
+      <publishTime>11/25/2021 13:31:09</publishTime>
+    </File>
+    <File Include="font/iconfont.ttf">
+      <publishTime>11/25/2021 13:31:09</publishTime>
+    </File>
+    <File Include="font/iconfont.woff">
+      <publishTime>11/25/2021 13:31:09</publishTime>
+    </File>
+    <File Include="font/iconfont.woff2">
+      <publishTime>11/25/2021 13:31:09</publishTime>
+    </File>
+    <File Include="Handler/RedisHandler.ashx">
+      <publishTime>12/22/2021 15:05:26</publishTime>
+    </File>
+    <File Include="img/ALLmic.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/auodio_all.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/big-camera-off.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/big-camera-on.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/big-mic-off.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/big-mic-on.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/camera-fz.png">
+      <publishTime>12/01/2021 17:30:12</publishTime>
+    </File>
+    <File Include="img/camera-max.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/camera-off.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/camera-on.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/camera-popover.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/camera.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/check-mic.png">
+      <publishTime>12/02/2021 10:48:59</publishTime>
+    </File>
+    <File Include="img/clearzjr.png">
+      <publishTime>12/29/2021 14:01:20</publishTime>
+    </File>
+    <File Include="img/code.jpg">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/fail.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/loading.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/logo.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/logout.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/mic-green.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/mic-off.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/mic-on.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/mic-popover.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/mic.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/right-top-arrow.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/screen-off.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/screen-on.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/sf_apply_ic.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/sf_ic_menu.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/sf_ic_message.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/sf_ic_message_black.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/sf_ic_record.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/sf_menu_close_red.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/shot.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/success.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/trtcmeeting_ic_camera_off.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/trtcmeeting_ic_camera_on.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/trtcmeeting_ic_meeting_mic_off.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/trtcmeeting_ic_member.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/trtcmeeting_ic_mic_on.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/trtcmeeting_ic_more.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="img/tx.png">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="index.aspx">
+      <publishTime>01/21/2022 10:55:48</publishTime>
+    </File>
+    <File Include="index.html">
+      <publishTime>12/02/2021 17:31:00</publishTime>
+    </File>
+    <File Include="js/ApiHelper.js">
+      <publishTime>12/29/2021 09:18:45</publishTime>
+    </File>
+    <File Include="js/bootstrap-material-design.js">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="js/common-mobile.js">
+      <publishTime>12/28/2021 10:43:46</publishTime>
+    </File>
+    <File Include="js/common.js">
+      <publishTime>01/04/2022 08:26:30</publishTime>
+    </File>
+    <File Include="js/debug/GenerateTestUserSig.js">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="js/device-testing.js">
+      <publishTime>12/30/2021 15:38:27</publishTime>
+    </File>
+    <File Include="js/iconfont.js">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="js/index.js">
+      <publishTime>01/19/2022 16:24:45</publishTime>
+    </File>
+    <File Include="js/jquery-3.2.1.min.js">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="js/lib-generate-test-usersig.min.js">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="js/popper.js">
+      <publishTime>11/25/2021 13:31:15</publishTime>
+    </File>
+    <File Include="js/presetting.js">
+      <publishTime>12/09/2021 10:20:39</publishTime>
+    </File>
+    <File Include="js/rtc-client-mobile.js">
+      <publishTime>01/21/2022 10:57:23</publishTime>
+    </File>
+    <File Include="js/rtc-client.js">
+      <publishTime>01/21/2022 10:56:39</publishTime>
+    </File>
+    <File Include="js/rtc-detection.js">
+      <publishTime>12/15/2021 10:44:54</publishTime>
+    </File>
+    <File Include="js/share-client.js">
+      <publishTime>12/15/2021 10:45:11</publishTime>
+    </File>
+    <File Include="js/trtc-index.js">
+      <publishTime>06/29/2021 13:08:36</publishTime>
+    </File>
+    <File Include="js/trtc-new.js">
+      <publishTime>12/03/2021 21:00:13</publishTime>
+    </File>
+    <File Include="js/trtc.js">
+      <publishTime>01/17/2022 14:20:30</publishTime>
+    </File>
+    <File Include="lib/layui/css/layui.css">
+      <publishTime>05/30/2021 21:18:06</publishTime>
+    </File>
+    <File Include="lib/layui/css/modules/code.css">
+      <publishTime>05/30/2021 21:18:06</publishTime>
+    </File>
+    <File Include="lib/layui/css/modules/laydate/default/laydate.css">
+      <publishTime>05/30/2021 21:18:09</publishTime>
+    </File>
+    <File Include="lib/layui/css/modules/layer/default/icon-ext.png">
+      <publishTime>05/30/2021 21:18:06</publishTime>
+    </File>
+    <File Include="lib/layui/css/modules/layer/default/icon.png">
+      <publishTime>05/30/2021 21:18:06</publishTime>
+    </File>
+    <File Include="lib/layui/css/modules/layer/default/layer.css">
+      <publishTime>05/30/2021 21:18:06</publishTime>
+    </File>
+    <File Include="lib/layui/css/modules/layer/default/loading-0.gif">
+      <publishTime>05/30/2021 21:18:09</publishTime>
+    </File>
+    <File Include="lib/layui/css/modules/layer/default/loading-1.gif">
+      <publishTime>05/30/2021 21:18:09</publishTime>
+    </File>
+    <File Include="lib/layui/css/modules/layer/default/loading-2.gif">
+      <publishTime>05/30/2021 21:18:09</publishTime>
+    </File>
+    <File Include="lib/layui/font/iconfont.eot">
+      <publishTime>05/30/2021 21:18:07</publishTime>
+    </File>
+    <File Include="lib/layui/font/iconfont.svg">
+      <publishTime>05/30/2021 21:18:06</publishTime>
+    </File>
+    <File Include="lib/layui/font/iconfont.ttf">
+      <publishTime>05/30/2021 21:18:09</publishTime>
+    </File>
+    <File Include="lib/layui/font/iconfont.woff">
+      <publishTime>05/30/2021 21:18:09</publishTime>
+    </File>
+    <File Include="lib/layui/font/iconfont.woff2">
+      <publishTime>05/30/2021 21:18:09</publishTime>
+    </File>
+    <File Include="lib/layui/layui.js">
+      <publishTime>05/30/2021 21:18:08</publishTime>
+    </File>
+    <File Include="mobile.aspx">
+      <publishTime>01/21/2022 10:55:54</publishTime>
+    </File>
+    <File Include="mobile.html">
+      <publishTime>12/02/2021 08:29:07</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.6.4.js">
+      <publishTime>11/25/2021 13:31:09</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.6.4.min.js">
+      <publishTime>11/25/2021 13:31:09</publishTime>
+    </File>
+    <File Include="Scripts/jquery.signalR-2.4.2.js">
+      <publishTime>11/25/2021 13:31:09</publishTime>
+    </File>
+    <File Include="Scripts/jquery.signalR-2.4.2.min.js">
+      <publishTime>11/25/2021 13:31:09</publishTime>
+    </File>
+    <File Include="show.html">
+      <publishTime>11/25/2021 13:31:09</publishTime>
+    </File>
+    <File Include="Test.aspx">
+      <publishTime>11/25/2021 13:31:09</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>01/21/2022 15:10:01</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
