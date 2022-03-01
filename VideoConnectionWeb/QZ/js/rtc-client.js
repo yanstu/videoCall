@@ -139,10 +139,7 @@ class RtcClient {
    * 推送
    */
   async publish() {
-    if (this.isPublished_) {
-      console.warn("已经给推送过了");
-      return;
-    }
+    if (this.isPublished_) return;
     try {
       await this.client_.publish(this.localStream_);
       this.playVideo(this.localStream_, oneself_.CHID);
@@ -318,16 +315,13 @@ class RtcClient {
             event.type == "audio" ? "麦克风" : "摄像头"
           } 状态改变为 ${event.state == "PAUSED" ? "停止" : "播放"}`
         );
-
-        // 如果能监听到有人恢复播放的通知，所以网络连接已恢复
+        // 如果能监听到有人恢复播放的通知，说明网络连接已恢复
         if (event.state == "PLAYING") {
           isDisconnect = false;
         }
-
         videoHandle(event.state == "PLAYING", userId);
-
         try {
-          event.state === "PAUSED" && resumeStreams();
+          event.state === "PAUSED" && this.resumeStreams();
         } catch (error) {}
       });
     });

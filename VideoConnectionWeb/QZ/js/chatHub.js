@@ -9,13 +9,7 @@ if (!chatHub || !chatHub.client) {
 // 收听
 chatHub.client.broadcastMessage = function (message, channelss) {
   if (channelss == oneself_.RoomId) {
-    var mess = JSON.parse(message);
-    mess.reCode != 25 &&
-      mess.reCode != 26 &&
-      mess.reCode != 27 &&
-      mess.reCode != 14 &&
-      mess.reCode != 05 &&
-      console.log(mess.reCode);
+    let mess = JSON.parse(message);
     switch (mess.reCode) {
       /*//设置主讲人
       case "01":

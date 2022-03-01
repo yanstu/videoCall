@@ -32,7 +32,7 @@
           @apply bg-[#344664] hidden drop-shadow-md fixed top-[10%] left-[3%] z-40 w-[25%] h-[80%] flex flex-col items-center;
         }
         .modalbox-title {
-          @apply w-full h-[7%] flex justify-center items-center bg-[#1e293b] font-bold text-[25px] text-[#54a2d5];
+          @apply w-full h-[7%] flex justify-center items-center bg-[#1e293b] font-bold text-[1.3rem] text-[#54a2d5];
         }
       }
     </style>
@@ -43,26 +43,26 @@
         <img
           id="mean_btn"
           class="ml-4 mr-4 hover:invert-[50%]"
-          style="width: 45px; height: 45px"
+          style="width: 1.95rem; height: 1.95rem"
           src="./img/sf_ic_menu.png"
         />
         <img
           id="testing_btn"
           class="hover:invert-[50%]"
-          style="width: 45px; height: 45px"
+          style="width: 1.95rem; height: 1.95rem"
           src="./img/check-mic.png"
         />
       </div>
       <div
         id="roomTitle"
-        class="flex-1 text-[40px] text-white font-bold flex items-center justify-center"
+        class="flex-1 text-[1.7rem] text-white font-bold flex items-center justify-center"
       >
         视频连线测试2
       </div>
       <div class="flex-1 flex items-center justify-end">
         <div
           id="exit-btn"
-          class="bg-[#1a5fc7] mr-4 w-[14%] h-[45%] hover:bg-[#1256bd] flex justify-center items-center text-white pl-3 pr-3"
+          class="bg-[#1a5fc7] mr-4 w-[14%] h-[50%] hover:bg-[#1256bd] text-[0.875rem] flex justify-center items-center text-white pl-3 pr-3"
         >
           退出
         </div>
@@ -382,41 +382,42 @@
         </div>
         <div
           id="member-list"
-          class="col-div w-[100%] text-[18px] h-[93%] p-1 overflow-scroll overscroll-contain text-white"
+          class="col-div w-[100%] text-[0.875rem] h-[93%] p-1 overflow-scroll overscroll-contain text-white"
         >
           <!-- 成员列表成员模板 -->
           <div
             id="member-me"
             style="display: none;"
-            class="flex border-b-[#06b6d4] border-b-[1px] pl-3 pr-3 w-full"
+            class="flex border-b-[#06b6d4] border-b-[1px] pl-2 pr-2 w-full"
           >
             <div
-              class="row-div member flex items-center h-[4rem]"
+              class="row-div member flex items-center h-[3.5rem]"
               style="width: 100%;justify-content: space-between"
             >
               <div class="member-id" style="color: #ed3e40;">user_7157526(我)</div>
               <div
-                class="row-div flex h-full justify-center items-center"
+                class="row-div flex h-full justify-c
+                enter items-center"
               >
                 <img
                   class="member-video_btn"
-                  style="height: 30px"
+                  style="height: 1.5rem"
                   src="./img/camera-on.png"
                   alt=""
                 />
                 <img
-                class="member-audio-btn ml-[18px]"
-                style="height: 30px"
+                class="member-audio-btn ml-[0.8rem]"
+                style="height: 1.5rem"
                 src="./img/mic-on.png"
                 alt=""
               />
-              <svg style="display: none;" class="faxiaoxi_btn icon text-[35px] text-[#bfbfbf] ml-[18px]" aria-hidden="true">
+              <svg style="display: none;" class="faxiaoxi_btn icon text-[1.6rem] text-[#bfbfbf] ml-[0.8rem]" aria-hidden="true">
                 <use xlink:href="#icon-faxiaoxi"></use>
               </svg>
-              <svg style="display: none;" class="tidiao_btn icon text-[35px] text-[#bfbfbf] ml-[18px]" aria-hidden="true">
+              <svg style="display: none;" class="tidiao_btn icon text-[1.6rem] text-[#bfbfbf] ml-[0.8rem]" aria-hidden="true">
                 <use xlink:href="#icon-tidiao"></use>
               </svg>
-              <div style="display: none;" class="shezhizhujiangren_btn bg-[#2d71d8] hover:!bg-[#0058db] w-[130px] h-[50%] ml-[18px] text-white flex justify-center items-center">设置主讲人</div>
+              <div style="display: none;" class="shezhizhujiangren_btn bg-[#2d71d8] hover:!bg-[#0058db] pl-[1rem] pr-[1rem] h-[50%] ml-[0.8rem] text-white flex justify-center items-center">设置主讲人</div>
             </div>
           </div>
         </div>
@@ -430,11 +431,11 @@
         </div>
         <div id="speakerList" class="flex flex-col h-[93%] overflow-scroll overscroll-contain">
           <!-- 发言人模板 -->
-          <div id="fayan_muban" style="display: none;" class="border-b-[#06b6d4] border-b-[1px] flex justify-between w-full h-[4rem] items-center pl-3 pr-3">
-            <div class="fayanrenxingming text-white text-[16px]">发言人姓名</div>
+          <div id="fayan_muban" style="display: none;" class="border-b-[#06b6d4] border-b-[1px] flex justify-between w-full h-[3.5rem] items-center pl-2 pr-2 text-[0.875rem]">
+            <div class="fayanrenxingming text-white">发言人姓名</div>
             <div class="flex h-full justify-center items-center">
-              <div class="yunxufayan w-[100px] bg-[#1567e3] hover:bg-[#0058db] h-[50%] flex justify-center items-center text-white mr-3">允许发言</div>
-              <div class="buyunxufayan w-[100px] bg-[#1567e3] hover:bg-[#0058db] h-[50%] flex justify-center items-center text-white">拒绝</div>
+              <div class="yunxufayan pl-[1rem] pr-[1rem] bg-[#1567e3] hover:bg-[#0058db] h-[50%] flex justify-center items-center text-white mr-3">允许发言</div>
+              <div class="buyunxufayan pl-[1rem] pr-[1rem] bg-[#1567e3] hover:bg-[#0058db] h-[50%] flex justify-center items-center text-white">拒绝</div>
             </div>
           </div>
         </div>
@@ -445,28 +446,28 @@
         <div class="modalbox-title">
           消息列表
         </div>
-        <div id="messageList" class="h-[86%] w-full overflow-scroll">
+        <div id="messageList" class="h-[86%] w-full overflow-scroll pb-3">
           <!-- 消息模板 -->
-          <div id="message_muban" style="display: none;" class="flex flex-col h-auto pl-3 pr-3 pt-3">
+          <div id="message_muban" style="display: none;" class="flex flex-col h-auto pl-2 pr-2 pt-2 text-[0.875rem]">
             <div class="message_time mb-2 mt-1 h-[20%] text-white flex justify-center items-center">
               2022-02-27 09:18:12
             </div>
             <div class="message_info h-[70%] flex flex-row w-full justify-end items-center">
-              <div class="message_neirong text-white m-3 bg-[#1d92ff] pl-3 pr-3 pt-1 pb-1 min-h-[6rem] w-[80%]">
+              <div class="message_neirong text-white mt-1 mr-2 mb-1 bg-[#226fe2] pl-1 pr-1 pt-1 pb-1 min-h-[5.7rem] w-[80%]">
                 这个是内这个是内这个是内内这个
               </div>
               <div class="message_touxiang bg-[#375587] flex items-center justify-center w-[20%] flex-col h-full">
                 <svg class="icon text-[4.5rem] text-white" aria-hidden="true">
                   <use xlink:href="#icon-touxiang"></use>
                 </svg>
-                <div class="message_xingming h-[27%] mb-[3%] w-auto text-white overflow-auto">
+                <div class="message_xingming h-[27%] mb-[3%] w-auto text-white overflow-auto text-[0.675rem]">
                   贵州省人大
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="h-[7%] flex w-full justify-between items-center pl-3 pr-3 bg-[#1e293b]">
+        <div class="h-[7%] flex w-full justify-between items-center pl-3 pr-3 bg-[#1e293b] text-[0.875rem]">
           <input id="xiaoxineirong" class="mr-3 w-[80%] h-[50%] pl-2 pr-2" maxlength="200"/>
           <div id="fasongxiaoxi" class="w-[20%] bg-[#1567e3] hover:bg-[#0058db] h-[50%] flex justify-center items-center text-white">发送</div>
         </div>
@@ -490,32 +491,32 @@
           class="absolute w-full h-full top-0 left-0 shadow bg-black opacity-10 pointer-events-none"
         ></div>
         <div class="toolbar_btn" id="mic_btn">
-          <svg class="icon text-[40px] text-white" aria-hidden="true">
+          <svg class="icon text-[25px] text-white" aria-hidden="true">
             <use xlink:href="#icon-maikefeng"></use>
           </svg>
-          <span class="mt-2 text-[16px]">静音</span>
+          <span class="mt-1 text-[14px]">静音</span>
         </div>
         <div class="toolbar_btn" id="video_btn">
-          <svg class="icon text-[40px] text-white" aria-hidden="true">
+          <svg class="icon text-[25px] text-white" aria-hidden="true">
             <use xlink:href="#icon-xiangji"></use>
           </svg>
-          <span class="mt-2 text-[16px]">摄像头</span>
+          <span class="mt-1 text-[14px]">摄像头</span>
         </div>
         <div class="toolbar_btn" style="display: none;" id="fanzhuan_btn">
-          <svg class="icon text-[40px] text-white" aria-hidden="true">
+          <svg class="icon text-[25px] text-white" aria-hidden="true">
             <use xlink:href="#icon-fanzhuan"></use>
           </svg>
-          <span class="mt-2 text-[16px]">翻转</span>
+          <span class="mt-1 text-[14px]">翻转</span>
         </div>
         <div class="toolbar_btn" id="canyuzhe_btn">
-          <svg class="icon text-[40px] text-white" aria-hidden="true">
+          <svg class="icon text-[25px] text-white" aria-hidden="true">
             <use xlink:href="#icon-canyuzhe"></use>
           </svg>
-          <span class="mt-2 text-[16px]">参与者</span>
+          <span class="mt-1 text-[14px]">参与者</span>
         </div>
         <div class="toolbar_btn" style="display: none;" id="fayanliebiao_btn">
           <div class="relative">
-            <svg class="icon text-[40px] text-white" aria-hidden="true">
+            <svg class="icon text-[25px] text-white" aria-hidden="true">
               <use xlink:href="#icon-fayanliebiao"></use>
             </svg>
             <div
@@ -524,11 +525,11 @@
                   class="w-[10px] h-[10px] rounded-full bg-red-600 absolute right-0 top-0"
                 ></div>
           </div>
-          <span class="mt-2 text-[16px]">发言列表</span>
+          <span class="mt-1 text-[14px]">发言列表</span>
         </div>
         <div class="toolbar_btn" id="xiaoxi_btn">
           <div class="relative">
-            <svg class="icon text-[40px] text-white " aria-hidden="true">
+            <svg class="icon text-[25px] text-white " aria-hidden="true">
               <use xlink:href="#icon-xiaoxi"></use>
             </svg>
             <div
@@ -537,25 +538,25 @@
                   class="w-[10px] h-[10px] rounded-full bg-red-600 absolute right-0 top-0"
                 ></div>
           </div>
-          <span class="mt-2 text-[16px]">消息</span>
+          <span class="mt-1 text-[14px]">消息</span>
         </div>
         <div class="toolbar_btn" id="shenqingfayan_btn">
-          <svg class="icon text-[40px] text-white" aria-hidden="true">
+          <svg class="icon text-[25px] text-white" aria-hidden="true">
             <use xlink:href="#icon-shenqingfayan"></use>
           </svg>
-          <span class="mt-2 text-[16px]">申请发言</span>
+          <span class="mt-1 text-[14px]">申请发言</span>
         </div>
         <div class="toolbar_btn" style="display: none;" id="guanbimaikefeng_btn">
-          <svg class="icon text-[40px] text-white" aria-hidden="true">
+          <svg class="icon text-[25px] text-white" aria-hidden="true">
             <use xlink:href="#icon-guanbimaikefeng"></use>
           </svg>
-          <span class="mt-2 text-[16px]">关闭麦克风</span>
+          <span class="mt-1 text-[14px]">关闭麦克风</span>
         </div>
         <div class="toolbar_btn" style="display: none;" id="quxiaozhujiangren_btn">
-          <svg class="icon text-[40px] text-white" aria-hidden="true">
+          <svg class="icon text-[25px] text-white" aria-hidden="true">
             <use xlink:href="#icon-quxiaozhujiangren"></use>
           </svg>
-          <span class="mt-2 text-[16px]">取消主讲人</span>
+          <span class="mt-1 text-[14px]">取消主讲人</span>
         </div>
       </div>
     </footer>

@@ -8,7 +8,7 @@
     isDisconnect = true;
   });
 
-  window.setInterval(() => {
+  /*window.setInterval(() => {
     {
       menuHideTimer.count++;
       if (menuHideTimer.count == menuHideTimer.time) {
@@ -34,7 +34,7 @@
   document.onkeydown = function () {
     menuHideTimer.count = 0;
     $("#toolbar").show();
-  };
+  };*/
 
   $("#testing_btn").on("click", (e) => {
     startDeviceConnect();
