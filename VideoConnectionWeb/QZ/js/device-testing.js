@@ -336,7 +336,6 @@ function deviceDialogInit() {
         .catch((err) => {
           console.log("getUserMedia err", err.name, err.message);
           handleGetUserMediaError(err);
-          leave();
         });
     }
   }

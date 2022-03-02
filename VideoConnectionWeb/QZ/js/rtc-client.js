@@ -220,25 +220,12 @@ class RtcClient {
   handleEvents() {
     this.client_.on("error", (err) => {
       console.error(err);
-      alert(err);
     });
-    this.client_.on("client-banned", (err) => {
-      console.error("客户端已禁止使用 " + err);
-      if (!isHidden()) {
-        alert("您已被踢出房间，可能是被挤下线了");
+    this.client_.on("client-banned", () => {
+      layer.msg("您已被挤下线", { icon: 2 });
+      setTimeout(() => {
         leave();
-      } else {
-        document.addEventListener(
-          "visibilitychange",
-          () => {
-            if (!isHidden()) {
-              alert("您已被踢出房间，可能是被挤下线了");
-              leave();
-            }
-          },
-          false
-        );
-      }
+      }, 1000);
     });
 
     // 当用户加入房间时触发

@@ -19,8 +19,10 @@ chatHub.client.broadcastMessage = function (message, channelss) {
       //踢出用户
       case "07":
         if (mess.ReUserid == oneself_.CHID) {
-          alert("您已被踢出房间");
-          leave();
+          layer.msg("您已被踢出房间", { icon: 2 });
+          setTimeout(() => {
+            leave();
+          }, 1000);
         }
         break;
       //关闭所有人麦克风
@@ -75,8 +77,10 @@ chatHub.client.broadcastMessage = function (message, channelss) {
         break;
       //踢出所有用户
       case "28":
-        alert("您已被踢出房间");
-        leave();
+        layer.msg("您已被踢出房间", { icon: 2 });
+        setTimeout(() => {
+          leave();
+        }, 1000);
         break;
     }
   }
@@ -161,8 +165,8 @@ function huoquxiaoxi(mess) {
       mess.Content +
         " (发送到：" +
         (mess.SendUserID == ZCRID_
-          ? fasonggeishei
-            ? getUserInfo(fasonggeishei).UserName
+          ? mess.ReUserid
+            ? getUserInfo(mess.ReUserid).UserName
             : "全部人"
           : "主持人") +
         ")"
@@ -298,7 +302,7 @@ function quxiaozhujiangren() {
   });
 }
 
-// 踢掉某个比
+// 踢掉某人
 function tidiao(ReUserid) {
   redisFB({
     reCode: "07",

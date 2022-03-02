@@ -224,12 +224,6 @@
       isMicOn = !isMicOn;
     })
   );
-  //logout
-  $("#logout-btn").on("click", () => {
-    leave();
-    $("#room-root").hide();
-    $("#login-root").show();
-  });
   //chrome60以下不支持popover，防止error
   if (getBrowser().browser == "Chrome" && getBrowser().version < "60") return;
   if (getBrowser().browser === "Firefox" && getBrowser().version < "56") return;

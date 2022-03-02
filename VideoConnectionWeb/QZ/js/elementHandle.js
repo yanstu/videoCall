@@ -73,7 +73,13 @@ function videoHandle(on, userId) {
 function addMemberView(ID, UserName) {
   let member = $("#member-me").clone();
   member.attr("id", "member_" + ID);
-  member.find(".member-id").html(UserName + (ID == ZJRID_ ? " (主讲人)" : ""));
+  member.find(".member-id").html(
+    (ID == ZJRID_
+      ? `<svg class="icon text-[0.9rem] text-[#ffa500] mr-1" aria-hidden="true">
+          <use xlink:href="#icon-zhujiangren"></use>
+        </svg>`
+      : "") + UserName
+  );
   if (ID == ZCRID_) {
     member.find(".faxiaoxi_btn").remove();
     member.find(".tidiao_btn").remove();
@@ -165,7 +171,7 @@ function onlineOrOfline(online, userId) {
   }
   $("#member_" + userId)
     .find(".member-id")
-    .attr("style", `color: ${online ? "#ffffff" : "#6e7179"};`);
+    .attr("style", `color: ${online ? "#ffffff" : "#7c7f85"};`);
   if (ZJRID_ != userId) {
     online ? $("#mask_" + userId).hide() : $("#mask_" + userId).show();
   }

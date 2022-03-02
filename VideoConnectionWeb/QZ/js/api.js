@@ -63,8 +63,10 @@ function ajaxMethod(str, data = {}, callback) {
       callback && callback(res);
     },
     error: () => {
-      alert("请求超时或没有网络链接");
-      location.reload();
+      layer.msg("请求超时或没有网络链接", { icon: 2 });
+      setTimeout(() => {
+        location.reload();
+      }, 1000);
     },
   });
 }
