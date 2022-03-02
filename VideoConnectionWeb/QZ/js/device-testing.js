@@ -128,6 +128,9 @@ async function deviceTestingInit() {
     // safari和firefox浏览器跳过扬声器检测
     noVoiceDevice ? startMicTesting() : startVoiceTesting();
   });
+  $("#reload").on("click", function () {
+    location.reload();
+  });
   // 播放器检测失败/成功
   $("#voice-fail, #voice-success").on("click", function () {
     voiceTestingResult.statusResult = $(this).attr("id") === "voice-success";
@@ -996,14 +999,5 @@ function handleGetUserMediaError(error) {
     default:
       msg = "初始化本地流时遇到未知错误, 请重试。";
   }
-
-  layer.confirm(
-    msg + "\n【请退出重新进入并允许授权】",
-    {
-      btn: ["确定"],
-    },
-    () => {
-      leave();
-    }
-  );
+  layer.msg(msg);
 }

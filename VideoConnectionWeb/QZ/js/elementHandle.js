@@ -6,7 +6,8 @@ function showOrHide() {
 
   // 是否显示申请发言按钮
   var jiadezhujiangren =
-    ZJRID_ == oneself_.CHID && roomDetail_.SpeakerName != oneself_.XM;
+    (ZJRID_ == oneself_.CHID && roomDetail_.SpeakerName != oneself_.XM) ||
+    ZJRID_ != oneself_.CHID;
   if (roomDetail_.AllowProposer == "1" && !oneself_.IsZCR && jiadezhujiangren) {
     $("#shenqingfayan_btn").show();
   } else {
