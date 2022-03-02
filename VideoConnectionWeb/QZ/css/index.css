@@ -819,8 +819,8 @@
   font-size: 13px;
 }
 
-#mic_btn:hover,
-#video_btn:hover,
+/*#mic_btn:hover,
+#video_btn:hover,*/
 #xiaoxi_btn:hover,
 #shenqingfayan_btn:hover,
 #guanbimaikefeng_btn:hover,
@@ -832,8 +832,8 @@
   color: #bdb8b8;
 }
 
-#mic_btn:hover svg,
-#video_btn:hover svg,
+/*#mic_btn:hover svg,
+#video_btn:hover svg,*/
 #fanzhuan_btn:hover svg,
 #quxiaozhujiangren_btn:hover svg,
 #guanbimaikefeng_btn:hover svg,
