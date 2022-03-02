@@ -8,7 +8,8 @@ if (!chatHub || !chatHub.client) {
 
 // 收听
 chatHub.client.broadcastMessage = function (message, channelss) {
-  if (channelss == oneself_.RoomId) {
+  var RoomId = oneself_?.RoomId || queryParams("RoomId");
+  if (channelss == RoomId) {
     let mess = JSON.parse(message);
     switch (mess.reCode) {
       /*//设置主讲人
@@ -27,7 +28,11 @@ chatHub.client.broadcastMessage = function (message, channelss) {
         break;
       //关闭所有人麦克风
       case "03":
-        if (ZJRID_ != oneself_.CHID && !oneself_.IsZCR && isMicOn)
+        if (
+          roomDetail_.SpeakerID != oneself_.CHID &&
+          !oneself_.IsZCR &&
+          isMicOn
+        )
           $("#mic_btn").click();
         break;
       //设置主讲人
@@ -63,6 +68,7 @@ chatHub.client.broadcastMessage = function (message, channelss) {
       case "06":
       // 关闭所有用户麦克风
       case "23":
+        console.log(mess);
         if (mess.ReUserid == oneself_.CHID) {
           $("#mic_btn").click();
         }
@@ -276,6 +282,7 @@ function yunxufayan(ReUserid) {
 
 // 关闭所有人麦克风
 function guanbisuoyourenmaifekeng() {
+  console.log(123);
   redisFB({
     reCode: "03",
     ReUserid: "",

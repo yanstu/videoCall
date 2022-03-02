@@ -179,6 +179,8 @@ function resetViews() {
       $("#profile_" + ID).remove();
       $("#member_" + ID).remove();
     }
+    $("#video_btn svg").html(`<use xlink:href="#icon-xiangji"></use>`);
+    $("#mic_btn svg").html(`<use xlink:href="#icon-maikefeng"></use>`);
     $("#zjr_mask img").attr("src", "./img/camera-gray.png");
     $("#zjr_mask").show();
   }

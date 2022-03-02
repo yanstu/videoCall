@@ -112,8 +112,8 @@ class RtcClient {
     if (this.isPublished_) return;
     try {
       await this.client_.publish(this.localStream_);
-      this.playVideo(this.localStream_, oneself_.CHID);
       this.shezhifenbianlv();
+      this.playVideo(this.localStream_, oneself_.CHID);
     } catch (error) {
       console.error("推送本地流失败" + error);
       this.isPublished_ = false;
@@ -198,15 +198,15 @@ class RtcClient {
     }
   }
 
-  shezhifenbianlv() {
+  async shezhifenbianlv() {
     if (ZJRID_ == oneself_.CHID) {
-      this.localStream_.setVideoProfile("720p");
+      await this.localStream_.setVideoProfile("720p");
     } else {
       var renshu = [8, 5, 2, 0];
       var fenbianlv = ["240p", "360p", "480p", "720p"];
-      for (const i in renshu) {
-        if (roomDetail_.UserList >= renshu[i]) {
-          this.localStream_.setVideoProfile(fenbianlv[i]);
+      for (var i = 0; i < renshu.length; i++) {
+        if (roomDetail_.UserList.length >= renshu[i]) {
+          await this.localStream_.setVideoProfile(fenbianlv[i]);
           break;
         }
       }
@@ -231,7 +231,6 @@ class RtcClient {
     this.client_.on("peer-join", (evt) => {
       const { userId } = evt;
       console.log(getUserInfo(userId)?.UserName + " 加入了房间");
-      this.shezhifenbianlv();
     });
 
     // 当远程连接端离开房间时触发
@@ -239,7 +238,6 @@ class RtcClient {
       const { userId } = evt;
       onlineOrOfline(false, userId);
       console.log(getUserInfo(userId)?.UserName + " 离开了房间，或者掉线");
-      this.shezhifenbianlv();
     });
 
     // 添加远程流时触发
@@ -367,6 +365,7 @@ class RtcClient {
    */
   startGetNetworkevel() {
     this.client_.on("network-quality", (event) => {
+      this.shezhifenbianlv();
       //console.log(`network-quality, uplinkNetworkQuality:${event.uplinkNetworkQuality}, downlinkNetworkQuality: ${event.downlinkNetworkQuality}`);
       //'0': '未知', '1': '极佳', '2': '较好', '3': '一般', '4': '差', '5': '极差', '6': '断开'
       /*$(`#mynetwork`).attr(
@@ -394,6 +393,14 @@ class RtcClient {
       }
       // 获取实际推流的视频码率参考：https://web.sdk.qcloud.com/trtc/webrtc/doc/zh-cn/Client.html#getLocalVideoStats
     }, 30 * 1000);
+  }
+
+  fbl() {
+    const videoTrack = this.localStream_.getVideoTrack();
+    if (videoTrack) {
+      var s = videoTrack.getSettings();
+      console.log(`分辨率：${s.width} * ${s.height}, 帧率：${s.frameRate}`);
+    }
   }
 
   // 停止获取流音量
