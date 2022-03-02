@@ -74,7 +74,7 @@ function addMemberView(ID, UserName) {
   let member = $("#member-me").clone();
   member.attr("id", "member_" + ID);
   member.find(".member-id").html(
-    (ID == ZJRID_
+    (ID == roomDetail_.SpeakerID
       ? `<svg class="icon text-[0.9rem] text-[#ffa500] mr-1" aria-hidden="true">
           <use xlink:href="#icon-zhujiangren"></use>
         </svg>`
@@ -119,11 +119,7 @@ function addMemberView(ID, UserName) {
     "click",
     clickProof(() => {
       if (oneself_.IsZCR) {
-        if (ID != ZJRID_) {
-          shezhizhujiangren(ID);
-        } else {
-          layer.msg("该用户已经是主讲人了。");
-        }
+        shezhizhujiangren(ID);
       }
     })
   );

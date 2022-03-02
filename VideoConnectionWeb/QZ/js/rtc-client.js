@@ -199,14 +199,13 @@ class RtcClient {
   }
 
   shezhifenbianlv() {
-    if (!hasMe) return;
     if (ZJRID_ == oneself_.CHID) {
       this.localStream_.setVideoProfile("720p");
     } else {
       var renshu = [8, 5, 2, 0];
       var fenbianlv = ["240p", "360p", "480p", "720p"];
       for (const i in renshu) {
-        if (this.members_.size >= renshu[i]) {
+        if (roomDetail_.UserList >= renshu[i]) {
           this.localStream_.setVideoProfile(fenbianlv[i]);
           break;
         }

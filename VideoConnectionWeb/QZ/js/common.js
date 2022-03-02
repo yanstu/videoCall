@@ -141,10 +141,10 @@ async function viewsHandle() {
   if (!rtc.isPublished_) {
     rtc.join();
   } else {
-    const loadIndex2 = layer.load(1);
+    // const loadIndex2 = layer.load(1);
     await rtc.leave();
     await rtc.join();
-    layer.close(loadIndex2);
+    // layer.close(loadIndex2);
   }
 }
 
