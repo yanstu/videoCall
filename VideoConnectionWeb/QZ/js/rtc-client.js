@@ -37,7 +37,7 @@ class RtcClient {
       if (getCameraId() && getMicrophoneId()) {
         this.localStream_ = TRTC.createStream({
           audio: true,
-          video: hasMe(oneself_.CHID),
+          video: hasMe(oneself_.CHID) || ZJRID_ == oneself_.CHID,
           userId: this.userId_,
           cameraId: getCameraId(),
           microphoneId: getMicrophoneId(),
@@ -47,7 +47,7 @@ class RtcClient {
         // 不指定 麦克风Id/摄像头Id，以避免过限制错误
         this.localStream_ = TRTC.createStream({
           audio: true,
-          video: hasMe(oneself_.CHID),
+          video: hasMe(oneself_.CHID) || ZJRID_ == oneself_.CHID,
           userId: this.userId_,
           mirror: false, // 是否开启镜像
         });
@@ -57,37 +57,6 @@ class RtcClient {
         await this.localStream_.initialize();
       } catch (error) {
         console.error("无法初始化共享流 - " + error);
-        let msg = "";
-        switch (error.name) {
-          case "NotReadableError":
-            msg =
-              "暂时无法访问摄像头/麦克风，请确保系统允许当前浏览器访问摄像头/麦克风，并且没有其他应用占用摄像头/麦克风。";
-            break;
-          case "NotAllowedError":
-            if (error.message === "Permission denied by system") {
-              msg = "请确保系统允许当前浏览器访问摄像头/麦克风。";
-            } else {
-              msg = "请允许当前网页访问摄像头/麦克风，否则将无法正常使用。";
-            }
-            break;
-          case "NotFoundError":
-            msg =
-              "浏览器获取不到摄像头/麦克风设备，请检查设备连接并且确保系统允许当前浏览器访问摄像头/麦克风。";
-            break;
-          default:
-            return;
-        }
-        msg && alert(msg);
-        /*msg &&
-          layer.confirm(
-            msg + "\n【请退出重新进入并允许授权】",
-            {
-              btn: ["确定"],
-            },
-            () => {
-              leave();
-            }
-          );*/
       }
 
       // 开始获取网络质量

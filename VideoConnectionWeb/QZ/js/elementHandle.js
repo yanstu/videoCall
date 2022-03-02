@@ -5,11 +5,9 @@ function showOrHide() {
   $("#zjr_box").addClass("w-[70%]");
 
   // 是否显示申请发言按钮
-  if (
-    roomDetail_.AllowProposer == "1" &&
-    !oneself_.IsZCR &&
-    ZJRID_ != oneself_.CHID
-  ) {
+  var jiadezhujiangren =
+    ZJRID_ == oneself_.CHID && roomDetail_.SpeakerName != oneself_.XM;
+  if (roomDetail_.AllowProposer == "1" && !oneself_.IsZCR && jiadezhujiangren) {
     $("#shenqingfayan_btn").show();
   } else {
     $("#shenqingfayan_btn").hide();

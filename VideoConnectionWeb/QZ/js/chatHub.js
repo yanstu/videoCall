@@ -187,7 +187,8 @@ function huoquhuiyihuancunxinxi(mess) {
   } else if (mess.ReUserid == oneself_.CHID) {
     roomDetail_ = mess.Data.VideoConferenceMess;
     roomDetail_.UserList.length == 0 && location.reload();
-    ZJRID_ = roomDetail_.SpeakerID;
+    // 如果没有设置主讲人，将自己设置为假的主讲人
+    ZJRID_ = roomDetail_.SpeakerID || oneself_.CHID;
     roomDetail_.UserList = roomDetail_.UserList.sort(sortData);
     ZCRID_ = roomDetail_.UserList.find((item) => item.IsZCR == 1).ID;
     viewsHandle();
@@ -365,7 +366,7 @@ function xintiaolianjie() {
 
 function beiyongfangan(RoomId) {
   ajaxMethod("RedisHandler", { Infotype: "GetInfo", RoomId }, (res) => {
-    console.log('-----------------------');
+    console.log("-----------------------");
     console.log(res);
   });
 }
