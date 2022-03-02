@@ -180,12 +180,14 @@
     clickProof(() => {
       videoHandle(!isCamOn, oneself_.CHID);
       if (isCamOn) {
-        $("#video_btn svg").toggleClass("text-white");
-        $("#video_btn,#video_btn svg").addClass("text-red");
+        /*$("#video_btn svg").toggleClass("text-white");
+        $("#video_btn,#video_btn svg").addClass("text-red");*/
+        $("#video_btn svg").html(`<use xlink:href="#icon-guanbixiangji"></use>`);
         muteVideo();
       } else {
-        $("#video_btn svg").toggleClass("text-white");
-        $("#video_btn,#video_btn svg").removeClass("text-red");
+        /*$("#video_btn svg").toggleClass("text-white");
+        $("#video_btn,#video_btn svg").removeClass("text-red");*/
+        $("#video_btn svg").html(`<use xlink:href="#icon-xiangji"></use>`);
         unmuteVideo();
       }
       if (oneself_.CHID == ZJRID_) {
@@ -209,12 +211,14 @@
     clickProof(() => {
       audioHandle(!isMicOn, oneself_.CHID);
       if (isMicOn) {
-        $("#mic_btn svg").toggleClass("text-white");
-        $("#mic_btn, #mic_btn svg").addClass("text-red");
+        /*$("#mic_btn svg").toggleClass("text-white");
+        $("#mic_btn, #mic_btn svg").addClass("text-red");*/
+        $("#mic_btn svg").html(`<use xlink:href="#icon-jingyin"></use>`);
         muteAudio();
       } else {
-        $("#mic_btn svg").toggleClass("text-white");
-        $("#mic_btn, #mic_btn svg").removeClass("text-red");
+        /*$("#mic_btn svg").toggleClass("text-white");
+        $("#mic_btn, #mic_btn svg").removeClass("text-red");*/
+        $("#mic_btn svg").html(`<use xlink:href="#icon-maikefeng"></use>`);
         unmuteAudio();
       }
       isMicOn = !isMicOn;

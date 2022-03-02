@@ -98,6 +98,7 @@ $.connection.hub
     chatHub.server.createRedis(RoomId);
     huoquhuiyihuancun();
     xintiaolianjie();
+    // beiyongfangan(RoomId);
   })
   .fail(function (reason) {
     alert("SignalR connection failed: " + reason);
@@ -360,4 +361,11 @@ function xintiaolianjie() {
       },
     });
   }, 2 * 1000);
+}
+
+function beiyongfangan(RoomId) {
+  ajaxMethod("RedisHandler", { Infotype: "GetInfo", RoomId }, (res) => {
+    console.log('-----------------------');
+    console.log(res);
+  });
 }

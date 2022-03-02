@@ -77,7 +77,8 @@ class RtcClient {
           default:
             return;
         }
-        msg &&
+        msg && alert(msg);
+        /*msg &&
           layer.confirm(
             msg + "\n【请退出重新进入并允许授权】",
             {
@@ -86,7 +87,7 @@ class RtcClient {
             () => {
               leave();
             }
-          );
+          );*/
       }
 
       // 开始获取网络质量

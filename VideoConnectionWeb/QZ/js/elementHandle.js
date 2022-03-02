@@ -1,4 +1,9 @@
 function showOrHide() {
+  $("#video-grid").removeClass("w-[0%]");
+  $("#video-grid").addClass("w-[30%]");
+  $("#zjr_box").removeClass("w-[100%]");
+  $("#zjr_box").addClass("w-[70%]");
+
   // 是否显示申请发言按钮
   if (
     roomDetail_.AllowProposer == "1" &&
@@ -9,8 +14,10 @@ function showOrHide() {
   } else {
     $("#shenqingfayan_btn").hide();
   }
+
   // 非手机端不需要显示翻转相机按钮
   getOS().type === "mobile" && $("#fanzhuan_btn").show();
+
   // 如果是主持人的话主持人相关权限按钮显示
   if (oneself_.IsZCR) {
     $("#fayanliebiao_btn").show();
@@ -21,6 +28,7 @@ function showOrHide() {
     $(".tidiao_btn").show();
     $(".faxiaoxi_btn").show();
   }
+
   // 非本页的不需要摄像头按钮
   if (!hasMe(oneself_.CHID) && !oneself_.IsZCR && ZJRID_ != oneself_.CHID) {
     $("#video_btn").hide();
@@ -158,7 +166,7 @@ function onlineOrOfline(online, userId) {
   }
   $("#member_" + userId)
     .find(".member-id")
-    .attr("style", `color: ${online ? "#008000" : "#ed3e40"};`);
+    .attr("style", `color: ${online ? "#ffffff" : "#6e7179"};`);
   if (ZJRID_ != userId) {
     online ? $("#mask_" + userId).hide() : $("#mask_" + userId).show();
   }
