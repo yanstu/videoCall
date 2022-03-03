@@ -133,27 +133,7 @@ function redisFB(data) {
 function huoqushenqingfayan(mess) {
   // 发言列表中不存在此用户的申请
   if (!($("#fayan_" + mess.SendUserID)?.length > 0)) {
-    let fayanren = $("#fayan_muban").clone();
-    fayanren.attr("id", "fayan_" + mess.SendUserID);
-    fayanren
-      .find(".fayanrenxingming")
-      .html(getUserInfo(mess.SendUserID).UserName);
-    fayanren.appendTo($("#speakerList"));
-    $("#speakerList").scrollTop(99999999);
-    fayanren.show();
-    // 绑定允许发言事件，为按钮绑定ID
-    fayanren.find(".yunxufayan").on("click", function () {
-      yunxufayan(mess.SendUserID);
-      shezhizhujiangren(mess.SendUserID);
-      $("#fayan_" + mess.SendUserID).remove();
-    });
-    // 绑定不允许发言事件，为按钮绑定ID
-    fayanren.find(".buyunxufayan").on("click", function () {
-      $("#fayan_" + mess.SendUserID).remove();
-    });
-    // 如果申请发言列表为没有打开的状态，显示发言列表的角标提醒
-    $("#shenqingfayanliebiao").css("display") == "none" &&
-      $("#fayan_jiaobiao").show();
+    addSpeaker(mess.SendUserID);
   } else {
     // 重复提交发言提醒
     mess.SendUserID != oneself_.CHID &&
@@ -169,34 +149,7 @@ function huoquxiaoxi(mess) {
     mess.SendUserID != oneself_.CHID
   )
     return;
-  let message = $("#message_muban").clone();
-  message.attr("id", "message_" + mess.SendUserID);
-  message.find(".message_xingming").html(getUserInfo(mess.SendUserID).UserName);
-  message.find(".message_time").html(getNowTime());
-  message
-    .find(".message_neirong")
-    .html(
-      mess.Content +
-        " (发送到：" +
-        (mess.SendUserID == ZCRID_
-          ? mess.ReUserid
-            ? getUserInfo(mess.ReUserid).UserName
-            : "全部人"
-          : "主持人") +
-        ")"
-    );
-  message.appendTo($("#messageList"));
-  if (mess.SendUserID != oneself_.CHID) {
-    var touxiang = message.find(".message_touxiang");
-    touxiang.prev().insertAfter(touxiang);
-    message
-      .find(".message_info")
-      .removeClass("justify-end")
-      .addClass("justify-start");
-  }
-  message.show();
-  $("#messageList").scrollTop(99999999);
-  $("#xiaoxiliebiao").css("display") == "none" && $("#xiaoxi_jiaobiao").show();
+  addMessage(mess.SendUserID, mess.ReUserid, mess.Content);
 }
 
 function huoquhuiyihuancunxinxi(mess) {

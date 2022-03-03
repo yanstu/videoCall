@@ -73,6 +73,7 @@
       $("#xiaoxiliebiao").find(".modalbox-title").html("消息列表");
     } else {
       if (fasonggeishei) {
+        // 清空消息列表
         /*for (let xiaoxi of $("#messageList").children()) {
           if ($(xiaoxi).attr("id") != "message_muban") $(xiaoxi).remove();
         }*/
@@ -159,10 +160,6 @@
         layer.msg("请先打开摄像头再切换");
         return;
       }
-      $("#fanzhuan_btn i").toggleClass("animate-[spin_1s_linear_1]");
-      setTimeout(() => {
-        $("#fanzhuan_btn i").toggleClass("animate-[spin_1s_linear_1]");
-      }, 1000);
       for (let data of cameraData) {
         if (cameraId != data) {
           cameraId = data;
@@ -180,9 +177,13 @@
     clickProof(() => {
       videoHandle(!isCamOn, oneself_.CHID);
       if (isCamOn) {
-        $("#video_btn svg").html(`<use xlink:href="#icon-guanbixiangji"></use>`);
+        // 切换到关闭摄像头状态
+        $("#video_btn svg").html(
+          `<use xlink:href="#icon-guanbixiangji"></use>`
+        );
         muteVideo();
       } else {
+        // 切换到打开摄像头状态
         $("#video_btn svg").html(`<use xlink:href="#icon-xiangji"></use>`);
         unmuteVideo();
       }
@@ -208,6 +209,7 @@
       isMicOn = !isMicOn;
     })
   );
+
   //chrome60以下不支持popover，防止error
   if (getBrowser().browser == "Chrome" && getBrowser().version < "60") return;
   if (getBrowser().browser === "Firefox" && getBrowser().version < "56") return;
