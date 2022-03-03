@@ -78,12 +78,6 @@ document.write(
   "<script src='./js/rtc-client.js?t=" + queryParams("t") + "'></s" + "cript>"
 );
 document.write(
-  "<script src='https://res2.wx.qq.com/open/js/jweixin-1.6.0.js?t=" +
-    queryParams("t") +
-    "'></s" +
-    "cript>"
-);
-document.write(
   "<script src='./js/prohibit.js?t=" + queryParams("t") + "'></s" + "cript>"
 );
 document.write(
