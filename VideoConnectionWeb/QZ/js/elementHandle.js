@@ -375,5 +375,6 @@ function onlineOrOfline(online, userId) {
       .find(".member-video_btn")
       .attr("src", "img/camera-on.png");
     $(`#mask_${userId} img`).attr("src", "./img/camera-gray.png");
+    $(`#mic_main_${userId} .volume-level`).css("height", "0%");
   }
 }
