@@ -68,7 +68,6 @@ chatHub.client.broadcastMessage = function (message, channelss) {
       case "06":
       // 关闭所有用户麦克风
       case "23":
-        console.log(mess);
         if (mess.ReUserid == oneself_.CHID) {
           $("#mic_btn").click();
         }
@@ -121,6 +120,7 @@ function sortData(a, b) {
 }
 
 function redisFB(data) {
+  // console.log(chatHub.server.redisFB(oneself_.RoomId, JSON.stringify(data)));
   chatHub.server.redisFB(oneself_.RoomId, JSON.stringify(data));
 }
 
@@ -192,15 +192,21 @@ function huoquxiaoxi(mess) {
 }
 
 function huoquhuiyihuancunxinxi(mess) {
+  console.log(mess);
   if (!mess.ReUserid || mess.Data.VideoConferenceMess.UserList.length == 0) {
     location.reload();
   } else if (mess.ReUserid == oneself_.CHID) {
     roomDetail_ = mess.Data.VideoConferenceMess;
+    if (ZJRID_ && roomDetail_.SpeakerID && ZJRID_ == roomDetail_.SpeakerID)
+      return;
     roomDetail_.UserList.length == 0 && location.reload();
-    // 如果没有设置主讲人，将自己设置为假的主讲人
-    ZJRID_ = roomDetail_.SpeakerID || oneself_.CHID;
     roomDetail_.UserList = roomDetail_.UserList.sort(sortData);
     ZCRID_ = roomDetail_.UserList.find((item) => item.IsZCR == 1).ID;
+    if (rtc.isPublished_) {
+      // 取消主讲人、更改主讲人
+      changeViews();
+      return;
+    }
     viewsHandle();
   }
 }
@@ -282,7 +288,6 @@ function yunxufayan(ReUserid) {
 
 // 关闭所有人麦克风
 function guanbisuoyourenmaifekeng() {
-  console.log(123);
   redisFB({
     reCode: "03",
     ReUserid: "",

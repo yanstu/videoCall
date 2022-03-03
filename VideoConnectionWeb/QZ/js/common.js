@@ -111,40 +111,107 @@ function login(JMStr) {
 async function viewsHandle() {
   // 处理布局相关
   layoutCompute();
-  // 用于翻页、取消主讲人、更改主讲人的处理
-  resetViews();
+  // 用于翻页、取消主讲人、更改主讲人的处理，清空用户下面再添加进去
+  // resetViews();
   // 为当前页用户循环添加至网页上
+  addViews();
+  // 如果没有设置主讲人，将自己设置为假的主讲人
+  ZJRID_ = roomDetail_.SpeakerID || oneself_.CHID;
+  // 权限判断按钮显示或隐藏
+  showOrHide();
+  if (!rtc.isPublished_) {
+    // 没有推送过，就是第一次进入房间
+    rtc.join();
+  }
+}
+
+function changeViews() {
+  const loadIndex2 = layer.load(1);
+  // 此处的ZJRID_代表上一个主持人
+  // 此处的newZJRID代表新的支持人主持人
+  var newZJRID = roomDetail_.SpeakerID || oneself_.CHID;
+  if (ZJRID_ != newZJRID) {
+    var zjr_streams =
+      newZJRID == oneself_.CHID ? rtc.localStream_ : rtc.members_.get(newZJRID);
+    zjr_streams?.stop();
+    if (ZJRID_ == oneself_.CHID) {
+      test(rtc.localStream_, oneself_.CHID);
+    } else {
+      test(rtc.members_.get(ZJRID_), ZJRID_);
+    }
+    function test(stream, ID) {
+      stream?.stop();
+      if (hasMe(ID)) {
+        stream?.play("box_" + ID);
+        stream ? $("#mask_" + ID).hide() : $("#mask_" + ID).show();
+      }
+    }
+    $("#zjr_video [id^='profile_']").remove();
+    $("#zjr_video [id^='player_']").remove();
+    $("#zjr_video").append(
+      userInfoTemplate(newZJRID, getUserInfo(newZJRID).UserName)
+    );
+    hasMe(newZJRID) && $("#mask_" + newZJRID).show();
+    zjr_streams?.play("zjr_video");
+    zjr_streams ? $("#zjr_mask").hide() : $("#zjr_mask").show();
+    $(`#zjr_mask img`).attr("src", `./img/camera-gray.png`);
+  }
+  for (let user_ of roomDetail_.UserList) {
+    $("#member_" + user_.ID).remove();
+  }
+  addMember();
+  !isMicOn && $("#mic_btn").click();
+  !isCamOn && $("#video_btn").click();
+  let states = rtc.client_.getRemoteMutedState();
+  for (let state of states) {
+    $("#member_" + state.userId)
+      .find(".member-id")
+      .attr("style", `color: "#ffffff"`);
+  }
+  $("#member_" + oneself_.CHID)
+    .find(".member-id")
+    .attr("style", `color: "#ffffff"`);
+  ZJRID_ = newZJRID;
+  rtc.shezhifenbianlv();
+  // 权限判断按钮显示或隐藏
+  showOrHide();
+  // 关闭加载中
+  layer.close(loadIndex2);
+}
+
+function addViews() {
   for (let user_ of layout_.pageUserList) {
     const { ID, UserName } = user_;
     addVideoView(ID, UserName);
-    addMaskView(ID);
   }
+  addMember();
+  $("#zjr_video").append(
+    userInfoTemplate(
+      roomDetail_.SpeakerID || oneself_.CHID,
+      getUserInfo(roomDetail_.SpeakerID || oneself_.CHID).UserName
+    )
+  );
+}
+
+// 其他地方会复用 所以独立出来
+function addMember() {
   // 当主持人不是主讲人的时候显示第一个位置
-  ZJRID_ != ZCRID_ && addMemberView(ZCRID_, getUserInfo(ZCRID_).UserName);
-  if (ZJRID_) {
+  roomDetail_.SpeakerID != ZCRID_ &&
+    addMemberView(ZCRID_, getUserInfo(ZCRID_).UserName);
+  if (roomDetail_.SpeakerID) {
     // 主讲人显示第二个位置
-    addMemberView(ZJRID_, getUserInfo(ZJRID_).UserName);
+    addMemberView(
+      roomDetail_.SpeakerID,
+      getUserInfo(roomDetail_.SpeakerID).UserName
+    );
   }
   for (let user_ of roomDetail_.UserList) {
     // 跳过主持人和主讲人
-    if (user_.ID == ZJRID_ || user_.ID == ZCRID_) {
+    if (user_.ID == ZCRID_ || user_.ID == roomDetail_.SpeakerID) {
       continue;
     }
     const { ID, UserName } = user_;
     addMemberView(ID, UserName);
-  }
-  initZJRViews();
-  showOrHide();
-
-  // 用于翻页、取消主讲人、更改主讲人的处理
-  // 没有推送过，就是第一次进入房间
-  if (!rtc.isPublished_) {
-    rtc.join();
-  } else {
-    // const loadIndex2 = layer.load(1);
-    await rtc.leave();
-    await rtc.join();
-    // layer.close(loadIndex2);
   }
 }
 
@@ -169,31 +236,20 @@ function layoutCompute() {
     );
 }
 
-function resetViews() {
-  if (rtc.isPublished_) {
-    $("#profile_").remove();
-    for (let user_ of roomDetail_.UserList) {
-      const { ID } = user_;
-      $("#box_" + ID).remove();
-      $("#mask_" + ID).remove();
-      $("#profile_" + ID).remove();
-      $("#member_" + ID).remove();
-    }
-    $("#video_btn svg").html(`<use xlink:href="#icon-xiangji"></use>`);
-    $("#mic_btn svg").html(`<use xlink:href="#icon-maikefeng"></use>`);
-    $("#zjr_mask img").attr("src", "./img/camera-gray.png");
-    $("#zjr_mask").show();
+/**function resetViews() {
+  $("#profile_").remove();
+  for (let user_ of roomDetail_.UserList) {
+    const { ID } = user_;
+    $("#box_" + ID).remove();
+    $("#mask_" + ID).remove();
+    $("#profile_" + ID).remove();
+    $("#member_" + ID).remove();
   }
-}
-
-function initZJRViews() {
-  $("#zjr_video").append(
-    userInfoTemplate(
-      ZJRID_ || "",
-      getUserInfo(ZJRID_)?.UserName || "未设置主讲人"
-    )
-  );
-}
+  $("#video_btn svg").html(`<use xlink:href="#icon-xiangji"></use>`);
+  $("#mic_btn svg").html(`<use xlink:href="#icon-maikefeng"></use>`);
+  $("#zjr_mask img").attr("src", "./img/camera-gray.png");
+  $("#zjr_mask").show();
+}*/
 
 function hasMe(userId) {
   var exits = layout_.pageUserList.find((user) => user.ID == userId);

@@ -27,67 +27,57 @@ class RtcClient {
    * 加入房间
    */
   async join() {
-    try {
-      // 加入房间
-      await this.client_.join({
-        roomId: parseInt(this.roomId_),
+    await this.client_.join({
+      roomId: parseInt(this.roomId_),
+    });
+
+    if (getCameraId() && getMicrophoneId()) {
+      this.localStream_ = TRTC.createStream({
+        audio: true,
+        video: hasMe(oneself_.CHID) || ZJRID_ == oneself_.CHID,
+        userId: this.userId_,
+        cameraId: getCameraId(),
+        microphoneId: getMicrophoneId(),
+        mirror: false, // 是否开启镜像
       });
-
-      // 创建本地流 audio/video 到 microphone/camera
-      if (getCameraId() && getMicrophoneId()) {
-        this.localStream_ = TRTC.createStream({
-          audio: true,
-          video: hasMe(oneself_.CHID) || ZJRID_ == oneself_.CHID,
-          userId: this.userId_,
-          cameraId: getCameraId(),
-          microphoneId: getMicrophoneId(),
-          mirror: false, // 是否开启镜像
-        });
-      } else {
-        // 不指定 麦克风Id/摄像头Id，以避免过限制错误
-        this.localStream_ = TRTC.createStream({
-          audio: true,
-          video: hasMe(oneself_.CHID) || ZJRID_ == oneself_.CHID,
-          userId: this.userId_,
-          mirror: false, // 是否开启镜像
-        });
-      }
-
-      try {
-        await this.localStream_.initialize();
-      } catch (error) {
-        console.error("无法初始化共享流 - " + error);
-      }
-
-      // 开始获取网络质量
-      this.startGetNetworkevel();
-
-      try {
-        // 推送本地流
-        await this.publish();
-      } catch (error) {
-        console.error("推送本地流失败 - ", error);
-      }
-
-      // 关闭加载中
-      layer.close(loadIndex);
-
-      // 开始获取音量
-      this.startGetAudioLevel();
-    } catch (error) {
-      console.error("加入房间失败! " + error);
+    } else {
+      // 不指定 麦克风Id/摄像头Id，以避免过限制错误
+      this.localStream_ = TRTC.createStream({
+        audio: true,
+        video: hasMe(oneself_.CHID) || ZJRID_ == oneself_.CHID,
+        userId: this.userId_,
+        mirror: false, // 是否开启镜像
+      });
     }
 
-    this.updateUserState();
+    try {
+      // 初始化本地流
+      await this.localStream_.initialize();
+      // 推送本地流
+      await this.publish();
+    } catch (error) {
+      console.error("无法初始化共享流或推送本地流失败 - ", error);
+    }
+
+    // 关闭加载中
+    layer.close(loadIndex);
+    // 开始获取网络质量
+    this.startGetNetworkevel();
+    // 开始获取音量
+    this.startGetAudioLevel();
   }
 
-  //更新成员状态
+  // 更新成员状态
   updateUserState() {
     let states = this.client_.getRemoteMutedState();
     for (let state of states) {
       audioHandle(!state.audioMuted, state.userId);
       videoHandle(!state.videoMuted, state.userId);
+      onlineOrOfline(true, state.userId);
     }
+    onlineOrOfline(true, oneself_.CHID);
+    audioHandle(isMicOn, oneself_.CHID);
+    videoHandle(isCamOn, oneself_.CHID);
   }
 
   /**
@@ -368,14 +358,6 @@ class RtcClient {
       this.shezhifenbianlv();
       //console.log(`network-quality, uplinkNetworkQuality:${event.uplinkNetworkQuality}, downlinkNetworkQuality: ${event.downlinkNetworkQuality}`);
       //'0': '未知', '1': '极佳', '2': '较好', '3': '一般', '4': '差', '5': '极差', '6': '断开'
-      /*$(`#mynetwork`).attr(
-        "src",
-        `./img/network/network_${
-          event.uplinkNetworkQuality == 6 || isDisconnect
-            ? 6
-            : event.uplinkNetworkQuality
-        }.png`
-      );*/
       isDisconnect = event.uplinkNetworkQuality == 6;
       if (event.uplinkNetworkQuality == 4 || event.uplinkNetworkQuality == 5) {
         layer.msg("当前网络极差，请注意保持良好的网络连接", { icon: 5 });

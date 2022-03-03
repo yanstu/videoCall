@@ -58,6 +58,7 @@ function videoHandle(on, userId) {
 
   if (userId == ZJRID_) {
     on ? $("#zjr_mask").hide() : $("#zjr_mask").show();
+    on && $("#mask_" + ZJRID_).show();
     !on && $(`#zjr_mask img`).attr("src", `./img/camera-green.png`);
   } else {
     on ? $("#mask_" + userId).hide() : $("#mask_" + userId).show();
@@ -78,7 +79,7 @@ function addMemberView(ID, UserName) {
       ? `<svg class="icon text-[0.9rem] text-[#ffa500] mr-1" aria-hidden="true">
           <use xlink:href="#icon-zhujiangren"></use>
         </svg>`
-      : "") + UserName
+      : `<span class="mr-[1.15rem]"></span>`) + UserName
   );
   if (ID == ZCRID_) {
     member.find(".faxiaoxi_btn").remove();
@@ -128,29 +129,17 @@ function addMemberView(ID, UserName) {
 }
 
 /**
- * 添加“摄像头未打开”遮罩
- */
-function addMaskView(ID) {
-  let mask = $("#zjr_mask").clone();
-  mask.attr("id", "mask_" + ID);
-  mask.appendTo($("#box_" + ID));
-  mask.show();
-}
-
-/**
  * 添加视频占位
  * Add a video box to the video grid
  * @param userId - The user ID of the user you want to add.
  * @param nickName - the nickName of the user
  */
-function addVideoView(userId, nickName) {
-  let div = $("<div/>", {
-    id: "box_" + userId,
-    class: "video-box relative",
-    style: "justify-content: center",
-  });
-  div.append(userInfoTemplate(userId, nickName));
-  div.appendTo("#video-grid");
+function addVideoView(ID, NickName) {
+  let box = $("#zjr_video").clone();
+  box.attr("id", "box_" + ID);
+  box.find("#zjr_mask").attr("id", "mask_" + ID);
+  box.append(userInfoTemplate(ID, NickName));
+  box.appendTo("#video-grid");
 }
 
 /**
@@ -164,13 +153,12 @@ function onlineOrOfline(online, userId) {
     !online
       ? $(`#zjr_mask img`).attr("src", "./img/camera-gray.png")
       : $(`#zjr_mask img`).attr("src", "./img/camera-green.png");
+  } else {
+    online ? $("#mask_" + userId).hide() : $("#mask_" + userId).show();
   }
   $("#member_" + userId)
     .find(".member-id")
     .attr("style", `color: ${online ? "#ffffff" : "#7c7f85"};`);
-  if (ZJRID_ != userId) {
-    online ? $("#mask_" + userId).hide() : $("#mask_" + userId).show();
-  }
   if (!online) {
     $(`#mic_main_${userId} .member-audio-btn`).attr("src", "img/mic-on.png");
     $(`#member_${userId} .member-audio-btn`).attr("src", "img/mic-on.png");
