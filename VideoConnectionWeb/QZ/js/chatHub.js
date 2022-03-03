@@ -12,10 +12,9 @@ chatHub.client.broadcastMessage = function (message, channelss) {
   if (channelss == RoomId) {
     let mess = JSON.parse(message);
     if (mess.reCode != 25) {
-      console.log("------------------------");
+      console.log("----------------------------------------");
       console.log(mess.reCode);
       console.log(mess);
-      console.log("------------------------");
     }
     switch (mess.reCode) {
       //踢出用户
