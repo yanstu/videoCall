@@ -17,7 +17,7 @@ chatHub.client.broadcastMessage = function (message, channelss) {
       console.log(mess);
     }
     switch (mess.reCode) {
-      //踢出用户
+      // 踢出用户
       case "07":
         if (mess.ReUserid == oneself_.CHID) {
           layer.msg("您已被踢出房间", { icon: 2 });
@@ -26,7 +26,7 @@ chatHub.client.broadcastMessage = function (message, channelss) {
           }, 1000);
         }
         break;
-      //关闭所有人麦克风
+      // 关闭除主讲人和主持人外所有的麦克风
       case "03":
         if (
           roomDetail_.SpeakerID != oneself_.CHID &&
@@ -35,11 +35,29 @@ chatHub.client.broadcastMessage = function (message, channelss) {
         )
           $("#mic_btn").click();
         break;
-      //设置主讲人
+      // 关闭除主讲人和主持人外所有的麦克风
+      case "04":
+        if (!oneself_.IsZCR && isMicOn) $("#mic_btn").click();
+        break;
+      // 设置主讲人
       case "01":
       case "20":
+        roomDetail_.SpeakerID = mess.ReUserid;
+        roomDetail_.SpeakerName = mess.ReUserName;
+        changeViews();
+        // huoquhuiyihuancun();
+        break;
       //取消主讲人
       case "29":
+        roomDetail_.SpeakerID = mess.ReUserid;
+        roomDetail_.SpeakerName = mess.ReUserName;
+        changeViews();
+        // huoquhuiyihuancun();
+        break;
+      // 关闭发言申请
+      case "15":
+      // 允许发言
+      case "17":
         huoquhuiyihuancun();
         break;
       //获取会议缓存信息
@@ -56,17 +74,17 @@ chatHub.client.broadcastMessage = function (message, channelss) {
       case "10":
         huoqushenqingfayan(mess);
         break;
-      // 控制用户打开关闭摄像头
+      // 用户打开/关闭自己的摄像头
       case "05":
-      // 关闭所有用户摄像头
+      // 打开/关闭用户的摄像头
       case "22":
         if (mess.ReUserid == oneself_.CHID) {
           $("#video_btn").click();
         }
         break;
-      // 控制用户打开关闭麦克风
+      // 用户打开/关闭自己的麦克风
       case "06":
-      // 关闭所有用户麦克风
+      // 打开/关闭用户的麦克风
       case "23":
         if (mess.ReUserid == oneself_.CHID) {
           $("#mic_btn").click();
@@ -153,7 +171,6 @@ function huoquxiaoxi(mess) {
 
 // 接收到获取会议缓存信息
 function huoquhuiyihuancunxinxi(mess) {
-  console.log(mess);
   if (!mess.ReUserid || mess.Data.VideoConferenceMess.UserList.length == 0) {
     location.reload();
   } else if (mess.ReUserid == oneself_.CHID) {
@@ -339,6 +356,21 @@ function xintiaolianjie() {
       },
     });
   }, 2 * 1000);
+}
+
+function fasongchangkuanbi() {
+  redisFB({
+    reCode: "30",
+    ReUserid: "",
+    ReUserQYBH: "",
+    ReUserName: "",
+    SendUserID: oneself_.CHID,
+    SendUserName: oneself_.XM,
+    Content: "",
+    Data: {
+      AspectRatio: layout_.aspectRatio,
+    },
+  });
 }
 
 function beiyongfangan(RoomId) {

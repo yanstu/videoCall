@@ -65,6 +65,8 @@ let layout_ = {
   pageUserList: [],
   // 百分比
   percentage: 100 / 5,
+  // 长宽比
+  aspectRatio: 0,
 };
 let ZCRID_ = "";
 let ZJRID_ = "";
@@ -138,6 +140,15 @@ function hasMe(userId) {
  */
 function getUserInfo(ID) {
   return roomDetail_.UserList.find((item) => item.ID == ID);
+}
+
+/**
+ * It returns the user information for the user with the specified name.
+ * @param UserName - The name of the user you want to get information about.
+ * @returns The user object.
+ */
+function getUserInfoByName(UserName) {
+  return roomDetail_.UserList.find((item) => item.UserName == UserName);
 }
 
 /**

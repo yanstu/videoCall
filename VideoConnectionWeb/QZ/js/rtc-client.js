@@ -181,11 +181,19 @@ class RtcClient {
 
   playVideo(stream, userId) {
     onlineOrOfline(true, userId);
-    if (ZJRID_ == userId) {
-      stream.play("zjr_video", { objectFit: "cover" });
-    } else if (hasMe(userId)) {
-      stream.play("box_" + userId, { objectFit: "cover" });
-    }
+    var objectFit = getUserInfo(userId).AspectRatio > 1 ? "contain" : "cover";
+    var videoVid = "box_" + userId;
+    if (ZJRID_ == userId) videoVid = "zjr_video";
+    stream.play(videoVid, { objectFit }).then(() => {
+      if (
+        userId == oneself_.CHID &&
+        (hasMe(oneself_.CHID) || ZJRID_ == oneself_.CHID)
+      ) {
+        layout_.aspectRatio =
+          $("#" + videoVid).height() / $("#" + videoVid).width();
+        fasongchangkuanbi();
+      }
+    });
   }
 
   async shezhifenbianlv() {
