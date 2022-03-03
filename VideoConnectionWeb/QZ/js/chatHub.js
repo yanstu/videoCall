@@ -11,11 +11,11 @@ chatHub.client.broadcastMessage = function (message, channelss) {
   var RoomId = oneself_?.RoomId || queryParams("RoomId");
   if (channelss == RoomId) {
     let mess = JSON.parse(message);
-    /*if (mess.reCode != 25 && mess.reCode != 27 && mess.reCode != 26) {
+    if (mess.reCode != 25 && mess.reCode != 27 && mess.reCode != 26) {
       console.log("----------------------------------------");
       console.log(mess.reCode);
       console.log(mess);
-    }*/
+    }
     switch (mess.reCode) {
       //踢出用户
       case "07":
@@ -151,6 +151,7 @@ function huoquxiaoxi(mess) {
   addMessage(mess.SendUserID, mess.ReUserid, mess.Content);
 }
 
+// 接收到获取会议缓存信息
 function huoquhuiyihuancunxinxi(mess) {
   console.log(mess);
   if (!mess.ReUserid || mess.Data.VideoConferenceMess.UserList.length == 0) {

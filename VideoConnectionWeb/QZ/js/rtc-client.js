@@ -182,9 +182,9 @@ class RtcClient {
   playVideo(stream, userId) {
     onlineOrOfline(true, userId);
     if (ZJRID_ == userId) {
-      stream.play("zjr_video");
+      stream.play("zjr_video", { objectFit: "cover" });
     } else if (hasMe(userId)) {
-      stream.play("box_" + userId);
+      stream.play("box_" + userId, { objectFit: "cover" });
     }
   }
 
