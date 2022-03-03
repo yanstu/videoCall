@@ -328,7 +328,11 @@ function addMemberView(ID, UserName) {
     "click",
     clickProof(() => {
       if (oneself_.IsZCR) {
-        shezhizhujiangren(ID);
+        if (member.find(".member-id").attr("style").indexOf("7c7f85") > -1) {
+          layer.msg("不能设置离线用户为主讲人");
+        } else {
+          shezhizhujiangren(ID);
+        }
       }
     }, 1200)
   );
@@ -367,7 +371,7 @@ function onlineOrOfline(online, userId) {
   }
   $("#member_" + userId)
     .find(".member-id")
-    .attr("style", `color: ${online ? "#ffffff" : "#7c7f85"};`);
+    .attr("style", `color: ${online ? "#ffffff;" : "#7c7f85;"};`);
   if (!online) {
     $(`#mic_main_${userId} .member-audio-btn`).attr("src", "img/mic-on.png");
     $(`#member_${userId} .member-audio-btn`).attr("src", "img/mic-on.png");
