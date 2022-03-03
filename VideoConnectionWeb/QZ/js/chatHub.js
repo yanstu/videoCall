@@ -11,6 +11,12 @@ chatHub.client.broadcastMessage = function (message, channelss) {
   var RoomId = oneself_?.RoomId || queryParams("RoomId");
   if (channelss == RoomId) {
     let mess = JSON.parse(message);
+    if (mess.reCode != 25) {
+      console.log("------------------------");
+      console.log(mess.reCode);
+      console.log(mess);
+      console.log("------------------------");
+    }
     switch (mess.reCode) {
       //踢出用户
       case "07":
@@ -86,7 +92,7 @@ chatHub.client.broadcastMessage = function (message, channelss) {
   }
 };
 
-//断开后处理
+// 断开后处理
 $.connection.hub.disconnected(function () {
   setTimeout(function () {
     console.log("断开尝试重新连接！");
@@ -94,7 +100,7 @@ $.connection.hub.disconnected(function () {
   }, 3 * 1000);
 });
 
-//调用服务端方法
+// 调用服务端方法
 $.connection.hub
   .start()
   .done(function () {
@@ -102,24 +108,30 @@ $.connection.hub
     chatHub.server.createRedis(RoomId);
     huoquhuiyihuancun();
     xintiaolianjie();
+    // 备用方案，防止redis缓存卡了
     // beiyongfangan(RoomId);
   })
   .fail(function (reason) {
     alert("SignalR connection failed: " + reason);
   });
 
-//对象排序
+// 对象排序
 function sortData(a, b) {
   undefined;
   return a.XUHAO - b.XUHAO;
 }
 
+/**
+ * It sends a message to the redis server.
+ * @param data - The data to be sent to the client.
+ */
 function redisFB(data) {
   chatHub.server.redisFB(oneself_.RoomId, JSON.stringify(data));
 }
 
 // 收到申请发言的请求
 function huoqushenqingfayan(mess) {
+  // 发言列表中不存在此用户的申请
   if (!($("#fayan_" + mess.SendUserID)?.length > 0)) {
     let fayanren = $("#fayan_muban").clone();
     fayanren.attr("id", "fayan_" + mess.SendUserID);
@@ -129,19 +141,21 @@ function huoqushenqingfayan(mess) {
     fayanren.appendTo($("#speakerList"));
     $("#speakerList").scrollTop(99999999);
     fayanren.show();
-
+    // 绑定允许发言事件，为按钮绑定ID
     fayanren.find(".yunxufayan").on("click", function () {
       yunxufayan(mess.SendUserID);
       shezhizhujiangren(mess.SendUserID);
       $("#fayan_" + mess.SendUserID).remove();
     });
+    // 绑定不允许发言事件，为按钮绑定ID
     fayanren.find(".buyunxufayan").on("click", function () {
       $("#fayan_" + mess.SendUserID).remove();
     });
-
+    // 如果申请发言列表为没有打开的状态，显示发言列表的角标提醒
     $("#shenqingfayanliebiao").css("display") == "none" &&
       $("#fayan_jiaobiao").show();
   } else {
+    // 重复提交发言提醒
     mess.SendUserID != oneself_.CHID &&
       layer.msg(getUserInfo(mess.SendUserID).UserName + "再次申请发言");
   }

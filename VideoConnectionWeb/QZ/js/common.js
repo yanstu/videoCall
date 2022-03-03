@@ -127,51 +127,51 @@ async function viewsHandle() {
 
 function changeViews() {
   const loadIndex2 = layer.load(1);
-  // 此处的ZJRID_代表上一个主持人
-  // 此处的newZJRID代表新的支持人主持人
+  // 此处的ZJRID_代表上一个主讲人
+  // 此处的newZJRID代表新的主讲人ID，没有的话设定自己为假主讲人
   var newZJRID = roomDetail_.SpeakerID || oneself_.CHID;
   if (ZJRID_ != newZJRID) {
+    // 获取将要成为主讲人的那个远程流
     var zjr_streams =
       newZJRID == oneself_.CHID ? rtc.localStream_ : rtc.members_.get(newZJRID);
     zjr_streams?.stop();
     if (ZJRID_ == oneself_.CHID) {
+      // 上一个主讲人是我，停止本地流
       test(rtc.localStream_, oneself_.CHID);
     } else {
+      // 上一个主讲人是其他人，停止他的远程流
       test(rtc.members_.get(ZJRID_), ZJRID_);
     }
     function test(stream, ID) {
       stream?.stop();
       if (hasMe(ID)) {
         stream?.play("box_" + ID);
+        // 如果远程流不存在，不在线，显示遮罩
         stream ? $("#mask_" + ID).hide() : $("#mask_" + ID).show();
       }
     }
+    // 移除原主持人的相关信息
     $("#zjr_video [id^='profile_']").remove();
     $("#zjr_video [id^='player_']").remove();
     $("#zjr_video").append(
       userInfoTemplate(newZJRID, getUserInfo(newZJRID).UserName)
     );
+    // 如果新的主持人也存在右侧小视频区域，右侧的小视频将显示遮罩
     hasMe(newZJRID) && $("#mask_" + newZJRID).show();
     zjr_streams?.play("zjr_video");
     zjr_streams ? $("#zjr_mask").hide() : $("#zjr_mask").show();
     $(`#zjr_mask img`).attr("src", `./img/camera-gray.png`);
   }
+  // 将参与者列表清空
   for (let user_ of roomDetail_.UserList) {
     $("#member_" + user_.ID).remove();
   }
+  // 重新添加至参与者列表，并进行排序
   addMember();
   !isMicOn && $("#mic_btn").click();
   !isCamOn && $("#video_btn").click();
-  let states = rtc.client_.getRemoteMutedState();
-  for (let state of states) {
-    $("#member_" + state.userId)
-      .find(".member-id")
-      .attr("style", `color: "#ffffff"`);
-  }
-  $("#member_" + oneself_.CHID)
-    .find(".member-id")
-    .attr("style", `color: "#ffffff"`);
   ZJRID_ = newZJRID;
+  // 重新设定新主持人、群众的分辨率
   rtc.shezhifenbianlv();
   // 权限判断按钮显示或隐藏
   showOrHide();
@@ -213,6 +213,17 @@ function addMember() {
     const { ID, UserName } = user_;
     addMemberView(ID, UserName);
   }
+  // 获取远程流用户的状态，能获取到的都是在线的，所以设定为在线状态
+  let states = rtc.client_.getRemoteMutedState();
+  for (let state of states) {
+    $("#member_" + state.userId)
+      .find(".member-id")
+      .attr("style", `color: "#ffffff"`);
+  }
+  // 将自己设定为在线
+  $("#member_" + oneself_.CHID)
+    .find(".member-id")
+    .attr("style", `color: "#ffffff"`);
 }
 
 function layoutCompute() {
