@@ -34,6 +34,8 @@ function changeViews() {
   // 此处的ZJRID_代表上一个主讲人
   // 此处的newZJRID代表新的主讲人ID，没有的话设定自己为假主讲人
   var newZJRID = roomDetail_.SpeakerID || oneself_.CHID;
+
+  // 对上一个主讲人的处理，如果小视频区域中也存在上一个主讲人，则移回去
   if (ZJRID_ != newZJRID) {
     // 获取将要成为主讲人的那个远程流
     var zjr_streams =
@@ -49,7 +51,7 @@ function changeViews() {
     function test(stream, ID) {
       stream?.stop();
       if (hasMe(ID)) {
-        stream?.play("box_" + ID);
+        stream?.play("box_" + ID, { objectFit: "cover" });
         // 如果远程流不存在，不在线，显示遮罩
         stream ? $("#mask_" + ID).hide() : $("#mask_" + ID).show();
       }
@@ -62,10 +64,22 @@ function changeViews() {
     );
     // 如果新的主持人也存在右侧小视频区域，右侧的小视频将显示遮罩
     hasMe(newZJRID) && $("#mask_" + newZJRID).show();
-    zjr_streams?.play("zjr_video");
+    // 判断是否为手机设备
+    var objectFit = getUserInfo(newZJRID).AspectRatio > 1 ? "contain" : "cover";
+    if (objectFit == "contain") {
+      $("#zjr_box").removeClass("w-full");
+      $("#zjr_box").addClass("w-[80%]");
+      $("#video-grid").addClass("bg-[#24292e]");
+    } else {
+      $("#zjr_box").removeClass("w-[80%]");
+      $("#zjr_box").addClass("w-full");
+      $("#video-grid").removeClass("bg-[#24292e]");
+    }
+    zjr_streams?.play("zjr_video", { objectFit });
     zjr_streams ? $("#zjr_mask").hide() : $("#zjr_mask").show();
     $(`#zjr_mask img`).attr("src", `./img/camera-gray.png`);
   }
+
   // 将参与者列表清空
   for (let user_ of roomDetail_.UserList) {
     $("#member_" + user_.ID).remove();

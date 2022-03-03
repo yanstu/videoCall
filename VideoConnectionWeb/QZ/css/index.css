@@ -842,3 +842,7 @@
 #zjr_video {
   border: none;
 }
+
+video {
+  background: #24292e !important;
+}

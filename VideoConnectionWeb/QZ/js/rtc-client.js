@@ -181,10 +181,18 @@ class RtcClient {
 
   playVideo(stream, userId) {
     onlineOrOfline(true, userId);
-    var objectFit = getUserInfo(userId).AspectRatio > 1 ? "contain" : "cover";
+    var objectFit =
+      getUserInfo(userId).AspectRatio > 1 && userId == ZJRID_
+        ? "contain"
+        : "cover";
+    if (objectFit == "contain") {
+      $("#zjr_box").removeClass("w-full");
+      $("#zjr_box").addClass("w-[80%]");
+      $("#video-grid").addClass("bg-[#24292e]");
+    }
     var videoVid = "box_" + userId;
     if (ZJRID_ == userId) videoVid = "zjr_video";
-    stream.play(videoVid, { objectFit }).then(() => {
+    stream?.play(videoVid, { objectFit }).then(() => {
       if (
         userId == oneself_.CHID &&
         (hasMe(oneself_.CHID) || ZJRID_ == oneself_.CHID)
