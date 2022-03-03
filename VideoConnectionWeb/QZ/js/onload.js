@@ -17,7 +17,7 @@ if (!queryParams("t")) {
       Math.random()
   );
 }
-/*
+
 // 重写日志输出对象，限制输出内容
 window.oldLog = console.log;
 console.log = (e) => {
@@ -52,4 +52,3 @@ console.error = (e) => {
   } catch (error) {}
   window.oldError(e);
 };
-*/
