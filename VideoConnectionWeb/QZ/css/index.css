@@ -799,16 +799,6 @@
   -ms-user-select: none;
   user-select: none;
 }
-#video-grid {
-  /* margin-top: -1px; */
-  z-index: -1;
-}
-.video-box {
-  border: 0.5px solid rgb(55, 84, 133, 0.2);
-}
-/*.member-audio-btn {
-  filter: Invert(100%);
-}*/
 #layui-layer-shade1 {
   z-index: 998 !important;
 }

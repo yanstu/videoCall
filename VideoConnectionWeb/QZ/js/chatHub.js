@@ -11,11 +11,11 @@ chatHub.client.broadcastMessage = function (message, channelss) {
   var RoomId = oneself_?.RoomId || queryParams("RoomId");
   if (channelss == RoomId) {
     let mess = JSON.parse(message);
-    if (mess.reCode != 25) {
+    /*if (mess.reCode != 25 && mess.reCode != 27 && mess.reCode != 26) {
       console.log("----------------------------------------");
       console.log(mess.reCode);
       console.log(mess);
-    }
+    }*/
     switch (mess.reCode) {
       //踢出用户
       case "07":

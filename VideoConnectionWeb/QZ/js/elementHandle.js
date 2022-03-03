@@ -1,9 +1,4 @@
 function showOrHide() {
-  $("#video-grid").removeClass("w-[0%]");
-  $("#video-grid").addClass("w-[30%]");
-  $("#zjr_box").removeClass("w-[100%]");
-  $("#zjr_box").addClass("w-[70%]");
-
   // 是否显示申请发言按钮
   var jiadezhujiangren =
     (ZJRID_ == oneself_.CHID && roomDetail_.SpeakerName != oneself_.XM) ||
@@ -329,6 +324,7 @@ function addMemberView(ID, UserName) {
 function addVideoView(ID, NickName) {
   let box = $("#zjr_video").clone();
   box.attr("id", "box_" + ID);
+  box.attr("class", "w-[99%] h-[99%] video-box relative");
   box.find("#zjr_mask").attr("id", "mask_" + ID);
   box.append(userInfoTemplate(ID, NickName));
   box.appendTo("#video-grid");
