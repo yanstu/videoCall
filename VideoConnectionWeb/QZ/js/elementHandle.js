@@ -122,7 +122,7 @@ function addMemberView(ID, UserName) {
       if (oneself_.IsZCR) {
         shezhizhujiangren(ID);
       }
-    })
+    }, 1200)
   );
   member.appendTo($("#member-list"));
   member.show();

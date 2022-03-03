@@ -12,11 +12,6 @@ chatHub.client.broadcastMessage = function (message, channelss) {
   if (channelss == RoomId) {
     let mess = JSON.parse(message);
     switch (mess.reCode) {
-      /*//设置主讲人
-      case "01":
-      case "20":
-        ZJRID_ = mess.ReUserid;
-        break;*/
       //踢出用户
       case "07":
         if (mess.ReUserid == oneself_.CHID) {
@@ -120,7 +115,6 @@ function sortData(a, b) {
 }
 
 function redisFB(data) {
-  // console.log(chatHub.server.redisFB(oneself_.RoomId, JSON.stringify(data)));
   chatHub.server.redisFB(oneself_.RoomId, JSON.stringify(data));
 }
 
