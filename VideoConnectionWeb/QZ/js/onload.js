@@ -9,14 +9,14 @@ function queryParams(name) {
 }
 
 // 清除缓存
-if (!queryParams("t")) {
+/*if (!queryParams("t")) {
   location.replace(
     location.href +
       (location.href.includes("?") ? "&" : "?") +
       "t=" +
       Math.random()
   );
-}
+}*/
 
 // 重写日志输出对象，限制输出内容
 window.oldLog = console.log;

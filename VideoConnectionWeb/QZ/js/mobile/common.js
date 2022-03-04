@@ -157,7 +157,7 @@ async function change() {
   $("#zjr_video").append(
     userInfoTemplate(newZJRID, getUserInfo(newZJRID).UserName)
   );
-  new_streams?.play("zjr_video");
+  new_streams?.play("zjr_video", { objectFit: "cover" });
   new_streams ? $("#zjr_mask").hide() : $("#zjr_mask").show();
 }
 
