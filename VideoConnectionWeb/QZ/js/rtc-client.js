@@ -206,12 +206,12 @@ class RtcClient {
   async shezhifenbianlv() {
     if (ZJRID_ == oneself_.CHID) {
       if (!roomDetail_.SpeakerID) {
-        await this.localStream_.setVideoProfile("1080p");
+        await this.localStream_.setVideoProfile("480p");
       } else {
-        await this.localStream_.setVideoProfile("720p");
+        await this.localStream_.setVideoProfile("1080p");
       }
     } else {
-      var renshu = [8, 5, 2, 0];
+      var renshu = [6, 4, 2, 0];
       var fenbianlv = ["240p", "360p", "480p", "720p"];
       for (var i = 0; i < renshu.length; i++) {
         if (roomDetail_.UserList.length >= renshu[i]) {
@@ -374,7 +374,7 @@ class RtcClient {
    */
   startGetNetworkevel() {
     this.client_.on("network-quality", (event) => {
-      this.shezhifenbianlv()
+      this.shezhifenbianlv();
       //console.log(`network-quality, uplinkNetworkQuality:${event.uplinkNetworkQuality}, downlinkNetworkQuality: ${event.downlinkNetworkQuality}`);
       //'0': '未知', '1': '极佳', '2': '较好', '3': '一般', '4': '差', '5': '极差', '6': '断开'
       isDisconnect = event.uplinkNetworkQuality == 6;

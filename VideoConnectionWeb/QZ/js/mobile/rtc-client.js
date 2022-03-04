@@ -188,12 +188,12 @@ class RtcClient {
   async shezhifenbianlv() {
     if (ZJRID_ == oneself_.CHID) {
       if (!roomDetail_.SpeakerID) {
-        await this.localStream_.setVideoProfile("1080p");
+        await this.localStream_.setVideoProfile("480p");
       } else {
-        await this.localStream_.setVideoProfile("720p");
+        await this.localStream_.setVideoProfile("1080p");
       }
     } else {
-      var renshu = [8, 5, 2, 0];
+      var renshu = [6, 4, 2, 0];
       var fenbianlv = ["240p", "360p", "480p", "720p"];
       for (var i = 0; i < renshu.length; i++) {
         if (roomDetail_.UserList.length >= renshu[i]) {
