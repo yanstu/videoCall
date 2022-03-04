@@ -142,12 +142,14 @@ async function change() {
     resetViews();
   } else {
     if (ZJRID_ == oneself_.CHID) {
+      resetViews();
       rtc.localStream_.stop();
       addVideoView(oneself_.CHID, oneself_.XM);
       $("#box_" + oneself_.CHID).append(
         userInfoTemplate(oneself_.CHID, oneself_.XM)
       );
       rtc.localStream_.play("box_" + oneself_.CHID);
+      $("#mask_" + oneself_.CHID).hide();
     }
   }
   $("#zjr_video [id^='profile_']").remove();
@@ -178,18 +180,22 @@ function init() {
 }
 
 $("#video-grid").on("click", () => {
-  $("#video-grid").attr("class", "w-full h-full video-box relative");
-  $("#zjr_box").attr(
-    "class",
-    "box-border grid w-[35%] h-[25%] absolute top-[8%] right-[1%] items-center z-10"
-  );
+  if ($("#video-grid > div").length > 0) {
+    $("#video-grid").attr("class", "w-full h-full video-box relative");
+    $("#zjr_box").attr(
+      "class",
+      "box-border grid w-[35%] h-[25%] absolute top-[8%] right-[1%] items-center z-10"
+    );
+  }
 });
 $("#zjr_video").on("click", () => {
-  $("#video-grid").attr(
-    "class",
-    "box-border grid w-[35%] h-[25%] absolute top-[8%] right-[1%] items-center justify-center z-10"
-  );
-  $("#zjr_box").attr("class", "w-full h-full video-box relative");
+  if ($("#video-grid > div").length > 0) {
+    $("#video-grid").attr(
+      "class",
+      "box-border grid w-[35%] h-[25%] absolute top-[8%] right-[1%] items-center justify-center z-10"
+    );
+    $("#zjr_box").attr("class", "w-full h-full video-box relative");
+  }
 });
 
 // 查询当前页的用户列表是否包含该用户

@@ -248,6 +248,7 @@ class RtcClient {
     this.client_.on("peer-join", (evt) => {
       const { userId } = evt;
       onlineOrOfline(true, userId);
+      this.members_.set(userId, null);
       console.log(getUserInfo(userId)?.UserName + " 加入了房间");
     });
 
@@ -255,6 +256,7 @@ class RtcClient {
     this.client_.on("peer-leave", (evt) => {
       const { userId } = evt;
       onlineOrOfline(false, userId);
+      this.members_.delete(userId);
       console.log(getUserInfo(userId)?.UserName + " 离开了房间，或者掉线");
     });
 
@@ -262,7 +264,6 @@ class RtcClient {
     this.client_.on("stream-added", (evt) => {
       const remoteStream = evt.stream;
       const userId = remoteStream.getUserId();
-      // members_只添加当前页在线的用户
       this.members_.set(userId, remoteStream);
       console.log(`${getUserInfo(userId)?.UserName} 添加远程流`);
       this.client_.subscribe(remoteStream);
@@ -312,7 +313,6 @@ class RtcClient {
       const uid = remoteStream?.getUserId();
       const id = remoteStream?.getId();
       remoteStream?.stop();
-      this.members_.delete(uid);
 
       // onlineOrOfline(false, uid);
 

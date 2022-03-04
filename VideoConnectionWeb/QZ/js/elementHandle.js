@@ -202,10 +202,8 @@ function addMember() {
     const { ID, UserName } = user_;
     addMemberView(ID, UserName);
   }
-  // 获取远程流用户的状态，能获取到的都是在线的，所以设定为在线状态
-  let states = rtc.client_.getRemoteMutedState();
-  for (let state of states) {
-    $("#member_" + state.userId)
+  for (let member of rtc.members_) {
+    $("#member_" + member[0])
       .find(".member-id")
       .attr("style", `color: "#ffffff"`);
   }
@@ -329,7 +327,10 @@ function addMemberView(ID, UserName) {
           layer.msg("不能对离线用户进行操作");
           return;
         }
-        if (!rtc.members_.get(ID) || !rtc.members_.get(ID).hasVideo()) {
+        if (
+          (!rtc.members_.get(ID) || !rtc.members_.get(ID).hasVideo()) &&
+          ZCRID_ != ID
+        ) {
           layer.msg("用户设备异常，不能操作摄像头");
           return;
         }
@@ -345,7 +346,10 @@ function addMemberView(ID, UserName) {
           layer.msg("不能对离线用户进行操作");
           return;
         }
-        if (!rtc.members_.get(ID) || !rtc.members_.get(ID).hasAudio()) {
+        if (
+          (!rtc.members_.get(ID) || !rtc.members_.get(ID).hasAudio()) &&
+          ZCRID_ != ID
+        ) {
           layer.msg("用户设备异常，不能操作麦克风");
           return;
         }
@@ -362,9 +366,10 @@ function addMemberView(ID, UserName) {
           return;
         }
         if (
-          !rtc.members_.get(ID) ||
-          !rtc.members_.get(ID).hasAudio() ||
-          !rtc.members_.get(ID).hasVideo()
+          (!rtc.members_.get(ID) ||
+            !rtc.members_.get(ID).hasAudio() ||
+            !rtc.members_.get(ID).hasVideo()) &&
+          ZCRID_ != ID
         ) {
           layer.msg("用户设备异常，不能设为主讲人");
           return;
