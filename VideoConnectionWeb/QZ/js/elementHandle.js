@@ -350,6 +350,7 @@ function addVideoView(ID, NickName) {
   let box = $("#zjr_video").clone();
   box.attr("id", "box_" + ID);
   box.attr("class", "w-[99%] h-[99%] video-box relative");
+  getOS().type === "mobile" && box.attr("class", "w-full h-full video-box relative");
   box.find("#zjr_mask").attr("id", "mask_" + ID);
   box.append(userInfoTemplate(ID, NickName));
   box.appendTo("#video-grid");
