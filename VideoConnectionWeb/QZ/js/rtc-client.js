@@ -55,29 +55,19 @@ class RtcClient {
       await this.localStream_.initialize();
       // 推送本地流
       await this.publish();
+      onlineOrOfline(true, oneself_.CHID);
     } catch (error) {
       console.error("无法初始化共享流或推送本地流失败 - ", error);
     }
 
+    // 权限判断按钮显示或隐藏
+    showOrHide();
     // 关闭加载中
     layer.close(loadIndex);
     // 开始获取网络质量
     this.startGetNetworkevel();
     // 开始获取音量
     this.startGetAudioLevel();
-  }
-
-  // 更新成员状态
-  updateUserState() {
-    let states = this.client_.getRemoteMutedState();
-    for (let state of states) {
-      audioHandle(!state.audioMuted, state.userId);
-      videoHandle(!state.videoMuted, state.userId);
-      onlineOrOfline(true, state.userId);
-    }
-    onlineOrOfline(true, oneself_.CHID);
-    audioHandle(isMicOn, oneself_.CHID);
-    videoHandle(isCamOn, oneself_.CHID);
   }
 
   /**
@@ -102,6 +92,7 @@ class RtcClient {
     if (this.isPublished_) return;
     try {
       await this.client_.publish(this.localStream_);
+      this.shezhifenbianlv();
       this.playVideo(this.localStream_, oneself_.CHID);
     } catch (error) {
       console.error("推送本地流失败" + error);
@@ -179,7 +170,7 @@ class RtcClient {
   }
 
   playVideo(stream, userId) {
-    onlineOrOfline(true, userId);
+    // onlineOrOfline(true, userId);
     var objectFit =
       getUserInfo(userId).AspectRatio > 1 && userId == ZJRID_
         ? "contain"
@@ -190,7 +181,8 @@ class RtcClient {
       $("#video-grid").addClass("bg-[#24292e]");
     }
     var videoVid = "box_" + userId;
-    if (ZJRID_ == userId) videoVid = "zjr_video";
+    if (ZJRID_ == userId || roomDetail_.SpeakerID == userId)
+      videoVid = "zjr_video";
     stream?.play(videoVid, { objectFit }).then(() => {
       if (
         userId == oneself_.CHID &&
@@ -204,7 +196,7 @@ class RtcClient {
   }
 
   async shezhifenbianlv() {
-    if (ZJRID_ == oneself_.CHID) {
+    if (ZJRID_ == oneself_.CHID || roomDetail_.SpeakerI == oneself_.CHID) {
       if (!roomDetail_.SpeakerID) {
         await this.localStream_.setVideoProfile("480p");
       } else {
@@ -255,6 +247,7 @@ class RtcClient {
     // 当用户加入房间时触发
     this.client_.on("peer-join", (evt) => {
       const { userId } = evt;
+      onlineOrOfline(true, userId);
       console.log(getUserInfo(userId)?.UserName + " 加入了房间");
     });
 
@@ -283,8 +276,8 @@ class RtcClient {
 
       if (
         hasMe(userId) ||
-        oneself_ == ZJRID_ ||
-        oneself_ == roomDetail_.SpeakerID
+        userId == ZJRID_ ||
+        userId == roomDetail_.SpeakerID
       ) {
         this.playVideo(remoteStream, userId);
       }
@@ -321,7 +314,7 @@ class RtcClient {
       remoteStream?.stop();
       this.members_.delete(uid);
 
-      onlineOrOfline(false, uid);
+      // onlineOrOfline(false, uid);
 
       this.remoteStreams_ = this.remoteStreams_.filter((stream) => {
         return stream.getId() !== id;
@@ -396,7 +389,6 @@ class RtcClient {
    */
   startGetNetworkevel() {
     this.client_.on("network-quality", (event) => {
-      this.shezhifenbianlv();
       //console.log(`network-quality, uplinkNetworkQuality:${event.uplinkNetworkQuality}, downlinkNetworkQuality: ${event.downlinkNetworkQuality}`);
       //'0': '未知', '1': '极佳', '2': '较好', '3': '一般', '4': '差', '5': '极差', '6': '断开'
       isDisconnect = event.uplinkNetworkQuality == 6;

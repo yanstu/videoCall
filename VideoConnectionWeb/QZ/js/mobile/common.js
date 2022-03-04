@@ -124,8 +124,6 @@ async function viewsHandle(mess) {
   ZJRID_ = roomDetail_.SpeakerID || oneself_.CHID;
 
   !rtc.isPublished_ && init();
-
-  showOrHide();
 }
 
 async function change() {
@@ -159,6 +157,7 @@ async function change() {
   );
   new_streams?.play("zjr_video", { objectFit: "cover" });
   new_streams ? $("#zjr_mask").hide() : $("#zjr_mask").show();
+  rtc.shezhifenbianlv();
 }
 
 function init() {

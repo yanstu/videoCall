@@ -23,9 +23,21 @@ function showOrHide() {
     $(".faxiaoxi_btn").show();
   }
 
-  // 非本页的不需要摄像头按钮
-  if (!hasMe(oneself_.CHID) && !oneself_.IsZCR && ZJRID_ != oneself_.CHID) {
+  let isAndroid = getOS().type === "mobile" && getOS().osName === "Android";
+  // 非本页非PC端的与没有摄像头设备的不需要摄像头按钮
+  if (
+    (!hasMe(oneself_.CHID) &&
+      !oneself_.IsZCR &&
+      ZJRID_ != oneself_.CHID &&
+      !isAndroid) ||
+    !rtc.localStream_.hasVideo()
+  ) {
     $("#video_btn").hide();
+  }
+  // 没有麦克风设备的不能控制麦克风按钮和申请发言
+  if (!rtc.localStream_.hasAudio()) {
+    $("#mic_btn").hide();
+    $("#shenqingfayan_btn").hide();
   }
 }
 
@@ -36,53 +48,50 @@ function changeViews() {
   // 此处的newZJRID代表新的主讲人ID，没有的话设定自己为假主讲人
   var newZJRID = roomDetail_.SpeakerID || oneself_.CHID;
 
-  // 对上一个主讲人的处理，如果小视频区域中也存在上一个主讲人，则移回去
-  if (ZJRID_ != newZJRID) {
-    // 先停止上一个主持人的播放
-    if (ZJRID_ == oneself_.CHID) {
-      // 上一个主讲人是我，停止本地流
-      rePlay(rtc.localStream_, oneself_.CHID);
-    } else {
-      // 上一个主讲人是其他人，停止他的远程流
-      rePlay(rtc.members_.get(ZJRID_), ZJRID_);
-    }
-    function rePlay(stream, ID) {
-      stream?.stop();
-      if (hasMe(ID)) {
-        stream?.play("box_" + ID, { objectFit: "cover" });
-        // 如果远程流不存在，不在线，显示遮罩
-        stream ? $("#mask_" + ID).hide() : $("#mask_" + ID).show();
-      }
-    }
-
-    // 获取将要成为主讲人的那个远程流
-    var zjr_streams =
-      newZJRID == oneself_.CHID ? rtc.localStream_ : rtc.members_.get(newZJRID);
-    zjr_streams?.stop();
-
-    // 移除原主持人的相关信息
-    $("#zjr_video [id^='profile_']").remove();
-    $("#zjr_video [id^='player_']").remove();
-    $("#zjr_video").append(
-      userInfoTemplate(newZJRID, getUserInfo(newZJRID).UserName)
-    );
-    // 如果新的主持人也存在右侧小视频区域，右侧的小视频将显示遮罩
-    hasMe(newZJRID) && $("#mask_" + newZJRID).show();
-    // 判断是否为手机设备
-    var objectFit = getUserInfo(newZJRID).AspectRatio > 1 ? "contain" : "cover";
-    if (objectFit == "contain") {
-      $("#zjr_box").removeClass("w-full");
-      $("#zjr_box").addClass("w-[80%]");
-      $("#video-grid").addClass("bg-[#24292e]");
-    } else {
-      $("#zjr_box").removeClass("w-[80%]");
-      $("#zjr_box").addClass("w-full");
-      $("#video-grid").removeClass("bg-[#24292e]");
-    }
-    zjr_streams?.play("zjr_video");
-    zjr_streams ? $("#zjr_mask").hide() : $("#zjr_mask").show();
-    $(`#zjr_mask img`).attr("src", `./img/camera-gray.png`);
+  // 先停止上一个主持人的播放
+  if (ZJRID_ == oneself_.CHID) {
+    // 上一个主讲人是我，停止本地流
+    rePlay(rtc.localStream_, oneself_.CHID);
+  } else {
+    // 上一个主讲人是其他人，停止他的远程流
+    rePlay(rtc.members_.get(ZJRID_), ZJRID_);
   }
+  function rePlay(stream, ID) {
+    stream?.stop();
+    if (hasMe(ID)) {
+      stream?.play("box_" + ID, { objectFit: "cover" });
+      // 如果远程流不存在，不在线，显示遮罩
+      stream ? $("#mask_" + ID).hide() : $("#mask_" + ID).show();
+    }
+  }
+  // 获取将要成为主讲人的那个远程流
+  var zjr_streams =
+    newZJRID == oneself_.CHID ? rtc.localStream_ : rtc.members_.get(newZJRID);
+  zjr_streams?.stop();
+
+  // 移除原主持人的相关信息
+  $(`#box_${newZJRID} .volume-level`).css("height", "0%");
+  $("#zjr_video [id^='profile_']").remove();
+  $("#zjr_video [id^='player_']").remove();
+  $("#zjr_video").append(
+    userInfoTemplate(newZJRID, getUserInfo(newZJRID).UserName)
+  );
+  // 如果新的主持人也存在右侧小视频区域，右侧的小视频将显示遮罩
+  hasMe(newZJRID) && $("#mask_" + newZJRID).show();
+  // 判断是否为手机设备
+  var objectFit = getUserInfo(newZJRID).AspectRatio > 1 ? "contain" : "cover";
+  if (objectFit == "contain") {
+    $("#zjr_box").removeClass("w-full");
+    $("#zjr_box").addClass("w-[80%]");
+    $("#video-grid").addClass("bg-[#24292e]");
+  } else {
+    $("#zjr_box").removeClass("w-[80%]");
+    $("#zjr_box").addClass("w-full");
+    $("#video-grid").removeClass("bg-[#24292e]");
+  }
+  zjr_streams?.play("zjr_video", { objectFit });
+  zjr_streams ? $("#zjr_mask").hide() : $("#zjr_mask").show();
+  $(`#zjr_mask img`).attr("src", `./img/camera-gray.png`);
 
   // 将参与者列表清空
   for (let user_ of roomDetail_.UserList) {
@@ -296,10 +305,18 @@ function addMemberView(ID, UserName) {
     member.find(".tidiao_btn").on(
       "click",
       clickProof(() => {
+        if (member.find(".member-id").attr("style").indexOf("7c7f85") > -1) {
+          layer.msg("不能对离线用户进行操作");
+          return;
+        }
         tidiao(ID);
       })
     );
     member.find(".faxiaoxi_btn").on("click", () => {
+      if (member.find(".member-id").attr("style").indexOf("7c7f85") > -1) {
+        layer.msg("不能对离线用户进行操作");
+        return;
+      }
       fasonggeishei = ID;
       $("#xiaoxi_btn").click();
     });
@@ -308,11 +325,15 @@ function addMemberView(ID, UserName) {
     "click",
     clickProof(() => {
       if (oneself_.IsZCR) {
-        // if (hasMe(ID)) {
-          dakaiguanbishexiangtou(ID);
-        /*} else {
-          layer.msg("该用户不在当前页，无法控制摄像头。");
-        }*/
+        if (member.find(".member-id").attr("style").indexOf("7c7f85") > -1) {
+          layer.msg("不能对离线用户进行操作");
+          return;
+        }
+        if (!rtc.members_.get(ID) || !rtc.members_.get(ID).hasVideo()) {
+          layer.msg("用户设备异常，不能操作摄像头");
+          return;
+        }
+        dakaiguanbishexiangtou(ID);
       }
     })
   );
@@ -320,6 +341,14 @@ function addMemberView(ID, UserName) {
     "click",
     clickProof(() => {
       if (oneself_.IsZCR) {
+        if (member.find(".member-id").attr("style").indexOf("7c7f85") > -1) {
+          layer.msg("不能对离线用户进行操作");
+          return;
+        }
+        if (!rtc.members_.get(ID) || !rtc.members_.get(ID).hasAudio()) {
+          layer.msg("用户设备异常，不能操作麦克风");
+          return;
+        }
         dakaiguanbimaikefeng(ID);
       }
     })
@@ -329,10 +358,18 @@ function addMemberView(ID, UserName) {
     clickProof(() => {
       if (oneself_.IsZCR) {
         if (member.find(".member-id").attr("style").indexOf("7c7f85") > -1) {
-          layer.msg("不能设置离线用户为主讲人");
-        } else {
-          shezhizhujiangren(ID);
+          layer.msg("不能对离线用户进行操作");
+          return;
         }
+        if (
+          !rtc.members_.get(ID) ||
+          !rtc.members_.get(ID).hasAudio() ||
+          !rtc.members_.get(ID).hasVideo()
+        ) {
+          layer.msg("用户设备异常，不能设为主讲人");
+          return;
+        }
+        shezhizhujiangren(ID);
       }
     }, 1200)
   );
@@ -385,5 +422,9 @@ function onlineOrOfline(online, userId) {
       .attr("src", "img/camera-on.png");
     $(`#mask_${userId} img`).attr("src", "./img/camera-gray.png");
     $(`#mic_main_${userId} .volume-level`).css("height", "0%");
+    $(`#fayan_${userId}`).remove();
+    if ($("#speakerList > div").length == 1) {
+      $("#fayan_jiaobiao").hide();
+    }
   }
 }

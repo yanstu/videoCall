@@ -119,8 +119,6 @@ async function viewsHandle() {
   addViews();
   // 如果没有设置主讲人，将自己设置为假的主讲人
   ZJRID_ = roomDetail_.SpeakerID || oneself_.CHID;
-  // 权限判断按钮显示或隐藏
-  showOrHide();
   if (!rtc.isPublished_) {
     // 没有推送过，就是第一次进入房间
     rtc.join();

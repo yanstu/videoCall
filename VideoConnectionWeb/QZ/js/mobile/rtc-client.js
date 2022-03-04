@@ -59,6 +59,8 @@ class RtcClient {
       console.error("无法初始化共享流或推送本地流失败 - ", error);
     }
 
+    // 权限判断按钮显示或隐藏
+    showOrHide();
     // 关闭加载中
     layer.close(loadIndex);
     // 开始获取网络质量
@@ -89,6 +91,7 @@ class RtcClient {
     if (this.isPublished_) return;
     try {
       await this.client_.publish(this.localStream_);
+      this.shezhifenbianlv();
       this.playVideo(this.localStream_, oneself_.CHID);
     } catch (error) {
       console.error("推送本地流失败" + error);
@@ -186,7 +189,7 @@ class RtcClient {
   }
 
   async shezhifenbianlv() {
-    if (ZJRID_ == oneself_.CHID) {
+    if (ZJRID_ == oneself_.CHID || roomDetail_.SpeakerI == oneself_.CHID) {
       if (!roomDetail_.SpeakerID) {
         await this.localStream_.setVideoProfile("480p");
       } else {
@@ -357,7 +360,6 @@ class RtcClient {
    */
   startGetNetworkevel() {
     this.client_.on("network-quality", (event) => {
-      this.shezhifenbianlv();
       //console.log(`network-quality, uplinkNetworkQuality:${event.uplinkNetworkQuality}, downlinkNetworkQuality: ${event.downlinkNetworkQuality}`);
       //'0': '未知', '1': '极佳', '2': '较好', '3': '一般', '4': '差', '5': '极差', '6': '断开'
       isDisconnect = event.uplinkNetworkQuality == 6;
