@@ -184,13 +184,6 @@ class RtcClient {
           fasongchangkuanbi();
         }
       });
-
-    let buxianshi = $("#buxianshi").clone();
-    buxianshi.attr("id", "buxianshi_" + userId);
-    buxianshi.appendTo($("#buxianshi"));
-
-    if (userId != oneself_.CHID && userId != ZJRID_)
-      stream?.play("buxianshi_" + userId);
   }
 
   async shezhifenbianlv() {
@@ -251,7 +244,9 @@ class RtcClient {
       const userId = remoteStream.getUserId();
       this.remoteStreams_.push(remoteStream);
 
-      this.playVideo(remoteStream, userId);
+      if (userId == roomDetail_.SpeakerID) {
+        this.playVideo(remoteStream, userId);
+      }
 
       if (!remoteStream.hasVideo()) {
         $("#mask_" + userId).show();
@@ -283,7 +278,7 @@ class RtcClient {
       const uid = remoteStream.getUserId();
       const id = remoteStream.getId();
       remoteStream.stop();
-      this.members_.delete(uid);
+      // this.members_.delete(uid);
 
       onlineOrOfline(false, uid);
 

@@ -102,8 +102,6 @@ function login(JMStr) {
     });
 
     trtcPreliminaryDetection();
-
-    bind();
   });
 }
 
@@ -137,31 +135,21 @@ async function change() {
   );
   $("#zjr_box").attr("class", "w-full h-full video-box relative");
   var newZJRID = roomDetail_.SpeakerID || oneself_.CHID;
+  var old_streams = rtc.members_.get(ZJRID_);
+  old_streams?.stop();
   var new_streams =
     newZJRID == oneself_.CHID ? rtc.localStream_ : rtc.members_.get(newZJRID);
-  new_streams?.stop();
+  new_streams & new_streams.stop();
   if (newZJRID == oneself_.CHID) {
-    var old_streams = rtc.members_.get(ZJRID_);
-    old_streams.stop();
-    old_streams.play("buxianshi_" + ZJRID_);
     resetViews();
-    /*$("#zjr_video [id^='profile_']").remove();
-    $("#zjr_video [id^='player_']").remove();
-    $("#zjr_video").append(
-      userInfoTemplate(ZJRID_, getUserInfo(ZJRID_).UserName)
-    );*/
   } else {
     if (ZJRID_ == oneself_.CHID) {
-      await rtc.localStream_.stop();
+      rtc.localStream_.stop();
       addVideoView(oneself_.CHID, oneself_.XM);
       $("#box_" + oneself_.CHID).append(
         userInfoTemplate(oneself_.CHID, oneself_.XM)
       );
-      await rtc.localStream_.play("box_" + oneself_.CHID);
-    } else {
-      var old_streams = rtc.members_.get(ZJRID_);
-      old_streams.stop();
-      old_streams.play("buxianshi_" + ZJRID_);
+      rtc.localStream_.play("box_" + oneself_.CHID);
     }
   }
   $("#zjr_video [id^='profile_']").remove();
