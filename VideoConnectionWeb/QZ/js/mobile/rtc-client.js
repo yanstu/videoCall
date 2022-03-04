@@ -34,7 +34,7 @@ class RtcClient {
     if (getCameraId() && getMicrophoneId()) {
       this.localStream_ = TRTC.createStream({
         audio: true,
-        video: hasMe(oneself_.CHID) || ZJRID_ == oneself_.CHID,
+        video: true,
         userId: this.userId_,
         cameraId: getCameraId(),
         microphoneId: getMicrophoneId(),
@@ -44,7 +44,7 @@ class RtcClient {
       // 不指定 麦克风Id/摄像头Id，以避免过限制错误
       this.localStream_ = TRTC.createStream({
         audio: true,
-        video: hasMe(oneself_.CHID) || ZJRID_ == oneself_.CHID,
+        video: true,
         userId: this.userId_,
         mirror: false, // 是否开启镜像
       });

@@ -34,7 +34,7 @@ class RtcClient {
     if (getCameraId() && getMicrophoneId()) {
       this.localStream_ = TRTC.createStream({
         audio: true,
-        video: hasMe(oneself_.CHID) || ZJRID_ == oneself_.CHID,
+        video: true,
         userId: this.userId_,
         cameraId: getCameraId(),
         microphoneId: getMicrophoneId(),
@@ -44,7 +44,7 @@ class RtcClient {
       // 不指定 麦克风Id/摄像头Id，以避免过限制错误
       this.localStream_ = TRTC.createStream({
         audio: true,
-        video: hasMe(oneself_.CHID) || ZJRID_ == oneself_.CHID,
+        video: true,
         userId: this.userId_,
         mirror: false, // 是否开启镜像
       });
@@ -265,7 +265,9 @@ class RtcClient {
       const userId = remoteStream.getUserId();
       this.remoteStreams_.push(remoteStream);
 
-      this.playVideo(remoteStream, userId);
+      if (hasMe(userId)) {
+        this.playVideo(remoteStream, userId);
+      }
 
       if (!remoteStream.hasVideo()) {
         $("#mask_" + userId).show();
@@ -294,9 +296,9 @@ class RtcClient {
     and removes the stream from the list of remote streams. */
     this.client_.on("stream-removed", (evt) => {
       const remoteStream = evt.stream;
-      const uid = remoteStream.getUserId();
-      const id = remoteStream.getId();
-      remoteStream.stop();
+      const uid = remoteStream?.getUserId();
+      const id = remoteStream?.getId();
+      remoteStream?.stop();
       this.members_.delete(uid);
 
       onlineOrOfline(false, uid);

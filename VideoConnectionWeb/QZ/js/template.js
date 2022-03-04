@@ -16,7 +16,7 @@ function userInfoTemplate(userId, nickName) {
         </div>
     </div>
     <!-- 昵称显示 -->
-    <span class="ml-1 mr-1 nicknamespan text-[0.875rem]" style="color: white">
+    <span class="ml-1 mr-1 nicknamespan text-[0.975rem]" style="color: white">
     ${nickName}
     </span>
   </div>`;

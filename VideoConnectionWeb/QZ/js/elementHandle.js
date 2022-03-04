@@ -79,7 +79,7 @@ function changeViews() {
         $("#zjr_box").addClass("w-full");
         $("#video-grid").removeClass("bg-[#24292e]");
       }
-      zjr_streams?.play("zjr_video", { objectFit });
+      zjr_streams?.play("zjr_video");
       zjr_streams ? $("#zjr_mask").hide() : $("#zjr_mask").show();
       $(`#zjr_mask img`).attr("src", `./img/camera-gray.png`);
     }
@@ -349,7 +349,7 @@ function addMemberView(ID, UserName) {
 function addVideoView(ID, NickName) {
   let box = $("#zjr_video").clone();
   box.attr("id", "box_" + ID);
-  box.attr("class", "w-[99%] h-[99%] video-box relative");
+  box.attr("class", "w-[99%] h-[99%] video-box relative border-[1px] border-[#999798] p-[2px]");
   getOS().type === "mobile" && box.attr("class", "w-full h-full video-box relative");
   box.find("#zjr_mask").attr("id", "mask_" + ID);
   box.append(userInfoTemplate(ID, NickName));
