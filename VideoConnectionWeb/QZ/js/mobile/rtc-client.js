@@ -235,8 +235,7 @@ class RtcClient {
     this.client_.on("stream-added", (evt) => {
       const remoteStream = evt.stream;
       const userId = remoteStream.getUserId();
-      // members_只添加当前页在线的用户
-      hasMe(userId) && this.members_.set(userId, remoteStream);
+      this.members_.set(userId, remoteStream);
       console.log(`${getUserInfo(userId)?.UserName} 添加远程流`);
       this.client_.subscribe(remoteStream);
     });

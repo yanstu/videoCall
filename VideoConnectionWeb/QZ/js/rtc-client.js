@@ -229,11 +229,27 @@ class RtcClient {
     this.client_.on("error", (err) => {
       console.error(err);
     });
+
     this.client_.on("client-banned", () => {
-      layer.msg("您已被挤下线", { icon: 2 });
-      setTimeout(() => {
-        leave();
-      }, 1000);
+      if (!isHidden()) {
+        layer.msg("您已被挤下线", { icon: 2 });
+        setTimeout(() => {
+          leave();
+        }, 1000);
+      } else {
+        document.addEventListener(
+          "visibilitychange",
+          () => {
+            if (!isHidden()) {
+              layer.msg("您已被挤下线", { icon: 2 });
+              setTimeout(() => {
+                leave();
+              }, 1000);
+            }
+          },
+          false
+        );
+      }
     });
 
     // 当用户加入房间时触发
@@ -254,7 +270,7 @@ class RtcClient {
       const remoteStream = evt.stream;
       const userId = remoteStream.getUserId();
       // members_只添加当前页在线的用户
-      hasMe(userId) && this.members_.set(userId, remoteStream);
+      this.members_.set(userId, remoteStream);
       console.log(`${getUserInfo(userId)?.UserName} 添加远程流`);
       this.client_.subscribe(remoteStream);
     });
@@ -265,7 +281,11 @@ class RtcClient {
       const userId = remoteStream.getUserId();
       this.remoteStreams_.push(remoteStream);
 
-      if (hasMe(userId)) {
+      if (
+        hasMe(userId) ||
+        oneself_ == ZJRID_ ||
+        oneself_ == roomDetail_.SpeakerID
+      ) {
         this.playVideo(remoteStream, userId);
       }
 
