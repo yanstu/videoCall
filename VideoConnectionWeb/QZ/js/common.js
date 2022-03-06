@@ -92,8 +92,7 @@ function login(JMStr) {
       leave();
     }
     oneself_ = res.Data;
-    $("title").html(res.Data.Title);
-    $("#roomTitle").html(res.Data.Title);
+    setTitle(res.Data.Title);
 
     rtc = new RtcClient({
       nickName: res.Data.XM,

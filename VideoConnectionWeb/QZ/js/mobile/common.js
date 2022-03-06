@@ -90,8 +90,7 @@ function login(JMStr) {
       leave();
     }
     oneself_ = res.Data;
-    $("title").html(res.Data.Title);
-    $("#roomTitle").html(res.Data.Title);
+    setTitle(res.Data.Title);
 
     rtc = new RtcClient({
       nickName: res.Data.XM,
@@ -111,18 +110,18 @@ function login(JMStr) {
 async function viewsHandle(mess) {
   if (mess) {
     roomDetail_ = mess.Data.VideoConferenceMess;
+    setTitle(roomDetail_.Title);
     roomDetail_.UserList.length == 0 && location.reload();
     roomDetail_.UserList = roomDetail_.UserList.sort(sortData);
     ZCRID_ = roomDetail_.UserList.find((item) => item.IsZCR == 1).ID;
   }
   if (ZJRID_ && roomDetail_.SpeakerID && ZJRID_ == roomDetail_.SpeakerID)
     return;
-
+  // 修改主讲人
   rtc.isPublished_ && change();
-
   // 如果没有设置主讲人，将自己设置为假的主讲人
   ZJRID_ = roomDetail_.SpeakerID || oneself_.CHID;
-
+  // 初始化
   !rtc.isPublished_ && init();
 }
 
@@ -163,6 +162,7 @@ async function change() {
   );
   new_streams?.play("zjr_video", { objectFit: "cover" });
   new_streams ? $("#zjr_mask").hide() : $("#zjr_mask").show();
+  // 切换身份后设置相应的分辨率
   rtc.shezhifenbianlv();
 }
 

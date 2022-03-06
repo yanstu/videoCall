@@ -274,6 +274,11 @@ function videoHandle(on, userId) {
   }
 }
 
+function setTitle(Title) {
+  $("title").html(Title);
+  $("#roomTitle").html(Title);
+}
+
 /**
  * 添加成员列表
  * Add a member to the member list
