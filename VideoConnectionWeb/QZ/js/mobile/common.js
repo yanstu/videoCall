@@ -129,7 +129,7 @@ async function viewsHandle(mess) {
 async function change() {
   $("#video-grid").attr(
     "class",
-    "box-border grid w-[35%] h-[25%] absolute top-[8%] right-[1%] items-center justify-center z-10"
+    "box-border grid w-[9rem] h-[25%] absolute top-[8%] right-[1%] items-center justify-center z-10"
   );
   $("#zjr_box").attr("class", "w-full h-full video-box relative");
   var newZJRID = roomDetail_.SpeakerID || oneself_.CHID;
@@ -145,6 +145,10 @@ async function change() {
       resetViews();
       rtc.localStream_.stop();
       addVideoView(oneself_.CHID, oneself_.XM);
+      $("#box_" + oneself_.CHID).attr(
+        "class",
+        "w-[9rem] h-full video-box relative"
+      );
       $("#box_" + oneself_.CHID).append(
         userInfoTemplate(oneself_.CHID, oneself_.XM)
       );
@@ -172,6 +176,10 @@ function init() {
     $("#box_" + oneself_.CHID).append(
       userInfoTemplate(oneself_.CHID, oneself_.XM)
     );
+    $("#box_" + oneself_.CHID).attr(
+      "class",
+      "w-[9rem] h-full video-box relative"
+    );
     $("#zjr_video").append(
       userInfoTemplate(ZJRID_, getUserInfo(ZJRID_).UserName)
     );
@@ -182,9 +190,13 @@ function init() {
 $("#video-grid").on("click", () => {
   if ($("#video-grid > div").length > 0) {
     $("#video-grid").attr("class", "w-full h-full video-box relative");
+    $("#box_" + oneself_.CHID).attr(
+      "class",
+      "w-full h-full video-box relative"
+    );
     $("#zjr_box").attr(
       "class",
-      "box-border grid w-[35%] h-[25%] absolute top-[8%] right-[1%] items-center z-10"
+      "box-border grid w-[9rem] h-[25%] absolute top-[8%] right-[1%] items-center z-10"
     );
   }
 });
@@ -192,7 +204,11 @@ $("#zjr_video").on("click", () => {
   if ($("#video-grid > div").length > 0) {
     $("#video-grid").attr(
       "class",
-      "box-border grid w-[35%] h-[25%] absolute top-[8%] right-[1%] items-center justify-center z-10"
+      "box-border grid w-[9rem] h-[25%] absolute top-[8%] right-[1%] items-center justify-center z-10"
+    );
+    $("#box_" + oneself_.CHID).attr(
+      "class",
+      "w-[9rem] h-full video-box relative"
     );
     $("#zjr_box").attr("class", "w-full h-full video-box relative");
   }

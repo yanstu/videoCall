@@ -157,6 +157,7 @@ class RtcClient {
   changeCameraId() {
     this.localStream_.switchDevice("video", cameraId).then(() => {
       console.log("切换摄像头成功");
+      this.shezhifenbianlv()
     });
   }
 

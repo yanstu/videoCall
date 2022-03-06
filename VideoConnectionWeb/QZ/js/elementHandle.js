@@ -26,16 +26,20 @@ function showOrHide() {
   let isAndroid = getOS().type === "mobile" && getOS().osName === "Android";
   // 非本页非PC端的与没有摄像头设备的不需要摄像头按钮
   if (
-    (!hasMe(oneself_.CHID) &&
-      !oneself_.IsZCR &&
-      ZJRID_ != oneself_.CHID &&
-      !isAndroid) ||
-    !rtc.localStream_.hasVideo()
+    !hasMe(oneself_.CHID) &&
+    !oneself_.IsZCR &&
+    ZJRID_ != oneself_.CHID &&
+    !isAndroid
   ) {
     $("#video_btn").hide();
   }
+  // 手机端没有授权摄像头的不能控制摄像头和翻转按钮
+  if (!rtc || !rtc.localStream_ || !rtc.localStream_.hasVideo()) {
+    $("#video_btn").hide();
+    $("#fanzhuan_btn").hide();
+  }
   // 没有麦克风设备的不能控制麦克风按钮和申请发言
-  if (!rtc.localStream_.hasAudio()) {
+  if (!rtc || !rtc.localStream_ || !rtc.localStream_.hasAudio()) {
     $("#mic_btn").hide();
     $("#shenqingfayan_btn").hide();
   }

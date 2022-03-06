@@ -1,5 +1,6 @@
 // 网络是否断开
 let isDisconnect = false;
+let initError = false;
 
 function queryParams(name) {
   const match = window.location.search.match(
@@ -48,6 +49,9 @@ console.error = (e) => {
     // 网络断开后trtc SDK会输出这句，所以可以断定为网络断开
     if (JSON.stringify(e)?.includes("前一个 join() 调用正在进行中")) {
       location.reload();
+    }
+    if (JSON.stringify(e)?.includes("无法初始化共享流或推送本地流失败")) {
+      initErrorinitError = true;
     }
   } catch (error) {}
   window.oldError(e);

@@ -203,8 +203,15 @@ async function deviceTestingInit() {
       }
     }
   );
+  $("#mic-refresh").on("click", async () => {
+    await updateMicDeviceList();
+  });
+  $("#camera-refresh").on("click", async () => {
+    await updateCameraDeviceList();
+  });
   // 摄像头设备切换
   $("#camera-select").change(async function () {
+    if (initError) location.reload();
     let newCameraId = $(this).children("option:selected").val();
     localStorage.setItem("txy_webRTC_cameraId", newCameraId);
     cameraTestingResult.device = {
@@ -213,6 +220,8 @@ async function deviceTestingInit() {
       kind: "videoinput",
     };
     await localStream.switchDevice("video", newCameraId);
+    cameraId = newCameraId;
+    rtc.changeCameraId();
   });
   // 扬声器设备切换
   $("#voice-select").change(async function () {
@@ -223,7 +232,6 @@ async function deviceTestingInit() {
       deviceId: $(this).children("option:selected").val(),
       kind: "audiooutput",
     };
-
     let audioPlayer = document.querySelector("#audio-player");
     await audioPlayer.setSinkId(newVoiceId);
   });
@@ -237,6 +245,8 @@ async function deviceTestingInit() {
       kind: "audioinput",
     };
     await localStream.switchDevice("audio", newMicID);
+    micId = newMicID;
+    rtc.changeMicId();
   });
 
   $("body").on("click", function () {
@@ -523,6 +533,12 @@ async function updateCameraDeviceList() {
     option.html(camera.label);
     option.appendTo("#camera-select");
   });
+
+  let newCameraId = $("#camera-select").children("option:selected").val();
+  if (newCameraId) {
+    cameraId = newCameraId;
+    rtc.changeCameraId();
+  }
 
   // 如果有用户设备选择缓存，优先使用缓存的deviceId
   let cacheCameraDevice = cameraDevices.filter(
@@ -943,7 +959,11 @@ function finishDeviceTesting() {
  */
 navigator.mediaDevices.ondevicechange = async function (event) {
   // 当前在摄像头检测页
-  if (curTestingPageId === "camera-testing-body") {
+  if (
+    curTestingPageId !== "voice-testing-body" ||
+    curTestingPageId !== "mic-testing-body"
+  ) {
+    console.log("摄像头设备发生变化");
     await updateCameraDeviceList();
     return;
   }
@@ -954,6 +974,7 @@ navigator.mediaDevices.ondevicechange = async function (event) {
   }
   // 当前在麦克风检测页
   if (curTestingPageId === "mic-testing-body") {
+    console.log("麦克风设备发生变化");
     await updateMicDeviceList();
     return;
   }
