@@ -156,6 +156,7 @@ class RtcClient {
   changeCameraId() {
     this.localStream_.switchDevice("video", cameraId).then(() => {
       console.log("切换摄像头成功");
+      this.shezhifenbianlv();
     });
   }
 
@@ -189,12 +190,10 @@ class RtcClient {
   }
 
   async shezhifenbianlv() {
-    if (ZJRID_ == oneself_.CHID || roomDetail_.SpeakerI == oneself_.CHID) {
-      if (!roomDetail_.SpeakerID) {
-        await this.localStream_.setVideoProfile("480p");
-      } else {
-        await this.localStream_.setVideoProfile("1080p");
-      }
+    if (!roomDetail_.SpeakerID) {
+      await this.localStream_.setVideoProfile("480p");
+    } else if (roomDetail_.SpeakerID == oneself_.CHID) {
+      await this.localStream_.setVideoProfile("1080p");
     } else {
       var renshu = [6, 4, 2, 0];
       var fenbianlv = ["240p", "360p", "480p", "720p"];
@@ -224,12 +223,15 @@ class RtcClient {
     // 当用户加入房间时触发
     this.client_.on("peer-join", (evt) => {
       const { userId } = evt;
+      this.members_.set(userId, null);
+      onlineOrOfline(true, userId);
       console.log(getUserInfo(userId)?.UserName + " 加入了房间");
     });
 
     // 当远程连接端离开房间时触发
     this.client_.on("peer-leave", (evt) => {
       const { userId } = evt;
+      this.members_.delete(userId);
       onlineOrOfline(false, userId);
       console.log(getUserInfo(userId)?.UserName + " 离开了房间，或者掉线");
     });
@@ -253,7 +255,7 @@ class RtcClient {
         this.playVideo(remoteStream, userId);
       }
 
-      if (!remoteStream.hasVideo()) {
+      if (!remoteStream) {
         $("#mask_" + userId).show();
         userId == ZJRID_ && $("#zjr_mask").show();
       }
@@ -282,11 +284,8 @@ class RtcClient {
       const remoteStream = evt.stream;
       const uid = remoteStream.getUserId();
       const id = remoteStream.getId();
-      remoteStream.stop();
-      // this.members_.delete(uid);
-
-      onlineOrOfline(false, uid);
-
+      remoteStream?.stop();
+      // onlineOrOfline(false, uid);
       this.remoteStreams_ = this.remoteStreams_.filter((stream) => {
         return stream.getId() !== id;
       });

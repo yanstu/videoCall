@@ -1,6 +1,9 @@
 // 网络是否断开
 let isDisconnect = false;
-let initError = false;
+// 因为摄像头初始化错误
+let cameraInitError = false;
+// 因为摄像头切换时错误
+let cameraSwitchError = false;
 
 function queryParams(name) {
   const match = window.location.search.match(
@@ -40,6 +43,12 @@ console.warn = (e) => {
       layer.msg("网络连接已恢复", { icon: 6 });
       huoquhuiyihuancun();
     }
+    if (JSON.stringify(e)?.includes("devicesRemoved")) {
+      layer.msg("摄像头设备已被拔出", { icon: 5 });
+    }
+    if (JSON.stringify(e)?.includes("devicesAdded")) {
+      layer.msg("摄像头设备已插入，正在恢复", { icon: 6 });
+    }
   } catch (error) {}
   window.oldWarn(e);
 };
@@ -51,7 +60,14 @@ console.error = (e) => {
       location.reload();
     }
     if (JSON.stringify(e)?.includes("无法初始化共享流或推送本地流失败")) {
-      initErrorinitError = true;
+      cameraInitError = true;
+    }
+    if (JSON.stringify(e)?.includes("Could not start video source")) {
+      $("#mask_" + oneself_?.CHID).show();
+      if (oneself_?.CHID == roomDetail_?.SpeakerID) {
+        $("#zjr_mask_").show();
+      }
+      cameraSwitchError = true;
     }
   } catch (error) {}
   window.oldError(e);

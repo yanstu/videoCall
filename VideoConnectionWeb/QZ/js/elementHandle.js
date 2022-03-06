@@ -23,23 +23,13 @@ function showOrHide() {
     $(".faxiaoxi_btn").show();
   }
 
-  let isAndroid = getOS().type === "mobile" && getOS().osName === "Android";
-  // 非本页非PC端的与没有摄像头设备的不需要摄像头按钮
-  if (
-    !hasMe(oneself_.CHID) &&
-    !oneself_.IsZCR &&
-    ZJRID_ != oneself_.CHID &&
-    !isAndroid
-  ) {
-    $("#video_btn").hide();
-  }
   // 手机端没有授权摄像头的不能控制摄像头和翻转按钮
-  if (!rtc || !rtc.localStream_ || !rtc.localStream_.hasVideo()) {
+  if (!rtc || !rtc.localStream_) {
     $("#video_btn").hide();
     $("#fanzhuan_btn").hide();
   }
   // 没有麦克风设备的不能控制麦克风按钮和申请发言
-  if (!rtc || !rtc.localStream_ || !rtc.localStream_.hasAudio()) {
+  if (!rtc || !rtc.localStream_) {
     $("#mic_btn").hide();
     $("#shenqingfayan_btn").hide();
   }
@@ -331,10 +321,7 @@ function addMemberView(ID, UserName) {
           layer.msg("不能对离线用户进行操作");
           return;
         }
-        if (
-          (!rtc.members_.get(ID) || !rtc.members_.get(ID).hasVideo()) &&
-          ZCRID_ != ID
-        ) {
+        if (!rtc.members_.get(ID) && ZCRID_ != ID) {
           layer.msg("用户设备异常，不能操作摄像头");
           return;
         }
@@ -350,10 +337,7 @@ function addMemberView(ID, UserName) {
           layer.msg("不能对离线用户进行操作");
           return;
         }
-        if (
-          (!rtc.members_.get(ID) || !rtc.members_.get(ID).hasAudio()) &&
-          ZCRID_ != ID
-        ) {
+        if (!rtc.members_.get(ID) && ZCRID_ != ID) {
           layer.msg("用户设备异常，不能操作麦克风");
           return;
         }
@@ -369,12 +353,7 @@ function addMemberView(ID, UserName) {
           layer.msg("不能对离线用户进行操作");
           return;
         }
-        if (
-          (!rtc.members_.get(ID) ||
-            !rtc.members_.get(ID).hasAudio() ||
-            !rtc.members_.get(ID).hasVideo()) &&
-          ZCRID_ != ID
-        ) {
+        if (!rtc.members_.get(ID) && ZCRID_ != ID) {
           layer.msg("用户设备异常，不能设为主讲人");
           return;
         }
@@ -412,24 +391,42 @@ function addVideoView(ID, NickName) {
  * @param {string} uid 用户id
  */
 function onlineOrOfline(online, userId) {
-  if (userId == ZJRID_) {
-    online ? $("#zjr_mask").hide() : $("#zjr_mask").show();
-    !online
-      ? $(`#zjr_mask img`).attr("src", "./img/camera-gray.png")
-      : $(`#zjr_mask img`).attr("src", "./img/camera-green.png");
+  // 针对主讲人在线或离线时的状态改变
+  if (!roomDetail_.SpeakerID || userId == roomDetail_.SpeakerID) {
+    if (rtc.members_.get(userId) && online) {
+      $("#zjr_mask").hide();
+    } else {
+      $("#zjr_mask").show();
+    }
+    online
+      ? $(`#zjr_mask img`).attr("src", "./img/camera-green.png")
+      : $(`#zjr_mask img`).attr("src", "./img/camera-gray.png");
   } else {
-    online ? $("#mask_" + userId).hide() : $("#mask_" + userId).show();
+    if (rtc.members_.get(userId) && online) {
+      $("#mask_" + userId).hide();
+    } else {
+      $("#mask_" + userId).show();
+    }
+    if (oneself_.CHID == userId) {
+      online ? $("#mask_" + userId).hide() : $("#mask_" + userId).show();
+    }
   }
+  // 改变遮罩摄像头图片颜色
+  online
+    ? $(`#mask_${userId} img`).attr("src", "./img/camera-green.png")
+    : $(`#mask_${userId} img`).attr("src", "./img/camera-gray.png");
+  // 改变用户列表用户在线状态颜色
   $("#member_" + userId)
     .find(".member-id")
     .attr("style", `color: ${online ? "#ffffff;" : "#7c7f85;"};`);
+  // 只针对离线的改变
   if (!online) {
     $(`#mic_main_${userId} .member-audio-btn`).attr("src", "img/mic-on.png");
     $(`#member_${userId} .member-audio-btn`).attr("src", "img/mic-on.png");
     $("#member_" + userId)
       .find(".member-video_btn")
       .attr("src", "img/camera-on.png");
-    $(`#mask_${userId} img`).attr("src", "./img/camera-gray.png");
+    // $(`#mask_${userId} img`).attr("src", "./img/camera-gray.png");
     $(`#mic_main_${userId} .volume-level`).css("height", "0%");
     $(`#fayan_${userId}`).remove();
     if ($("#speakerList > div").length == 1) {

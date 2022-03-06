@@ -211,7 +211,7 @@ async function deviceTestingInit() {
   });
   // 摄像头设备切换
   $("#camera-select").change(async function () {
-    if (initError) location.reload();
+    if (cameraInitError) location.reload();
     let newCameraId = $(this).children("option:selected").val();
     localStorage.setItem("txy_webRTC_cameraId", newCameraId);
     cameraTestingResult.device = {
@@ -965,6 +965,7 @@ navigator.mediaDevices.ondevicechange = async function (event) {
   ) {
     console.log("摄像头设备发生变化");
     await updateCameraDeviceList();
+    if (cameraSwitchError) location.reload();
     return;
   }
   // 当前在扬声器检测页
