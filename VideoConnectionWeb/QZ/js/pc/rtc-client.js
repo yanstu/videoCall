@@ -178,29 +178,35 @@ class RtcClient {
   }
 
   playVideo(stream, userId) {
-    // onlineOrOfline(true, userId);
-    var objectFit =
-      getUserInfo(userId).AspectRatio > 1 && userId == ZJRID_
-        ? "contain"
-        : "cover";
-    if (objectFit == "contain") {
-      $("#zjr_box").removeClass("w-full");
-      $("#zjr_box").addClass("w-[80%]");
-      $("#video-grid").addClass("bg-[#24292e]");
-    }
-    var videoVid = "box_" + userId;
-    if (ZJRID_ == userId || roomDetail_.SpeakerID == userId)
-      videoVid = "zjr_video";
-    stream?.play(videoVid, { objectFit }).then(() => {
-      if (
-        userId == oneself_.CHID &&
-        (hasMe(oneself_.CHID) || ZJRID_ == oneself_.CHID)
-      ) {
-        layout_.aspectRatio =
-          $("#" + videoVid).height() / $("#" + videoVid).width();
-        fasongchangkuanbi();
+    if (
+      hasMe(userId) ||
+      !roomDetail_.SpeakerID ||
+      userId == roomDetail_.SpeakerID
+    ) {
+      // onlineOrOfline(true, userId);
+      var objectFit =
+        getUserInfo(userId).AspectRatio > 1 && userId == ZJRID_
+          ? "contain"
+          : "cover";
+      if (objectFit == "contain") {
+        $("#zjr_box").removeClass("w-full");
+        $("#zjr_box").addClass("w-[80%]");
+        $("#video-grid").addClass("bg-[#24292e]");
       }
-    });
+      var videoVid = "box_" + userId;
+      if (ZJRID_ == userId || roomDetail_.SpeakerID == userId)
+        videoVid = "zjr_video";
+      stream?.play(videoVid, { objectFit }).then(() => {
+        if (
+          userId == oneself_.CHID &&
+          (hasMe(oneself_.CHID) || ZJRID_ == oneself_.CHID)
+        ) {
+          layout_.aspectRatio =
+            $("#" + videoVid).height() / $("#" + videoVid).width();
+          fasongchangkuanbi();
+        }
+      });
+    }
   }
 
   async shezhifenbianlv() {
@@ -281,13 +287,7 @@ class RtcClient {
       const userId = remoteStream.getUserId();
       this.remoteStreams_.push(remoteStream);
 
-      if (
-        hasMe(userId) ||
-        userId == ZJRID_ ||
-        userId == roomDetail_.SpeakerID
-      ) {
-        this.playVideo(remoteStream, userId);
-      }
+      this.playVideo(remoteStream, userId);
 
       if (!remoteStream) {
         $("#mask_" + userId).show();
