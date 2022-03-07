@@ -530,6 +530,7 @@ async function updateCameraDeviceList() {
   cameraDevices.forEach((camera) => {
     let option = $("<option></option>");
     option.attr("value", camera.deviceId);
+    // camera.deviceId == cameraId && option.attr("selected", "selected");
     option.html(camera.label);
     option.appendTo("#camera-select");
   });

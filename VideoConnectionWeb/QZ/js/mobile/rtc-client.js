@@ -170,7 +170,7 @@ class RtcClient {
   }
 
   playVideo(stream, userId) {
-    console.log(getUserInfo(userId).UserName);
+    // console.log(getUserInfo(userId).UserName);
     onlineOrOfline(true, userId);
     var videoVid = "box_" + userId;
     var woshizhujiangren = roomDetail_.SpeakerID == oneself_.CHID;

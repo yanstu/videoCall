@@ -329,12 +329,12 @@ class RtcClient {
     the src attribute of the video button to "img/camera-off.png". */
     this.client_.on("stream-updated", (evt) => {
       const remoteStream = evt.stream;
-      let uid = this.getUidByStreamId(remoteStream.getId());
+      /*let uid = this.getUidByStreamId(remoteStream.getId());
       if (!remoteStream.hasVideo()) {
         $("#" + uid)
           .find(".member-video_btn")
           .attr("src", "img/camera-off.png");
-      }
+      }*/
     });
 
     /* This code is listening for a mute-audio event from the client. When it receives the event, it

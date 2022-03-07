@@ -814,8 +814,8 @@
 #canyuzhe_btn:hover,
 #fanzhuan_btn:hover,
 #fayanliebiao_btn:hover {
-  fill: #bdb8b8;
-  color: #bdb8b8;
+  fill: #ddd4d4 !important;
+  color: #ddd4d4 !important;
 }
 
 /*#mic_btn:hover svg,
@@ -827,8 +827,8 @@
 #xiaoxi_btn:hover svg,
 #fayanliebiao_btn:hover svg,
 #canyuzhe_btn:hover svg {
-  fill: #bdb8b8;
-  color: #bdb8b8;
+  fill: #ddd4d4 !important;
+  color: #ddd4d4 !important;
 }
 
 #member-list > div:last-child {

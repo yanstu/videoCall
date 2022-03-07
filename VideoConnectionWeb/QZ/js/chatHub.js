@@ -153,7 +153,7 @@ function huoqushenqingfayan(mess) {
     addSpeaker(mess.SendUserID);
   } else {
     // 重复提交发言提醒
-    mess.SendUserID != oneself_.CHID &&
+    oneself_.IsZCR &&
       layer.msg(getUserInfo(mess.SendUserID).UserName + "再次申请发言");
   }
 }
