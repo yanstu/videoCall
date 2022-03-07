@@ -381,7 +381,7 @@ function addVideoView(ID, NickName) {
   box.attr("id", "box_" + ID);
   box.attr(
     "class",
-    "w-[99%] h-[99%] video-box relative border-[1px] border-[#999798] p-[2px]"
+    "w-[99%] h-[99%] video-box relative border-[1px] border-[#5f6d7a] p-[2px]"
   );
   getOS().type === "mobile" &&
     box.attr("class", "w-full h-full video-box relative");

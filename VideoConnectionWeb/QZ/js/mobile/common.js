@@ -117,11 +117,8 @@ async function viewsHandle(mess) {
     return;
   // 修改主讲人
   rtc.isPublished_ && change();
-  ZJRID_ = !roomDetail_.SpeakerID
-    ? rtc.members_.get(ZCRID_)
-      ? ZCRID_
-      : oneself_.CHID
-    : roomDetail_.SpeakerID;
+  ZJRID_ = !roomDetail_.SpeakerID ? ZCRID_ : roomDetail_.SpeakerID;
+  console.log(rtc.members_.get(ZCRID_));
   // 初始化
   !rtc.isPublished_ && init();
 }

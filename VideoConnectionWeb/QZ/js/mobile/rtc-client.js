@@ -170,15 +170,14 @@ class RtcClient {
   }
 
   playVideo(stream, userId) {
+    console.log(getUserInfo(userId).UserName);
     onlineOrOfline(true, userId);
     var videoVid = "box_" + userId;
-    var woshizhujiangren =
-      userId == oneself_.CHID &&
-      (ZJRID_ == oneself_.CHID || oneself_.CHID == roomDetail_.SpeakerID);
+    var woshizhujiangren = roomDetail_.SpeakerID == oneself_.CHID;
     if (ZJRID_ == userId) videoVid = "zjr_video";
     stream
       ?.play(videoVid, {
-        objectFit: woshizhujiangren ? "contain" : "cover",
+        objectFit: "cover",
       })
       .then(() => {
         if (woshizhujiangren) {
@@ -253,6 +252,8 @@ class RtcClient {
 
       if (userId == roomDetail_.SpeakerID) {
         this.playVideo(remoteStream, userId);
+      } else if (!roomDetail_.SpeakerID && userId == ZCRID_) {
+        this.playVideo(remoteStream, userId);
       }
 
       if (!remoteStream) {
@@ -296,12 +297,12 @@ class RtcClient {
     the src attribute of the video button to "img/camera-off.png". */
     this.client_.on("stream-updated", (evt) => {
       const remoteStream = evt.stream;
-      let uid = this.getUidByStreamId(remoteStream.getId());
+      /*let uid = this.getUidByStreamId(remoteStream.getId());
       if (!remoteStream.hasVideo()) {
         $("#" + uid)
           .find(".member-video_btn")
           .attr("src", "img/camera-off.png");
-      }
+      }*/
     });
 
     /* This code is listening for a mute-audio event from the client. When it receives the event, it

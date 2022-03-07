@@ -158,7 +158,6 @@ async function rtcDetection() {
     // 获取当前设备推荐的浏览器信息
     deviceDetectionRemindInfo = getRecommendBrowserInfo();
 
-    console.log("isFirefoxM56", isFirefoxM56());
     if (isFirefoxM56() && !checkDetail.isH264Supported) {
       deviceDetectionRemindInfo =
         "Firefox 尚未完成H264编码支持，请稍等重试或使用其他推荐浏览器打开链接<br>" +
