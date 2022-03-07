@@ -92,8 +92,6 @@ function login(JMStr) {
       leave();
     }
     oneself_ = res.Data;
-    setTitle(res.Data.Title);
-
     rtc = new RtcClient({
       nickName: res.Data.XM,
       userId: res.Data.CHID,

@@ -403,6 +403,9 @@ function onlineOrOfline(online, userId) {
     } else {
       $("#zjr_mask").show();
     }
+    if (oneself_.CHID == userId) {
+      online ? $("#zjr_mask").hide() : $("#zjr_mask").show();
+    }
     online
       ? $(`#zjr_mask img`).attr("src", "./img/camera-green.png")
       : $(`#zjr_mask img`).attr("src", "./img/camera-gray.png");

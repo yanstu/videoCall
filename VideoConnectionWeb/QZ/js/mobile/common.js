@@ -90,8 +90,6 @@ function login(JMStr) {
       leave();
     }
     oneself_ = res.Data;
-    setTitle(res.Data.Title);
-
     rtc = new RtcClient({
       nickName: res.Data.XM,
       userId: res.Data.CHID,
@@ -126,18 +124,27 @@ async function viewsHandle(mess) {
 }
 
 async function change() {
+  // 还原
   $("#video-grid").attr(
     "class",
     "box-border grid w-[9rem] h-[25%] absolute top-[8%] right-[1%] items-center justify-center z-10"
   );
   $("#zjr_box").attr("class", "w-full h-full video-box relative");
-  var newZJRID = roomDetail_.SpeakerID || oneself_.CHID;
+  // 如果当前没有主讲人，将主持人作为主讲人视角，如果主持人没有在线，将自己设为主讲人视角
+  var newZJRID = !roomDetail_.SpeakerID
+    ? rtc.members_.get(ZCRID_)
+      ? ZCRID_
+      : oneself_.CHID
+    : roomDetail_.SpeakerID;
+  // 先停止上一个主讲人的远程流
   var old_streams = rtc.members_.get(ZJRID_);
   old_streams?.stop();
+  // 再停止新的主讲人的远程流
   var new_streams =
     newZJRID == oneself_.CHID ? rtc.localStream_ : rtc.members_.get(newZJRID);
-  new_streams & new_streams.stop();
+  new_streams?.stop();
   if (newZJRID == oneself_.CHID) {
+    // 如果新的主讲人是我，清空小视频区域
     resetViews();
   } else {
     if (ZJRID_ == oneself_.CHID) {
@@ -162,6 +169,8 @@ async function change() {
   );
   new_streams?.play("zjr_video", { objectFit: "cover" });
   new_streams ? $("#zjr_mask").hide() : $("#zjr_mask").show();
+  !isMicOn && $("#mic_btn").click();
+  !isCamOn && $("#video_btn").click();
   // 切换身份后设置相应的分辨率
   rtc.shezhifenbianlv();
 }
@@ -187,6 +196,7 @@ function init() {
   rtc.join();
 }
 
+// 点击小视频切换大视频
 $("#video-grid").on("click", () => {
   if ($("#video-grid > div").length > 0) {
     $("#video-grid").attr("class", "w-full h-full video-box relative");
@@ -200,6 +210,7 @@ $("#video-grid").on("click", () => {
     );
   }
 });
+// 还原
 $("#zjr_video").on("click", () => {
   if ($("#video-grid > div").length > 0) {
     $("#video-grid").attr(
