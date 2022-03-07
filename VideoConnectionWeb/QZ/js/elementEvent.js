@@ -125,7 +125,7 @@
   // 退出按钮事件
   $("#exit-btn").on({
     click: function () {
-      layer.confirm(
+      /*layer.confirm(
         "确定退出视频连线？",
         {
           btn: ["确定", "取消"],
@@ -133,7 +133,8 @@
         () => {
           leave();
         }
-      );
+      );*/
+      leave();
     },
   });
 
@@ -144,7 +145,7 @@
     },
   });
 
-  // 翻转相机点击事件
+  // 申请发言按钮点击事件
   $("#shenqingfayan_btn").on(
     "click",
     clickProof(() => {

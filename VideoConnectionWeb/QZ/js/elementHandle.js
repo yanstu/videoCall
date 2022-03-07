@@ -266,9 +266,15 @@ function videoHandle(on, userId) {
     .attr("src", `img/camera-${on ? "on" : "off"}.png`);
   !on && $(`#mask_${userId} img`).attr("src", `./img/camera-green.png`);
 
-  if (userId == ZJRID_) {
+  if (
+    userId == roomDetail_.SpeakerID ||
+    (oneself_.CHID == userId &&
+      !roomDetail_.SpeakerID &&
+      getOS().type !== "mobile") ||
+    (getOS().type === "mobile" && userId == ZCRID_ && !roomDetail_.SpeakerID)
+  ) {
     on ? $("#zjr_mask").hide() : $("#zjr_mask").show();
-    on && $("#mask_" + ZJRID_).show();
+    on && $("#mask_" + userId).show();
     !on && $(`#zjr_mask img`).attr("src", `./img/camera-green.png`);
   } else {
     on ? $("#mask_" + userId).hide() : $("#mask_" + userId).show();
@@ -397,8 +403,13 @@ function addVideoView(ID, NickName) {
  * @param {string} uid 用户id
  */
 function onlineOrOfline(online, userId) {
+  var uid = !roomDetail_.SpeakerID
+    ? getOS().type === "mobile"
+      ? ZCRID_
+      : oneself_.CHID
+    : roomDetail_.SpeakerID;
   // 针对主讲人在线或离线时的状态改变
-  if (!roomDetail_.SpeakerID || userId == roomDetail_.SpeakerID) {
+  if (userId == uid) {
     if (rtc.members_.get(userId) && online) {
       $("#zjr_mask").hide();
     } else {
@@ -417,7 +428,6 @@ function onlineOrOfline(online, userId) {
       $("#mask_" + userId).show();
     }
     if (oneself_.CHID == userId) {
-      console.log(1231231);
       online ? $("#mask_" + userId).hide() : $("#mask_" + userId).show();
     }
   }
