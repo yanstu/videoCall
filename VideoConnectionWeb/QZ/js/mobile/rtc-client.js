@@ -213,10 +213,25 @@ class RtcClient {
       console.error(err);
     });
     this.client_.on("client-banned", () => {
-      layer.msg("您已被挤下线", { icon: 2 });
-      setTimeout(() => {
-        leave();
-      }, 1000);
+      if (!isHidden()) {
+        layer.msg("您已被挤下线", { icon: 2 });
+        setTimeout(() => {
+          leave();
+        }, 1000);
+      } else {
+        document.addEventListener(
+          "visibilitychange",
+          () => {
+            if (!isHidden()) {
+              layer.msg("您已被挤下线", { icon: 2 });
+              setTimeout(() => {
+                leave();
+              }, 1000);
+            }
+          },
+          false
+        );
+      }
     });
 
     // 当用户加入房间时触发

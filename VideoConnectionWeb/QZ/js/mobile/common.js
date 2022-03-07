@@ -118,7 +118,6 @@ async function viewsHandle(mess) {
   // 修改主讲人
   rtc.isPublished_ && change();
   ZJRID_ = !roomDetail_.SpeakerID ? ZCRID_ : roomDetail_.SpeakerID;
-  console.log(rtc.members_.get(ZCRID_));
   // 初始化
   !rtc.isPublished_ && init();
 }
@@ -174,6 +173,7 @@ async function change() {
   !isCamOn && $("#video_btn").click();
   // 切换身份后设置相应的分辨率
   rtc.shezhifenbianlv();
+  showOrHide();
 }
 
 function init() {
