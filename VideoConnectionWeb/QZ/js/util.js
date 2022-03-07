@@ -334,41 +334,6 @@ function queryParams(name) {
 }
 
 /**
- * 防抖节流
- */
-function debounce(callback, delay = 500) {
-  let pre = 0; // 默认值不要是Date.now() ==> 第1次事件立即调用
-  return function (event) {
-    // 节流函数/真正的事件回调函数   this是发生事件的标签
-    const current = Date.now();
-    if (current - pre > delay) {
-      // 只有离上一次调用callback的时间差大于delay
-      // 调用真正处理事件的函数, this是事件源, 参数是event
-      callback.call(this, event);
-      // 记录此次调用的时间
-      pre = current;
-    } else {
-      layer.msg("请勿频繁切换");
-    }
-  };
-}
-
-/**
- * Get the current date and time
- * @returns The current time in the format of `YYYY-MM-DD HH:MM:SS`.
- */
-function getNowTime() {
-  var date = new Date();
-  var year = date.getFullYear();
-  var month = date.getMonth();
-  var day = date.getDate();
-  var hour = date.getHours();
-  var minute = date.getMinutes();
-  var second = date.getSeconds();
-  return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
-}
-
-/**
  * Get the current date and time
  * @returns The current time in the format of `YYYY-MM-DD HH:MM:SS`.
  */
