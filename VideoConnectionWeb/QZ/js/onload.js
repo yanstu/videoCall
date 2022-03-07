@@ -62,6 +62,13 @@ console.error = (e) => {
     if (JSON.stringify(e)?.includes("无法初始化共享流或推送本地流失败")) {
       cameraInitError = true;
     }
+    if (
+      JSON.stringify(e)?.includes(
+        "failed to subscribe stream, reason: because the remote"
+      )
+    ) {
+      huoquhuiyihuancun();
+    }
     if (JSON.stringify(e)?.includes("Could not start video source")) {
       $("#mask_" + oneself_?.CHID).show();
       if (oneself_?.CHID == roomDetail_?.SpeakerID) {

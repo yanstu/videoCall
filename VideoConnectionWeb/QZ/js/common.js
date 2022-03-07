@@ -78,6 +78,8 @@ let menuHideTimer = {
   x: 0,
   y: 0,
 };
+// 心跳连接计时器
+let xintiaoTimer = null;
 
 /**
  * 解密获取房间信息
@@ -155,6 +157,7 @@ function getUserInfoByName(UserName) {
  * 离开房间并关闭网页
  */
 function leave() {
+  xintiaoTimer && clearInterval(xintiaoTimer);
   rtc && rtc.leave();
   let hasPre = false;
   if (window.history.length > 1) hasPre = true;

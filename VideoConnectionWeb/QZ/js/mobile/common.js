@@ -117,8 +117,11 @@ async function viewsHandle(mess) {
     return;
   // 修改主讲人
   rtc.isPublished_ && change();
-  // 如果没有设置主讲人，将自己设置为假的主讲人
-  ZJRID_ = roomDetail_.SpeakerID || oneself_.CHID;
+  ZJRID_ = !roomDetail_.SpeakerID
+    ? rtc.members_.get(ZCRID_)
+      ? ZCRID_
+      : oneself_.CHID
+    : roomDetail_.SpeakerID;
   // 初始化
   !rtc.isPublished_ && init();
 }
@@ -158,6 +161,7 @@ async function change() {
       $("#box_" + oneself_.CHID).append(
         userInfoTemplate(oneself_.CHID, oneself_.XM)
       );
+      $("#video-grid [id^='player_']").remove();
       rtc.localStream_.play("box_" + oneself_.CHID);
       $("#mask_" + oneself_.CHID).hide();
     }
