@@ -78,6 +78,8 @@ let menuHideTimer = {
   x: 0,
   y: 0,
 };
+// 心跳连接计时器
+let xintiaoTimer = null;
 
 /**
  * 解密获取房间信息

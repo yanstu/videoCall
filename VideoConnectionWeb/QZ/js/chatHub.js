@@ -176,8 +176,7 @@ function huoquhuiyihuancunxinxi(mess) {
   } else if (mess.ReUserid == oneself_.CHID) {
     roomDetail_ = mess.Data.VideoConferenceMess;
     setTitle(roomDetail_.Title);
-    if (ZJRID_ && roomDetail_.SpeakerID && ZJRID_ == roomDetail_.SpeakerID)
-      return;
+    if (ZJRID_ && roomDetail_.SpeakerID) return;
     roomDetail_.UserList.length == 0 && location.reload();
     roomDetail_.UserList = roomDetail_.UserList.sort(sortData);
     ZCRID_ = roomDetail_.UserList.find((item) => item.IsZCR == 1).ID;

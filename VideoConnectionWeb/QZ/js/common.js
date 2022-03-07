@@ -123,7 +123,7 @@ async function viewsHandle() {
     const indexLoad3 = layer.load(1);
     await rtc.leave();
     await rtc.join();
-    layer.close(loadIndex3);
+    layer.close(indexLoad3);
   }
 }
 

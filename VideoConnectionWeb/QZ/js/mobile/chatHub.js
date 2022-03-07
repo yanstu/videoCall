@@ -259,7 +259,7 @@ function dakaiguanbimaikefeng(ReUserid) {
 
 // 心跳
 function xintiaolianjie() {
-  setInterval(() => {
+  xintiaoTimer = setInterval(() => {
     redisFB({
       reCode: "25",
       ReUserid: oneself_.CHID,
