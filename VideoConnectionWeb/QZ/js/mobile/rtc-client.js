@@ -182,7 +182,7 @@ class RtcClient {
       .then(() => {
         if (woshizhujiangren) {
           layout_.aspectRatio =
-            $("#" + videoVid).height() / $("#" + videoVid).width();
+            $("#zjr_video").height() / $("#zjr_video").width();
           fasongchangkuanbi();
         }
       });

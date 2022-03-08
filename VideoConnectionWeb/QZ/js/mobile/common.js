@@ -169,7 +169,12 @@ async function change() {
   $("#zjr_video").append(
     userInfoTemplate(newZJRID, getUserInfo(newZJRID).UserName)
   );
-  new_streams?.play("zjr_video", { objectFit: "cover" });
+  new_streams?.play("zjr_video", { objectFit: "cover" }).then(() => {
+    if (roomDetail_.SpeakerID == oneself_.CHID) {
+      layout_.aspectRatio = $("#zjr_video").height() / $("#zjr_video").width();
+      fasongchangkuanbi();
+    }
+  });
   new_streams ? $("#zjr_mask").hide() : $("#zjr_mask").show();
   !isMicOn && $("#mic_btn").click();
   !isCamOn && $("#video_btn").click();
