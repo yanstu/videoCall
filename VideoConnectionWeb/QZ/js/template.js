@@ -2,12 +2,19 @@
  * 左下角昵称显示区域模板
  */
 function userInfoTemplate(userId, nickName) {
-  return `<div id="profile_${userId}" class="absolute bottom-0 left-0 pl-1 pr-1 w-auto h-7 z-10 flex justify-items-center items-center text-center">
+  var isMobile = location.href.includes("mobile");
+  return `<div id="profile_${userId}" class="absolute ${
+    isMobile ? "top-0" : "bottom-0"
+  } left-0 pl-1 pr-1 w-auto h-7 z-10 flex justify-items-center items-center text-center">
     <!-- 背景遮罩 -->
-    <div class="absolute top-0 left-0 w-full rounded-tr-lg h-full bg-[#000000] opacity-10"></div>
+    <div class="absolute top-0 left-0 w-full ${
+      isMobile ? "rounded-br-lg" : "rounded-tr-lg"
+    } h-full bg-[#000000] opacity-10"></div>
     <!-- 声音显示 -->
     <div id="mic_main_${userId}">
-        <div class="flex items-center justify-content-center relative h-4">
+        <div class="flex items-center justify-content-center relative ${
+          isMobile ? "h-5" : "h-4"
+        }">
           <img class="member-audio-btn h-full" src="./img/mic-on.png">
           <!-- 音量级别显示 -->
           <div class="volume-level absolute bottom-0 left-0 w-full" style="height: 0%; overflow: hidden; transition: height .1s ease;">

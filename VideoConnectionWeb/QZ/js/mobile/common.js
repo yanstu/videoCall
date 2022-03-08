@@ -119,7 +119,7 @@ async function viewsHandle(mess) {
     return;
   // 修改主讲人
   rtc.isPublished_ && change();
-  ZJRID_ = !roomDetail_.SpeakerID ? ZCRID_ : roomDetail_.SpeakerID;
+  ZJRID_ = roomDetail_.SpeakerID || oneself_.CHID;
   // 初始化
   !rtc.isPublished_ && init();
 }
@@ -132,11 +132,7 @@ async function change() {
   );
   $("#zjr_box").attr("class", "w-full h-full video-box relative");
   // 如果当前没有主讲人，将主持人作为主讲人视角，如果主持人没有在线，将自己设为主讲人视角
-  var newZJRID = !roomDetail_.SpeakerID
-    ? rtc.members_.get(ZCRID_)
-      ? ZCRID_
-      : oneself_.CHID
-    : roomDetail_.SpeakerID;
+  var newZJRID = roomDetail_.SpeakerID || oneself_.CHID;
   // 先停止上一个主讲人的远程流
   var old_streams = rtc.members_.get(ZJRID_);
   old_streams?.stop();
@@ -147,6 +143,13 @@ async function change() {
   if (newZJRID == oneself_.CHID) {
     // 如果新的主讲人是我，清空小视频区域
     resetViews();
+    if (!roomDetail_.SpeakerID) {
+      var zcr_streams = rtc.members_.get(ZCRID_);
+      zcr_streams?.stop();
+      addVideoView(ZCRID_, getUserInfo(ZCRID_).UserName);
+      $("#box_" + ZCRID_).attr("class", "w-[9rem] h-full video-box relative");
+      zcr_streams.play("box_" + ZCRID_);
+    }
   } else {
     if (ZJRID_ == oneself_.CHID) {
       resetViews();
@@ -155,9 +158,6 @@ async function change() {
       $("#box_" + oneself_.CHID).attr(
         "class",
         "w-[9rem] h-full video-box relative"
-      );
-      $("#box_" + oneself_.CHID).append(
-        userInfoTemplate(oneself_.CHID, oneself_.XM)
       );
       $("#video-grid [id^='player_']").remove();
       rtc.localStream_.play("box_" + oneself_.CHID);
@@ -185,6 +185,12 @@ async function change() {
 
 function init() {
   if (ZJRID_ == oneself_.CHID) {
+    if (!roomDetail_.SpeakerID) {
+      var zcr_streams = rtc.members_.get(ZCRID_);
+      zcr_streams?.stop();
+      addVideoView(ZCRID_, getUserInfo(ZCRID_).UserName);
+      $("#box_" + ZCRID_).attr("class", "w-[9rem] h-full video-box relative");
+    }
     $("#zjr_video").append(
       userInfoTemplate(ZJRID_, getUserInfo(ZJRID_).UserName)
     );
@@ -208,10 +214,8 @@ function init() {
 $("#video-grid").on("click", () => {
   if ($("#video-grid > div").length > 0) {
     $("#video-grid").attr("class", "w-full h-full video-box relative");
-    $("#box_" + oneself_.CHID).attr(
-      "class",
-      "w-full h-full video-box relative"
-    );
+    var uid = !roomDetail_.SpeakerID ? ZCRID_ : oneself_.CHID;
+    $("#box_" + uid).attr("class", "w-full h-full video-box relative");
     $("#zjr_box").attr(
       "class",
       "box-border grid w-[9rem] h-[25%] absolute top-[8%] right-[1%] items-center z-10"
@@ -225,10 +229,8 @@ $("#zjr_video").on("click", () => {
       "class",
       "box-border grid w-[9rem] h-[25%] absolute top-[8%] right-[1%] items-center justify-center z-10"
     );
-    $("#box_" + oneself_.CHID).attr(
-      "class",
-      "w-[9rem] h-full video-box relative"
-    );
+    var uid = !roomDetail_.SpeakerID ? ZCRID_ : oneself_.CHID;
+    $("#box_" + uid).attr("class", "w-[9rem] h-full video-box relative");
     $("#zjr_box").attr("class", "w-full h-full video-box relative");
   }
 });

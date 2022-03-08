@@ -11,7 +11,7 @@ function showOrHide() {
   }
 
   // 非手机端不需要显示翻转相机按钮
-  getOS().type === "mobile" && $("#fanzhuan_btn").show();
+  location.href.includes("mobile") && $("#fanzhuan_btn").show();
 
   // 如果是主持人的话主持人相关权限按钮显示
   if (oneself_.IsZCR) {
@@ -84,7 +84,12 @@ function changeViews() {
     $("#zjr_box").addClass("w-full");
     $("#video-grid").removeClass("bg-[#24292e]");
   }
-  zjr_streams?.play("zjr_video", { objectFit });
+  zjr_streams?.play("zjr_video", { objectFit }).then(() => {
+    if (roomDetail_.SpeakerID == oneself_.CHID) {
+      layout_.aspectRatio = $("#zjr_video").height() / $("#zjr_video").width();
+      fasongchangkuanbi();
+    }
+  });
   zjr_streams ? $("#zjr_mask").hide() : $("#zjr_mask").show();
   $(`#zjr_mask img`).attr("src", `./img/camera-gray.png`);
 
@@ -258,6 +263,7 @@ function audioHandle(on, userId) {
 }
 
 function videoHandle(on, userId) {
+  var zjr = roomDetail_.SpeakerID || oneself_.CHID;
   console.log(
     `${getUserInfo(userId)?.UserName} ${on ? "打开" : "关闭"}了摄像头`
   );
@@ -266,7 +272,7 @@ function videoHandle(on, userId) {
     .attr("src", `img/camera-${on ? "on" : "off"}.png`);
   !on && $(`#mask_${userId} img`).attr("src", `./img/camera-green.png`);
 
-  if (userId == huoquzjr()) {
+  if (userId == zjr) {
     on ? $("#zjr_mask").hide() : $("#zjr_mask").show();
     on && $("#mask_" + userId).show();
     !on && $(`#zjr_mask img`).attr("src", `./img/camera-green.png`);
@@ -384,7 +390,7 @@ function addVideoView(ID, NickName) {
     "class",
     "w-[99%] h-[99%] video-box relative border-[1px] border-[#5f6d7a] p-[2px]"
   );
-  getOS().type === "mobile" &&
+  location.href.includes("mobile") &&
     box.attr("class", "w-full h-full video-box relative");
   box.find("#zjr_mask").attr("id", "mask_" + ID);
   box.append(userInfoTemplate(ID, NickName));
@@ -397,8 +403,9 @@ function addVideoView(ID, NickName) {
  * @param {string} uid 用户id
  */
 function onlineOrOfline(online, userId) {
+  var zjr = roomDetail_.SpeakerID || oneself_.CHID;
   // 针对主讲人在线或离线时的状态改变
-  if (userId == huoquzjr()) {
+  if (userId == zjr) {
     if (rtc.members_.get(userId) && online) {
       $("#zjr_mask").hide();
     } else {
