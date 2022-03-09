@@ -115,8 +115,6 @@ async function viewsHandle(mess) {
     roomDetail_.UserList = roomDetail_.UserList.sort(sortData);
     ZCRID_ = roomDetail_.UserList.find((item) => item.IsZCR == 1).ID;
   }
-  if (ZJRID_ && roomDetail_.SpeakerID && ZJRID_ == roomDetail_.SpeakerID)
-    return;
   // 修改主讲人
   rtc.isPublished_ && change();
   ZJRID_ = roomDetail_.SpeakerID || oneself_.CHID;
