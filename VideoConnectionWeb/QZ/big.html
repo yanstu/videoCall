@@ -45,11 +45,6 @@
     <header class="flex flex-row h-[7%] bg-[#262626] w-full">
       <div class="flex-1 flex items-center justify-start">
         <img
-          id="mean_btn"
-          class="ml-4 mr-4 hover:invert-[50%] h-[50%]"
-          src="./img/sf_ic_menu.png"
-        />
-        <img
           id="testing_btn"
           class="hover:invert-[50%] h-[50%]"
           src="./img/check-mic.png"
@@ -93,10 +88,6 @@
             </div>
           </div>
         </div>
-      </div>
-      
-      <!-- 群众区 -->
-      <div id="video-grid" class="box-border grid w-[20%] h-[93%] absolute bottom-0 right-0 items-center justify-center z-10">
       </div>
 
       <!-- 展示不支持webRTC的提示 -->
@@ -552,92 +543,12 @@
         <img src="./lib/layui/css/modules/layer/default/icon.png" alt="" />
       </div>
     </section>
-    <footer
-      class="w-full h-[8%] drop-shadow-md flex items-center justify-center absolute bottom-2 z-50 mx-auto"
-    >
-      <div
-        id="toolbar"
-        class="h-full w-auto flex text-center text-white items-center justify-center mx-auto relative"
-      >
-        <div
-          class="absolute w-full h-full top-0 left-0 shadow bg-black opacity-10 pointer-events-none"
-        ></div>
-        <div class="toolbar_btn" id="mic_btn">
-          <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
-            <use xlink:href="#icon-maikefeng"></use>
-          </svg>
-          <span class="mt-1 text-[14px]">静音</span>
-        </div>
-        <div class="toolbar_btn" id="video_btn">
-          <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
-            <use xlink:href="#icon-xiangji"></use>
-          </svg>
-          <span class="mt-1 text-[14px]">摄像头</span>
-        </div>
-        <div class="toolbar_btn" style="display: none;" id="fanzhuan_btn">
-          <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
-            <use xlink:href="#icon-fanzhuan"></use>
-          </svg>
-          <span class="mt-1 text-[14px]">翻转</span>
-        </div>
-        <div class="toolbar_btn" id="canyuzhe_btn">
-          <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
-            <use xlink:href="#icon-canyuzhe"></use>
-          </svg>
-          <span class="mt-1 text-[14px]">参与者</span>
-        </div>
-        <div class="toolbar_btn" style="display: none;" id="fayanliebiao_btn">
-          <div class="relative">
-            <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
-              <use xlink:href="#icon-fayanliebiao"></use>
-            </svg>
-            <div
-                  id="fayan_jiaobiao"
-                  style="display: none;"
-                  class="w-[10px] h-[10px] rounded-full bg-red-600 absolute right-0 top-0"
-                ></div>
-          </div>
-          <span class="mt-1 text-[14px]">发言列表</span>
-        </div>
-        <div class="toolbar_btn" id="xiaoxi_btn">
-          <div class="relative">
-            <svg class="icon text-[1.7rem] text-white " aria-hidden="true">
-              <use xlink:href="#icon-xiaoxi"></use>
-            </svg>
-            <div
-                  id="xiaoxi_jiaobiao"
-                  style="display: none;"
-                  class="w-[10px] h-[10px] rounded-full bg-red-600 absolute right-0 top-0"
-                ></div>
-          </div>
-          <span class="mt-1 text-[14px]">消息</span>
-        </div>
-        <div class="toolbar_btn" id="shenqingfayan_btn">
-          <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
-            <use xlink:href="#icon-shenqingfayan"></use>
-          </svg>
-          <span class="mt-1 text-[14px]">申请发言</span>
-        </div>
-        <div class="toolbar_btn" style="display: none;" id="guanbimaikefeng_btn">
-          <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
-            <use xlink:href="#icon-guanbimaikefeng"></use>
-          </svg>
-          <span class="mt-1 text-[14px]">关闭麦克风</span>
-        </div>
-        <div class="toolbar_btn" style="display: none;" id="quxiaozhujiangren_btn">
-          <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
-            <use xlink:href="#icon-quxiaozhujiangren"></use>
-          </svg>
-          <span class="mt-1 text-[14px]">取消主讲人</span>
-        </div>
-      </div>
-    </footer>
 
     <script src="./lib/jquery/jquery-3.2.1.min.js"></script>
     <script src="./lib/jquery/jquery.signalR.min.js"></script>
     <script src="./lib/layui/layui.js"></script>
     <script src="/signalr/hubs"></script>
-    <script src="./js/pc/chatHub.js"></script>
+    <script src="./js/big/chatHub.js"></script>
     <script src="./lib/trtc/lib-generate-test-usersig.min.js"></script>
     <script src="./lib/trtc/GenerateTestUserSig.js"></script>
     <script src="./js/iconfont.js"></script>
@@ -647,9 +558,9 @@
     <script src="./js/device-testing.js"></script>
     <script src="./js/elementHandle.js"></script>
     <script src="./js/common-public.js"></script>
-    <script src="./js/pc/common.js"></script>
+    <script src="./js/big/common.js"></script>
     <script src="./js/rtc-detection.js"></script>
-    <script src="./js/pc/rtc-client.js"></script>
+    <script src="./js/big/rtc-client.js"></script>
     <script src="./js/prohibit.js"></script>
     <script src="./js/elementEvent.js"></script>
     <script>

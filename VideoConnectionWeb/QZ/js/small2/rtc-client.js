@@ -19,7 +19,6 @@ class RtcClient {
       userSig: this.userSig_,
     });
 
-    // 开始获取网络质量
     this.startGetNetworkevel();
 
     // 客户端监听服务
@@ -58,6 +57,7 @@ class RtcClient {
       await this.localStream_.initialize();
       // 推送本地流
       await this.publish();
+      onlineOrOfline(true, oneself_.CHID);
     } catch (error) {
       console.error("无法初始化共享流或推送本地流失败 - ", error);
     }
@@ -155,10 +155,17 @@ class RtcClient {
    * 切换摄像头
    */
   changeCameraId() {
-    this.localStream_.switchDevice("video", cameraId).then(() => {
-      console.log("切换摄像头成功");
-      this.shezhifenbianlv();
-    });
+    try {
+      this.localStream_.switchDevice("video", cameraId).then(() => {
+        console.log("切换摄像头成功");
+        this.shezhifenbianlv();
+      });
+    } catch (error) {
+      if (JSON.stringify(error)?.includes("Cannot read properties of null"))
+        layer.msg(
+          "暂时无法访问摄像头/麦克风，请确保系统授予当前浏览器摄像头/麦克风权限，并且没有其他应用占用摄像头/麦克风。"
+        );
+    }
   }
 
   /**
@@ -171,37 +178,17 @@ class RtcClient {
   }
 
   playVideo(stream, userId) {
-    // console.log(getUserInfo(userId).UserName);
-    onlineOrOfline(true, userId);
-    var videoVid = "box_" + userId;
-    var woshizhujiangren = roomDetail_.SpeakerID == oneself_.CHID;
-    if (ZJRID_ == userId) videoVid = "zjr_video";
-    stream
-      ?.play(videoVid, {
-        objectFit: "cover",
-      })
-      .then(() => {
-        if (woshizhujiangren) {
-          layout_.aspectRatio =
-            $("#zjr_video").height() / $("#zjr_video").width();
-          fasongchangkuanbi();
-        }
-      });
+    var objectFit = getUserInfo(userId).AspectRatio > 1 ? "contain" : "cover";
+    stream?.play("box_" + userId, { objectFit });
   }
 
   async shezhifenbianlv() {
-    if (!roomDetail_.SpeakerID) {
-      await this.localStream_.setVideoProfile("480p");
-    } else if (roomDetail_.SpeakerID == oneself_.CHID) {
-      await this.localStream_.setVideoProfile("1080p");
-    } else {
-      var renshu = [6, 4, 2, 0];
-      var fenbianlv = ["240p", "360p", "480p", "720p"];
-      for (var i = 0; i < renshu.length; i++) {
-        if (roomDetail_.UserList.length >= renshu[i]) {
-          await this.localStream_.setVideoProfile(fenbianlv[i]);
-          break;
-        }
+    var renshu = [6, 4, 2, 0];
+    var fenbianlv = ["240p", "360p", "480p", "720p"];
+    for (var i = 0; i < renshu.length; i++) {
+      if (roomDetail_.UserList.length >= renshu[i]) {
+        await this.localStream_.setVideoProfile(fenbianlv[i]);
+        break;
       }
     }
   }
@@ -213,6 +200,7 @@ class RtcClient {
     this.client_.on("error", (err) => {
       console.error(err);
     });
+
     this.client_.on("client-banned", () => {
       if (!isHidden()) {
         layer.msg("您已被挤下线", { icon: 2 });
@@ -266,11 +254,7 @@ class RtcClient {
       const userId = remoteStream.getUserId();
       this.remoteStreams_.push(remoteStream);
 
-      if (userId == roomDetail_.SpeakerID) {
-        this.playVideo(remoteStream, userId);
-      } else if (!roomDetail_.SpeakerID && userId == ZCRID_) {
-        this.playVideo(remoteStream, userId);
-      }
+      this.playVideo(remoteStream, userId);
 
       if (!remoteStream) {
         $("#mask_" + userId).show();
@@ -299,10 +283,9 @@ class RtcClient {
     and removes the stream from the list of remote streams. */
     this.client_.on("stream-removed", (evt) => {
       const remoteStream = evt.stream;
-      const uid = remoteStream.getUserId();
-      const id = remoteStream.getId();
+      const uid = remoteStream?.getUserId();
+      const id = remoteStream?.getId();
       remoteStream?.stop();
-      // onlineOrOfline(false, uid);
       this.remoteStreams_ = this.remoteStreams_.filter((stream) => {
         return stream.getId() !== id;
       });
@@ -396,14 +379,13 @@ class RtcClient {
 
     /*setInterval(() => {
       // 获取实际采集的分辨率和帧率
-      const videoTrack = this.localStream_.getVideoTrack();
+      const videoTrack = this.localStream_?.getVideoTrack();
       if (videoTrack) {
         const settings = videoTrack.getSettings();
         console.log(
           `分辨率：${settings.width} * ${settings.height}, 帧率：${settings.frameRate}`
         );
       }
-      // 获取实际推流的视频码率参考：https://web.sdk.qcloud.com/trtc/webrtc/doc/zh-cn/Client.html#getLocalVideoStats
     }, 30 * 1000);*/
   }
 

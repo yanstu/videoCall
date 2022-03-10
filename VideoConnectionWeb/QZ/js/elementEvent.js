@@ -47,6 +47,67 @@
     }
   });
 
+  // 切换视图按钮点击事件
+  $("#qiehuanshitu_btn").on("click", () => {
+    $("#qiehuanshitu_mianban").fadeToggle();
+  });
+
+  // 点击事件
+  $("#qiehuanchangguishipin_btn").on("click", () => {
+    if (roomDetail_.UserList > 25) {
+      layer.msg("当前房间用户超过25人，不能使用此模式");
+    } else {
+      location.replace(
+        location.origin +
+          location.pathname.substring(
+            0,
+            location.pathname.lastIndexOf("/") + 1
+          ) +
+          "index.html" +
+          location.href.substring(location.href.indexOf("?"))
+      );
+    }
+  });
+
+  // 点击事件
+  $("#qiehuanbigshipin_btn").on("click", () => {
+    if (roomDetail_.UserList > 25) {
+      layer.msg("当前房间用户超过25人，不能使用此模式");
+    } else {
+      location.replace(
+        location.origin +
+          location.pathname.substring(
+            0,
+            location.pathname.lastIndexOf("/") + 1
+          ) +
+          "big.html" +
+          location.href.substring(location.href.indexOf("?"))
+      );
+    }
+  });
+
+  // 切换小视频点击事件
+  $("#qiehuanxiaoshipin_btn").on("click", () => {
+    if (roomDetail_.UserList > 25) {
+      layer.msg("当前房间用户超过25人，不能使用此模式");
+    } else {
+      location.replace(
+        location.origin +
+          location.pathname.substring(
+            0,
+            location.pathname.lastIndexOf("/") + 1
+          ) +
+          "small.html" +
+          location.href.substring(location.href.indexOf("?"))
+      );
+    }
+  });
+
+  // 切换视图关闭按钮点击事件
+  $("#qiehuanshitu_close_btn").on("click", () => {
+    $("#qiehuanshitu_btn").click();
+  });
+
   // 用户列表点击事件
   $("#canyuzhe_btn").on("click", (event) => {
     $("#yonghuliebiao").fadeToggle();

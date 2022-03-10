@@ -19,6 +19,8 @@ class RtcClient {
       userSig: this.userSig_,
     });
 
+    this.startGetNetworkevel();
+
     // 客户端监听服务
     this.handleEvents();
   }
@@ -64,8 +66,6 @@ class RtcClient {
     showOrHide();
     // 关闭加载中
     layer.close(loadIndex);
-    // 开始获取网络质量
-    this.startGetNetworkevel();
     // 开始获取音量
     this.startGetAudioLevel();
   }
@@ -183,7 +183,6 @@ class RtcClient {
       !roomDetail_.SpeakerID ||
       userId == roomDetail_.SpeakerID
     ) {
-      // onlineOrOfline(true, userId);
       var objectFit =
         getUserInfo(userId).AspectRatio > 1 && userId == ZJRID_
           ? "contain"
@@ -199,7 +198,8 @@ class RtcClient {
       stream?.play(videoVid, { objectFit }).then(() => {
         if (
           userId == oneself_.CHID &&
-          (hasMe(oneself_.CHID) || ZJRID_ == oneself_.CHID)
+          (hasMe(oneself_.CHID) || ZJRID_ == oneself_.CHID) &&
+          layout_.aspectRatio > 1
         ) {
           layout_.aspectRatio =
             $("#" + videoVid).height() / $("#" + videoVid).width();
@@ -394,23 +394,32 @@ class RtcClient {
     this.client_.on("network-quality", (event) => {
       //console.log(`network-quality, uplinkNetworkQuality:${event.uplinkNetworkQuality}, downlinkNetworkQuality: ${event.downlinkNetworkQuality}`);
       //'0': '未知', '1': '极佳', '2': '较好', '3': '一般', '4': '差', '5': '极差', '6': '断开'
+
+      $(`#mynetwork`).attr(
+        "src",
+        `./img/network/network_${
+          event.uplinkNetworkQuality == 6 || isDisconnect
+            ? 6
+            : event.uplinkNetworkQuality
+        }.png`
+      );
+
       isDisconnect = event.uplinkNetworkQuality == 6;
       if (event.uplinkNetworkQuality == 4 || event.uplinkNetworkQuality == 5) {
         layer.msg("当前网络极差，请注意保持良好的网络连接", { icon: 5 });
       }
     });
 
-    setInterval(() => {
+    /*setInterval(() => {
       // 获取实际采集的分辨率和帧率
-      const videoTrack = this.localStream_.getVideoTrack();
+      const videoTrack = this.localStream_?.getVideoTrack();
       if (videoTrack) {
         const settings = videoTrack.getSettings();
         console.log(
           `分辨率：${settings.width} * ${settings.height}, 帧率：${settings.frameRate}`
         );
       }
-      // 获取实际推流的视频码率参考：https://web.sdk.qcloud.com/trtc/webrtc/doc/zh-cn/Client.html#getLocalVideoStats
-    }, 30 * 1000);
+    }, 30 * 1000);*/
   }
 
   fbl() {

@@ -85,7 +85,7 @@ function changeViews() {
     $("#video-grid").removeClass("bg-[#24292e]");
   }
   zjr_streams?.play("zjr_video", { objectFit }).then(() => {
-    if (roomDetail_.SpeakerID == oneself_.CHID) {
+    if (roomDetail_.SpeakerID == oneself_.CHID && layout_.aspectRatio > 1) {
       layout_.aspectRatio = $("#zjr_video").height() / $("#zjr_video").width();
       fasongchangkuanbi();
     }
@@ -276,6 +276,9 @@ function videoHandle(on, userId) {
     on ? $("#zjr_mask").hide() : $("#zjr_mask").show();
     on && $("#mask_" + userId).show();
     !on && $(`#zjr_mask img`).attr("src", `./img/camera-green.png`);
+    if (location.href.includes("small")) {
+      on ? $("#mask_" + userId).hide() : $("#mask_" + userId).show();
+    }
   } else {
     on ? $("#mask_" + userId).hide() : $("#mask_" + userId).show();
   }
