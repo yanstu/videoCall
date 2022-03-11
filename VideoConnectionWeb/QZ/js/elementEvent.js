@@ -88,7 +88,7 @@
 
   // 切换小视频点击事件
   $("#qiehuanxiaoshipin_btn").on("click", () => {
-    if (roomDetail_.UserList > 25) {
+    if (roomDetail_.UserList.length > 25) {
       layer.msg("当前房间用户超过25人，不能使用此模式");
     } else {
       location.replace(
@@ -179,6 +179,38 @@
         quxiaozhujiangren();
       } else {
         layer.msg("您不是主持人");
+      }
+    })
+  );
+
+  // 点击上一页
+  $("#shangyiye_btn").on(
+    "click",
+    clickProof(() => {
+      if (oneself_.IsZCR || location.href.toLowerCase().includes("small2")) {
+        if (layout_.pageNo == 0) {
+          layer.msg("不能再向上翻了");
+        } else {
+          fanye(layout_.pageNo - 1);
+        }
+      } else {
+        layer.msg("无权限");
+      }
+    })
+  );
+
+  // 点击上一页
+  $("#xiayiye_btn").on(
+    "click",
+    clickProof(() => {
+      if (oneself_.IsZCR || location.href.toLowerCase().includes("small2")) {
+        if (layout_.pageNo + 1 == layout_.pageCount) {
+          layer.msg("不能再向下翻了");
+        } else {
+          fanye(layout_.pageNo + 1);
+        }
+      } else {
+        layer.msg("无权限");
       }
     })
   );

@@ -193,14 +193,36 @@ class RtcClient {
       // console.log(`network-quality, uplinkNetworkQuality:${event.uplinkNetworkQuality}, downlinkNetworkQuality: ${event.downlinkNetworkQuality}`);
       //'0': '未知', '1': '极佳', '2': '较好', '3': '一般', '4': '差', '5': '极差', '6': '断开'
 
-      $(`#mynetwork`).attr(
-        "src",
-        `./img/network/network_${
-          event.downlinkNetworkQuality == 6 || isDisconnect
-            ? 6
-            : event.downlinkNetworkQuality
-        }.png`
-      );
+      var title = {
+        0: "未知",
+        1: "极佳",
+        2: "较好",
+        3: "一般",
+        4: "差",
+        5: "极差",
+        6: "断开",
+      };
+
+      $(`#network-down`)
+        .attr(
+          "src",
+          `./img/network/down/network_${
+            event.downlinkNetworkQuality == 6 || isDisconnect
+              ? 6
+              : event.downlinkNetworkQuality
+          }.png`
+        )
+        .attr("title", title[event.downlinkNetworkQuality]);
+      $(`#network-up`)
+        .attr(
+          "src",
+          `./img/network/up/network_${
+            event.uplinkNetworkQuality == 6 || isDisconnect
+              ? 6
+              : event.uplinkNetworkQuality
+          }.png`
+        )
+        .attr("title", title[event.uplinkNetworkQuality]);
 
       isDisconnect = event.downlinkNetworkQuality == 6;
       if (

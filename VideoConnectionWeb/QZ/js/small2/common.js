@@ -1,20 +1,30 @@
-
-
 /**
  * 对视图进行处理
  */
 async function viewsHandle() {
+  roomDetail_.CHRY_ShowCols = 5;
+  roomDetail_.CHRY_ShowRows = 5;
+  layoutCompute();
+  // 用于翻页、取消主讲人、更改主讲人的处理，清空用户下面再添加进去
+  rtc.isJoined_ && resetViews();
   // 处理布局相关
   sortView();
   // 为当前页用户循环添加至网页上
   addView();
   // 如果没有设置主讲人，将自己设置为假的主讲人
-  ZJRID_ = roomDetail_.SpeakerID || oneself_.CHID;
-  rtc.join();
+  if (!rtc.isJoined_) {
+    // 没有推送过，就是第一次进入房间
+    rtc.join();
+  } else {
+    const indexLoad3 = layer.load(1);
+    await rtc.leave();
+    await rtc.join();
+    layer.close(indexLoad3);
+  }
 }
 
 function addView() {
-  for (let user_ of roomDetail_.UserList) {
+  for (let user_ of layout_.pageUserList) {
     const { ID, UserName } = user_;
     $("#video-grid").append(videoBoxTemplate(ID, UserName));
     $("#box_" + ID).attr(
@@ -27,7 +37,7 @@ function addView() {
 
 function sortView() {
   for (let index = 4; index >= 0; index--) {
-    if (roomDetail_.UserList.length > index * index) {
+    if (layout_.pageUserList.length > index * index) {
       $("#video-grid").attr(
         "class",
         `box-border grid w-full h-full items-center justify-center z-10 grid-cols-${
@@ -41,6 +51,6 @@ function sortView() {
 
 // 查询房间是否包含该用户
 function hasMe(userId) {
-  var exits = roomDetail_.UserList.find((user) => user.ID == userId);
+  var exits = layout_.pageUserList.find((user) => user.ID == userId);
   return !!exits;
 }

@@ -125,8 +125,6 @@ $.connection.hub
     chatHub.server.createRedis(RoomId);
     huoquhuiyihuancun();
     xintiaolianjie();
-    // 备用方案，防止redis缓存卡了
-    // beiyongfangan(RoomId);
   })
   .fail(function (reason) {
     alert("SignalR connection failed: " + reason);
@@ -176,15 +174,14 @@ function huoquhuiyihuancunxinxi(mess) {
   } else if (mess.ReUserid == oneself_.CHID) {
     roomDetail_ = mess.Data.VideoConferenceMess;
     setTitle(roomDetail_.Title);
-    if (ZJRID_ && roomDetail_.SpeakerID) return;
     roomDetail_.UserList.length == 0 && location.reload();
     roomDetail_.UserList = roomDetail_.UserList.sort(sortData);
     ZCRID_ = roomDetail_.UserList.find((item) => item.IsZCR == 1).ID;
-    if (rtc.isPublished_) {
+    /*if (rtc.isPublished_) {
       // 取消主讲人、更改主讲人
       changeViews();
       return;
-    }
+    }*/
     viewsHandle();
   }
 }
@@ -373,9 +370,18 @@ function fasongchangkuanbi() {
   });
 }
 
-function beiyongfangan(RoomId) {
-  ajaxMethod("RedisHandler", { Infotype: "GetInfo", RoomId }, (res) => {
-    console.log("-----------------------");
-    console.log(res);
+function fanye(no) {
+  roomDetail_.page = no;
+  roomDetail_.type = 1;
+  var VideoConferenceMess = roomDetail_;
+  redisFB({
+    reCode: "12",
+    ReUserid: oneself_.CHID,
+    ReUserQYBH: "",
+    ReUserName: "",
+    SendUserID: oneself_.CHID,
+    SendUserName: oneself_.UserName,
+    Content: "",
+    Data: { VideoConferenceMess },
   });
 }

@@ -6,8 +6,7 @@ class RtcClient {
     this.roomId_ = options.roomId;
     this.nickName_ = options.nickName;
 
-    this.isPublished_ = false;
-    this.localStream_ = null;
+    this.isJoined_ = false;
     this.remoteStreams_ = [];
     this.members_ = new Map();
 
@@ -20,9 +19,10 @@ class RtcClient {
     });
 
     this.startGetNetworkevel();
-
     // 客户端监听服务
     this.handleEvents();
+    // 开始获取音量
+    this.startGetAudioLevel();
   }
 
   /**
@@ -32,165 +32,24 @@ class RtcClient {
     await this.client_.join({
       roomId: parseInt(this.roomId_),
     });
-
-    if (getCameraId() && getMicrophoneId()) {
-      this.localStream_ = TRTC.createStream({
-        audio: true,
-        video: true,
-        userId: this.userId_,
-        cameraId: getCameraId(),
-        microphoneId: getMicrophoneId(),
-        mirror: false, // 是否开启镜像
-      });
-    } else {
-      // 不指定 麦克风Id/摄像头Id，以避免过限制错误
-      this.localStream_ = TRTC.createStream({
-        audio: true,
-        video: true,
-        userId: this.userId_,
-        mirror: false, // 是否开启镜像
-      });
-    }
-
-    try {
-      // 初始化本地流
-      await this.localStream_.initialize();
-      // 推送本地流
-      await this.publish();
-      onlineOrOfline(true, oneself_.CHID);
-    } catch (error) {
-      console.error("无法初始化共享流或推送本地流失败 - ", error);
-    }
-
-    // 权限判断按钮显示或隐藏
-    showOrHide();
+    this.isJoined_ = true;
     // 关闭加载中
     layer.close(loadIndex);
-    // 开始获取音量
-    this.startGetAudioLevel();
   }
 
   /**
    * 离开房间
    */
   async leave() {
-    // 确保本地流在离开之前取消发布
-    await this.unpublish();
     // 离开房间
     await this.client_.leave();
-    this.localStream_.stop();
-    this.localStream_.close();
-    this.localStream_ = null;
     // 停止获取音量
     this.stopGetAudioLevel();
-  }
-
-  /**
-   * 推送
-   */
-  async publish() {
-    if (this.isPublished_) return;
-    try {
-      await this.client_.publish(this.localStream_);
-      this.shezhifenbianlv();
-      this.playVideo(this.localStream_, oneself_.CHID);
-    } catch (error) {
-      console.error("推送本地流失败" + error);
-      this.isPublished_ = false;
-    }
-    this.isPublished_ = true;
-  }
-
-  /**
-   * 取消推送
-   */
-  async unpublish() {
-    if (!this.isPublished_) {
-      console.warn("RtcClient.unpublish() 已经调用但未推送");
-      return;
-    }
-    await this.client_.unpublish(this.localStream_);
-    this.isPublished_ = false;
-  }
-
-  /**
-   * Mute the local audio
-   */
-  muteLocalAudio() {
-    this.localStream_.muteAudio();
-  }
-
-  /**
-   * Unmute the local audio
-   */
-  unmuteLocalAudio() {
-    this.localStream_.unmuteAudio();
-  }
-
-  /**
-   * Mute the local video
-   */
-  muteLocalVideo() {
-    this.localStream_.muteVideo();
-  }
-
-  /**
-   * *Unmutes the local video.*
-   */
-  unmuteLocalVideo() {
-    this.localStream_.unmuteVideo();
-  }
-
-  /**
-   * Resumes the local and remote streams
-   */
-  resumeStreams() {
-    this.localStream_.resume();
-    for (let stream of this.remoteStreams_) {
-      stream.resume();
-    }
-  }
-
-  /**
-   * 切换摄像头
-   */
-  changeCameraId() {
-    try {
-      this.localStream_.switchDevice("video", cameraId).then(() => {
-        console.log("切换摄像头成功");
-        this.shezhifenbianlv();
-      });
-    } catch (error) {
-      if (JSON.stringify(error)?.includes("Cannot read properties of null"))
-        layer.msg(
-          "暂时无法访问摄像头/麦克风，请确保系统授予当前浏览器摄像头/麦克风权限，并且没有其他应用占用摄像头/麦克风。"
-        );
-    }
-  }
-
-  /**
-   * 切换麦克风
-   */
-  changeMicId() {
-    this.localStream_.switchDevice("audio", micId).then(() => {
-      console.log("切换麦克风成功");
-    });
   }
 
   playVideo(stream, userId) {
     var objectFit = getUserInfo(userId).AspectRatio > 1 ? "contain" : "cover";
     stream?.play("box_" + userId, { objectFit });
-  }
-
-  async shezhifenbianlv() {
-    var renshu = [6, 4, 2, 0];
-    var fenbianlv = ["240p", "360p", "480p", "720p"];
-    for (var i = 0; i < renshu.length; i++) {
-      if (roomDetail_.UserList.length >= renshu[i]) {
-        await this.localStream_.setVideoProfile(fenbianlv[i]);
-        break;
-      }
-    }
   }
 
   /**
@@ -254,12 +113,7 @@ class RtcClient {
       const userId = remoteStream.getUserId();
       this.remoteStreams_.push(remoteStream);
 
-      this.playVideo(remoteStream, userId);
-
-      if (!remoteStream) {
-        $("#mask_" + userId).show();
-        userId == ZJRID_ && $("#zjr_mask").show();
-      }
+      hasMe(userId) && this.playVideo(remoteStream, userId);
 
       remoteStream.on("player-state-changed", (event) => {
         console.log(
@@ -289,19 +143,6 @@ class RtcClient {
       this.remoteStreams_ = this.remoteStreams_.filter((stream) => {
         return stream.getId() !== id;
       });
-    });
-
-    /* The above code is listening for a stream-updated event. When a stream-updated event is received,
-    the code checks to see if the stream has video. If the stream does not have video, the code sets
-    the src attribute of the video button to "img/camera-off.png". */
-    this.client_.on("stream-updated", (evt) => {
-      const remoteStream = evt.stream;
-      /*let uid = this.getUidByStreamId(remoteStream.getId());
-      if (!remoteStream.hasVideo()) {
-        $("#" + uid)
-          .find(".member-video_btn")
-          .attr("src", "img/camera-off.png");
-      }*/
     });
 
     /* This code is listening for a mute-audio event from the client. When it receives the event, it
@@ -361,40 +202,45 @@ class RtcClient {
     this.client_.on("network-quality", (event) => {
       //console.log(`network-quality, uplinkNetworkQuality:${event.uplinkNetworkQuality}, downlinkNetworkQuality: ${event.downlinkNetworkQuality}`);
       //'0': '未知', '1': '极佳', '2': '较好', '3': '一般', '4': '差', '5': '极差', '6': '断开'
+      var title = {
+        0: "未知",
+        1: "极佳",
+        2: "较好",
+        3: "一般",
+        4: "差",
+        5: "极差",
+        6: "断开",
+      };
 
-      $(`#mynetwork`).attr(
-        "src",
-        `./img/network/network_${
-          event.uplinkNetworkQuality == 6 || isDisconnect
-            ? 6
-            : event.uplinkNetworkQuality
-        }.png`
-      );
+      $(`#network-down`)
+        .attr(
+          "src",
+          `./img/network/down/network_${
+            event.downlinkNetworkQuality == 6 || isDisconnect
+              ? 6
+              : event.downlinkNetworkQuality
+          }.png`
+        )
+        .attr("title", title[event.downlinkNetworkQuality]);
+      $(`#network-up`)
+        .attr(
+          "src",
+          `./img/network/up/network_${
+            event.uplinkNetworkQuality == 6 || isDisconnect
+              ? 6
+              : event.uplinkNetworkQuality
+          }.png`
+        )
+        .attr("title", title[event.uplinkNetworkQuality]);
 
-      isDisconnect = event.uplinkNetworkQuality == 6;
-      if (event.uplinkNetworkQuality == 4 || event.uplinkNetworkQuality == 5) {
+      isDisconnect = event.downlinkNetworkQuality == 6;
+      if (
+        event.downlinkNetworkQuality == 4 ||
+        event.downlinkNetworkQuality == 5
+      ) {
         layer.msg("当前网络极差，请注意保持良好的网络连接", { icon: 5 });
       }
     });
-
-    /*setInterval(() => {
-      // 获取实际采集的分辨率和帧率
-      const videoTrack = this.localStream_?.getVideoTrack();
-      if (videoTrack) {
-        const settings = videoTrack.getSettings();
-        console.log(
-          `分辨率：${settings.width} * ${settings.height}, 帧率：${settings.frameRate}`
-        );
-      }
-    }, 30 * 1000);*/
-  }
-
-  fbl() {
-    const videoTrack = this.localStream_.getVideoTrack();
-    if (videoTrack) {
-      var s = videoTrack.getSettings();
-      console.log(`分辨率：${s.width} * ${s.height}, 帧率：${s.frameRate}`);
-    }
   }
 
   // 停止获取流音量

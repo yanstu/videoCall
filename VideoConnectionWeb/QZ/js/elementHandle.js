@@ -11,13 +11,15 @@ function showOrHide() {
   }
 
   // 非手机端不需要显示翻转相机按钮
-  location.href.includes("mobile") && $("#fanzhuan_btn").show();
+  location.href.toLowerCase().includes("mobile") && $("#fanzhuan_btn").show();
 
   // 如果是主持人的话主持人相关权限按钮显示
   if (oneself_.IsZCR) {
     $("#fayanliebiao_btn").show();
     $("#guanbimaikefeng_btn").show();
     $("#quxiaozhujiangren_btn").show();
+    $("#shangyiye_btn").show();
+    $("#xiayiye_btn").show();
     $("#fayanliebiao_btn").show();
     $(".shezhizhujiangren_btn").show();
     $(".tidiao_btn").show();
@@ -37,7 +39,6 @@ function showOrHide() {
 }
 
 function changeViews() {
-  // try {
   const loadIndex2 = layer.load(1);
   // 此处的ZJRID_代表上一个主讲人
   // 此处的newZJRID代表新的主讲人ID，没有的话设定自己为假主讲人
@@ -108,9 +109,6 @@ function changeViews() {
   showOrHide();
   // 关闭加载中
   layer.close(loadIndex2);
-  /*} catch (error) {
-    viewsHandle();
-  }*/
 }
 
 function addViews() {
@@ -214,17 +212,19 @@ function addMember() {
 }
 
 function layoutCompute() {
+  layout_.pageNo = roomDetail_.page || 0;
   layout_.rows = roomDetail_.CHRY_ShowRows == 0 ? 5 : roomDetail_.CHRY_ShowRows;
   layout_.cols = roomDetail_.CHRY_ShowCols == 0 ? 5 : roomDetail_.CHRY_ShowCols;
   layout_.pageSize = layout_.rows * layout_.cols;
   layout_.percentage = 100 / layout_.rows;
-  layout_.remainderPage = roomDetail_.UserList.length % layout_.pageSize;
-  layout_.pageCount = roomDetail_.UserList.length / layout_.pageSize;
+  layout_.remainder = roomDetail_.UserList.length % layout_.pageSize;
+  layout_.pageCount = Math.ceil(roomDetail_.UserList.length / layout_.pageSize);
+  layout_.count = roomDetail_.UserList.length;
   layout_.pageUserList = roomDetail_.UserList.slice(
     layout_.pageNo * layout_.pageSize,
     ((layout_.pageNo + 1) * layout_.pageSize) % layout_.pageSize == 0
       ? (layout_.pageNo + 1) * layout_.pageSize
-      : layout_.pageNo * layout_.pageSize + layout_.remainderPage
+      : layout_.pageNo * layout_.pageSize + layout_.remainder
   );
   $("#video-grid")
     .css("grid-template-columns", "repeat(" + layout_.cols + ", 1fr)")
@@ -236,6 +236,7 @@ function layoutCompute() {
 
 function resetViews() {
   $("#profile_").remove();
+  $("#box-grid [id^='player_']").remove();
   for (let user_ of roomDetail_.UserList) {
     const { ID } = user_;
     $("#box_" + ID).remove();
@@ -274,10 +275,25 @@ function videoHandle(on, userId) {
 
   if (userId == zjr) {
     on ? $("#zjr_mask").hide() : $("#zjr_mask").show();
-    on && $("#mask_" + userId).show();
+    // on && $("#mask_" + userId).show();
     !on && $(`#zjr_mask img`).attr("src", `./img/camera-green.png`);
-    if (location.href.includes("small")) {
+    if (location.href.toLowerCase().includes("small")) {
       on ? $("#mask_" + userId).hide() : $("#mask_" + userId).show();
+    }
+    if (on) {
+      $("#mask_" + userId).hide();
+      $("#img_" + userId)
+        .attr("src", rtc?.localStream_?.getVideoFrame())
+        .show();
+      videoImgTimer = setInterval(() => {
+        $("#img_" + userId)
+          .attr("src", rtc?.localStream_?.getVideoFrame())
+          .show();
+      }, 60 * 1000);
+    } else {
+      videoImgTimer && clearInterval(videoImgTimer);
+      $("#img_" + userId).hide();
+      $("#mask_" + userId).show();
     }
   } else {
     on ? $("#mask_" + userId).hide() : $("#mask_" + userId).show();
@@ -393,9 +409,10 @@ function addVideoView(ID, NickName) {
     "class",
     "w-[99%] h-[99%] video-box relative border-[1px] border-[#5f6d7a] p-[2px]"
   );
-  location.href.includes("mobile") &&
+  location.href.toLowerCase().includes("mobile") &&
     box.attr("class", "w-full h-full video-box relative");
   box.find("#zjr_mask").attr("id", "mask_" + ID);
+  box.find("#zjr_img").attr("id", "img_" + ID);
   box.append(userInfoTemplate(ID, NickName));
   box.appendTo("#video-grid");
 }

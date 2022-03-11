@@ -45,11 +45,13 @@
       <div class="flex-1 flex items-center justify-start">
         <img
           id="mean_btn"
+          title="显示/隐藏菜单"
           class="ml-4 mr-4 hover:invert-[50%] h-[50%]"
           src="./img/sf_ic_menu.png"
         />
         <img
           id="testing_btn"
+          title="设备、网络检测"
           class="hover:invert-[50%] h-[50%]"
           src="./img/check-mic.png"
         />
@@ -65,15 +67,24 @@
           class="flex items-center justify-content-center relative h-[50%] mr-4"
         >
           <img
-            id="mynetwork"
+            id="network-up"
             class="h-full"
-            src="./img/network/network_3.png"
+            src="./img/network/up/network_4.png"
+          />
+        </div>
+        <div
+          class="flex items-center justify-content-center relative h-[50%] mr-4"
+        >
+          <img
+            id="network-down"
+            class="h-full"
+            src="./img/network/down/network_4.png"
           />
         </div>
         <div
           class="flex items-center justify-content-center relative h-[43%] mr-4"
         >
-          <img id="qiehuanshitu_btn" class="h-full" src="./img/shitu.png" />
+          <img id="qiehuanshitu_btn" title="切换布局模式" class="h-full" src="./img/shitu.png" />
         </div>
         <div
           id="exit-btn"
@@ -441,157 +452,6 @@
         </div>
       </div>
 
-      <!-- 成员列表 -->
-      <div
-        id="yonghuliebiao"
-        class="modalbox"
-        style="justify-content: center !important"
-      >
-        <div class="modalbox-title">参与者列表</div>
-        <div
-          id="member-list"
-          class="col-div w-[100%] text-[0.875rem] h-[93%] p-1 overflow-y-scroll overscroll-contain text-white"
-        >
-          <!-- 成员列表成员模板 -->
-          <div
-            id="member-me"
-            style="display: none"
-            class="flex border-b-[#283240] border-b-[1px] pl-2 pr-2 w-full"
-          >
-            <div
-              class="row-div member flex items-center h-[3.5rem]"
-              style="width: 100%; justify-content: space-between"
-            >
-              <div
-                class="member-id flex justify-center items-center"
-                style="color: #7c7f85"
-              >
-                user_7157526(我)
-              </div>
-              <div class="row-div flex h-full justify-c enter items-center">
-                <img
-                  class="member-video_btn"
-                  style="height: 1.5rem"
-                  src="./img/camera-on.png"
-                  alt=""
-                />
-                <img
-                  class="member-audio-btn ml-[0.8rem]"
-                  style="height: 1.5rem"
-                  src="./img/mic-on.png"
-                  alt=""
-                />
-                <svg
-                  style="display: none"
-                  class="faxiaoxi_btn icon text-[1.6rem] text-[#bfbfbf] ml-[0.8rem]"
-                  aria-hidden="true"
-                >
-                  <use xlink:href="#icon-faxiaoxi"></use>
-                </svg>
-                <svg
-                  style="display: none"
-                  class="tidiao_btn icon text-[1.6rem] text-[#bfbfbf] ml-[0.8rem]"
-                  aria-hidden="true"
-                >
-                  <use xlink:href="#icon-tidiao"></use>
-                </svg>
-                <div
-                  style="display: none"
-                  class="shezhizhujiangren_btn anniubeijing pl-[1rem] pr-[1rem] h-[50%] ml-[0.8rem] text-white flex justify-center items-center"
-                >
-                  设主讲人
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 申请发言列表 -->
-      <div id="shenqingfayanliebiao" class="modalbox">
-        <div class="modalbox-title">申请发言列表</div>
-        <div
-          id="speakerList"
-          class="flex flex-col h-[93%] overflow-y-scroll overscroll-contain"
-        >
-          <!-- 发言人模板 -->
-          <div
-            id="fayan_muban"
-            style="display: none"
-            class="border-b-[#283240] border-b-[1px] flex justify-between w-full h-[3.5rem] items-center pl-2 pr-2 text-[0.875rem]"
-          >
-            <div class="fayanrenxingming text-white">发言人姓名</div>
-            <div class="flex h-full justify-center items-center">
-              <div
-                class="yunxufayan pl-[1rem] pr-[1rem] anniubeijing h-[50%] flex justify-center items-center text-white mr-3"
-              >
-                允许发言
-              </div>
-              <div
-                class="buyunxufayan pl-[1rem] pr-[1rem] anniubeijing h-[50%] flex justify-center items-center text-white"
-              >
-                拒绝
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 消息列表 -->
-      <div id="xiaoxiliebiao" class="modalbox">
-        <div class="modalbox-title">消息列表</div>
-        <div id="messageList" class="h-[86%] w-full overflow-y-scroll pb-3">
-          <!-- 消息模板 -->
-          <div
-            id="message_muban"
-            style="display: none"
-            class="flex flex-col h-auto pl-2 pr-2 pt-2 text-[0.875rem]"
-          >
-            <div
-              class="message_time mb-2 mt-1 h-[20%] text-white flex justify-center items-center"
-            >
-              2022-02-27 09:18:12
-            </div>
-            <div
-              class="message_info h-[70%] flex flex-row w-full justify-end items-center"
-            >
-              <div
-                class="message_neirong text-white text-[0.875rem] mt-1 mr-2 mb-1 bg-[#2d3549] pl-1 pr-1 pt-1 pb-1 min-h-[5.7rem] w-[80%]"
-              >
-                这个是内这个是内这个是内内这个
-              </div>
-              <div
-                class="message_touxiang bg-[#2d3549] flex items-center justify-center w-[20%] flex-col h-full"
-              >
-                <svg class="icon text-[4.5rem] text-white" aria-hidden="true">
-                  <use xlink:href="#icon-touxiang"></use>
-                </svg>
-                <div
-                  class="message_xingming h-[27%] mb-[3%] w-auto text-white overflow-auto text-[0.675rem]"
-                >
-                  贵州省人大
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="h-[7%] flex w-full justify-between items-center pl-3 pr-3 bg-[#262626] text-[0.875rem]"
-        >
-          <input
-            id="xiaoxineirong"
-            class="mr-3 w-[80%] h-[50%] pl-2 pr-2"
-            maxlength="200"
-          />
-          <div
-            id="fasongxiaoxi"
-            class="w-[20%] anniubeijing h-[50%] flex justify-center items-center text-white"
-          >
-            发送
-          </div>
-        </div>
-      </div>
-
       <!-- 预加载所有网络图片资源，防止断网后加载不出断网图标图片 -->
       <div style="display: none">
         <img src="./img/network/network_0.png" alt="" />
@@ -616,77 +476,17 @@
         <div
           class="absolute w-full h-full top-0 left-0 shadow bg-black opacity-10 pointer-events-none"
         ></div>
-        <div class="toolbar_btn" id="mic_btn">
+        <div class="toolbar_btn" id="shangyiye_btn">
           <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
-            <use xlink:href="#icon-maikefeng"></use>
+            <use xlink:href="#icon-shangyiye"></use>
           </svg>
-          <span class="mt-1 text-[14px]">静音</span>
+          <span class="mt-1 text-[14px]">上一页</span>
         </div>
-        <div class="toolbar_btn" id="video_btn">
+        <div class="toolbar_btn" id="xiayiye_btn">
           <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
-            <use xlink:href="#icon-xiangji"></use>
+            <use xlink:href="#icon-xiayiye"></use>
           </svg>
-          <span class="mt-1 text-[14px]">摄像头</span>
-        </div>
-        <div class="toolbar_btn" style="display: none" id="fanzhuan_btn">
-          <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
-            <use xlink:href="#icon-fanzhuan"></use>
-          </svg>
-          <span class="mt-1 text-[14px]">翻转</span>
-        </div>
-        <div class="toolbar_btn" id="canyuzhe_btn">
-          <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
-            <use xlink:href="#icon-canyuzhe"></use>
-          </svg>
-          <span class="mt-1 text-[14px]">参与者</span>
-        </div>
-        <div class="toolbar_btn" style="display: none" id="fayanliebiao_btn">
-          <div class="relative">
-            <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
-              <use xlink:href="#icon-fayanliebiao"></use>
-            </svg>
-            <div
-              id="fayan_jiaobiao"
-              style="display: none"
-              class="w-[10px] h-[10px] rounded-full bg-red-600 absolute right-0 top-0"
-            ></div>
-          </div>
-          <span class="mt-1 text-[14px]">发言列表</span>
-        </div>
-        <div class="toolbar_btn" id="xiaoxi_btn">
-          <div class="relative">
-            <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
-              <use xlink:href="#icon-xiaoxi"></use>
-            </svg>
-            <div
-              id="xiaoxi_jiaobiao"
-              style="display: none"
-              class="w-[10px] h-[10px] rounded-full bg-red-600 absolute right-0 top-0"
-            ></div>
-          </div>
-          <span class="mt-1 text-[14px]">消息</span>
-        </div>
-        <div class="toolbar_btn" id="shenqingfayan_btn">
-          <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
-            <use xlink:href="#icon-shenqingfayan"></use>
-          </svg>
-          <span class="mt-1 text-[14px]">申请发言</span>
-        </div>
-        <div class="toolbar_btn" style="display: none" id="guanbimaikefeng_btn">
-          <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
-            <use xlink:href="#icon-guanbimaikefeng"></use>
-          </svg>
-          <span class="mt-1 text-[14px]">关闭麦克风</span>
-        </div>
-        <div
-          class="toolbar_btn"
-          style="display: none"
-          id="quxiaozhujiangren_btn"
-        >
-          <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
-            <use xlink:href="#icon-quxiaozhujiangren"></use>
-          </svg>
-          <span class="mt-1 text-[14px]">取消主讲人</span>
+          <span class="mt-1 text-[14px]">下一页</span>
         </div>
       </div>
     </footer>
@@ -695,7 +495,7 @@
     <script src="./lib/jquery/jquery.signalR.min.js"></script>
     <script src="./lib/layui/layui.js"></script>
     <script src="/signalr/hubs"></script>
-    <script src="./js/small/chatHub.js"></script>
+    <script src="./js/small2/chatHub.js"></script>
     <script src="./lib/trtc/lib-generate-test-usersig.min.js"></script>
     <script src="./lib/trtc/GenerateTestUserSig.js"></script>
     <script src="./js/iconfont.js"></script>
@@ -705,9 +505,9 @@
     <script src="./js/device-testing.js"></script>
     <script src="./js/elementHandle.js"></script>
     <script src="./js/common-public.js"></script>
-    <script src="./js/small/common.js"></script>
+    <script src="./js/small2/common.js"></script>
     <script src="./js/rtc-detection.js"></script>
-    <script src="./js/small/rtc-client.js"></script>
+    <script src="./js/small2/rtc-client.js"></script>
     <script src="./js/prohibit.js"></script>
     <script src="./js/elementEvent.js"></script>
     <script>

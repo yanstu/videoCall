@@ -49,6 +49,8 @@ let roomDetail_ = {
   UserList: [],
 };
 let layout_ = {
+  // 总用户数量
+  count: 0,
   // 行数
   rows: 5,
   // 列数
@@ -58,7 +60,7 @@ let layout_ = {
   // 总页数
   pageCount: 0,
   // 余数
-  remainderPage: 0,
+  remainder: 0,
   // 当前第几页
   pageNo: 0,
   // 当前页的用户列表
@@ -80,6 +82,10 @@ let menuHideTimer = {
 };
 // 心跳连接计时器
 let xintiaoTimer = null;
+// 定时翻页计时器
+let pageTurnTimer = null;
+// 定时抽取主讲人帧
+let videoImgTimer = null
 
 /**
  * 解密获取房间信息

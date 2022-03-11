@@ -46,11 +46,13 @@
       <div class="flex-1 flex items-center justify-start">
         <img
           id="mean_btn"
+          title="显示/隐藏菜单"
           class="ml-4 mr-4 hover:invert-[50%] h-[50%]"
           src="./img/sf_ic_menu.png"
         />
         <img
           id="testing_btn"
+          title="设备、网络检测"
           class="hover:invert-[50%] h-[50%]"
           src="./img/check-mic.png"
         />
@@ -63,10 +65,13 @@
       </div>
       <div class="flex-1 flex items-center justify-end">
         <div class="flex items-center justify-content-center relative h-[50%] mr-4">
-          <img id="mynetwork" class="h-full" src="./img/network/network_3.png">
+          <img id="network-up" class="h-full" src="./img/network/up/network_4.png">
+        </div>
+        <div class="flex items-center justify-content-center relative h-[50%] mr-4">
+          <img id="network-down" class="h-full" src="./img/network/down/network_4.png">
         </div>
         <div class="flex items-center justify-content-center relative h-[43%] mr-4">
-          <img id="qiehuanshitu_btn" class="h-full" src="./img/shitu.png">
+          <img id="qiehuanshitu_btn" title="切换布局模式" class="h-full" src="./img/shitu.png">
         </div>
         <div
           id="exit-btn"
@@ -91,6 +96,7 @@
             <!-- 渐变 bg-gradient-to-b from-[#242e47] via-[#2958ce] to-[#242e47]  -->
             <img class="h-[40%]" src="./img/camera-gray.png" alt="" />
             </div>
+            <img id="zjr_img" style="display: none;z-index: 9;" class="w-full h-full" src="" alt="">
           </div>
         </div>
       </div>
@@ -629,6 +635,18 @@
             <use xlink:href="#icon-quxiaozhujiangren"></use>
           </svg>
           <span class="mt-1 text-[14px]">取消主讲人</span>
+        </div>
+        <div class="toolbar_btn" style="display: none;" id="shangyiye_btn">
+          <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
+            <use xlink:href="#icon-shangyiye"></use>
+          </svg>
+          <span class="mt-1 text-[14px]">上一页</span>
+        </div>
+        <div class="toolbar_btn" style="display: none;" id="xiayiye_btn">
+          <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
+            <use xlink:href="#icon-xiayiye"></use>
+          </svg>
+          <span class="mt-1 text-[14px]">下一页</span>
         </div>
       </div>
     </footer>

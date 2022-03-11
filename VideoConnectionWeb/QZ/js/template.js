@@ -2,7 +2,7 @@
  * 左下角昵称显示区域模板
  */
 function userInfoTemplate(userId, nickName) {
-  var isMobile = location.href.includes("mobile");
+  var isMobile = location.href.toLowerCase().includes("mobile");
   return `<div id="profile_${userId}" class="absolute ${
     isMobile ? "top-0" : "bottom-0"
   } left-0 pl-1 pr-1 w-auto h-7 z-10 flex justify-items-center items-center text-center">

@@ -370,10 +370,3 @@ function fasongchangkuanbi() {
     },
   });
 }
-
-function beiyongfangan(RoomId) {
-  ajaxMethod("RedisHandler", { Infotype: "GetInfo", RoomId }, (res) => {
-    console.log("-----------------------");
-    console.log(res);
-  });
-}
