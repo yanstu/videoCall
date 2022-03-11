@@ -54,7 +54,7 @@ class RtcClient {
 
     try {
       // 初始化本地流
-      await this.localStream_.initialize();
+      await this.localStream_?.initialize();
       // 推送本地流
       await this.publish();
       onlineOrOfline(true, oneself_.CHID);
@@ -78,8 +78,8 @@ class RtcClient {
     await this.unpublish();
     // 离开房间
     await this.client_.leave();
-    this.localStream_.stop();
-    this.localStream_.close();
+    this.localStream_?.stop();
+    this.localStream_?.close();
     this.localStream_ = null;
     // 停止获取音量
     this.stopGetAudioLevel();
@@ -117,35 +117,35 @@ class RtcClient {
    * Mute the local audio
    */
   muteLocalAudio() {
-    this.localStream_.muteAudio();
+    this.localStream_?.muteAudio();
   }
 
   /**
    * Unmute the local audio
    */
   unmuteLocalAudio() {
-    this.localStream_.unmuteAudio();
+    this.localStream_?.unmuteAudio();
   }
 
   /**
    * Mute the local video
    */
   muteLocalVideo() {
-    this.localStream_.muteVideo();
+    this.localStream_?.muteVideo();
   }
 
   /**
    * *Unmutes the local video.*
    */
   unmuteLocalVideo() {
-    this.localStream_.unmuteVideo();
+    this.localStream_?.unmuteVideo();
   }
 
   /**
    * Resumes the local and remote streams
    */
   resumeStreams() {
-    this.localStream_.resume();
+    this.localStream_?.resume();
     for (let stream of this.remoteStreams_) {
       stream.resume();
     }
@@ -156,7 +156,7 @@ class RtcClient {
    */
   changeCameraId() {
     try {
-      this.localStream_.switchDevice("video", cameraId).then(() => {
+      this.localStream_?.switchDevice("video", cameraId).then(() => {
         console.log("切换摄像头成功");
         this.shezhifenbianlv();
       });
@@ -172,7 +172,7 @@ class RtcClient {
    * 切换麦克风
    */
   changeMicId() {
-    this.localStream_.switchDevice("audio", micId).then(() => {
+    this.localStream_?.switchDevice("audio", micId).then(() => {
       console.log("切换麦克风成功");
     });
   }
@@ -214,15 +214,15 @@ class RtcClient {
 
   async shezhifenbianlv() {
     if (!roomDetail_.SpeakerID) {
-      await this.localStream_.setVideoProfile("480p");
+      await this.localStream_?.setVideoProfile("480p");
     } else if (roomDetail_.SpeakerID == oneself_.CHID) {
-      await this.localStream_.setVideoProfile("1080p");
+      await this.localStream_?.setVideoProfile("1080p");
     } else {
       var renshu = [6, 4, 2, 0];
       var fenbianlv = ["240p", "360p", "480p", "720p"];
       for (var i = 0; i < renshu.length; i++) {
         if (roomDetail_.UserList.length >= renshu[i]) {
-          await this.localStream_.setVideoProfile(fenbianlv[i]);
+          await this.localStream_?.setVideoProfile(fenbianlv[i]);
           break;
         }
       }
@@ -417,7 +417,7 @@ class RtcClient {
               : event.downlinkNetworkQuality
           }.png`
         )
-        .attr("title", title[event.downlinkNetworkQuality]);
+        .attr("title", "下行速度：" + title[event.downlinkNetworkQuality]);
       $(`#network-up`)
         .attr(
           "src",
@@ -427,7 +427,7 @@ class RtcClient {
               : event.uplinkNetworkQuality
           }.png`
         )
-        .attr("title", title[event.uplinkNetworkQuality]);
+        .attr("title", "上行速度：" + title[event.uplinkNetworkQuality]);
 
       isDisconnect = event.uplinkNetworkQuality == 6;
       if (event.uplinkNetworkQuality == 4 || event.uplinkNetworkQuality == 5) {
@@ -435,14 +435,17 @@ class RtcClient {
       }
 
       if (event.uplinkNetworkQuality >= 4) {
-        this.localStream_.setVideoProfile("180p");
+        this.localStream_?.setVideoProfile("180p");
+        if (event.uplinkNetworkQuality >= 4) {
+          this.localStream_?.setVideoProfile("120p");
+        }
       } else {
         if (!roomDetail_.SpeakerID) {
-          this.localStream_.setVideoProfile("480p");
+          this.localStream_?.setVideoProfile("480p");
         } else if (roomDetail_.SpeakerID == oneself_.CHID) {
-          this.localStream_.setVideoProfile("1080p");
+          this.localStream_?.setVideoProfile("1080p");
         } else {
-          this.localStream_.setVideoProfile("240p");
+          this.localStream_?.setVideoProfile("240p");
         }
       }
     });
@@ -460,7 +463,7 @@ class RtcClient {
   }
 
   fbl() {
-    const videoTrack = this.localStream_.getVideoTrack();
+    const videoTrack = this.localStream_?.getVideoTrack();
     if (videoTrack) {
       var s = videoTrack.getSettings();
       console.log(`分辨率：${s.width} * ${s.height}, 帧率：${s.frameRate}`);

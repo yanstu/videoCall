@@ -221,7 +221,7 @@ class RtcClient {
               : event.downlinkNetworkQuality
           }.png`
         )
-        .attr("title", title[event.downlinkNetworkQuality]);
+        .attr("title", '下行速度：' + title[event.downlinkNetworkQuality]);
       $(`#network-up`)
         .attr(
           "src",
@@ -231,7 +231,7 @@ class RtcClient {
               : event.uplinkNetworkQuality
           }.png`
         )
-        .attr("title", title[event.uplinkNetworkQuality]);
+        .attr("title", '上行速度：' + title[event.uplinkNetworkQuality]);
 
       isDisconnect = event.downlinkNetworkQuality == 6;
       if (
