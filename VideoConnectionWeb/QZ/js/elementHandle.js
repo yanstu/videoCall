@@ -53,6 +53,7 @@ function changeViews() {
     rePlay(rtc.members_.get(ZJRID_), ZJRID_);
   }
   function rePlay(stream, ID) {
+    $("#img_" + ID).hide()
     stream?.stop();
     if (hasMe(ID)) {
       stream?.play("box_" + ID, { objectFit: "cover" });
@@ -92,6 +93,9 @@ function changeViews() {
     }
   });
   zjr_streams ? $("#zjr_mask").hide() : $("#zjr_mask").show();
+  // 为新的主讲人取帧
+  zjr_streams && videoHandle(true, newZJRID);
+
   $(`#zjr_mask img`).attr("src", `./img/camera-gray.png`);
 
   // 将参与者列表清空
@@ -102,9 +106,8 @@ function changeViews() {
   addMember();
   !isMicOn && $("#mic_btn").click();
   !isCamOn && $("#video_btn").click();
+
   ZJRID_ = newZJRID;
-  // 重新设定新主持人、群众的分辨率
-  rtc.shezhifenbianlv();
   // 权限判断按钮显示或隐藏
   showOrHide();
   // 关闭加载中
@@ -281,10 +284,13 @@ function videoHandle(on, userId) {
       on ? $("#mask_" + userId).hide() : $("#mask_" + userId).show();
     }
     if (on) {
+      videoImgTimer && clearInterval(videoImgTimer);
       $("#mask_" + userId).hide();
-      $("#img_" + userId)
-        .attr("src", rtc?.localStream_?.getVideoFrame())
-        .show();
+      setTimeout(() => {
+        $("#img_" + userId)
+          .attr("src", rtc?.localStream_?.getVideoFrame())
+          .show();
+      }, 100);
       videoImgTimer = setInterval(() => {
         $("#img_" + userId)
           .attr("src", rtc?.localStream_?.getVideoFrame())

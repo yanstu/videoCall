@@ -92,7 +92,6 @@ class RtcClient {
     if (this.isPublished_) return;
     try {
       await this.client_.publish(this.localStream_);
-      this.shezhifenbianlv();
       this.playVideo(this.localStream_, oneself_.CHID);
     } catch (error) {
       console.error("推送本地流失败" + error);
@@ -158,7 +157,6 @@ class RtcClient {
     try {
       this.localStream_?.switchDevice("video", cameraId).then(() => {
         console.log("切换摄像头成功");
-        this.shezhifenbianlv();
       });
     } catch (error) {
       if (JSON.stringify(error)?.includes("Cannot read properties of null"))
@@ -196,7 +194,7 @@ class RtcClient {
       if (ZJRID_ == userId || roomDetail_.SpeakerID == userId)
         videoVid = "zjr_video";
       stream?.play(videoVid, { objectFit }).then(() => {
-        if (!roomDetail_ || roomDetail_.SpeakerID == oneself_.CHID) {
+        if (!roomDetail_.SpeakerID || roomDetail_.SpeakerID == oneself_.CHID) {
           videoHandle(true, userId);
         }
         if (
@@ -209,23 +207,6 @@ class RtcClient {
           fasongchangkuanbi();
         }
       });
-    }
-  }
-
-  async shezhifenbianlv() {
-    if (!roomDetail_.SpeakerID) {
-      await this.localStream_?.setVideoProfile("480p");
-    } else if (roomDetail_.SpeakerID == oneself_.CHID) {
-      await this.localStream_?.setVideoProfile("1080p");
-    } else {
-      var renshu = [6, 4, 2, 0];
-      var fenbianlv = ["240p", "360p", "480p", "720p"];
-      for (var i = 0; i < renshu.length; i++) {
-        if (roomDetail_.UserList.length >= renshu[i]) {
-          await this.localStream_?.setVideoProfile(fenbianlv[i]);
-          break;
-        }
-      }
     }
   }
 
@@ -434,32 +415,34 @@ class RtcClient {
         layer.msg("当前网络极差，请注意保持良好的网络连接", { icon: 5 });
       }
 
-      if (event.uplinkNetworkQuality >= 4) {
-        this.localStream_?.setVideoProfile("180p");
-        if (event.uplinkNetworkQuality >= 4) {
-          this.localStream_?.setVideoProfile("120p");
-        }
+      if (!this.isPublished_) {
+        // 如果没有推送则将自己的分辨率设为最高，因为没有推送到远程流，不会影响到网络
+        this.localStream_?.setVideoProfile("1080p");
       } else {
-        if (!roomDetail_.SpeakerID) {
-          this.localStream_?.setVideoProfile("480p");
-        } else if (roomDetail_.SpeakerID == oneself_.CHID) {
-          this.localStream_?.setVideoProfile("1080p");
+        // 如果网络极差，不管是不是主讲人也将分辨率调到极低
+        if (event.uplinkNetworkQuality >= 4) {
+          this.localStream_?.setVideoProfile("180p");
+          if (event.uplinkNetworkQuality >= 4) {
+            this.localStream_?.setVideoProfile("120p");
+          }
         } else {
-          this.localStream_?.setVideoProfile("240p");
+          if (!roomDetail_.SpeakerID) {
+            this.localStream_?.setVideoProfile("480p");
+          } else if (roomDetail_.SpeakerID == oneself_.CHID) {
+            this.localStream_?.setVideoProfile("1080p");
+          } else {
+            var renshu = [6, 4, 2, 0];
+            var fenbianlv = ["240p", "360p", "480p", "720p"];
+            for (var i = 0; i < renshu.length; i++) {
+              if (roomDetail_.UserList.length >= renshu[i]) {
+                this.localStream_?.setVideoProfile(fenbianlv[i]);
+                break;
+              }
+            }
+          }
         }
       }
     });
-
-    /*setInterval(() => {
-      // 获取实际采集的分辨率和帧率
-      const videoTrack = this.localStream_?.getVideoTrack();
-      if (videoTrack) {
-        const settings = videoTrack.getSettings();
-        console.log(
-          `分辨率：${settings.width} * ${settings.height}, 帧率：${settings.frameRate}`
-        );
-      }
-    }, 30 * 1000);*/
   }
 
   fbl() {

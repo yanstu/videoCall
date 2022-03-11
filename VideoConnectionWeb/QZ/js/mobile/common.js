@@ -71,8 +71,6 @@ async function change() {
   new_streams ? $("#zjr_mask").hide() : $("#zjr_mask").show();
   !isMicOn && $("#mic_btn").click();
   !isCamOn && $("#video_btn").click();
-  // 切换身份后设置相应的分辨率
-  rtc.shezhifenbianlv();
   showOrHide();
 }
 

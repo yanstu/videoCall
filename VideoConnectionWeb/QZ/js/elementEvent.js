@@ -280,14 +280,6 @@
         // 切换到打开摄像头状态
         $("#video_btn svg").html(`<use xlink:href="#icon-xiangji"></use>`);
         unmuteVideo();
-        if (oneself_.CHID == roomDetail_.SpeakerID || !roomDetail_.SpeakerID) {
-          setTimeout(() => {
-            $("#img_" + oneself_.CHID).attr(
-              "src",
-              rtc?.localStream_?.getVideoFrame()
-            );
-          }, 100);
-        }
       }
       if (oneself_.CHID == ZJRID_) {
         if (isCamOn) $(`#zjr_mask img`).attr("src", `./img/camera-green.png`);

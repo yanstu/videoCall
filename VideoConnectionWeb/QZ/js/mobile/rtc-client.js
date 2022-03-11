@@ -55,12 +55,21 @@ class RtcClient {
 
     try {
       // 初始化本地流
-      await this.localStream_.initialize();
-      // 推送本地流
-      await this.publish();
+      await this.localStream_?.initialize();
     } catch (error) {
-      console.error("无法初始化共享流或推送本地流失败 - ", error);
+      console.error("无法初始化共享流 - ", error);
     }
+
+    try {
+      // 推送本地流
+      if (hasMe(oneself_.CHID) || roomDetail_.SpeakerID == oneself_.CHID) {
+        await this.publish();
+      }
+    } catch (error) {
+      console.error("推送本地流失败 - ", error);
+    }
+
+    this.playVideo(this.localStream_, oneself_.CHID);
 
     // 权限判断按钮显示或隐藏
     showOrHide();
@@ -78,8 +87,8 @@ class RtcClient {
     await this.unpublish();
     // 离开房间
     await this.client_.leave();
-    this.localStream_.stop();
-    this.localStream_.close();
+    this.localStream_?.stop();
+    this.localStream_?.close();
     this.localStream_ = null;
     // 停止获取音量
     this.stopGetAudioLevel();
@@ -92,8 +101,6 @@ class RtcClient {
     if (this.isPublished_) return;
     try {
       await this.client_.publish(this.localStream_);
-      this.shezhifenbianlv();
-      this.playVideo(this.localStream_, oneself_.CHID);
     } catch (error) {
       console.error("推送本地流失败" + error);
       this.isPublished_ = false;
@@ -117,35 +124,35 @@ class RtcClient {
    * Mute the local audio
    */
   muteLocalAudio() {
-    this.localStream_.muteAudio();
+    this.localStream_?.muteAudio();
   }
 
   /**
    * Unmute the local audio
    */
   unmuteLocalAudio() {
-    this.localStream_.unmuteAudio();
+    this.localStream_?.unmuteAudio();
   }
 
   /**
    * Mute the local video
    */
   muteLocalVideo() {
-    this.localStream_.muteVideo();
+    this.localStream_?.muteVideo();
   }
 
   /**
    * *Unmutes the local video.*
    */
   unmuteLocalVideo() {
-    this.localStream_.unmuteVideo();
+    this.localStream_?.unmuteVideo();
   }
 
   /**
    * Resumes the local and remote streams
    */
   resumeStreams() {
-    this.localStream_.resume();
+    this.localStream_?.resume();
     for (let stream of this.remoteStreams_) {
       stream.resume();
     }
@@ -155,9 +162,8 @@ class RtcClient {
    * 切换摄像头
    */
   changeCameraId() {
-    this.localStream_.switchDevice("video", cameraId).then(() => {
+    this.localStream_?.switchDevice("video", cameraId).then(() => {
       console.log("切换摄像头成功");
-      this.shezhifenbianlv();
     });
   }
 
@@ -165,7 +171,7 @@ class RtcClient {
    * 切换麦克风
    */
   changeMicId() {
-    this.localStream_.switchDevice("audio", micId).then(() => {
+    this.localStream_?.switchDevice("audio", micId).then(() => {
       console.log("切换麦克风成功");
     });
   }
@@ -186,23 +192,6 @@ class RtcClient {
           fasongchangkuanbi();
         }
       });
-  }
-
-  async shezhifenbianlv() {
-    if (!roomDetail_.SpeakerID) {
-      await this.localStream_.setVideoProfile("480p");
-    } else if (roomDetail_.SpeakerID == oneself_.CHID) {
-      await this.localStream_.setVideoProfile("1080p");
-    } else {
-      var renshu = [6, 4, 2, 0];
-      var fenbianlv = ["240p", "360p", "480p", "720p"];
-      for (var i = 0; i < renshu.length; i++) {
-        if (roomDetail_.UserList.length >= renshu[i]) {
-          await this.localStream_.setVideoProfile(fenbianlv[i]);
-          break;
-        }
-      }
-    }
   }
 
   /**
@@ -397,7 +386,7 @@ class RtcClient {
               : event.downlinkNetworkQuality
           }.png`
         )
-        .attr("title", '下行速度：' + title[event.downlinkNetworkQuality]);
+        .attr("title", "下行速度：" + title[event.downlinkNetworkQuality]);
       $(`#network-up`)
         .attr(
           "src",
@@ -407,29 +396,45 @@ class RtcClient {
               : event.uplinkNetworkQuality
           }.png`
         )
-        .attr("title", '上行速度：' + title[event.uplinkNetworkQuality]);
+        .attr("title", title[event.uplinkNetworkQuality]);
 
       isDisconnect = event.uplinkNetworkQuality == 6;
       if (event.uplinkNetworkQuality == 4 || event.uplinkNetworkQuality == 5) {
         layer.msg("当前网络极差，请注意保持良好的网络连接", { icon: 5 });
       }
-    });
 
-    /*setInterval(() => {
-      // 获取实际采集的分辨率和帧率
-      const videoTrack = this.localStream_.getVideoTrack();
-      if (videoTrack) {
-        const settings = videoTrack.getSettings();
-        console.log(
-          `分辨率：${settings.width} * ${settings.height}, 帧率：${settings.frameRate}`
-        );
+      if (!this.isPublished_) {
+        // 如果没有推送则将自己的分辨率设为最高，因为没有推送到远程流，不会影响到网络
+        this.localStream_?.setVideoProfile("1080p");
+      } else {
+        // 如果网络极差，不管是不是主讲人也将分辨率调到极低
+        if (event.uplinkNetworkQuality >= 4) {
+          this.localStream_?.setVideoProfile("180p");
+          if (event.uplinkNetworkQuality >= 4) {
+            this.localStream_?.setVideoProfile("120p");
+          }
+        } else {
+          if (!roomDetail_.SpeakerID) {
+            this.localStream_?.setVideoProfile("480p");
+          } else if (roomDetail_.SpeakerID == oneself_.CHID) {
+            this.localStream_?.setVideoProfile("1080p");
+          } else {
+            var renshu = [6, 4, 2, 0];
+            var fenbianlv = ["240p", "360p", "480p", "720p"];
+            for (var i = 0; i < renshu.length; i++) {
+              if (roomDetail_.UserList.length >= renshu[i]) {
+                this.localStream_?.setVideoProfile(fenbianlv[i]);
+                break;
+              }
+            }
+          }
+        }
       }
-      // 获取实际推流的视频码率参考：https://web.sdk.qcloud.com/trtc/webrtc/doc/zh-cn/Client.html#getLocalVideoStats
-    }, 30 * 1000);*/
+    });
   }
 
   fbl() {
-    const videoTrack = this.localStream_.getVideoTrack();
+    const videoTrack = this.localStream_?.getVideoTrack();
     if (videoTrack) {
       var s = videoTrack.getSettings();
       console.log(`分辨率：${s.width} * ${s.height}, 帧率：${s.frameRate}`);
