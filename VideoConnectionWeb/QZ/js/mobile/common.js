@@ -1,4 +1,3 @@
-
 /**
  * 对视图进行处理
  */
@@ -128,6 +127,6 @@ $("#zjr_video").on("click", () => {
 
 // 查询当前页的用户列表是否包含该用户
 function hasMe(userId) {
-  var exits = roomDetail_.UserList.find((user) => user.ID == userId);
+  var exits = layout_.pageUserList.find((user) => user.ID == userId);
   return !!exits;
 }

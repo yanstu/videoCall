@@ -54,8 +54,8 @@
 
   // 点击事件
   $("#qiehuanchangguishipin_btn").on("click", () => {
-    if (roomDetail_.UserList > 25) {
-      layer.msg("当前房间用户超过25人，不能使用此模式");
+    if (location.href.toLowerCase().includes("index")) {
+      $("#video-grid").fadeIn();
     } else {
       location.replace(
         location.origin +
@@ -65,6 +65,24 @@
           ) +
           "index.html" +
           location.href.substring(location.href.indexOf("?"))
+      );
+    }
+  });
+
+  // 点击事件
+  $("#qiehuandashipin_btn").on("click", () => {
+    if (location.href.toLowerCase().includes("index")) {
+      $("#video-grid").fadeOut();
+    } else {
+      location.replace(
+        location.origin +
+          location.pathname.substring(
+            0,
+            location.pathname.lastIndexOf("/") + 1
+          ) +
+          "index.html" +
+          location.href.substring(location.href.indexOf("?")) +
+          "&h=1"
       );
     }
   });
