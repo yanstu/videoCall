@@ -9,11 +9,12 @@ async function viewsHandle(mess) {
     roomDetail_.UserList = roomDetail_.UserList.sort(sortData);
     ZCRID_ = roomDetail_.UserList.find((item) => item.IsZCR == 1).ID;
   }
+  layoutCompute(true);
   // 修改主讲人
-  rtc.isPublished_ && change();
+  rtc.isJoined_ && change();
   ZJRID_ = roomDetail_.SpeakerID || oneself_.CHID;
   // 初始化
-  !rtc.isPublished_ && init();
+  !rtc.isJoined_ && init();
 }
 
 async function change() {
@@ -61,12 +62,14 @@ async function change() {
   $("#zjr_video").append(
     userInfoTemplate(newZJRID, getUserInfo(newZJRID).UserName)
   );
+  // 将新主讲人播放到主讲人容器
   new_streams?.play("zjr_video", { objectFit: "cover" }).then(() => {
     if (roomDetail_.SpeakerID == oneself_.CHID) {
       layout_.aspectRatio = $("#zjr_video").height() / $("#zjr_video").width();
       fasongchangkuanbi();
     }
   });
+  tuisong();
   new_streams ? $("#zjr_mask").hide() : $("#zjr_mask").show();
   !isMicOn && $("#mic_btn").click();
   !isCamOn && $("#video_btn").click();

@@ -7,6 +7,7 @@ class RtcClient {
     this.nickName_ = options.nickName;
 
     this.isPublished_ = false;
+    this.isJoined_ = false;
     this.localStream_ = null;
     this.remoteStreams_ = [];
     this.members_ = new Map();
@@ -32,6 +33,7 @@ class RtcClient {
     await this.client_.join({
       roomId: parseInt(this.roomId_),
     });
+    this.isJoined_ = true;
 
     if (getCameraId() && getMicrophoneId()) {
       this.localStream_ = TRTC.createStream({
@@ -55,12 +57,20 @@ class RtcClient {
     try {
       // 初始化本地流
       await this.localStream_?.initialize();
-      // 推送本地流
-      await this.publish();
-      onlineOrOfline(true, oneself_.CHID);
     } catch (error) {
-      console.error("无法初始化共享流或推送本地流失败 - ", error);
+      console.error("无法初始化共享流 - ", error);
     }
+
+    try {
+      // 推送本地流
+      if (hasMe(oneself_.CHID) || roomDetail_.SpeakerID == oneself_.CHID) {
+        await this.publish();
+      }
+    } catch (error) {
+      console.error("推送本地流失败 - ", error);
+    }
+
+    this.playVideo(this.localStream_, oneself_.CHID);
 
     // 权限判断按钮显示或隐藏
     showOrHide();
@@ -78,6 +88,7 @@ class RtcClient {
     await this.unpublish();
     // 离开房间
     await this.client_.leave();
+    this.isJoined_ = false;
     this.localStream_?.stop();
     this.localStream_?.close();
     this.localStream_ = null;
@@ -92,7 +103,6 @@ class RtcClient {
     if (this.isPublished_) return;
     try {
       await this.client_.publish(this.localStream_);
-      this.playVideo(this.localStream_, oneself_.CHID);
     } catch (error) {
       console.error("推送本地流失败" + error);
       this.isPublished_ = false;
@@ -105,7 +115,7 @@ class RtcClient {
    */
   async unpublish() {
     if (!this.isPublished_) {
-      console.warn("RtcClient.unpublish() 已经调用但未推送");
+      console.warn("还没有推送过");
       return;
     }
     await this.client_.unpublish(this.localStream_);
@@ -175,12 +185,14 @@ class RtcClient {
     });
   }
 
+  // 将用户播放到指定div容器
   playVideo(stream, userId) {
     if (
       hasMe(userId) ||
       !roomDetail_.SpeakerID ||
       userId == roomDetail_.SpeakerID
     ) {
+      $(`#box_${userId} [id^='player_']`).remove();
       var objectFit =
         getUserInfo(userId).AspectRatio > 1 && userId == ZJRID_
           ? "contain"

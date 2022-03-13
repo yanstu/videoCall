@@ -1,3 +1,4 @@
+// 根据当前用户权限显示或者隐藏按钮
 function showOrHide() {
   // 是否显示申请发言按钮
   if (
@@ -38,7 +39,8 @@ function showOrHide() {
   }
 }
 
-function changeViews() {
+// 设置取消主讲人的处理
+async function changeViews() {
   const loadIndex2 = layer.load(1);
   // 此处的ZJRID_代表上一个主讲人
   // 此处的newZJRID代表新的主讲人ID，没有的话设定自己为假主讲人
@@ -53,7 +55,7 @@ function changeViews() {
     rePlay(rtc.members_.get(ZJRID_), ZJRID_);
   }
   function rePlay(stream, ID) {
-    $("#img_" + ID).hide()
+    $("#img_" + ID).hide();
     stream?.stop();
     if (hasMe(ID)) {
       stream?.play("box_" + ID, { objectFit: "cover" });
@@ -92,6 +94,8 @@ function changeViews() {
       fasongchangkuanbi();
     }
   });
+  tuisong();
+  // 主讲人的未推送远程流的话显示遮罩
   zjr_streams ? $("#zjr_mask").hide() : $("#zjr_mask").show();
   // 为新的主讲人取帧
   zjr_streams && videoHandle(true, newZJRID);
@@ -114,12 +118,15 @@ function changeViews() {
   layer.close(loadIndex2);
 }
 
+// 添加当前页用户到页面
 function addViews() {
   for (let user_ of layout_.pageUserList) {
     const { ID, UserName } = user_;
     addVideoView(ID, UserName);
   }
+  // 添加用户到参与者列表
   addMember();
+  // 主持人左下角添加
   $("#zjr_video").append(
     userInfoTemplate(
       roomDetail_.SpeakerID || oneself_.CHID,
@@ -214,7 +221,8 @@ function addMember() {
     .attr("style", `color: "#ffffff"`);
 }
 
-function layoutCompute() {
+// 布局计算，手机端不改变小视频区域网格布局
+function layoutCompute(isMobile) {
   layout_.pageNo = roomDetail_.page || 0;
   layout_.rows = roomDetail_.CHRY_ShowRows == 0 ? 5 : roomDetail_.CHRY_ShowRows;
   layout_.cols = roomDetail_.CHRY_ShowCols == 0 ? 5 : roomDetail_.CHRY_ShowCols;
@@ -229,17 +237,19 @@ function layoutCompute() {
       ? (layout_.pageNo + 1) * layout_.pageSize
       : layout_.pageNo * layout_.pageSize + layout_.remainder
   );
-  $("#video-grid")
-    .css("grid-template-columns", "repeat(" + layout_.cols + ", 1fr)")
-    .css(
-      "grid-template-rows",
-      "repeat(" + layout_.rows + ", " + layout_.percentage + "%)"
-    );
+  if (!isMobile) {
+    $("#video-grid")
+      .css("grid-template-columns", "repeat(" + layout_.cols + ", 1fr)")
+      .css(
+        "grid-template-rows",
+        "repeat(" + layout_.rows + ", " + layout_.percentage + "%)"
+      );
+  }
 }
 
+// 清空小视频和主讲人盒子
 function resetViews() {
   $("#profile_").remove();
-  $("#box-grid [id^='player_']").remove();
   for (let user_ of roomDetail_.UserList) {
     const { ID } = user_;
     $("#box_" + ID).remove();
@@ -253,6 +263,7 @@ function resetViews() {
   $("#zjr_mask").show();
 }
 
+// 麦克风开关状态控制
 function audioHandle(on, userId) {
   console.log(
     `${getUserInfo(userId)?.UserName} ${on ? "打开" : "关闭"}了麦克风`
@@ -266,8 +277,11 @@ function audioHandle(on, userId) {
   );
 }
 
+// 视频开关状态控制
 function videoHandle(on, userId) {
-  var zjr = roomDetail_.SpeakerID || oneself_.CHID;
+  var zjr =
+    roomDetail_.SpeakerID ||
+    (location.href.toLowerCase().includes("big.html") ? ZCRID_ : oneself_.CHID);
   console.log(
     `${getUserInfo(userId)?.UserName} ${on ? "打开" : "关闭"}了摄像头`
   );
@@ -285,15 +299,31 @@ function videoHandle(on, userId) {
     }
     if (on) {
       videoImgTimer && clearInterval(videoImgTimer);
+      var stream =
+        userId == oneself_.CHID ? rtc?.localStream_ : rtc.members_.get(userId);
       $("#mask_" + userId).hide();
-      setTimeout(() => {
-        $("#img_" + userId)
-          .attr("src", rtc?.localStream_?.getVideoFrame())
-          .show();
-      }, 100);
+      var img = "";
+      function getImg() {
+        setTimeout(() => {
+          img = stream?.getVideoFrame();
+          if (img != "data:,") {
+            $("#mask_" + userId).hide();
+            $("#img_" + userId)
+              .attr("src", img)
+              .show();
+          } else {
+            $("#mask_" + userId).show();
+            setTimeout(() => {
+              getImg();
+            }, 1000);
+          }
+        }, 100);
+      }
+      stream && getImg();
+
       videoImgTimer = setInterval(() => {
         $("#img_" + userId)
-          .attr("src", rtc?.localStream_?.getVideoFrame())
+          .attr("src", stream?.getVideoFrame())
           .show();
       }, 60 * 1000);
     } else {
@@ -358,10 +388,10 @@ function addMemberView(ID, UserName) {
           layer.msg("不能对离线用户进行操作");
           return;
         }
-        if (!rtc.members_.get(ID) && ZCRID_ != ID) {
+        /*if (!rtc.members_.get(ID) && ZCRID_ != ID) {
           layer.msg("用户设备异常，不能操作摄像头");
           return;
-        }
+        }*/
         dakaiguanbishexiangtou(ID);
       }
     })
@@ -374,10 +404,10 @@ function addMemberView(ID, UserName) {
           layer.msg("不能对离线用户进行操作");
           return;
         }
-        if (!rtc.members_.get(ID) && ZCRID_ != ID) {
+        /*if (!rtc.members_.get(ID) && ZCRID_ != ID) {
           layer.msg("用户设备异常，不能操作麦克风");
           return;
-        }
+        }*/
         dakaiguanbimaikefeng(ID);
       }
     })
@@ -390,10 +420,10 @@ function addMemberView(ID, UserName) {
           layer.msg("不能对离线用户进行操作");
           return;
         }
-        if (!rtc.members_.get(ID) && ZCRID_ != ID) {
+        /*if (!rtc.members_.get(ID) && ZCRID_ != ID) {
           layer.msg("用户设备异常，不能设为主讲人");
           return;
-        }
+        }*/
         shezhizhujiangren(ID);
       }
     }, 1200)

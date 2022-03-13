@@ -45,7 +45,14 @@
     <header class="flex flex-row h-[7%] bg-[#262626] w-full">
       <div class="flex-1 flex items-center justify-start">
         <img
+          id="mean_btn"
+          title="显示/隐藏菜单"
+          class="ml-4 mr-4 hover:invert-[50%] h-[50%]"
+          src="./img/sf_ic_menu.png"
+        />
+        <img
           id="testing_btn"
+          title="设备、网络检测"
           class="hover:invert-[50%] h-[50%]"
           src="./img/check-mic.png"
         />
@@ -89,8 +96,13 @@
             <!-- 渐变 bg-gradient-to-b from-[#242e47] via-[#2958ce] to-[#242e47]  -->
             <img class="h-[40%]" src="./img/camera-gray.png" alt="" />
             </div>
+            <img id="zjr_img" style="display: none;z-index: 9;" class="w-full h-full" src="" alt="">
           </div>
         </div>
+      </div>
+      
+      <!-- 群众区 -->
+      <div id="video-grid" class="box-border grid w-[20%] h-[93%] absolute bottom-0 right-0 items-center justify-center z-10">
       </div>
 
       <!-- 展示不支持webRTC的提示 -->
@@ -381,7 +393,6 @@
         </div>
       </div>
 
-
       <!-- 切换视图遮罩 -->
       <div id="qiehuanshitu_mianban" style="display: none">
         <!-- 切换视图卡片 -->
@@ -410,109 +421,6 @@
               <use xlink:href="#icon-closeIcon"></use>
             </svg>
           </div>
-        </div>
-      </div>
-
-
-      <!-- 成员列表 -->
-      <div
-        id="yonghuliebiao"
-        class="modalbox"
-        style="justify-content: center !important"
-      >
-        <div class="modalbox-title">
-参与者列表
-        </div>
-        <div
-          id="member-list"
-          class="col-div w-[100%] text-[0.875rem] h-[93%] p-1 overflow-y-scroll overscroll-contain text-white"
-        >
-          <!-- 成员列表成员模板 -->
-          <div
-            id="member-me"
-            style="display: none;"
-            class="flex border-b-[#283240] border-b-[1px] pl-2 pr-2 w-full"
-          >
-            <div
-              class="row-div member flex items-center h-[3.5rem]"
-              style="width: 100%;justify-content: space-between"
-            >
-              <div class="member-id flex justify-center items-center" style="color: #7c7f85;">user_7157526(我)</div>
-              <div
-                class="row-div flex h-full justify-c
-                enter items-center"
-              >
-                <img
-                  class="member-video_btn"
-                  style="height: 1.5rem"
-                  src="./img/camera-on.png"
-                  alt=""
-                />
-                <img
-                class="member-audio-btn ml-[0.8rem]"
-                style="height: 1.5rem"
-                src="./img/mic-on.png"
-                alt=""
-              />
-              <svg style="display: none;" class="faxiaoxi_btn icon text-[1.6rem] text-[#bfbfbf] ml-[0.8rem]" aria-hidden="true">
-                <use xlink:href="#icon-faxiaoxi"></use>
-              </svg>
-              <svg style="display: none;" class="tidiao_btn icon text-[1.6rem] text-[#bfbfbf] ml-[0.8rem]" aria-hidden="true">
-                <use xlink:href="#icon-tidiao"></use>
-              </svg>
-              <div style="display: none;" class="shezhizhujiangren_btn anniubeijing pl-[1rem] pr-[1rem] h-[50%] ml-[0.8rem] text-white flex justify-center items-center">设主讲人</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      </div>
-
-      <!-- 申请发言列表 -->
-      <div id="shenqingfayanliebiao" class="modalbox">
-        <div class="modalbox-title">
-          申请发言列表
-        </div>
-        <div id="speakerList" class="flex flex-col h-[93%] overflow-y-scroll overscroll-contain">
-          <!-- 发言人模板 -->
-          <div id="fayan_muban" style="display: none;" class="border-b-[#283240] border-b-[1px] flex justify-between w-full h-[3.5rem] items-center pl-2 pr-2 text-[0.875rem]">
-            <div class="fayanrenxingming text-white">发言人姓名</div>
-            <div class="flex h-full justify-center items-center">
-              <div class="yunxufayan pl-[1rem] pr-[1rem] anniubeijing h-[50%] flex justify-center items-center text-white mr-3">允许发言</div>
-              <div class="buyunxufayan pl-[1rem] pr-[1rem] anniubeijing h-[50%] flex justify-center items-center text-white">拒绝</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 消息列表 -->
-      <div id="xiaoxiliebiao" class="modalbox">
-        <div class="modalbox-title">
-          消息列表
-        </div>
-        <div id="messageList" class="h-[86%] w-full overflow-y-scroll pb-3">
-          <!-- 消息模板 -->
-          <div id="message_muban" style="display: none;" class="flex flex-col h-auto pl-2 pr-2 pt-2 text-[0.875rem]">
-            <div class="message_time mb-2 mt-1 h-[20%] text-white flex justify-center items-center">
-              2022-02-27 09:18:12
-            </div>
-            <div class="message_info h-[70%] flex flex-row w-full justify-end items-center">
-              <div class="message_neirong text-white text-[0.875rem] mt-1 mr-2 mb-1 bg-[#2d3549] pl-1 pr-1 pt-1 pb-1 min-h-[5.7rem] w-[80%]">
-                这个是内这个是内这个是内内这个
-              </div>
-              <div class="message_touxiang bg-[#2d3549] flex items-center justify-center w-[20%] flex-col h-full">
-                <svg class="icon text-[4.5rem] text-white" aria-hidden="true">
-                  <use xlink:href="#icon-touxiang"></use>
-                </svg>
-                <div class="message_xingming h-[27%] mb-[3%] w-auto text-white overflow-auto text-[0.675rem]">
-                  贵州省人大
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="h-[7%] flex w-full justify-between items-center pl-3 pr-3 bg-[#262626] text-[0.875rem]">
-          <input id="xiaoxineirong" class="mr-3 w-[80%] h-[50%] pl-2 pr-2" maxlength="200"/>
-          <div id="fasongxiaoxi" class="w-[20%] anniubeijing h-[50%] flex justify-center items-center text-white">发送</div>
         </div>
       </div>
 
@@ -557,6 +465,7 @@
 
       if (queryParams("p")) {
         login(queryParams("p"));
+        queryParams("h") && $("#video-grid").fadeOut()
       } else {
         alert("参数错误");
         leave();

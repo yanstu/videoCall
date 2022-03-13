@@ -7,6 +7,7 @@ class RtcClient {
     this.nickName_ = options.nickName;
 
     this.isPublished_ = false;
+    this.isJoined_ = false;
     this.localStream_ = null;
     this.remoteStreams_ = [];
     this.members_ = new Map();
@@ -33,6 +34,7 @@ class RtcClient {
     await this.client_.join({
       roomId: parseInt(this.roomId_),
     });
+    this.isJoined_ = true;
 
     if (getCameraId() && getMicrophoneId()) {
       this.localStream_ = TRTC.createStream({
@@ -87,6 +89,7 @@ class RtcClient {
     await this.unpublish();
     // 离开房间
     await this.client_.leave();
+    this.isJoined_ = false;
     this.localStream_?.stop();
     this.localStream_?.close();
     this.localStream_ = null;
@@ -113,7 +116,7 @@ class RtcClient {
    */
   async unpublish() {
     if (!this.isPublished_) {
-      console.warn("RtcClient.unpublish() 已经调用但未推送");
+      console.warn("还没有推送过");
       return;
     }
     await this.client_.unpublish(this.localStream_);
@@ -176,8 +179,8 @@ class RtcClient {
     });
   }
 
+  // 将用户播放到指定div容器
   playVideo(stream, userId) {
-    // console.log(getUserInfo(userId).UserName);
     onlineOrOfline(true, userId);
     var videoVid = "box_" + userId;
     if (ZJRID_ == userId) videoVid = "zjr_video";

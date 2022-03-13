@@ -42,10 +42,9 @@ class RtcClient {
    * 离开房间
    */
   async leave() {
-    // 确保本地流在离开之前取消发布
-    await this.unpublish();
     // 停止获取音量
-    this.client_.enableAudioVolumeEvaluation(-1);
+    this.client_?.enableAudioVolumeEvaluation(-1);
+    this.client_?.leave();
   }
 
   /**
@@ -76,6 +75,22 @@ class RtcClient {
           false
         );
       }
+    });
+
+    // 当用户加入房间时触发
+    this.client_.on("peer-join", (evt) => {
+      const { userId } = evt;
+      this.members_.set(userId, null);
+      onlineOrOfline(true, userId);
+      console.log(getUserInfo(userId)?.UserName + " 加入了房间");
+    });
+
+    // 当远程连接端离开房间时触发
+    this.client_.on("peer-leave", (evt) => {
+      const { userId } = evt;
+      this.members_.delete(userId);
+      onlineOrOfline(false, userId);
+      console.log(getUserInfo(userId)?.UserName + " 离开了房间，或者掉线");
     });
 
     // 添加远程流时触发
@@ -164,6 +179,9 @@ class RtcClient {
           ? "contain"
           : "cover";
       stream?.play("zjr_video", { objectFit });
+      videoHandle(true, userId);
+    } else if (hasMe(userId)) {
+      stream?.play("box_" + userId);
     }
   }
 
@@ -212,7 +230,7 @@ class RtcClient {
               : event.downlinkNetworkQuality
           }.png`
         )
-        .attr("title", '下行速度：' + title[event.downlinkNetworkQuality]);
+        .attr("title", "下行速度：" + title[event.downlinkNetworkQuality]);
       $(`#network-up`)
         .attr(
           "src",
@@ -222,7 +240,7 @@ class RtcClient {
               : event.uplinkNetworkQuality
           }.png`
         )
-        .attr("title", '上行速度：' + title[event.uplinkNetworkQuality]);
+        .attr("title", "上行速度：" + title[event.uplinkNetworkQuality]);
 
       isDisconnect = event.downlinkNetworkQuality == 6;
       if (

@@ -85,7 +85,7 @@ let xintiaoTimer = null;
 // 定时翻页计时器
 let pageTurnTimer = null;
 // 定时抽取主讲人帧
-let videoImgTimer = null
+let videoImgTimer = null;
 
 /**
  * 解密获取房间信息
@@ -108,6 +108,15 @@ function login(JMStr) {
 
     trtcPreliminaryDetection();
   });
+}
+
+// 推送还是取消推送
+async function tuisong() {
+  if (hasMe(oneself_.CHID) || oneself_.CHID == roomDetail_.SpeakerID) {
+    await rtc.publish();
+  } else {
+    await rtc.unpublish();
+  }
 }
 
 /**

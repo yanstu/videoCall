@@ -45,14 +45,12 @@ chatHub.client.broadcastMessage = function (message, channelss) {
         roomDetail_.SpeakerID = mess.ReUserid;
         roomDetail_.SpeakerName = mess.ReUserName;
         changeViews();
-        // huoquhuiyihuancun();
         break;
       //取消主讲人
       case "29":
         roomDetail_.SpeakerID = mess.ReUserid;
         roomDetail_.SpeakerName = mess.ReUserName;
         changeViews();
-        // huoquhuiyihuancun();
         break;
       // 关闭发言申请
       case "15":
@@ -171,17 +169,13 @@ function huoquxiaoxi(mess) {
 function huoquhuiyihuancunxinxi(mess) {
   if (!mess.ReUserid || mess.Data.VideoConferenceMess.UserList.length == 0) {
     location.reload();
-  } else if (mess.ReUserid == oneself_.CHID) {
+    // } else if (mess.ReUserid == oneself_.CHID) {
+  } else if (mess.ReUserid == oneself_.CHID || mess.ReUserid == ZCRID_) {
     roomDetail_ = mess.Data.VideoConferenceMess;
     setTitle(roomDetail_.Title);
     roomDetail_.UserList.length == 0 && location.reload();
     roomDetail_.UserList = roomDetail_.UserList.sort(sortData);
     ZCRID_ = roomDetail_.UserList.find((item) => item.IsZCR == 1).ID;
-    /*if (rtc.isPublished_) {
-      // 取消主讲人、更改主讲人
-      changeViews();
-      return;
-    }*/
     viewsHandle();
   }
 }

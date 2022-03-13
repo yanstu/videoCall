@@ -19,7 +19,7 @@ chatHub.client.broadcastMessage = function (message, channelss) {
       case "29":
         roomDetail_.SpeakerID = mess.ReUserid;
         roomDetail_.SpeakerName = mess.ReUserName;
-        viewsHandle();
+        change();
         break;
       //获取会议缓存信息
       case "12":
@@ -68,6 +68,11 @@ function huoquhuiyihuancunxinxi(mess) {
   if (!mess.ReUserid || mess.Data.VideoConferenceMess.UserList.length == 0) {
     location.reload();
   } else if (mess.ReUserid == oneself_.CHID) {
+    roomDetail_ = mess.Data.VideoConferenceMess;
+    setTitle(roomDetail_.Title);
+    roomDetail_.UserList.length == 0 && location.reload();
+    roomDetail_.UserList = roomDetail_.UserList.sort(sortData);
+    ZCRID_ = roomDetail_.UserList.find((item) => item.IsZCR == 1).ID;
     viewsHandle(mess);
   }
 }
