@@ -13,9 +13,6 @@ async function viewsHandle() {
     const { ID, UserName } = user_;
     addVideoView(ID, UserName);
   }
-  $("#zjr_video").append(
-    userInfoTemplate(ZJRID_, getUserInfo(ZJRID_).UserName)
-  );
   const indexLoad3 = layer.load(1);
   await rtc.leave();
   await rtc.join();

@@ -43,8 +43,9 @@ class RtcClient {
    */
   async leave() {
     // 停止获取音量
+    this.isJoined_ = false;
+    await this.client_?.leave();
     this.client_?.enableAudioVolumeEvaluation(-1);
-    this.client_?.leave();
   }
 
   /**

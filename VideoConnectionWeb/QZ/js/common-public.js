@@ -112,7 +112,7 @@ function login(JMStr) {
 
 // 推送还是取消推送
 async function tuisong() {
-  if (hasMe(oneself_.CHID) || oneself_.CHID == roomDetail_.SpeakerID) {
+  if (hasMe(oneself_.CHID) || oneself_.CHID == roomDetail_.SpeakerID || oneself_.IsZCR) {
     await rtc.publish();
   } else {
     await rtc.unpublish();

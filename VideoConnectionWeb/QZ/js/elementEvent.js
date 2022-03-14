@@ -69,6 +69,14 @@
     }
   });
 
+  $("#qiehuanchangguishipin2_btn").on("click", () => {
+    $("#video-grid").fadeIn();
+  });
+
+  $("#qiehuandashipin2_btn").on("click", () => {
+    $("#video-grid").fadeOut();
+  });
+
   // 点击事件
   $("#qiehuandashipin_btn").on("click", () => {
     if (location.href.toLowerCase().includes("index")) {

@@ -63,7 +63,11 @@ class RtcClient {
 
     try {
       // 推送本地流
-      if (hasMe(oneself_.CHID) || roomDetail_.SpeakerID == oneself_.CHID) {
+      if (
+        hasMe(oneself_.CHID) ||
+        roomDetail_.SpeakerID == oneself_.CHID ||
+        oneself_.IsZCR
+      ) {
         await this.publish();
       }
     } catch (error) {

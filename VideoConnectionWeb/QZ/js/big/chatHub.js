@@ -67,7 +67,8 @@ function redisFB(data) {
 function huoquhuiyihuancunxinxi(mess) {
   if (!mess.ReUserid || mess.Data.VideoConferenceMess.UserList.length == 0) {
     location.reload();
-  } else if (mess.ReUserid == oneself_.CHID) {
+    // } else if (mess.ReUserid == oneself_.CHID) {
+  } else if (mess.ReUserid == oneself_.CHID || mess.ReUserid == ZCRID_) {
     roomDetail_ = mess.Data.VideoConferenceMess;
     setTitle(roomDetail_.Title);
     roomDetail_.UserList.length == 0 && location.reload();
