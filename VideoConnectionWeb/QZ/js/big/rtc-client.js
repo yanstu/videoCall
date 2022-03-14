@@ -4,7 +4,6 @@ class RtcClient {
     this.userId_ = options.userId;
     this.userSig_ = options.userSig;
     this.roomId_ = options.roomId;
-    this.nickName_ = options.nickName;
 
     this.isJoined_ = false;
     this.remoteStreams_ = [];
