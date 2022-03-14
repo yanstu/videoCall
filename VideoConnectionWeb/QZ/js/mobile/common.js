@@ -10,7 +10,7 @@ async function viewsHandle() {
 }
 
 async function change() {
-  // 还原
+  // 还原主讲人与我的位置
   $("#video-grid").attr(
     "class",
     "box-border grid w-[9rem] h-[25%] absolute top-[8%] right-[1%] items-center justify-center z-10"
@@ -49,6 +49,7 @@ async function change() {
       $("#mask_" + oneself_.CHID).hide();
     }
   }
+  // 移除原主持人相关信息
   $("#zjr_video [id^='profile_']").remove();
   $("#zjr_video [id^='player_']").remove();
   $("#zjr_video").append(
@@ -69,6 +70,7 @@ async function change() {
   showOrHide();
 }
 
+// 第一次进入的初始化
 function init() {
   if (ZJRID_ == oneself_.CHID) {
     if (!roomDetail_.SpeakerID) {

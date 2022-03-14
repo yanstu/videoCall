@@ -250,15 +250,6 @@
   // 退出按钮事件
   $("#exit-btn").on({
     click: function () {
-      /*layer.confirm(
-        "确定退出视频连线？",
-        {
-          btn: ["确定", "取消"],
-        },
-        () => {
-          leave();
-        }
-      );*/
       leave();
     },
   });

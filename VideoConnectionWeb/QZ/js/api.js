@@ -70,9 +70,9 @@ function ajaxMethod(str, data = {}, callback) {
     error: (err) => {
       console.log(err);
       layer.msg("请求超时或没有网络链接", { icon: 2 });
-      /*setTimeout(() => {
+      setTimeout(() => {
         location.reload();
-      }, 1000);*/
+      }, 3000);
     },
   });
 }

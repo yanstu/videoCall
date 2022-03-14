@@ -36,7 +36,6 @@ chatHub.on("broadcastMessage", function (message, channelss) {
       case "29":
         roomDetail_.SpeakerID = mess.ReUserid;
         roomDetail_.SpeakerName = mess.ReUserName;
-        // changeViews();
         break;
       //获取会议缓存信息
       case "12":

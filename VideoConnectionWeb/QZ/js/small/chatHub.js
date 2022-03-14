@@ -41,17 +41,10 @@ chatHub.on("broadcastMessage", function (message, channelss) {
       // 设置主讲人
       case "01":
       case "20":
-        roomDetail_.SpeakerID = mess.ReUserid;
-        roomDetail_.SpeakerName = mess.ReUserName;
-        changeViews();
-        // huoquhuiyihuancun();
-        break;
       //取消主讲人
       case "29":
         roomDetail_.SpeakerID = mess.ReUserid;
         roomDetail_.SpeakerName = mess.ReUserName;
-        changeViews();
-        // huoquhuiyihuancun();
         break;
       // 关闭发言申请
       case "15":
