@@ -7,7 +7,7 @@ if (!chatHub || !signalR) {
 
 // 收听
 chatHub.on("broadcastMessage", function (message, channelss) {
-  var RoomId = oneself_?.RoomId || queryParams("RoomId");
+  var RoomId = queryParams("RoomId");
   if (channelss == RoomId) {
     let mess = JSON.parse(message);
     if (mess.reCode != 25 && mess.reCode != 27 && mess.reCode != 26) {
@@ -107,7 +107,7 @@ function startChathub() {
   chatHub
     .start()
     .then(function () {
-      var RoomId = oneself_?.RoomId || queryParams("RoomId");
+      var RoomId = queryParams("RoomId");
       chatHub.server.createRedis(RoomId);
       huoquhuiyihuancun();
       xintiaolianjie();
@@ -122,7 +122,7 @@ function startChathub() {
  * @param data - The data to be sent to the client.
  */
 function redisFB(data) {
-  var RoomId = oneself_?.RoomId || queryParams("RoomId");
+  var RoomId = queryParams("RoomId");
   chatHub.invoke("redisFB", RoomId, JSON.stringify(data));
 }
 
@@ -147,7 +147,7 @@ function huoquhuiyihuancunxinxi(mess) {
  * 发布获取会议缓存
  */
 function huoquhuiyihuancun() {
-  var RoomId = oneself_?.RoomId || queryParams("RoomId");
+  var RoomId = queryParams("RoomId");
   ajaxMethod("RedisHandler", { Infotype: "GetCache", RoomId }, (res) => {
     huoquhuiyihuancunxinxi(res);
   });

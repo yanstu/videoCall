@@ -1,12 +1,15 @@
-const baseUrl = [
-  "https://wsllzapptest.gzshifang.com:8091/api/",
-  "https://testvideoapi.gzshifang.com:9011/api/",
-][1];
+const apiBaseUrl = {
+  zhengshi: "https://wsllzapptest.gzshifang.com:8091/api/",
+  ceshi: "https://testvideoapi.gzshifang.com:9011/api/",
+}.ceshi;
 
-const hubsUrl = ["https://testvideo.gzshifang.com:9031/chatHub"][0];
-const signalrUrl = [
-  "https://testvideo.gzshifang.com:9031/lib/aspnet/signalr/dist/browser/signalr.min.js",
-][0];
+const hubBaseUrl = {
+  zhengshi: "https://splxweb.gzshifang.com:8092/",
+  ceshi: "https://testvideo.gzshifang.com:9031/",
+}.ceshi;
+const hubsUrl = hubBaseUrl + "chatHub";
+const signalrUrl =
+  hubBaseUrl + "lib/aspnet/signalr/dist/browser/signalr.min.js";
 
 /**
  * A router function that maps the key to the URL.
@@ -53,7 +56,7 @@ function ajaxMethod(str, data = {}, callback) {
   const route = router(str);
   $.ajax({
     type: route.method,
-    url: (route.root ? "" : baseUrl) + route.url,
+    url: (route.root ? "" : apiBaseUrl) + route.url,
     data,
     dataType: "json",
     async: false,
