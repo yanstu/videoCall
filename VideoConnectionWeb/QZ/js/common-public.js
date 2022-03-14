@@ -48,7 +48,8 @@ let roomDetail_ = {
   // 参加会议人员列表
   UserList: [],
 };
-let layout_ = {
+// 参会端布局
+let meet_layout = {
   // 总用户数量
   count: 0,
   // 行数
@@ -69,7 +70,31 @@ let layout_ = {
   percentage: 100 / 5,
   // 长宽比
   aspectRatio: 0,
+  // 显示模式 1.主讲人模式2.参会人模式3.小视频模式
+  mode: 2,
 };
+// 展示端布局
+let display_layout = {
+  // 总用户数量
+  count: 0,
+  // 行数
+  rows: 5,
+  // 列数
+  cols: 5,
+  // 页面视频数
+  pageSize: 10,
+  // 总页数
+  pageCount: 0,
+  // 余数
+  remainder: 0,
+  // 当前第几页
+  pageNo: 0,
+  // 当前页的用户列表
+  pageUserList: [],
+  // 显示模式 1.主讲人模式2.参会人模式3.小视频模式
+  // mode: 1,
+};
+
 let ZCRID_ = "";
 let ZJRID_ = "";
 let fasonggeishei = "";
@@ -121,6 +146,16 @@ async function tuisong() {
   } else {
     await rtc.unpublish();
   }
+}
+
+// 查询参会端与展示端当前是否包含该用户
+function hasMe(userId) {
+  layoutCompute();
+  displayLayoutCompute();
+  var exits =
+    meet_layout.pageUserList.find((user) => user.ID == userId) ||
+    display_layout.pageUserList.find((user) => user.ID == userId);
+  return !!exits;
 }
 
 /**

@@ -89,8 +89,9 @@ async function changeViews() {
     $("#video-grid").removeClass("bg-[#24292e]");
   }
   zjr_streams?.play("zjr_video", { objectFit }).then(() => {
-    if (roomDetail_.SpeakerID == oneself_.CHID && layout_.aspectRatio > 1) {
-      layout_.aspectRatio = $("#zjr_video").height() / $("#zjr_video").width();
+    if (roomDetail_.SpeakerID == oneself_.CHID && meet_layout.aspectRatio > 1) {
+      meet_layout.aspectRatio =
+        $("#zjr_video").height() / $("#zjr_video").width();
       fasongchangkuanbi();
     }
   });
@@ -120,7 +121,7 @@ async function changeViews() {
 
 // 添加当前页用户到页面
 function addViews() {
-  for (let user_ of layout_.pageUserList) {
+  for (let user_ of meet_layout.pageUserList) {
     const { ID, UserName } = user_;
     addVideoView(ID, UserName);
   }
@@ -222,29 +223,53 @@ function addMember() {
 }
 
 // 布局计算，手机端不改变小视频区域网格布局
-function layoutCompute(isMobile) {
-  layout_.pageNo = roomDetail_.page || 0;
-  layout_.rows = roomDetail_.CHRY_ShowRows == 0 ? 5 : roomDetail_.CHRY_ShowRows;
-  layout_.cols = roomDetail_.CHRY_ShowCols == 0 ? 5 : roomDetail_.CHRY_ShowCols;
-  layout_.pageSize = layout_.rows * layout_.cols;
-  layout_.percentage = 100 / layout_.rows;
-  layout_.remainder = roomDetail_.UserList.length % layout_.pageSize;
-  layout_.pageCount = Math.ceil(roomDetail_.UserList.length / layout_.pageSize);
-  layout_.count = roomDetail_.UserList.length;
-  layout_.pageUserList = roomDetail_.UserList.slice(
-    layout_.pageNo * layout_.pageSize,
-    ((layout_.pageNo + 1) * layout_.pageSize) % layout_.pageSize == 0
-      ? (layout_.pageNo + 1) * layout_.pageSize
-      : layout_.pageNo * layout_.pageSize + layout_.remainder
+function layoutCompute() {
+  meet_layout.pageSize = meet_layout.rows * meet_layout.cols;
+  meet_layout.percentage = 100 / meet_layout.rows;
+  meet_layout.remainder = roomDetail_.UserList.length % meet_layout.pageSize;
+  meet_layout.pageCount = Math.ceil(
+    roomDetail_.UserList.length / meet_layout.pageSize
   );
-  if (!isMobile) {
+  meet_layout.count = roomDetail_.UserList.length;
+  meet_layout.pageUserList = roomDetail_.UserList.slice(
+    meet_layout.pageNo * meet_layout.pageSize,
+    ((meet_layout.pageNo + 1) * meet_layout.pageSize) % meet_layout.pageSize ==
+      0
+      ? (meet_layout.pageNo + 1) * meet_layout.pageSize
+      : meet_layout.pageNo * meet_layout.pageSize + meet_layout.remainder
+  );
+  if (
+    location.href.toLowerCase().includes("index") ||
+    location.href.toLowerCase().includes("big")
+  ) {
     $("#video-grid")
-      .css("grid-template-columns", "repeat(" + layout_.cols + ", 1fr)")
+      .css("grid-template-columns", "repeat(" + meet_layout.cols + ", 1fr)")
       .css(
         "grid-template-rows",
-        "repeat(" + layout_.rows + ", " + layout_.percentage + "%)"
+        "repeat(" + meet_layout.rows + ", " + meet_layout.percentage + "%)"
       );
   }
+}
+
+// 展示端布局计算，手机端不改变小视频区域网格布局
+function displayLayoutCompute() {
+  display_layout.pageSize = display_layout.rows * display_layout.cols;
+  display_layout.percentage = 100 / display_layout.rows;
+  display_layout.remainder =
+    roomDetail_.UserList.length % display_layout.pageSize;
+  display_layout.pageCount = Math.ceil(
+    roomDetail_.UserList.length / display_layout.pageSize
+  );
+  display_layout.count = roomDetail_.UserList.length;
+  display_layout.pageUserList = roomDetail_.UserList.slice(
+    display_layout.pageNo * display_layout.pageSize,
+    ((display_layout.pageNo + 1) * display_layout.pageSize) %
+      display_layout.pageSize ==
+      0
+      ? (display_layout.pageNo + 1) * display_layout.pageSize
+      : display_layout.pageNo * display_layout.pageSize +
+          display_layout.remainder
+  );
 }
 
 // 清空小视频和主讲人盒子

@@ -222,7 +222,7 @@ class RtcClient {
           (hasMe(oneself_.CHID) || ZJRID_ == oneself_.CHID) &&
           getUserInfo(oneself_.CHID).AspectRatio > 1
         ) {
-          layout_.aspectRatio =
+          meet_layout.aspectRatio =
             $("#" + videoVid).height() / $("#" + videoVid).width();
           fasongchangkuanbi();
         }

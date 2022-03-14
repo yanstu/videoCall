@@ -92,9 +92,35 @@ chatHub.on("broadcastMessage", function (message, channelss) {
           leave();
         }, 1000);
         break;
+      // 改变展示端布局行列显示
+      case "33":
+        var state = mess.Data.State;
+        display_layout.cols = state.split("*")[0];
+        display_layout.rows = state.split("*")[0];
+        display_layout.pageNo = 0;
+        viewsHandle();
+        break;
+      // 改变展示端当前分页
+      case "34":
+        var pageNo = mess.Data.State;
+        display_layout.pageNo = pageNo - 1;
+        viewsHandle();
+        break;
+      // 改变参会端当前分页
+      case "37":
+        var pageNo = mess.Data.State;
+        meet_layout.pageNo = pageNo - 1;
+        viewsHandle();
+        break;
     }
   }
 });
+
+// 对象排序
+function sortData(a, b) {
+  undefined;
+  return a.XUHAO - b.XUHAO;
+}
 
 // 断开后处理
 chatHub.connection.onclose(function () {
@@ -112,11 +138,13 @@ function startChathub() {
     .start()
     .then(function () {
       var RoomId = queryParams("RoomId");
-      chatHub.server.createRedis(RoomId);
+      chatHub.invoke("createRedis", RoomId).catch(function (err) {
+        return console.error(err.toString());
+      });
       huoquhuiyihuancun();
       xintiaolianjie();
     })
-    .fail(function (reason) {
+    .catch(function (reason) {
       alert("SignalR connection failed: " + reason);
     });
 }
@@ -135,8 +163,7 @@ function huoquhuiyihuancunxinxi(mess) {
   if (mess.reCode) {
     if (!mess.ReUserid || mess.Data.VideoConferenceMess.UserList.length == 0) {
       location.reload();
-      // } else if (mess.ReUserid == oneself_.CHID) {
-    } else if (mess.ReUserid == oneself_.CHID || mess.ReUserid == ZCRID_) {
+    } else if (mess.ReUserid == oneself_.CHID) {
       roomDetail_ = mess.Data.VideoConferenceMess;
     } else {
       return;
@@ -144,7 +171,13 @@ function huoquhuiyihuancunxinxi(mess) {
   } else {
     roomDetail_ = mess;
   }
-  viewsHandle(mess);
+  setTitle(roomDetail_.Title);
+  roomDetail_.UserList.length == 0 && location.reload();
+  roomDetail_.UserList = roomDetail_.UserList.sort(sortData);
+  ZCRID_ = roomDetail_.UserList.find((item) => item.IsZCR == 1).ID;
+  meet_layout.rows = roomDetail_.CHRY_ShowRows;
+  meet_layout.cols = roomDetail_.CHRY_ShowCols;
+  viewsHandle();
 }
 
 /**
@@ -291,7 +324,7 @@ function fasongchangkuanbi() {
     SendUserName: oneself_.XM,
     Content: "",
     Data: {
-      AspectRatio: layout_.aspectRatio,
+      AspectRatio: meet_layout.aspectRatio,
     },
   });
 }

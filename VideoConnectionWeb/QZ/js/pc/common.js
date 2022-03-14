@@ -15,9 +15,3 @@ async function viewsHandle() {
   await rtc.join();
   layer.close(indexLoad3);
 }
-
-// 查询当前页的用户列表是否包含该用户
-function hasMe(userId) {
-  var exits = layout_.pageUserList.find((user) => user.ID == userId);
-  return !!exits;
-}

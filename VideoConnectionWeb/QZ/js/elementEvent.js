@@ -214,10 +214,13 @@
     "click",
     clickProof(() => {
       if (oneself_.IsZCR || location.href.toLowerCase().includes("small2")) {
-        if (layout_.pageNo == 0) {
+        var layout = location.href.toLowerCase().includes("small2")
+          ? display_layout
+          : meet_layout;
+        if (layout.pageNo == 0) {
           layer.msg("不能再向上翻了");
         } else {
-          fanye(layout_.pageNo - 1);
+          fanye(layout.pageNo - 1);
         }
       } else {
         layer.msg("无权限");
@@ -230,10 +233,13 @@
     "click",
     clickProof(() => {
       if (oneself_.IsZCR || location.href.toLowerCase().includes("small2")) {
-        if (layout_.pageNo + 1 == layout_.pageCount) {
+        var layout = location.href.toLowerCase().includes("small2")
+          ? display_layout
+          : meet_layout;
+        if (layout.pageNo + 1 == layout.pageCount) {
           layer.msg("不能再向下翻了");
         } else {
-          fanye(layout_.pageNo + 1);
+          fanye(layout.pageNo + 1);
         }
       } else {
         layer.msg("无权限");

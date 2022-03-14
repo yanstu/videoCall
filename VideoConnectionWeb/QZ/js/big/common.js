@@ -9,7 +9,7 @@ async function viewsHandle() {
   // 如果没有设置主讲人，设定主持人为主讲人视角
   ZJRID_ = roomDetail_.SpeakerID || ZCRID_;
   // 为当前页用户循环添加至网页上
-  for (let user_ of layout_.pageUserList) {
+  for (let user_ of meet_layout.pageUserList) {
     const { ID, UserName } = user_;
     addVideoView(ID, UserName);
   }
@@ -69,10 +69,4 @@ function change() {
   showOrHide();
   // 关闭加载中
   layer.close(loadIndex2);
-}
-
-// 查询当前页的用户列表是否包含该用户
-function hasMe(userId) {
-  var exits = layout_.pageUserList.find((user) => user.ID == userId);
-  return !!exits;
 }

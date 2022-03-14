@@ -93,7 +93,7 @@ chatHub.on("broadcastMessage", function (message, channelss) {
           $("#mic_btn").click();
         }
         break;
-      //允许发言
+      // 允许发言
       case "18":
         if (mess.Data.State == "1" && !oneself_.IsZCR) {
           $("#shenqingfayan_btn").show();
@@ -101,7 +101,7 @@ chatHub.on("broadcastMessage", function (message, channelss) {
           $("#shenqingfayan_btn").hide();
         }
         break;
-      //踢出所有用户
+      // 踢出所有用户
       case "28":
         layer.msg("您已被踢出房间", { icon: 2 });
         setTimeout(() => {
@@ -128,13 +128,15 @@ function startChathub() {
     .start()
     .then(function () {
       var RoomId = queryParams("RoomId");
-      chatHub.server.createRedis(RoomId);
+      chatHub.invoke("createRedis", RoomId).catch(function (err) {
+        return console.error(err.toString());
+      });
       huoquhuiyihuancun();
       xintiaolianjie();
       // 备用方案，防止redis缓存卡了
       // beiyongfangan(RoomId);
     })
-    .fail(function (reason) {
+    .catch(function (reason) {
       alert("SignalR connection failed: " + reason);
     });
 }
@@ -375,7 +377,7 @@ function fasongchangkuanbi() {
     SendUserName: oneself_.XM,
     Content: "",
     Data: {
-      AspectRatio: layout_.aspectRatio,
+      AspectRatio: meet_layout.aspectRatio,
     },
   });
 }

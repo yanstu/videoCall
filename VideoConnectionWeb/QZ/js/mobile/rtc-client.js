@@ -189,7 +189,7 @@ class RtcClient {
       })
       .then(() => {
         if (userId == oneself_.CHID) {
-          layout_.aspectRatio =
+          meet_layout.aspectRatio =
             $("#zjr_video").height() / $("#zjr_video").width();
           fasongchangkuanbi();
         }

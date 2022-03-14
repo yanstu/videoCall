@@ -87,7 +87,7 @@ chatHub.on("broadcastMessage", function (message, channelss) {
           $("#mic_btn").click();
         }
         break;
-      //允许发言
+      // 允许发言
       case "18":
         if (mess.Data.State == "1" && !oneself_.IsZCR) {
           $("#shenqingfayan_btn").show();
@@ -95,12 +95,46 @@ chatHub.on("broadcastMessage", function (message, channelss) {
           $("#shenqingfayan_btn").hide();
         }
         break;
-      //踢出所有用户
+      // 踢出所有用户
       case "28":
         layer.msg("您已被踢出房间", { icon: 2 });
         setTimeout(() => {
           leave();
         }, 1000);
+        break;
+      // 操作所有用户切换显示模式
+      case "35":
+        switch (mess.Data.State) {
+          case 1:
+            $("#qiehuandashipin_btn").click();
+            break;
+          case 2:
+            $("#qiehuanchangguishipin_btn").click();
+            break;
+          case 3:
+            $("#qiehuanxiaoshipin_btn").click();
+            break;
+        }
+        break;
+      // 改变展示端布局行列显示
+      case "33":
+        var state = mess.Data.State;
+        display_layout.cols = state.split("*")[0];
+        display_layout.rows = state.split("*")[0];
+        display_layout.pageNo = 0;
+        changeViews();
+        break;
+      // 改变展示端当前分页
+      case "34":
+        var pageNo = mess.Data.State;
+        display_layout.pageNo = pageNo - 1;
+        changeViews();
+        break;
+      // 改变参会端当前分页
+      case "37":
+        var pageNo = mess.Data.State;
+        meet_layout.pageNo = pageNo - 1;
+        viewsHandle();
         break;
     }
   }
@@ -176,8 +210,7 @@ function huoquhuiyihuancunxinxi(mess) {
   if (mess.reCode) {
     if (!mess.ReUserid || mess.Data.VideoConferenceMess.UserList.length == 0) {
       location.reload();
-      // } else if (mess.ReUserid == oneself_.CHID) {
-    } else if (mess.ReUserid == oneself_.CHID || mess.ReUserid == ZCRID_) {
+    } else if (mess.ReUserid == oneself_.CHID) {
       roomDetail_ = mess.Data.VideoConferenceMess;
     } else {
       return;
@@ -189,6 +222,8 @@ function huoquhuiyihuancunxinxi(mess) {
   roomDetail_.UserList.length == 0 && location.reload();
   roomDetail_.UserList = roomDetail_.UserList.sort(sortData);
   ZCRID_ = roomDetail_.UserList.find((item) => item.IsZCR == 1).ID;
+  meet_layout.rows = roomDetail_.CHRY_ShowRows;
+  meet_layout.cols = roomDetail_.CHRY_ShowCols;
   viewsHandle();
 }
 
@@ -365,23 +400,20 @@ function fasongchangkuanbi() {
     SendUserName: oneself_.XM,
     Content: "",
     Data: {
-      AspectRatio: layout_.aspectRatio,
+      AspectRatio: meet_layout.aspectRatio,
     },
   });
 }
 
 function fanye(no) {
-  roomDetail_.page = no;
-  roomDetail_.type = 1;
-  var VideoConferenceMess = roomDetail_;
   redisFB({
-    reCode: "12",
-    ReUserid: oneself_.CHID,
+    reCode: "37",
+    ReUserid: "",
     ReUserQYBH: "",
     ReUserName: "",
     SendUserID: oneself_.CHID,
     SendUserName: oneself_.UserName,
     Content: "",
-    Data: { VideoConferenceMess },
+    Data: { State: no + 1 },
   });
 }

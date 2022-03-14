@@ -1,26 +1,12 @@
 /**
  * 对视图进行处理
  */
-async function viewsHandle(mess) {
-  if (mess) {
-    roomDetail_ = mess.Data.VideoConferenceMess;
-    setTitle(roomDetail_.Title);
-    roomDetail_.UserList.length == 0 && location.reload();
-    roomDetail_.UserList = roomDetail_.UserList.sort(sortData);
-    ZCRID_ = roomDetail_.UserList.find((item) => item.IsZCR == 1).ID;
-  }
-  layoutCompute(true);
+async function viewsHandle() {
   // 修改主讲人
   rtc.isJoined_ && change();
   ZJRID_ = roomDetail_.SpeakerID || oneself_.CHID;
   // 初始化
   !rtc.isJoined_ && init();
-}
-
-// 对象排序
-function sortData(a, b) {
-  undefined;
-  return a.XUHAO - b.XUHAO;
 }
 
 async function change() {
@@ -71,7 +57,8 @@ async function change() {
   // 将新主讲人播放到主讲人容器
   new_streams?.play("zjr_video", { objectFit: "cover" }).then(() => {
     if (roomDetail_.SpeakerID == oneself_.CHID) {
-      layout_.aspectRatio = $("#zjr_video").height() / $("#zjr_video").width();
+      meet_layout.aspectRatio =
+        $("#zjr_video").height() / $("#zjr_video").width();
       fasongchangkuanbi();
     }
   });
@@ -133,9 +120,3 @@ $("#zjr_video").on("click", () => {
     $("#zjr_box").attr("class", "w-full h-full video-box relative");
   }
 });
-
-// 查询当前页的用户列表是否包含该用户
-function hasMe(userId) {
-  var exits = layout_.pageUserList.find((user) => user.ID == userId);
-  return !!exits;
-}

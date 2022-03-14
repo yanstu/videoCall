@@ -28,29 +28,41 @@ chatHub.on("broadcastMessage", function (message, channelss) {
       case "12":
         huoquhuiyihuancunxinxi(mess);
         break;
+      // 改变参会端当前分页
+      case "37":
+        var pageNo = mess.Data.State;
+        meet_layout.pageNo = pageNo - 1;
+        viewsHandle();
+        break;
     }
   }
 });
 
 // 断开后处理
-$.connection.hub.disconnected(function () {
+chatHub.connection.onclose(function () {
+  console.log("断开尝试重新连接！");
   setTimeout(function () {
-    console.log("断开尝试重新连接！");
-    $.connection.hub.start();
-  }, 3 * 1000);
+    startChathub();
+  }, 3000); //3秒后重新连接.
 });
 
+startChathub();
+
 // 调用服务端方法
-$.connection.hub
-  .start()
-  .done(function () {
-    var RoomId = queryParams("RoomId");
-    chatHub.server.createRedis(RoomId);
-    huoquhuiyihuancun();
-  })
-  .fail(function (reason) {
-    alert("SignalR connection failed: " + reason);
-  });
+function startChathub() {
+  chatHub
+    .start()
+    .then(function () {
+      var RoomId = queryParams("RoomId");
+      chatHub.invoke("createRedis", RoomId).catch(function (err) {
+        return console.error(err.toString());
+      });
+      huoquhuiyihuancun();
+    })
+    .catch(function (reason) {
+      alert("SignalR connection failed: " + reason);
+    });
+}
 
 // 对象排序
 function sortData(a, b) {
@@ -72,8 +84,8 @@ function huoquhuiyihuancunxinxi(mess) {
   if (mess.reCode) {
     if (!mess.ReUserid || mess.Data.VideoConferenceMess.UserList.length == 0) {
       location.reload();
-      // } else if (mess.ReUserid == oneself_.CHID) {
-    } else if (mess.ReUserid == oneself_.CHID || mess.ReUserid == ZCRID_) {
+    } else if (mess.ReUserid == oneself_.CHID) {
+      // } else if (mess.ReUserid == oneself_.CHID || mess.ReUserid == ZCRID_) {
       roomDetail_ = mess.Data.VideoConferenceMess;
     } else {
       return;
@@ -85,6 +97,8 @@ function huoquhuiyihuancunxinxi(mess) {
   roomDetail_.UserList.length == 0 && location.reload();
   roomDetail_.UserList = roomDetail_.UserList.sort(sortData);
   ZCRID_ = roomDetail_.UserList.find((item) => item.IsZCR == 1).ID;
+  meet_layout.rows = roomDetail_.CHRY_ShowRows;
+  meet_layout.cols = roomDetail_.CHRY_ShowCols;
   viewsHandle(mess);
 }
 
