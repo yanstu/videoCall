@@ -11,6 +11,10 @@ chatHub.on("broadcastMessage", function (message, channelss) {
   if (channelss == RoomId) {
     let mess = JSON.parse(message);
     switch (mess.reCode) {
+      // 获取用户缓存
+      case "14":
+        roomDetail_.UserList = mess.Data.UserList;
+        break;
       // 设置主讲人
       case "01":
       case "20":

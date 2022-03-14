@@ -81,6 +81,10 @@ chatHub.on("broadcastMessage", function (message, channelss) {
           $("#video_btn").click();
         }
         break;
+      // 获取用户缓存
+      case "14":
+        roomDetail_.UserList = mess.Data.UserList;
+        break;
       // 用户打开/关闭自己的麦克风
       case "06":
       // 打开/关闭用户的麦克风

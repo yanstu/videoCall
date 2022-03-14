@@ -25,6 +25,10 @@ chatHub.on("broadcastMessage", function (message, channelss) {
           }, 1000);
         }
         break;
+      // 获取用户缓存
+      case "14":
+        roomDetail_.UserList = mess.Data.UserList;
+        break;
       // 设置主讲人
       case "01":
       case "20":

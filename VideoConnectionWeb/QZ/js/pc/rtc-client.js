@@ -4,7 +4,6 @@ class RtcClient {
     this.userId_ = options.userId;
     this.userSig_ = options.userSig;
     this.roomId_ = options.roomId;
-    this.nickName_ = options.nickName;
 
     this.isPublished_ = false;
     this.isJoined_ = false;
@@ -196,11 +195,16 @@ class RtcClient {
       !roomDetail_.SpeakerID ||
       userId == roomDetail_.SpeakerID
     ) {
+      // 将用户相关状态图标改为在线
+      onlineOrOfline(true, userId);
+      // 移除当前用户上一次播放遗留的div
       $(`#box_${userId} [id^='player_']`).remove();
+      // 如果当前用户是主讲人并且缩放比大于一将播放模式改为contain
       var objectFit =
         getUserInfo(userId).AspectRatio > 1 && userId == ZJRID_
           ? "contain"
           : "cover";
+      // 如果主讲人为手机端，将小视频区域取消悬浮
       if (objectFit == "contain") {
         $("#zjr_box").removeClass("w-full");
         $("#zjr_box").addClass("w-[80%]");
@@ -289,6 +293,7 @@ class RtcClient {
 
       this.playVideo(remoteStream, userId);
 
+      // 如果用户未推送远程流，显示遮罩
       if (!remoteStream) {
         $("#mask_" + userId).show();
         userId == ZJRID_ && $("#zjr_mask").show();
@@ -324,19 +329,6 @@ class RtcClient {
       });
     });
 
-    /* The above code is listening for a stream-updated event. When a stream-updated event is received,
-    the code checks to see if the stream has video. If the stream does not have video, the code sets
-    the src attribute of the video button to "img/camera-off.png". */
-    this.client_.on("stream-updated", (evt) => {
-      const remoteStream = evt.stream;
-      /*let uid = this.getUidByStreamId(remoteStream.getId());
-      if (!remoteStream.hasVideo()) {
-        $("#" + uid)
-          .find(".member-video_btn")
-          .attr("src", "img/camera-off.png");
-      }*/
-    });
-
     /* This code is listening for a mute-audio event from the client. When it receives the event, it
     calls the audioHandle function with the parameters false and the userId. */
     this.client_.on("mute-audio", ({ userId }) => {
@@ -359,14 +351,6 @@ class RtcClient {
     this.client_.on("unmute-video", ({ userId }) => {
       videoHandle(true, userId);
     });
-  }
-
-  getUidByStreamId(streamId) {
-    for (let [uid, stream] of this.members_) {
-      if (stream.getId() == streamId) {
-        return uid;
-      }
-    }
   }
 
   /**

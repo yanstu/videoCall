@@ -57,6 +57,10 @@ chatHub.on("broadcastMessage", function (message, channelss) {
       case "12":
         huoquhuiyihuancunxinxi(mess);
         break;
+      // 获取用户缓存
+      case "14":
+        roomDetail_.UserList = mess.Data.UserList;
+        break;
       // 用户打开/关闭自己的摄像头
       case "05":
       // 打开/关闭用户的摄像头
