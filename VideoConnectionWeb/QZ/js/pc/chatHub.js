@@ -1,13 +1,12 @@
-$.connection.hub.url = signalrUrl;
-const chatHub = $.connection.chatHub;
+const chatHub = new signalR.HubConnectionBuilder().withUrl(hubsUrl).build();
 
-if (!chatHub || !chatHub.client) {
+if (!chatHub || !signalR) {
   alert("请检查服务端是否启动");
   location.reload();
 }
 
 // 收听
-chatHub.client.broadcastMessage = function (message, channelss) {
+chatHub.on("broadcastMessage", function (message, channelss) {
   var RoomId = oneself_?.RoomId || queryParams("RoomId");
   if (channelss == RoomId) {
     let mess = JSON.parse(message);
@@ -42,15 +41,15 @@ chatHub.client.broadcastMessage = function (message, channelss) {
       // 设置主讲人
       case "01":
       case "20":
-        roomDetail_.SpeakerID = mess.ReUserid;
-        roomDetail_.SpeakerName = mess.ReUserName;
-        changeViews();
-        break;
       //取消主讲人
       case "29":
         roomDetail_.SpeakerID = mess.ReUserid;
         roomDetail_.SpeakerName = mess.ReUserName;
         changeViews();
+        break;
+      // 获取用户缓存
+      case "14":
+        roomDetail_.UserList = mess.Data.UserList;
         break;
       // 关闭发言申请
       case "15":
@@ -105,28 +104,34 @@ chatHub.client.broadcastMessage = function (message, channelss) {
         break;
     }
   }
-};
-
-// 断开后处理
-$.connection.hub.disconnected(function () {
-  setTimeout(function () {
-    console.log("断开尝试重新连接！");
-    $.connection.hub.start();
-  }, 3 * 1000);
 });
 
+// 断开后处理
+chatHub.connection.onclose(function () {
+  console.log("断开尝试重新连接！");
+  setTimeout(function () {
+    startChathub();
+  }, 3000); //3秒后重新连接.
+});
+
+startChathub();
+
 // 调用服务端方法
-$.connection.hub
-  .start()
-  .done(function () {
-    var RoomId = oneself_?.RoomId || queryParams("RoomId");
-    chatHub.server.createRedis(RoomId);
-    huoquhuiyihuancun();
-    xintiaolianjie();
-  })
-  .fail(function (reason) {
-    alert("SignalR connection failed: " + reason);
-  });
+function startChathub() {
+  chatHub
+    .start()
+    .then(function () {
+      var RoomId = oneself_?.RoomId || queryParams("RoomId");
+      chatHub.invoke("createRedis", RoomId).catch(function (err) {
+        return console.error(err.toString());
+      });
+      huoquhuiyihuancun();
+      xintiaolianjie();
+    })
+    .catch(function (reason) {
+      alert("SignalR connection failed: " + reason);
+    });
+}
 
 // 对象排序
 function sortData(a, b) {
@@ -139,7 +144,8 @@ function sortData(a, b) {
  * @param data - The data to be sent to the client.
  */
 function redisFB(data) {
-  chatHub.server.redisFB(oneself_.RoomId, JSON.stringify(data));
+  var RoomId = oneself_?.RoomId || queryParams("RoomId");
+  chatHub.invoke("redisFB", RoomId, JSON.stringify(data));
 }
 
 // 收到申请发言的请求
@@ -167,32 +173,32 @@ function huoquxiaoxi(mess) {
 
 // 接收到获取会议缓存信息
 function huoquhuiyihuancunxinxi(mess) {
-  if (!mess.ReUserid || mess.Data.VideoConferenceMess.UserList.length == 0) {
-    location.reload();
-    // } else if (mess.ReUserid == oneself_.CHID) {
-  } else if (mess.ReUserid == oneself_.CHID || mess.ReUserid == ZCRID_) {
-    roomDetail_ = mess.Data.VideoConferenceMess;
-    setTitle(roomDetail_.Title);
-    roomDetail_.UserList.length == 0 && location.reload();
-    roomDetail_.UserList = roomDetail_.UserList.sort(sortData);
-    ZCRID_ = roomDetail_.UserList.find((item) => item.IsZCR == 1).ID;
-    viewsHandle();
+  if (mess.reCode) {
+    if (!mess.ReUserid || mess.Data.VideoConferenceMess.UserList.length == 0) {
+      location.reload();
+      // } else if (mess.ReUserid == oneself_.CHID) {
+    } else if (mess.ReUserid == oneself_.CHID || mess.ReUserid == ZCRID_) {
+      roomDetail_ = mess.Data.VideoConferenceMess;
+    } else {
+      return;
+    }
+  } else {
+    roomDetail_ = mess;
   }
+  setTitle(roomDetail_.Title);
+  roomDetail_.UserList.length == 0 && location.reload();
+  roomDetail_.UserList = roomDetail_.UserList.sort(sortData);
+  ZCRID_ = roomDetail_.UserList.find((item) => item.IsZCR == 1).ID;
+  viewsHandle();
 }
 
 /**
  * 发布获取会议缓存
  */
 function huoquhuiyihuancun() {
-  redisFB({
-    reCode: "11",
-    ReUserid: "",
-    ReUserQYBH: "",
-    ReUserName: "",
-    SendUserID: oneself_.CHID,
-    SendUserName: oneself_.UserName,
-    Content: "",
-    Data: {},
+  var RoomId = oneself_?.RoomId || queryParams("RoomId");
+  ajaxMethod("RedisHandler", { Infotype: "GetCache", RoomId }, (res) => {
+    huoquhuiyihuancunxinxi(res);
   });
 }
 

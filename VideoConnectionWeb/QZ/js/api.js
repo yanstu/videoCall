@@ -3,8 +3,10 @@ const baseUrl = [
   "https://testvideoapi.gzshifang.com:9011/api/",
 ][1];
 
-const hubsUrl = ["/signalr/hubs"][0];
-const signalrUrl = ["/signalr"][0];
+const hubsUrl = ["https://testvideo.gzshifang.com:9031/chatHub"][0];
+const signalrUrl = [
+  "https://testvideo.gzshifang.com:9031/lib/aspnet/signalr/dist/browser/signalr.min.js",
+][0];
 
 /**
  * A router function that maps the key to the URL.
@@ -34,7 +36,7 @@ function router(key) {
      */
     RedisHandler: {
       root: true,
-      method: "get",
+      method: "post",
       url: "/Handler/RedisHandler.ashx",
     },
   };
@@ -51,7 +53,7 @@ function ajaxMethod(str, data = {}, callback) {
   const route = router(str);
   $.ajax({
     type: route.method,
-    url: route.root ? "" : baseUrl + route.url,
+    url: (route.root ? "" : baseUrl) + route.url,
     data,
     dataType: "json",
     async: false,
@@ -62,11 +64,12 @@ function ajaxMethod(str, data = {}, callback) {
     success: (res) => {
       callback && callback(res);
     },
-    error: () => {
+    error: (err) => {
+      console.log(err);
       layer.msg("请求超时或没有网络链接", { icon: 2 });
-      setTimeout(() => {
+      /*setTimeout(() => {
         location.reload();
-      }, 1000);
+      }, 1000);*/
     },
   });
 }

@@ -360,9 +360,11 @@ function getDeviceConnectInfo() {
   if (!(hasCameraDevice && hasMicDevice && hasVoiceDevice)) {
     connectInfo = `未检测到${hasCameraDevice ? "" : "【摄像头】"}${
       hasVoiceDevice ? "" : "【扬声器】"
-    }${hasMicDevice ? "" : "【麦克风】"}设备，请检查设备连接`;
+    }${hasMicDevice ? "" : "【麦克风】"}设备，请检查设备连接${
+      !hasVoiceDevice ? "\n苹果设备请忽略" : ""
+    }`;
     return connectInfo;
-  }
+  }``
   // 第二步：浏览器未拿到摄像头/麦克风权限的提示
   if (!(hasCameraConnect && hasMicConnect)) {
     connectInfo = hasNetworkConnect

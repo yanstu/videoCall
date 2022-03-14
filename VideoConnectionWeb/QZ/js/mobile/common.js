@@ -17,6 +17,12 @@ async function viewsHandle(mess) {
   !rtc.isJoined_ && init();
 }
 
+// 对象排序
+function sortData(a, b) {
+  undefined;
+  return a.XUHAO - b.XUHAO;
+}
+
 async function change() {
   // 还原
   $("#video-grid").attr(

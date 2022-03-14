@@ -1,13 +1,12 @@
-$.connection.hub.url = signalrUrl;
-const chatHub = $.connection.chatHub;
+const chatHub = new signalR.HubConnectionBuilder().withUrl(hubsUrl).build();
 
-if (!chatHub || !chatHub.client) {
+if (!chatHub || !signalR) {
   alert("请检查服务端是否启动");
   location.reload();
 }
 
 // 收听
-chatHub.client.broadcastMessage = function (message, channelss) {
+chatHub.on("broadcastMessage", function (message, channelss) {
   var RoomId = oneself_?.RoomId || queryParams("RoomId");
   if (channelss == RoomId) {
     let mess = JSON.parse(message);
@@ -27,7 +26,7 @@ chatHub.client.broadcastMessage = function (message, channelss) {
         break;
     }
   }
-};
+});
 
 // 断开后处理
 $.connection.hub.disconnected(function () {
@@ -60,36 +59,37 @@ function sortData(a, b) {
  * @param data - The data to be sent to the client.
  */
 function redisFB(data) {
-  chatHub.server.redisFB(oneself_.RoomId, JSON.stringify(data));
+  var RoomId = oneself_?.RoomId || queryParams("RoomId");
+  chatHub.invoke("redisFB", RoomId, JSON.stringify(data));
 }
 
 // 接收到获取会议缓存信息
 function huoquhuiyihuancunxinxi(mess) {
-  if (!mess.ReUserid || mess.Data.VideoConferenceMess.UserList.length == 0) {
-    location.reload();
-    // } else if (mess.ReUserid == oneself_.CHID) {
-  } else if (mess.ReUserid == oneself_.CHID || mess.ReUserid == ZCRID_) {
-    roomDetail_ = mess.Data.VideoConferenceMess;
-    setTitle(roomDetail_.Title);
-    roomDetail_.UserList.length == 0 && location.reload();
-    roomDetail_.UserList = roomDetail_.UserList.sort(sortData);
-    ZCRID_ = roomDetail_.UserList.find((item) => item.IsZCR == 1).ID;
-    viewsHandle(mess);
+  if (mess.reCode) {
+    if (!mess.ReUserid || mess.Data.VideoConferenceMess.UserList.length == 0) {
+      location.reload();
+      // } else if (mess.ReUserid == oneself_.CHID) {
+    } else if (mess.ReUserid == oneself_.CHID || mess.ReUserid == ZCRID_) {
+      roomDetail_ = mess.Data.VideoConferenceMess;
+    } else {
+      return;
+    }
+  } else {
+    roomDetail_ = mess;
   }
+  setTitle(roomDetail_.Title);
+  roomDetail_.UserList.length == 0 && location.reload();
+  roomDetail_.UserList = roomDetail_.UserList.sort(sortData);
+  ZCRID_ = roomDetail_.UserList.find((item) => item.IsZCR == 1).ID;
+  viewsHandle(mess);
 }
 
 /**
  * 发布获取会议缓存
  */
 function huoquhuiyihuancun() {
-  redisFB({
-    reCode: "11",
-    ReUserid: "",
-    ReUserQYBH: "",
-    ReUserName: "",
-    SendUserID: oneself_.CHID,
-    SendUserName: oneself_.UserName,
-    Content: "",
-    Data: {},
+  var RoomId = oneself_?.RoomId || queryParams("RoomId");
+  ajaxMethod("RedisHandler", { Infotype: "GetCache", RoomId }, (res) => {
+    huoquhuiyihuancunxinxi(res);
   });
 }
