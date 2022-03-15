@@ -153,6 +153,9 @@
   });
 
   $("#xiaoxi_btn").on("click", () => {
+    oneself_.IsZCR
+      ? $("#fasong_tip").html("发向所有人")
+      : $("#fasong_tip").html("发向管理员");
     $("#xiaoxiliebiao").toggle();
     $("#xiaoxi_jiaobiao").hide();
     if ($("#xiaoxiliebiao").css("display") == "none") {
@@ -167,6 +170,7 @@
         $("#xiaoxiliebiao")
           .find(".modalbox-title")
           .html(`消息列表 (${getUserInfo(fasonggeishei).UserName})`);
+        $("#fasong_tip").hide();
       }
     }
 

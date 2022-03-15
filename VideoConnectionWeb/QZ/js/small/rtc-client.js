@@ -175,6 +175,7 @@ class RtcClient {
   }
 
   playVideo(stream, userId) {
+    videoHandle(true, userId);
     var objectFit = getUserInfo(userId).AspectRatio > 1 ? "contain" : "cover";
     stream?.play("box_" + userId, { objectFit });
   }

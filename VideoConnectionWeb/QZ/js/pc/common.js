@@ -10,8 +10,8 @@ async function viewsHandle() {
   addViews();
   // 如果没有设置主讲人，将自己设置为假的主讲人
   ZJRID_ = roomDetail_.SpeakerID || oneself_.CHID;
-  const indexLoad3 = layer.load(1);
+  // const indexLoad3 = layer.load(1);
   await rtc.leave();
   await rtc.join();
-  layer.close(indexLoad3);
+  // layer.close(indexLoad3);
 }

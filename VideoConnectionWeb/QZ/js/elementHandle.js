@@ -18,14 +18,23 @@ function showOrHide() {
   if (oneself_.IsZCR) {
     $("#fayanliebiao_btn").show();
     $("#guanbimaikefeng_btn").show();
-    $("#quxiaozhujiangren_btn").show();
     $("#shangyiye_btn").show();
     $("#xiayiye_btn").show();
     $("#fayanliebiao_btn").show();
-    $(".shezhizhujiangren_btn").show();
     $(".tidiao_btn").show();
     $(".faxiaoxi_btn").show();
+    // 参会端小视频模式主讲人不需要设置主讲人、取消主讲人按钮
+    if (location.href.toLowerCase().includes("small")) {
+      $(".shezhizhujiangren_btn").hide();
+      $("#quxiaozhujiangren_btn").hide();
+    } else {
+      $(".shezhizhujiangren_btn").show();
+      $("#quxiaozhujiangren_btn").show();
+    }
   }
+
+  // winform打开的视频连线不显示消息按钮
+  window.WSLLZWinFrom && $("#xiaoxi_btn").hide();
 
   // 手机端没有授权摄像头的不能控制摄像头和翻转按钮
   if (!rtc || !rtc.localStream_) {

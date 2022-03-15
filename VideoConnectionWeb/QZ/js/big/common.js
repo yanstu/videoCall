@@ -19,6 +19,7 @@ async function viewsHandle() {
   layer.close(indexLoad3);
 }
 
+// 取消、修改主讲人的处理
 function change() {
   const loadIndex2 = layer.load(1);
   // 此处的ZJRID_代表上一个主讲人
