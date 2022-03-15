@@ -177,8 +177,7 @@ function huoquhuiyihuancunxinxi(mess) {
   if (mess.reCode) {
     if (!mess.ReUserid || mess.Data.VideoConferenceMess.UserList.length == 0) {
       location.reload();
-      // } else if (mess.ReUserid == oneself_.CHID) {
-    } else if (mess.ReUserid == oneself_.CHID || mess.ReUserid == ZCRID_) {
+    } else if (mess.ReUserid == oneself_.CHID) {
       roomDetail_ = mess.Data.VideoConferenceMess;
     } else {
       return;
