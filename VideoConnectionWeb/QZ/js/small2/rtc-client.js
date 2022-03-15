@@ -136,7 +136,7 @@ class RtcClient {
     and removes the stream from the list of remote streams. */
     this.client_.on("stream-removed", (evt) => {
       const remoteStream = evt.stream;
-      const uid = remoteStream?.getUserId();
+      const userId = remoteStream?.getUserId();
       const id = remoteStream?.getId();
       remoteStream?.stop();
       this.members_.set(userId, null);

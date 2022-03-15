@@ -52,7 +52,7 @@
     $("#qiehuanshitu_mianban").fadeToggle();
   });
 
-  // 点击事件
+  // 参会端切换到主讲人+小视频模式
   $("#qiehuanchangguishipin_btn").on("click", () => {
     if (location.href.toLowerCase().includes("index")) {
       $("#video-grid").fadeIn();
@@ -69,15 +69,17 @@
     }
   });
 
+  // 展示端切换到主讲人+小视频模式
   $("#qiehuanchangguishipin2_btn").on("click", () => {
     $("#video-grid").fadeIn();
   });
 
+  // 展示端切换到主讲人模式
   $("#qiehuandashipin2_btn").on("click", () => {
     $("#video-grid").fadeOut();
   });
 
-  // 点击事件
+  // 参会端切换到主讲人模式
   $("#qiehuandashipin_btn").on("click", () => {
     if (location.href.toLowerCase().includes("index")) {
       $("#video-grid").fadeOut();
@@ -95,24 +97,7 @@
     }
   });
 
-  // 点击事件
-  $("#qiehuanbigshipin_btn").on("click", () => {
-    if (roomDetail_.UserList > 25) {
-      layer.msg("当前房间用户超过25人，不能使用此模式");
-    } else {
-      location.replace(
-        location.origin +
-          location.pathname.substring(
-            0,
-            location.pathname.lastIndexOf("/") + 1
-          ) +
-          "big.html" +
-          location.href.substring(location.href.indexOf("?"))
-      );
-    }
-  });
-
-  // 切换小视频点击事件
+  // 参会端切换到小视频模式
   $("#qiehuanxiaoshipin_btn").on("click", () => {
     if (roomDetail_.UserList.length > 25) {
       layer.msg("当前房间用户超过25人，不能使用此模式");
@@ -135,7 +120,7 @@
   });
 
   // 用户列表点击事件
-  $("#canyuzhe_btn").on("click", (event) => {
+  $("#canyuzhe_btn").on("click", () => {
     $("#yonghuliebiao").fadeToggle();
 
     // 关闭其他窗口
@@ -143,7 +128,7 @@
     $("#xiaoxiliebiao").hide();
   });
 
-  $("#fayanliebiao_btn").on("click", (e) => {
+  $("#fayanliebiao_btn").on("click", () => {
     $("#shenqingfayanliebiao").fadeToggle();
     $("#fayan_jiaobiao").hide();
 
@@ -161,6 +146,9 @@
     if ($("#xiaoxiliebiao").css("display") == "none") {
       fasonggeishei = "";
       $("#xiaoxiliebiao").find(".modalbox-title").html("消息列表");
+      oneself_.IsZCR
+        ? $("#fasong_tip").html("发向所有人")
+        : $("#fasong_tip").html("发向管理员");
     } else {
       if (fasonggeishei) {
         // 清空消息列表

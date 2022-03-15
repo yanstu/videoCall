@@ -224,6 +224,10 @@ function huoquhuiyihuancunxinxi(mess) {
   ZCRID_ = roomDetail_.UserList.find((item) => item.IsZCR == 1).ID;
   meet_layout.rows = roomDetail_.CHRY_ShowRows;
   meet_layout.cols = roomDetail_.CHRY_ShowCols;
+  meet_layout.pageNo = roomDetail_.CHDModel.Page - 1;
+  display_layout.pageNo = roomDetail_.XSDModel.Page - 1;
+  display_layout.cols = roomDetail_.XSDModel.XSPFormat.split("*")[0];
+  display_layout.rows = roomDetail_.XSDModel.XSPFormat.split("*")[0];
   viewsHandle();
 }
 

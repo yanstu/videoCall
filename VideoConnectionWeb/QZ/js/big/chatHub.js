@@ -34,6 +34,17 @@ chatHub.on("broadcastMessage", function (message, channelss) {
         meet_layout.pageNo = pageNo - 1;
         viewsHandle();
         break;
+      // 操作显示端切换显示模式
+      case "32":
+        switch (mess.Data.State) {
+          case 1:
+            $("#qiehuandashipin2_btn").click();
+            break;
+          case 2:
+            $("#qiehuanchangguishipin2_btn").click();
+            break;
+        }
+        break;
     }
   }
 });
@@ -99,6 +110,10 @@ function huoquhuiyihuancunxinxi(mess) {
   ZCRID_ = roomDetail_.UserList.find((item) => item.IsZCR == 1).ID;
   meet_layout.rows = roomDetail_.CHRY_ShowRows;
   meet_layout.cols = roomDetail_.CHRY_ShowCols;
+  meet_layout.pageNo = roomDetail_.CHDModel.Page - 1;
+  display_layout.pageNo = roomDetail_.XSDModel.Page - 1;
+  display_layout.cols = roomDetail_.XSDModel.XSPFormat.split("*")[0];
+  display_layout.rows = roomDetail_.XSDModel.XSPFormat.split("*")[0];
   viewsHandle(mess);
 }
 
