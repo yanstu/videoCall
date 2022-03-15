@@ -35,9 +35,9 @@ let roomDetail_ = {
   CHRY_ShowCols: 2,
   // 显示行数
   CHRY_ShowRows: 5,
-  // 不用开摄像头的听众
+  // 消息列表
   MessList: [],
-  // 在线列表
+  // 发言列表
   ProposerList: [],
   // 主讲人UD
   SpeakerID: "fe130caac11a4d60b4357713c7d03415",
@@ -47,6 +47,19 @@ let roomDetail_ = {
   Title: "视频连线测试2",
   // 参加会议人员列表
   UserList: [],
+  // 展示端配置
+  XSDModel: {
+    Model: 3,
+    Page: 1,
+    XSPFormat: "4*4",
+  },
+  // 参会端配置
+  CHDModel: {
+    Model: 2,
+    Page: 1,
+  },
+  // 小视频模式
+  XSPMS: 0,
 };
 // 参会端布局
 let meet_layout = {

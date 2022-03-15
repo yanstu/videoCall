@@ -541,34 +541,55 @@ function onlineOrOfline(online, userId) {
   }
 }
 
-// 参会端切换到小视频模式
-function zsd_xiao() {
-  if (!location.href.toLowerCase().includes("small2")) {
-    location.replace(
-      location.origin +
-        location.pathname.substring(0, location.pathname.lastIndexOf("/") + 1) +
-        "small2.html" +
-        location.href.substring(location.href.indexOf("?"))
-    );
-  }
-}
-
-// 展示端切换到主讲人+小视频模式
-function zsd_zhu_xiao() {
-  $("#video-grid").fadeIn();
-}
-
-// 展示端切换到主讲人模式
-function zsd_zhu() {
-  if (location.href.toLowerCase().includes("index")) {
-    $("#video-grid").fadeOut();
-  } else {
-    location.replace(
-      location.origin +
-        location.pathname.substring(0, location.pathname.lastIndexOf("/") + 1) +
-        "big.html" +
-        location.href.substring(location.href.indexOf("?")) +
-        "&h=1"
-    );
+// 展示端切换显示模式
+function zhanshiduan_mode(state) {
+  switch (state) {
+    case 1:
+      // 展示端切换到主讲人模式
+      if (location.href.toLowerCase().includes("big")) {
+        $("#video-grid").fadeOut();
+      } else {
+        location.replace(
+          location.origin +
+            location.pathname.substring(
+              0,
+              location.pathname.lastIndexOf("/") + 1
+            ) +
+            "big.html" +
+            location.href.substring(location.href.indexOf("?")) +
+            "&h=1"
+        );
+      }
+      break;
+    case 2:
+      // 展示端切换到主讲人+小视频模式
+      if (location.href.toLowerCase().includes("big")) {
+        $("#video-grid").fadeIn();
+      } else {
+        location.replace(
+          location.origin +
+            location.pathname.substring(
+              0,
+              location.pathname.lastIndexOf("/") + 1
+            ) +
+            "big.html" +
+            location.href.substring(location.href.indexOf("?"))
+        );
+      }
+      break;
+    case 3:
+      // 参会端切换到小视频模式
+      if (!location.href.toLowerCase().includes("small2")) {
+        location.replace(
+          location.origin +
+            location.pathname.substring(
+              0,
+              location.pathname.lastIndexOf("/") + 1
+            ) +
+            "small2.html" +
+            location.href.substring(location.href.indexOf("?"))
+        );
+      }
+      break;
   }
 }

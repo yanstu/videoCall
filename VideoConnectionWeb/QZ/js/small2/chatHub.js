@@ -69,17 +69,7 @@ chatHub.on("broadcastMessage", function (message, channelss) {
         break;
       // 操作显示端切换显示模式
       case "32":
-        switch (mess.Data.State) {
-          case 1:
-            zsd_zhu();
-            break;
-          case 2:
-            zsd_zhu_xiao();
-            break;
-          case 2:
-            zsd_xiao();
-            break;
-        }
+        zhanshiduan_mode(mess.Data.State);
         break;
     }
   }
@@ -149,6 +139,7 @@ function huoquhuiyihuancunxinxi(mess) {
   display_layout.pageNo = roomDetail_.XSDModel.Page - 1;
   display_layout.cols = roomDetail_.XSDModel.XSPFormat.split("*")[0];
   display_layout.rows = roomDetail_.XSDModel.XSPFormat.split("*")[0];
+  zhanshiduan_mode(roomDetail_.XSDModel.Model);
   viewsHandle();
 }
 
