@@ -364,7 +364,8 @@ function getDeviceConnectInfo() {
       !hasVoiceDevice ? "\n苹果设备请忽略" : ""
     }`;
     return connectInfo;
-  }``
+  }
+  ``;
   // 第二步：浏览器未拿到摄像头/麦克风权限的提示
   if (!(hasCameraConnect && hasMicConnect)) {
     connectInfo = hasNetworkConnect
@@ -1023,5 +1024,7 @@ function handleGetUserMediaError(error) {
     default:
       msg = "初始化本地流时遇到未知错误, 请重试。";
   }
-  layer.msg(msg);
+  !location.href.toLowerCase().includes("small2") &&
+    location.href.toLowerCase().includes("big") &&
+    layer.msg(msg);
 }

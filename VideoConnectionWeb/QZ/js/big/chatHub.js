@@ -107,7 +107,7 @@ function huoquhuiyihuancunxinxi(mess) {
   display_layout.cols = roomDetail_.XSDModel.XSPFormat.split("*")[0];
   display_layout.rows = roomDetail_.XSDModel.XSPFormat.split("*")[0];
   zhanshiduan_mode(roomDetail_.XSDModel.Model);
-  viewsHandle(mess);
+  viewsHandle();
 }
 
 /**
