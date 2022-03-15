@@ -93,12 +93,12 @@ class RtcClient {
       console.log(getUserInfo(userId)?.UserName + " 离开了房间，或者掉线");
     });
 
-    // 添加远程流时触发
+    // 推送远程流时触发
     this.client_.on("stream-added", (evt) => {
       const remoteStream = evt.stream;
       const userId = remoteStream.getUserId();
       this.members_.set(userId, remoteStream);
-      console.log(`${getUserInfo(userId)?.UserName} 添加远程流`);
+      console.log(`${getUserInfo(userId)?.UserName} 推送远程流`);
       this.client_.subscribe(remoteStream);
     });
 
@@ -140,6 +140,8 @@ class RtcClient {
       const uid = remoteStream?.getUserId();
       const id = remoteStream?.getId();
       remoteStream?.stop();
+      this.members_.set(userId, null);
+      console.log(`${getUserInfo(userId)?.UserName} 取消推送远程流`);
       this.remoteStreams_ = this.remoteStreams_.filter((stream) => {
         return stream.getId() !== id;
       });
