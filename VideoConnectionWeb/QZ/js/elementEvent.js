@@ -69,16 +69,6 @@
     }
   });
 
-  // 展示端切换到主讲人+小视频模式
-  $("#qiehuanchangguishipin2_btn").on("click", () => {
-    $("#video-grid").fadeIn();
-  });
-
-  // 展示端切换到主讲人模式
-  $("#qiehuandashipin2_btn").on("click", () => {
-    $("#video-grid").fadeOut();
-  });
-
   // 参会端切换到主讲人模式
   $("#qiehuandashipin_btn").on("click", () => {
     if (location.href.toLowerCase().includes("index")) {

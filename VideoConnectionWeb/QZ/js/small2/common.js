@@ -24,7 +24,6 @@ function addView() {
       "w-full h-full video-box relative box-border border-[2px] border-[#5451]"
     );
   }
-  addMember();
 }
 
 function sortView() {

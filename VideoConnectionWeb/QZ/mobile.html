@@ -462,7 +462,7 @@
 
       window.WeixinJSBridge && window.WeixinJSBridge.call("hideToolbar");
 
-      if (queryParams("p")) {
+      if (queryParams("p") && queryParams("RoomId")) {
         login(queryParams("p"));
       } else {
         alert("参数错误");

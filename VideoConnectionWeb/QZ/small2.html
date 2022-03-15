@@ -81,7 +81,7 @@
             src="./img/network/down/network_4.png"
           />
         </div>
-        <div
+        <!-- <div
           class="flex items-center justify-content-center relative h-[43%] mr-4"
         >
           <img
@@ -90,7 +90,7 @@
             class="h-full"
             src="./img/shitu.png"
           />
-        </div>
+        </div> -->
         <div
           id="exit-btn"
           class="anniubeijing mr-4 w-[14%] h-[50%] text-[0.875rem] flex justify-center items-center text-white pl-3 pr-3"
@@ -465,7 +465,7 @@
 
       window.WeixinJSBridge && window.WeixinJSBridge.call("hideToolbar");
 
-      if (queryParams("p")) {
+      if (queryParams("p") && queryParams("RoomId")) {
         login(queryParams("p"));
       } else {
         alert("参数错误");

@@ -38,10 +38,13 @@ chatHub.on("broadcastMessage", function (message, channelss) {
       case "32":
         switch (mess.Data.State) {
           case 1:
-            $("#qiehuandashipin2_btn").click();
+            zsd_zhu();
             break;
           case 2:
-            $("#qiehuanchangguishipin2_btn").click();
+            zsd_zhu_xiao();
+            break;
+          case 2:
+            zsd_xiao();
             break;
         }
         break;

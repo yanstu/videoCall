@@ -67,6 +67,20 @@ chatHub.on("broadcastMessage", function (message, channelss) {
         var pageNo = mess.Data.State;
         meet_layout.pageNo = pageNo - 1;
         break;
+      // 操作显示端切换显示模式
+      case "32":
+        switch (mess.Data.State) {
+          case 1:
+            zsd_zhu();
+            break;
+          case 2:
+            zsd_zhu_xiao();
+            break;
+          case 2:
+            zsd_xiao();
+            break;
+        }
+        break;
     }
   }
 });
@@ -117,8 +131,7 @@ function huoquhuiyihuancunxinxi(mess) {
   if (mess.reCode) {
     if (!mess.ReUserid || mess.Data.VideoConferenceMess.UserList.length == 0) {
       location.reload();
-      // } else if (mess.ReUserid == oneself_.CHID) {
-    } else if (mess.ReUserid == oneself_.CHID || mess.ReUserid == ZCRID_) {
+    } else if (mess.ReUserid == oneself_.CHID) {
       roomDetail_ = mess.Data.VideoConferenceMess;
     } else {
       return;
