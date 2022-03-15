@@ -10,8 +10,23 @@ async function viewsHandle() {
   addViews();
   // 如果没有设置主讲人，将自己设置为假的主讲人
   ZJRID_ = roomDetail_.SpeakerID || oneself_.CHID;
-  // const indexLoad3 = layer.load(1);
-  await rtc.leave();
-  await rtc.join();
-  // layer.close(indexLoad3);
+
+  if (!rtc.isJoined_) {
+    await rtc.join();
+  } else {
+    tuisong();
+    for (const user of meet_layout.pageUserList) {
+      if (ZJRID_ != user.ID) {
+        var stream =
+          user.ID == oneself_.CHID
+            ? rtc.localStream_
+            : rtc.members_.get(user.ID);
+        stream?.stop();
+        stream?.play("box_" + user.ID);
+        stream && videoHandle(true, user.ID);
+      } else {
+        videoHandle(true, ZJRID_);
+      }
+    }
+  }
 }

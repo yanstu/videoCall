@@ -245,7 +245,6 @@ class RtcClient {
 
       if (!remoteStream) {
         $("#mask_" + userId).show();
-        userId == ZJRID_ && $("#zjr_mask").show();
       }
 
       remoteStream.on("player-state-changed", (event) => {

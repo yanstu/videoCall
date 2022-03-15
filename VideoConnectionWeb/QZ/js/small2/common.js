@@ -13,6 +13,7 @@ async function viewsHandle() {
   await rtc.leave();
   await rtc.join();
   layer.close(indexLoad3);
+  $("[id^='img_']").remove();
 }
 
 function addView() {

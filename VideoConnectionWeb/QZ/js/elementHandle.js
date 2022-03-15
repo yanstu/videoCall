@@ -291,10 +291,6 @@ function resetViews() {
     $("#profile_" + ID).remove();
     $("#member_" + ID).remove();
   }
-  $("#video_btn svg").html(`<use xlink:href="#icon-xiangji"></use>`);
-  $("#mic_btn svg").html(`<use xlink:href="#icon-maikefeng"></use>`);
-  $("#zjr_mask img").attr("src", "./img/camera-gray.png");
-  $("#zjr_mask").show();
 }
 
 // 麦克风开关状态控制
@@ -473,18 +469,7 @@ function addMemberView(ID, UserName) {
  * @param nickName - the nickName of the user
  */
 function addVideoView(ID, NickName) {
-  let box = $("#zjr_video").clone();
-  box.attr("id", "box_" + ID);
-  box.attr(
-    "class",
-    "w-[99%] h-[99%] video-box relative border-[1px] border-[#5f6d7a] p-[2px]"
-  );
-  location.href.toLowerCase().includes("mobile") &&
-    box.attr("class", "w-full h-full video-box relative");
-  box.find("#zjr_mask").attr("id", "mask_" + ID);
-  box.find("#zjr_img").attr("id", "img_" + ID);
-  box.append(userInfoTemplate(ID, NickName));
-  box.appendTo("#video-grid");
+  $("#video-grid").append(videoBoxTemplate(ID, NickName));
 }
 
 /**

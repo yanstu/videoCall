@@ -186,7 +186,6 @@ function huoquhuiyihuancunxinxi(mess) {
     roomDetail_ = mess;
   }
   setTitle(roomDetail_.Title);
-  if (ZJRID_ && roomDetail_.SpeakerID) return;
   roomDetail_.UserList.length == 0 && location.reload();
   roomDetail_.UserList = roomDetail_.UserList.sort(sortData);
   ZCRID_ = roomDetail_.UserList.find((item) => item.IsZCR == 1).ID;

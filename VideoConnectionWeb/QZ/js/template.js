@@ -33,11 +33,16 @@ function userInfoTemplate(userId, nickName) {
  * 视频盒子模板
  */
 function videoBoxTemplate(userId, nickName) {
-  return `<div id="box_${userId}" class="w-full h-full video-box relative">
+  return `<div id="box_${userId}" class="${
+    location.href.toLowerCase().includes("mobile")
+      ? "w-full h-full video-box relative"
+      : "w-[99%] h-[99%] video-box relative border-[1px] border-[#5f6d7a] p-[2px]"
+  }">
             <!-- “摄像头未开启”遮罩模板 -->
             <div id="mask_${userId}" style="z-index: 8" class="mask top-0 left-0 justify-center col-div flex w-full h-full bg-[#24292e] items-center justify-items-center absolute flex-col">
               <img class="h-[40%]" src="./img/camera-gray.png" alt="" />
             </div>
+            <img id="img_${userId}" style="display: none;z-index: 9;" class="w-full h-full" src="" alt="">
             ${userInfoTemplate(userId, nickName)}
           </div>`;
 }

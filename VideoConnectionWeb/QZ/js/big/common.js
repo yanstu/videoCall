@@ -13,10 +13,26 @@ async function viewsHandle() {
     const { ID, UserName } = user_;
     addVideoView(ID, UserName);
   }
-  const indexLoad3 = layer.load(1);
-  await rtc.leave();
-  await rtc.join();
-  layer.close(indexLoad3);
+  $("#zjr_video").append(
+    userInfoTemplate(ZJRID_, getUserInfo(ZJRID_).UserName)
+  );
+  if (!rtc.isJoined_) {
+    await rtc.join();
+  } else {
+    for (const user of meet_layout.pageUserList) {
+      if (ZJRID_ != user.ID) {
+        var stream =
+          user.ID == oneself_.CHID
+            ? rtc.localStream_
+            : rtc.members_.get(user.ID);
+        stream?.stop();
+        stream?.play("box_" + user.ID);
+        stream && videoHandle(true, user.ID);
+      } else {
+        videoHandle(true, ZJRID_);
+      }
+    }
+  }
 }
 
 // 取消、修改主讲人的处理

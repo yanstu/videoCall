@@ -1,5 +1,3 @@
-
-
 /**
  * 对视图进行处理
  */
@@ -8,9 +6,8 @@ async function viewsHandle() {
   sortView();
   // 为当前页用户循环添加至网页上
   addView();
-  // 如果没有设置主讲人，将自己设置为假的主讲人
-  ZJRID_ = roomDetail_.SpeakerID || oneself_.CHID;
-  rtc.join();
+  await rtc.join();
+  $("[id^='img_']").remove();
 }
 
 function addView() {
