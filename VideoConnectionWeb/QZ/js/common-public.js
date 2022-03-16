@@ -130,7 +130,14 @@ let videoImgTimer = null;
  * @param { string } JMStr 密钥
  */
 function login(JMStr) {
-  ajaxMethod("checkJRHYInfo", { JMStr }, (res) => {
+  var data = { JMStr };
+  if (
+    location.href.toLowerCase().includes("big") ||
+    location.href.toLowerCase().includes("small2")
+  ) {
+    data.LY = 1;
+  }
+  ajaxMethod("checkJRHYInfo", data, (res) => {
     if (!res.Data) {
       alert("解密失败，请检查链接。");
       leave();
