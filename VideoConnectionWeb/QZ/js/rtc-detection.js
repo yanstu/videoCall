@@ -11,9 +11,7 @@ const DEVICE_TYPE_ENUM = {
 const deviceType = getDeviceType();
 
 function trtcPreliminaryDetection() {
-  rtcDetection().then((detectionResult) => {
-    detectionResult && deviceTestingInit();
-  });
+  rtcDetection();
 
   TRTC.getDevices()
     .then((devices) => {

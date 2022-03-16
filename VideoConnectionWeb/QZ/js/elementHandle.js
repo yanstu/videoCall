@@ -62,6 +62,7 @@ async function changeViews() {
     // 上一个主讲人是其他人，停止他的远程流
     rePlay(rtc.members_.get(ZJRID_), ZJRID_);
   }
+
   function rePlay(stream, ID) {
     $("#img_" + ID).hide();
     stream?.stop();
@@ -83,8 +84,10 @@ async function changeViews() {
   $("#zjr_video").append(
     userInfoTemplate(newZJRID, getUserInfo(newZJRID).UserName)
   );
+
   // 如果新的主持人也存在右侧小视频区域，右侧的小视频将显示遮罩
   hasMe(newZJRID) && $("#mask_" + newZJRID).show();
+
   // 判断是否为手机设备
   var objectFit = getUserInfo(newZJRID).AspectRatio > 1 ? "contain" : "cover";
   if (objectFit == "contain") {
@@ -96,6 +99,7 @@ async function changeViews() {
     $("#zjr_box").addClass("w-full");
     $("#video-grid").removeClass("bg-[#24292e]");
   }
+
   zjr_streams?.play("zjr_video", { objectFit }).then(() => {
     if (roomDetail_.SpeakerID == oneself_.CHID && meet_layout.aspectRatio > 1) {
       meet_layout.aspectRatio =
@@ -103,7 +107,9 @@ async function changeViews() {
       fasongchangkuanbi();
     }
   });
+
   tuisong();
+
   // 主讲人的未推送远程流的话显示遮罩
   zjr_streams ? $("#zjr_mask").hide() : $("#zjr_mask").show();
   // 为新的主讲人取帧
@@ -115,6 +121,7 @@ async function changeViews() {
   for (let user_ of roomDetail_.UserList) {
     $("#member_" + user_.ID).remove();
   }
+
   // 重新添加至参与者列表，并进行排序
   addMember();
   if (oneself_.CHID == newZJRID) {
@@ -128,7 +135,7 @@ async function changeViews() {
 
   setTimeout(() => {
     gengxinzhuangtai();
-  }, 500);
+  }, 1000);
 }
 
 // 添加当前页用户到页面

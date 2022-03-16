@@ -16,15 +16,19 @@ async function change() {
     "box-border grid w-[9rem] h-[25%] absolute top-[8%] right-[1%] items-center justify-center z-10"
   );
   $("#zjr_box").attr("class", "w-full h-full video-box relative");
+
   // 如果当前没有主讲人，将主持人作为主讲人视角，如果主持人没有在线，将自己设为主讲人视角
   var newZJRID = roomDetail_.SpeakerID || oneself_.CHID;
+
   // 先停止上一个主讲人的远程流
   var old_streams = rtc.members_.get(ZJRID_);
   old_streams?.stop();
+
   // 再停止新的主讲人的远程流
   var new_streams =
     newZJRID == oneself_.CHID ? rtc.localStream_ : rtc.members_.get(newZJRID);
   new_streams?.stop();
+
   if (newZJRID == oneself_.CHID) {
     // 如果新的主讲人是我，清空小视频区域
     resetViews();
@@ -49,12 +53,15 @@ async function change() {
       $("#mask_" + oneself_.CHID).hide();
     }
   }
-  // 移除原主持人相关信息
+
+  // 移除原主持人相关信息、添加新的主持人相关信息
   $("#zjr_video [id^='profile_']").remove();
   $("#zjr_video [id^='player_']").remove();
   $("#zjr_video").append(
     userInfoTemplate(newZJRID, getUserInfo(newZJRID).UserName)
   );
+  showOrHide();
+
   // 将新主讲人播放到主讲人容器
   new_streams?.play("zjr_video", { objectFit: "cover" }).then(() => {
     if (roomDetail_.SpeakerID == oneself_.CHID) {
@@ -63,13 +70,13 @@ async function change() {
       fasongchangkuanbi();
     }
   });
-  tuisong();
   new_streams ? $("#zjr_mask").hide() : $("#zjr_mask").show();
-  showOrHide();
+
+  tuisong();
 
   setTimeout(() => {
     gengxinzhuangtai();
-  }, 500);
+  }, 1000);
 }
 
 // 第一次进入的初始化

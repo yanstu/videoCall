@@ -88,5 +88,5 @@ function change() {
 
   setTimeout(() => {
     gengxinzhuangtai();
-  }, 500);
+  }, 1000);
 }
