@@ -50,7 +50,6 @@ function showOrHide() {
 
 // 设置取消主讲人的处理
 async function changeViews() {
-  const loadIndex2 = layer.load(1);
   // 此处的ZJRID_代表上一个主讲人
   // 此处的newZJRID代表新的主讲人ID，没有的话设定自己为假主讲人
   var newZJRID = roomDetail_.SpeakerID || oneself_.CHID;
@@ -124,8 +123,6 @@ async function changeViews() {
   ZJRID_ = newZJRID;
   // 权限判断按钮显示或隐藏
   showOrHide();
-  // 关闭加载中
-  layer.close(loadIndex2);
 }
 
 // 添加当前页用户到页面

@@ -29,7 +29,9 @@ async function viewsHandle() {
         stream?.play("box_" + user.ID);
         stream && videoHandle(true, user.ID);
       } else {
-        videoHandle(true, ZJRID_);
+        if (rtc.members_.get(ZJRID_) || ZJRID_ == oneself_.CHID) {
+          videoHandle(true, ZJRID_);
+        }
       }
     }
   }
@@ -37,7 +39,6 @@ async function viewsHandle() {
 
 // 取消、修改主讲人的处理
 function change() {
-  const loadIndex2 = layer.load(1);
   // 此处的ZJRID_代表上一个主讲人
   // 此处的newZJRID代表新的主讲人ID，没有的话设定主持人为主讲人视角
   var newZJRID = roomDetail_.SpeakerID || ZCRID_;
@@ -84,6 +85,4 @@ function change() {
   ZJRID_ = newZJRID;
   // 权限判断按钮显示或隐藏
   showOrHide();
-  // 关闭加载中
-  layer.close(loadIndex2);
 }

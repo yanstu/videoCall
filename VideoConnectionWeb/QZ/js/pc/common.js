@@ -25,7 +25,9 @@ async function viewsHandle() {
         stream?.play("box_" + user.ID);
         stream && videoHandle(true, user.ID);
       } else {
-        videoHandle(true, ZJRID_);
+        if (rtc.members_.get(ZJRID_) || ZJRID_ == oneself_.CHID) {
+          videoHandle(true, ZJRID_);
+        }
       }
     }
   }

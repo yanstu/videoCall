@@ -9,10 +9,8 @@ async function viewsHandle() {
   sortView();
   // 为当前页用户循环添加至网页上
   addView();
-  const indexLoad3 = layer.load(1);
   await rtc.leave();
   await rtc.join();
-  layer.close(indexLoad3);
   $("[id^='img_']").remove();
 }
 
