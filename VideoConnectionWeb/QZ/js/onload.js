@@ -62,6 +62,9 @@ console.error = (e) => {
     if (JSON.stringify(e)?.includes("无法初始化共享流或推送本地流失败")) {
       cameraInitError = true;
     }
+    if (JSON.stringify(e)?.includes("'elementId' is not found in the")) {
+      return;
+    }
     if (
       JSON.stringify(e)?.includes(
         "failed to subscribe stream, reason: because the remote"

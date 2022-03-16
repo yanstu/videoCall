@@ -11,8 +11,8 @@ function showOrHide() {
     $("#shenqingfayan_btn").hide();
   }
 
-  // 非手机端不需要显示翻转相机按钮
-  location.href.toLowerCase().includes("mobile") && $("#fanzhuan_btn").show();
+  // 非安卓端不需要显示翻转相机按钮
+  deviceType == DEVICE_TYPE_ENUM.MOBILE_ANDROID && $("#fanzhuan_btn").show();
 
   // 如果是主持人的话主持人相关权限按钮显示
   if (oneself_.IsZCR) {
