@@ -329,7 +329,6 @@ class RtcClient {
       this.remoteStreams_ = this.remoteStreams_.filter((stream) => {
         return stream.getId() !== id;
       });
-      
     });
 
     /* This code is listening for a mute-audio event from the client. When it receives the event, it

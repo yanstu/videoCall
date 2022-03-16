@@ -329,3 +329,15 @@ function clickProof(callback, delay = 500) {
     }
   };
 }
+
+// 更新我和其他用户的状态
+function gengxinzhuangtai() {
+  let states = rtc.client_.getRemoteMutedState();
+  for (const state of states) {
+    videoHandle(!state.videoMuted, state.userId);
+    audioHandle(!state.audioMuted, state.userId);
+    console.log(!state.videoMuted);
+  }
+  videoHandle(isCamOn, oneself_.CHID);
+  audioHandle(isMicOn, oneself_.CHID);
+}

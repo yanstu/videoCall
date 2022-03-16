@@ -116,11 +116,7 @@ chatHub.on("broadcastMessage", function (message, channelss) {
   }
 });
 
-// 对象排序
-function sortData(a, b) {
-  undefined;
-  return a.XUHAO - b.XUHAO;
-}
+
 
 // 断开后处理
 chatHub.connection.onclose(function () {
@@ -173,7 +169,6 @@ function huoquhuiyihuancunxinxi(mess) {
   }
   setTitle(roomDetail_.Title);
   roomDetail_.UserList.length == 0 && location.reload();
-  roomDetail_.UserList = roomDetail_.UserList.sort(sortData);
   ZCRID_ = roomDetail_.UserList.find((item) => item.IsZCR == 1).ID;
   meet_layout.rows = roomDetail_.CHRY_ShowRows;
   meet_layout.cols = roomDetail_.CHRY_ShowCols;

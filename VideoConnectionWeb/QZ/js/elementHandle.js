@@ -117,12 +117,18 @@ async function changeViews() {
   }
   // 重新添加至参与者列表，并进行排序
   addMember();
-  !isMicOn && $("#mic_btn").click();
-  !isCamOn && $("#video_btn").click();
+  if (oneself_.CHID == newZJRID) {
+    !isMicOn && $("#mic_btn").click();
+    !isCamOn && $("#video_btn").click();
+  }
 
   ZJRID_ = newZJRID;
   // 权限判断按钮显示或隐藏
   showOrHide();
+
+  setTimeout(() => {
+    gengxinzhuangtai();
+  }, 500);
 }
 
 // 添加当前页用户到页面
@@ -415,10 +421,14 @@ function addMemberView(ID, UserName) {
           layer.msg("不能对离线用户进行操作");
           return;
         }
-        /*if (!rtc.members_.get(ID) && ZCRID_ != ID) {
-          layer.msg("用户设备异常，不能操作摄像头");
+        if (
+          !getUserInfoByMeet(ID) &&
+          ID != ZCRID_ &&
+          ID != roomDetail_.SpeakerID
+        ) {
+          layer.msg("不能对非本页用户进行操作");
           return;
-        }*/
+        }
         dakaiguanbishexiangtou(ID);
       }
     })
@@ -431,8 +441,12 @@ function addMemberView(ID, UserName) {
           layer.msg("不能对离线用户进行操作");
           return;
         }
-        if (!hasMe(ID) && ID != ZCRID_ && ID != roomDetail_.SpeakerID) {
-          layer.msg("不能对不在本页用户进行操作");
+        if (
+          !getUserInfoByMeet(ID) &&
+          ID != ZCRID_ &&
+          ID != roomDetail_.SpeakerID
+        ) {
+          layer.msg("不能对非本页用户进行操作");
           return;
         }
         dakaiguanbimaikefeng(ID);
@@ -445,10 +459,6 @@ function addMemberView(ID, UserName) {
       if (oneself_.IsZCR) {
         if (member.find(".member-id").attr("style").indexOf("7c7f85") > -1) {
           layer.msg("不能对离线用户进行操作");
-          return;
-        }
-        if (!hasMe(ID) && ID != ZCRID_ && ID != roomDetail_.SpeakerID) {
-          layer.msg("不能对不在本页用户进行操作");
           return;
         }
         shezhizhujiangren(ID);

@@ -65,9 +65,11 @@ async function change() {
   });
   tuisong();
   new_streams ? $("#zjr_mask").hide() : $("#zjr_mask").show();
-  !isMicOn && $("#mic_btn").click();
-  !isCamOn && $("#video_btn").click();
   showOrHide();
+
+  setTimeout(() => {
+    gengxinzhuangtai();
+  }, 500);
 }
 
 // 第一次进入的初始化
