@@ -98,19 +98,19 @@ chatHub.on("broadcastMessage", function (message, channelss) {
         display_layout.cols = state.split("*")[0];
         display_layout.rows = state.split("*")[0];
         display_layout.pageNo = 0;
-        viewsHandle();
+        tuisong();
         break;
       // 改变展示端当前分页
       case "34":
         var pageNo = mess.Data.State;
         display_layout.pageNo = pageNo - 1;
-        viewsHandle();
+        tuisong();
         break;
       // 改变参会端当前分页
       case "37":
         var pageNo = mess.Data.State;
         meet_layout.pageNo = pageNo - 1;
-        viewsHandle();
+        tuisong();
         break;
     }
   }

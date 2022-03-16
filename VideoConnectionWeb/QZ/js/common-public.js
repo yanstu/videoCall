@@ -189,6 +189,14 @@ function getUserInfoByName(UserName) {
   return roomDetail_.UserList.find((item) => item.UserName == UserName);
 }
 
+function getUserInfoByMeet(ID) {
+  return meet_layout.pageUserList.find((item) => item.ID == ID);
+}
+
+function getUserInfoByDisplay(ID) {
+  return display_layout.pageUserList.find((item) => item.ID == ID);
+}
+
 /**
  * 离开房间并关闭网页
  */
