@@ -431,10 +431,10 @@ function addMemberView(ID, UserName) {
           layer.msg("不能对离线用户进行操作");
           return;
         }
-        /*if (!rtc.members_.get(ID) && ZCRID_ != ID) {
-          layer.msg("用户设备异常，不能操作麦克风");
+        if (!hasMe(ID) && ID != ZCRID_ && ID != roomDetail_.SpeakerID) {
+          layer.msg("不能对不在本页用户进行操作");
           return;
-        }*/
+        }
         dakaiguanbimaikefeng(ID);
       }
     })
@@ -447,10 +447,10 @@ function addMemberView(ID, UserName) {
           layer.msg("不能对离线用户进行操作");
           return;
         }
-        /*if (!rtc.members_.get(ID) && ZCRID_ != ID) {
-          layer.msg("用户设备异常，不能设为主讲人");
+        if (!hasMe(ID) && ID != ZCRID_ && ID != roomDetail_.SpeakerID) {
+          layer.msg("不能对不在本页用户进行操作");
           return;
-        }*/
+        }
         shezhizhujiangren(ID);
       }
     }, 1200)
