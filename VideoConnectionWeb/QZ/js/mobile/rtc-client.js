@@ -423,7 +423,7 @@ class RtcClient {
             this.localStream_?.setVideoProfile("1080p");
           } else {
             var renshu = [6, 4, 2, 0];
-            var fenbianlv = ["240p", "360p", "480p", "720p"];
+            var fenbianlv = ["120p", "360p", "480p", "720p"];
             for (var i = 0; i < renshu.length; i++) {
               if (roomDetail_.UserList.length >= renshu[i]) {
                 this.localStream_?.setVideoProfile(fenbianlv[i]);

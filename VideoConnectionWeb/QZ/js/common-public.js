@@ -170,7 +170,7 @@ async function tuisong() {
 
 // 查询参会端与展示端当前是否包含该用户
 function hasMe(userId) {
-  layoutCompute();
+  meetLayoutCompute();
   displayLayoutCompute();
   var exits =
     meet_layout.pageUserList.find((user) => user.ID == userId) ||
@@ -340,4 +340,19 @@ function gengxinzhuangtai() {
   }
   videoHandle(isCamOn, oneself_.CHID);
   audioHandle(isMicOn, oneself_.CHID);
+}
+
+// 如果主讲人是手机端则对主讲人区域处理
+function objectFitHandle(userId) {
+  var objectFit = getUserInfo(userId).AspectRatio > 1 ? "contain" : "cover";
+  if (objectFit == "contain" && $("#video-grid").css("display") != "none") {
+    $("#zjr_box").removeClass("w-full");
+    $("#zjr_box").addClass("w-[80%]");
+    $("#video-grid").addClass("bg-[#24292e]");
+  } else {
+    $("#zjr_box").removeClass("w-[80%]");
+    $("#zjr_box").addClass("w-full");
+    $("#video-grid").removeClass("bg-[#24292e]");
+  }
+  return objectFit;
 }

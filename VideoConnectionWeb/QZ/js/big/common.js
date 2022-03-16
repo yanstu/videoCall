@@ -3,7 +3,7 @@
  */
 async function viewsHandle() {
   // 处理布局相关
-  layoutCompute();
+  meetLayoutCompute();
   // 用于翻页、取消主讲人、更改主讲人的处理，清空用户下面再添加进去
   resetViews();
   // 如果没有设置主讲人，设定主持人为主讲人视角
@@ -67,16 +67,8 @@ function change() {
   // 如果新的主持人也存在右侧小视频区域，右侧的小视频将显示遮罩
   hasMe(newZJRID) && $("#mask_" + newZJRID).show();
   // 判断是否为手机设备
-  var objectFit = getUserInfo(newZJRID).AspectRatio > 1 ? "contain" : "cover";
-  if (objectFit == "contain") {
-    $("#zjr_box").removeClass("w-full");
-    $("#zjr_box").addClass("w-[80%]");
-    $("#video-grid").addClass("bg-[#24292e]");
-  } else {
-    $("#zjr_box").removeClass("w-[80%]");
-    $("#zjr_box").addClass("w-full");
-    $("#video-grid").removeClass("bg-[#24292e]");
-  }
+  var objectFit = objectFitHandle(newZJRID);
+
   zjr_streams?.play("zjr_video", { objectFit });
   zjr_streams ? $("#zjr_mask").hide() : $("#zjr_mask").show();
   // 为新的主讲人取帧

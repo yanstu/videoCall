@@ -48,96 +48,6 @@ function showOrHide() {
   }
 }
 
-// 设置取消主讲人的处理
-async function changeViews() {
-  // 此处的ZJRID_代表上一个主讲人
-  // 此处的newZJRID代表新的主讲人ID，没有的话设定自己为假主讲人
-  var newZJRID = roomDetail_.SpeakerID || oneself_.CHID;
-
-  // 先停止上一个主持人的播放
-  if (ZJRID_ == oneself_.CHID) {
-    // 上一个主讲人是我，停止本地流
-    rePlay(rtc.localStream_, oneself_.CHID);
-  } else {
-    // 上一个主讲人是其他人，停止他的远程流
-    rePlay(rtc.members_.get(ZJRID_), ZJRID_);
-  }
-
-  function rePlay(stream, ID) {
-    $("#img_" + ID).hide();
-    stream?.stop();
-    if (hasMe(ID)) {
-      stream?.play("box_" + ID, { objectFit: "cover" });
-      // 如果远程流不存在，不在线，显示遮罩
-      stream ? $("#mask_" + ID).hide() : $("#mask_" + ID).show();
-    }
-  }
-  // 获取将要成为主讲人的那个远程流
-  var zjr_streams =
-    newZJRID == oneself_.CHID ? rtc.localStream_ : rtc.members_.get(newZJRID);
-  zjr_streams?.stop();
-
-  // 移除原主持人的相关信息
-  $(`#box_${newZJRID} .volume-level`).css("height", "0%");
-  $("#zjr_video [id^='profile_']").remove();
-  $("#zjr_video [id^='player_']").remove();
-  $("#zjr_video").append(
-    userInfoTemplate(newZJRID, getUserInfo(newZJRID).UserName)
-  );
-
-  // 如果新的主持人也存在右侧小视频区域，右侧的小视频将显示遮罩
-  hasMe(newZJRID) && $("#mask_" + newZJRID).show();
-
-  // 判断是否为手机设备
-  var objectFit = getUserInfo(newZJRID).AspectRatio > 1 ? "contain" : "cover";
-  if (objectFit == "contain") {
-    $("#zjr_box").removeClass("w-full");
-    $("#zjr_box").addClass("w-[80%]");
-    $("#video-grid").addClass("bg-[#24292e]");
-  } else {
-    $("#zjr_box").removeClass("w-[80%]");
-    $("#zjr_box").addClass("w-full");
-    $("#video-grid").removeClass("bg-[#24292e]");
-  }
-
-  zjr_streams?.play("zjr_video", { objectFit }).then(() => {
-    if (roomDetail_.SpeakerID == oneself_.CHID && meet_layout.aspectRatio > 1) {
-      meet_layout.aspectRatio =
-        $("#zjr_video").height() / $("#zjr_video").width();
-      fasongchangkuanbi();
-    }
-  });
-
-  tuisong();
-
-  // 主讲人的未推送远程流的话显示遮罩
-  zjr_streams ? $("#zjr_mask").hide() : $("#zjr_mask").show();
-  // 为新的主讲人取帧
-  zjr_streams && videoHandle(true, newZJRID);
-
-  $(`#zjr_mask img`).attr("src", `./img/camera-gray.png`);
-
-  // 将参与者列表清空
-  for (let user_ of roomDetail_.UserList) {
-    $("#member_" + user_.ID).remove();
-  }
-
-  // 重新添加至参与者列表，并进行排序
-  addMember();
-  if (oneself_.CHID == newZJRID) {
-    !isMicOn && $("#mic_btn").click();
-    !isCamOn && $("#video_btn").click();
-  }
-
-  ZJRID_ = newZJRID;
-  // 权限判断按钮显示或隐藏
-  showOrHide();
-
-  setTimeout(() => {
-    gengxinzhuangtai();
-  }, 1000);
-}
-
 // 添加当前页用户到页面
 function addViews() {
   for (let user_ of meet_layout.pageUserList) {
@@ -242,7 +152,7 @@ function addMember() {
 }
 
 // 布局计算，手机端不改变小视频区域网格布局
-function layoutCompute() {
+function meetLayoutCompute() {
   meet_layout.pageSize = meet_layout.rows * meet_layout.cols;
   meet_layout.percentage = 100 / meet_layout.rows;
   meet_layout.remainder = roomDetail_.UserList.length % meet_layout.pageSize;
