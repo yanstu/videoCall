@@ -59,8 +59,18 @@ console.error = (e) => {
     if (JSON.stringify(e)?.includes("前一个 join() 调用正在进行中")) {
       location.reload();
     }
-    if (JSON.stringify(e)?.includes("无法初始化共享流或推送本地流失败")) {
+    if (JSON.stringify(e)?.includes("无法初始化共享流")) {
       cameraInitError = true;
+      setTimeout(() => {
+        if (
+          oneself_?.CHID == roomDetail_?.SpeakerID ||
+          !roomDetail_?.SpeakerID
+        ) {
+          $("#zjr_mask").show();
+        } else {
+          $("#mask_" + oneself_.CHID).show();
+        }
+      }, 500);
     }
     if (JSON.stringify(e)?.includes("'elementId' is not found in the")) {
       return;

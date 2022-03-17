@@ -179,11 +179,12 @@ class RtcClient {
   }
 
   // 将用户播放到指定div容器
-  playVideo(stream, userId) {
+  async playVideo(stream, userId) {
     onlineOrOfline(true, userId);
     var videoVid = "box_" + userId;
     if (ZJRID_ == userId) videoVid = "zjr_video";
-    stream?.play(videoVid, {
+    await stream?.stop();
+    await stream?.play(videoVid, {
       objectFit: "cover",
     });
   }
