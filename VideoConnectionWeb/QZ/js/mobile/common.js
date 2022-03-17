@@ -3,10 +3,10 @@
  */
 async function viewsHandle() {
   // 修改主讲人
-  rtc.isJoined_ && change();
+  rtc?.isJoined_ && change();
   ZJRID_ = roomDetail_.SpeakerID || oneself_.CHID;
   // 初始化
-  !rtc.isJoined_ && init();
+  (!rtc || !rtc.isJoined_) && init();
 }
 
 async function change() {
@@ -63,7 +63,7 @@ async function change() {
   showOrHide();
 
   // 将新主讲人播放到主讲人容器
-  new_streams?.play("zjr_video", { objectFit: "cover" })
+  new_streams?.play("zjr_video", { objectFit: "cover" });
   new_streams ? $("#zjr_mask").hide() : $("#zjr_mask").show();
 
   tuisong();
