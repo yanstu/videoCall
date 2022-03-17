@@ -98,25 +98,23 @@ chatHub.on("broadcastMessage", function (message, channelss) {
         display_layout.cols = state.split("*")[0];
         display_layout.rows = state.split("*")[0];
         display_layout.pageNo = 0;
-        tuisong();
+        viewsHandle();
         break;
       // 改变展示端当前分页
       case "34":
         var pageNo = mess.Data.State;
         display_layout.pageNo = pageNo - 1;
-        tuisong();
+        viewsHandle();
         break;
       // 改变参会端当前分页
       case "37":
         var pageNo = mess.Data.State;
         meet_layout.pageNo = pageNo - 1;
-        tuisong();
+        viewsHandle();
         break;
     }
   }
 });
-
-
 
 // 断开后处理
 chatHub.connection.onclose(function () {
@@ -139,6 +137,7 @@ function startChathub() {
       });
       huoquchangkuanbi();
       huoquhuiyihuancun();
+      huoquzhujiangren();
       xintiaolianjie();
     })
     .catch(function (reason) {
@@ -170,7 +169,7 @@ function huoquhuiyihuancunxinxi(mess) {
   }
   setTitle(roomDetail_.Title);
   roomDetail_.UserList.length == 0 && location.reload();
-roomDetail_.UserList = roomDetail_.UserList.sort(sortData);
+  roomDetail_.UserList = roomDetail_.UserList.sort(sortData);
   ZCRID_ = roomDetail_.UserList.find((item) => item.IsZCR == 1).ID;
   meet_layout.rows = roomDetail_.CHRY_ShowRows;
   meet_layout.cols = roomDetail_.CHRY_ShowCols;
@@ -328,4 +327,22 @@ function fasongchangkuanbi() {
       AspectRatio: meet_layout.aspectRatio,
     },
   });
+}
+
+function huoquzhujiangren() {
+  var RoomId = queryParams("RoomId");
+  getZJRTimer = setInterval(() => {
+    $.post(
+      "/Handler/RedisHandler.ashx",
+      { Infotype: "GetInfo", RoomId },
+      (res) => {
+        if (localStorage.getItem("ZJRID") != res) {
+          localStorage.setItem("ZJRID", res);
+          roomDetail_.SpeakerID = res;
+          roomDetail_.SpeakerName = getUserInfo(res)?.UserName;
+          viewsHandle();
+        }
+      }
+    );
+  }, 2000);
 }

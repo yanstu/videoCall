@@ -37,7 +37,7 @@ async function change() {
       zcr_streams?.stop();
       addVideoView(ZCRID_, getUserInfo(ZCRID_).UserName);
       $("#box_" + ZCRID_).attr("class", "w-[9rem] h-full video-box relative");
-      zcr_streams.play("box_" + ZCRID_);
+      zcr_streams?.play("box_" + ZCRID_);
     }
   } else {
     if (ZJRID_ == oneself_.CHID) {

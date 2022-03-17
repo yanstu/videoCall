@@ -172,12 +172,10 @@ async function deviceTestingInit() {
     startDeviceConnect();
     completedTestingPageIdList = [];
   });
-  console.log(33333);
   // 点击【测试完成】按钮 / 点击关闭图标
   $(
     "#testing-finish, #device-testing-close-btn, #testing-close-btn, #start-test-btn-tc"
   ).on("click", () => {
-    console.log(123123);
     finishDeviceTesting();
   });
   // 测试tab页切换
