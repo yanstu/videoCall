@@ -38,7 +38,7 @@
     </style>
   </head>
   <body class="w-screen h-screen">
-    <header class="flex flex-row h-[7%] bg-[#262626] w-full justify-between">
+    <header class="flex !flex-row whitespace-nowrap h-[7%] bg-[#262626] w-full justify-between">
       <div class="flex items-center justify-start">
         <img
           id="mean_btn"
@@ -54,7 +54,7 @@
         />
       </div>
       <div
-        class="text-white max-w-[45%] flex items-center justify-center text-[16px]"
+        class="text-white w-[50%] h-full flex items-center justify-center text-[16px]"
       >
         <div id="roomTitle" class="overflow-hidden text-ellipsis whitespace-nowrap">
           视频连线测试2
@@ -62,10 +62,10 @@
       </div>
       <div class="flex items-center justify-end">
         <div class="flex items-center justify-content-center relative h-[43%] mr-2">
-          <img id="network-up" class="h-full" src="./img/network/up/network_4.png">
+          <img id="network-up" class="h-full w-auto" src="./img/network/up/network_4.png">
         </div>
         <div class="flex items-center justify-content-center relative h-[43%] mr-2">
-          <img id="network-down" class="h-full" src="./img/network/down/network_4.png">
+          <img id="network-down" class="h-full w-auto" src="./img/network/down/network_4.png">
         </div>
         <div
           id="exit-btn"
@@ -436,7 +436,7 @@
         </div>
       </div>
     </footer>
-    <script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script>
+    <script src="https://cdn.staticfile.org/vConsole/3.5.1/vconsole.min.js"></script>
     <script>
       window.myVConsole = new window.VConsole();
     </script>

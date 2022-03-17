@@ -67,6 +67,13 @@ console.error = (e) => {
     }
     if (
       JSON.stringify(e)?.includes(
+        "Cannot send data if the connection is not in the"
+      )
+    ) {
+      startChathub();
+    }
+    if (
+      JSON.stringify(e)?.includes(
         "failed to subscribe stream, reason: because the remote"
       )
     ) {

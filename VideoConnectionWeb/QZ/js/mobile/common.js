@@ -74,7 +74,7 @@ async function change() {
 }
 
 // 第一次进入的初始化
-function init() {
+async function init() {
   if (ZJRID_ == oneself_.CHID) {
     if (!roomDetail_.SpeakerID) {
       var zcr_streams = rtc.members_.get(ZCRID_);
@@ -98,7 +98,7 @@ function init() {
       userInfoTemplate(ZJRID_, getUserInfo(ZJRID_).UserName)
     );
   }
-  rtc.join();
+  await rtc.join();
 }
 
 // 点击小视频切换大视频

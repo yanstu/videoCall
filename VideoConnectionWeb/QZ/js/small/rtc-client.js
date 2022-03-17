@@ -386,29 +386,24 @@ class RtcClient {
         layer.msg("当前网络极差，请注意保持良好的网络连接", { icon: 5 });
       }
 
-      if (!this.isPublished_) {
-        // 如果没有推送则将自己的分辨率设为最高，因为没有推送到远程流，不会影响到网络
-        this.localStream_?.setVideoProfile("1080p");
-      } else {
-        // 如果网络极差，不管是不是主讲人也将分辨率调到极低
+      // 如果网络极差，不管是不是主讲人也将分辨率调到极低
+      if (event.uplinkNetworkQuality >= 4) {
+        this.localStream_?.setVideoProfile("180p");
         if (event.uplinkNetworkQuality >= 4) {
-          this.localStream_?.setVideoProfile("180p");
-          if (event.uplinkNetworkQuality >= 4) {
-            this.localStream_?.setVideoProfile("120p");
-          }
+          this.localStream_?.setVideoProfile("120p");
+        }
+      } else {
+        if (!roomDetail_.SpeakerID) {
+          this.localStream_?.setVideoProfile("480p");
+        } else if (roomDetail_.SpeakerID == oneself_.CHID) {
+          this.localStream_?.setVideoProfile("1080p");
         } else {
-          if (!roomDetail_.SpeakerID) {
-            this.localStream_?.setVideoProfile("480p");
-          } else if (roomDetail_.SpeakerID == oneself_.CHID) {
-            this.localStream_?.setVideoProfile("1080p");
-          } else {
-            var renshu = [6, 4, 2, 0];
-            var fenbianlv = ["120p", "360p", "480p", "720p"];
-            for (var i = 0; i < renshu.length; i++) {
-              if (roomDetail_.UserList.length >= renshu[i]) {
-                this.localStream_?.setVideoProfile(fenbianlv[i]);
-                break;
-              }
+          var renshu = [6, 4, 2, 0];
+          var fenbianlv = ["120p", "360p", "480p", "720p"];
+          for (var i = 0; i < renshu.length; i++) {
+            if (roomDetail_.UserList.length >= renshu[i]) {
+              this.localStream_?.setVideoProfile(fenbianlv[i]);
+              break;
             }
           }
         }
