@@ -365,7 +365,7 @@ function sortData(a, b) {
   return a.XUHAO - b.XUHAO;
 }
 
-// 获取主讲人的长宽比并推送
+// 获取主讲人的长宽比并
 function huoquchangkuanbi() {
   meet_layout.aspectRatio = $("#zjr_video").height() / $("#zjr_video").width();
   fasongchangkuanbi();

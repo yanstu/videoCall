@@ -290,13 +290,7 @@ function videoHandle(on, userId) {
 function setTitle(Title) {
   $("title").html(Title);
   $("#roomTitle").html(Title);
-  if (getOsType() == "desktop") {
-    var defualtSize = "1.8";
-    while ($("#roomTitle").width() / $("body").width() >= 0.82) {
-      defualtSize = defualtSize - 0.05
-      $("#roomTitle").css("font-size", defualtSize + "rem");
-    }
-  }
+  changeTitleFontSize();
 }
 
 /**
@@ -525,5 +519,15 @@ async function zhanshiduan_mode(state) {
         );
       }
       break;
+  }
+}
+
+function changeTitleFontSize() {
+  if (getOsType() == "desktop") {
+    var defualtSize = "1.8";
+    while ($("#roomTitle").width() / $("body").width() >= 0.82) {
+      defualtSize = defualtSize - 0.05;
+      $("#roomTitle").css("font-size", defualtSize + "rem");
+    }
   }
 }
