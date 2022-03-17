@@ -217,15 +217,6 @@ class RtcClient {
         if (!roomDetail_.SpeakerID || roomDetail_.SpeakerID == oneself_.CHID) {
           videoHandle(true, userId);
         }
-        if (
-          userId == oneself_.CHID &&
-          (hasMe(oneself_.CHID) || ZJRID_ == oneself_.CHID) &&
-          getUserInfo(oneself_.CHID).AspectRatio > 1
-        ) {
-          meet_layout.aspectRatio =
-            $("#" + videoVid).height() / $("#" + videoVid).width();
-          fasongchangkuanbi();
-        }
       });
     }
   }

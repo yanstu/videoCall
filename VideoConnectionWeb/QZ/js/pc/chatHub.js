@@ -159,6 +159,7 @@ function startChathub() {
       chatHub.invoke("createRedis", RoomId).catch(function (err) {
         return console.error(err.toString());
       });
+      huoquchangkuanbi();
       huoquhuiyihuancun();
       xintiaolianjie();
     })
@@ -166,8 +167,6 @@ function startChathub() {
       alert("SignalR connection failed: " + reason);
     });
 }
-
-
 
 /**
  * It sends a message to the redis server.
@@ -216,6 +215,7 @@ function huoquhuiyihuancunxinxi(mess) {
   }
   setTitle(roomDetail_.Title);
   roomDetail_.UserList.length == 0 && location.reload();
+  roomDetail_.UserList = roomDetail_.UserList.sort(sortData);
   ZCRID_ = roomDetail_.UserList.find((item) => item.IsZCR == 1).ID;
   meet_layout.rows = roomDetail_.CHRY_ShowRows;
   meet_layout.cols = roomDetail_.CHRY_ShowCols;

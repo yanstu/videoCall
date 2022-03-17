@@ -183,17 +183,9 @@ class RtcClient {
     onlineOrOfline(true, userId);
     var videoVid = "box_" + userId;
     if (ZJRID_ == userId) videoVid = "zjr_video";
-    stream
-      ?.play(videoVid, {
-        objectFit: "cover",
-      })
-      .then(() => {
-        if (userId == oneself_.CHID) {
-          meet_layout.aspectRatio =
-            $("#zjr_video").height() / $("#zjr_video").width();
-          fasongchangkuanbi();
-        }
-      });
+    stream?.play(videoVid, {
+      objectFit: "cover",
+    });
   }
 
   /**

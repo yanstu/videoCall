@@ -124,6 +124,7 @@ function startChathub() {
       chatHub.invoke("createRedis", RoomId).catch(function (err) {
         return console.error(err.toString());
       });
+      huoquchangkuanbi();
       huoquhuiyihuancun();
       xintiaolianjie();
       // 备用方案，防止redis缓存卡了
@@ -183,6 +184,7 @@ function huoquhuiyihuancunxinxi(mess) {
   }
   setTitle(roomDetail_.Title);
   roomDetail_.UserList.length == 0 && location.reload();
+roomDetail_.UserList = roomDetail_.UserList.sort(sortData);
   ZCRID_ = roomDetail_.UserList.find((item) => item.IsZCR == 1).ID;
   if (rtc.isPublished_) {
     return;

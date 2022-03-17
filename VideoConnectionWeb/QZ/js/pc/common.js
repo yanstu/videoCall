@@ -76,13 +76,7 @@ async function changeViews() {
   // 判断是否为手机设备
   var objectFit = objectFitHandle(newZJRID);
 
-  zjr_streams?.play("zjr_video", { objectFit }).then(() => {
-    if (roomDetail_.SpeakerID == oneself_.CHID && meet_layout.aspectRatio > 1) {
-      meet_layout.aspectRatio =
-        $("#zjr_video").height() / $("#zjr_video").width();
-      fasongchangkuanbi();
-    }
-  });
+  zjr_streams?.play("zjr_video", { objectFit })
 
   tuisong();
 

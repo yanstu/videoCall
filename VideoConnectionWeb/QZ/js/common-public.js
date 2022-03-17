@@ -358,3 +358,15 @@ function objectFitHandle(userId) {
   }
   return objectFit;
 }
+
+//对象排序
+function sortData(a, b) {
+  undefined;
+  return a.XUHAO - b.XUHAO;
+}
+
+// 获取主讲人的长宽比并推送
+function huoquchangkuanbi() {
+  meet_layout.aspectRatio = $("#zjr_video").height() / $("#zjr_video").width();
+  fasongchangkuanbi();
+}

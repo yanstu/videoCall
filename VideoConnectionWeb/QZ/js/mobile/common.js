@@ -63,13 +63,7 @@ async function change() {
   showOrHide();
 
   // 将新主讲人播放到主讲人容器
-  new_streams?.play("zjr_video", { objectFit: "cover" }).then(() => {
-    if (roomDetail_.SpeakerID == oneself_.CHID) {
-      meet_layout.aspectRatio =
-        $("#zjr_video").height() / $("#zjr_video").width();
-      fasongchangkuanbi();
-    }
-  });
+  new_streams?.play("zjr_video", { objectFit: "cover" })
   new_streams ? $("#zjr_mask").hide() : $("#zjr_mask").show();
 
   tuisong();
