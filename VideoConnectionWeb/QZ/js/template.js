@@ -35,7 +35,7 @@ function userInfoTemplate(userId, nickName) {
 function videoBoxTemplate(userId, nickName) {
   return `<div id="box_${userId}" class="${
     location.href.toLowerCase().includes("mobile")
-      ? "w-full h-full video-box relative"
+      ? "w-[9rem] h-full video-box relative"
       : "w-[99%] h-[99%] video-box relative border-[1px] border-[#5f6d7a] p-[2px]"
   }">
             <!-- “摄像头未开启”遮罩模板 -->

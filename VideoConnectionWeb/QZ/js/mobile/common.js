@@ -105,8 +105,7 @@ function init() {
 $("#video-grid").on("click", () => {
   if ($("#video-grid > div").length > 0) {
     $("#video-grid").attr("class", "w-full h-full video-box relative");
-    var uid = !roomDetail_.SpeakerID ? ZCRID_ : oneself_.CHID;
-    $("#box_" + uid).attr("class", "w-full h-full video-box relative");
+    $("[id^='box_']").attr("class", "w-full h-full video-box relative");
     $("#zjr_box").attr(
       "class",
       "box-border grid w-[9rem] h-[25%] absolute top-[8%] right-[1%] items-center z-10"
@@ -120,8 +119,7 @@ $("#zjr_video").on("click", () => {
       "class",
       "box-border grid w-[9rem] h-[25%] absolute top-[8%] right-[1%] items-center justify-center z-10"
     );
-    var uid = !roomDetail_.SpeakerID ? ZCRID_ : oneself_.CHID;
-    $("#box_" + uid).attr("class", "w-[9rem] h-full video-box relative");
+    $("[id^='box_']").attr("class", "w-[9rem] h-full video-box relative");
     $("#zjr_box").attr("class", "w-full h-full video-box relative");
   }
 });
