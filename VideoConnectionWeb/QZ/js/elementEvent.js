@@ -1,5 +1,6 @@
 (() => {
   $(window).resize(() => {
+    console.log(123);
     changeTitleFontSize();
   });
 
