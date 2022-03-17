@@ -42,7 +42,11 @@ function videoBoxTemplate(userId, nickName) {
             <div id="mask_${userId}" style="z-index: 8" class="mask top-0 left-0 justify-center col-div flex w-full h-full bg-[#24292e] items-center justify-items-center absolute flex-col">
               <img class="h-[40%]" src="./img/camera-gray.png" alt="" />
             </div>
-            <img id="img_${userId}" style="display: none;z-index: 9;" class="w-full h-full" src="" alt="">
+            ${
+              location.href.toLowerCase().includes("mobile")
+                ? ""
+                : 'location.href.toLowerCase().includes("mobile")'
+            }
             ${userInfoTemplate(userId, nickName)}
           </div>`;
 }

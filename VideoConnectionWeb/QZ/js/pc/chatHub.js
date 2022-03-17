@@ -170,7 +170,10 @@ function startChathub() {
  */
 function redisFB(data) {
   var RoomId = queryParams("RoomId");
-  chatHub.invoke("redisFB", RoomId, JSON.stringify(data));
+  chatHub.invoke("redisFB", RoomId, JSON.stringify(data)).catch(function (err) {
+    console.error(err);
+    startChathub();
+  });
 }
 
 // 收到申请发言的请求

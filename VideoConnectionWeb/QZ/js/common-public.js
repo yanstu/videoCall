@@ -341,7 +341,6 @@ function gengxinzhuangtai() {
   }
   videoHandle(isCamOn, oneself_.CHID);
   audioHandle(isMicOn, oneself_.CHID);
-  console.log(isMicOn);
 }
 
 // 如果主讲人是手机端则对主讲人区域处理
