@@ -470,19 +470,17 @@ async function zhanshiduan_mode(state) {
   switch (state) {
     case 1:
       // 展示端切换到主讲人模式
-
-      for (const stream of rtc.remoteStreams_) {
-        if (
-          stream.userId_ != roomDetail_.SpeakerID ||
-          (stream.userId_ == ZCRID_ && roomDetail_.SpeakerID)
-        ) {
-          await stream?.stop();
-          await rtc.client_.unsubscribe(stream);
-        }
-      }
-
       if (location.href.toLowerCase().includes("big")) {
         $("#video-grid").fadeOut();
+        for (const stream of rtc.remoteStreams_) {
+          if (
+            stream.userId_ != roomDetail_.SpeakerID ||
+            (stream.userId_ == ZCRID_ && roomDetail_.SpeakerID)
+          ) {
+            await stream?.stop();
+            await rtc.client_.unsubscribe(stream);
+          }
+        }
       } else {
         location.replace(
           location.origin +
@@ -497,14 +495,10 @@ async function zhanshiduan_mode(state) {
       }
       break;
     case 2:
-      for (const stream of rtc.remoteStreams_) {
-        await stream?.stop();
-        await rtc.client_.unsubscribe(stream);
-        await rtc.client_.subscribe(stream);
-      }
-
       // 展示端切换到主讲人+小视频模式
       if (location.href.toLowerCase().includes("big")) {
+        await rtc.leave();
+        await rtc.join();
         $("#video-grid").fadeIn();
       } else {
         location.replace(

@@ -65,6 +65,7 @@ chatHub.on("broadcastMessage", function (message, channelss) {
         break;
       // 操作显示端切换显示模式
       case "32":
+        display_layout.mode = mess.Data.State;
         zhanshiduan_mode(mess.Data.State);
         break;
     }
