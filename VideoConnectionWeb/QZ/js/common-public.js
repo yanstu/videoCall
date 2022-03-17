@@ -105,7 +105,7 @@ let display_layout = {
   // 当前页的用户列表
   pageUserList: [],
   // 显示模式 1.主讲人模式2.参会人模式3.小视频模式
-  // mode: 1,
+  mode: 2,
 };
 
 let ZCRID_ = "";
@@ -124,6 +124,8 @@ let xintiaoTimer = null;
 let pageTurnTimer = null;
 // 定时抽取主讲人帧
 let videoImgTimer = null;
+// 定时获取主讲人
+let getZJRTimer = null;
 
 /**
  * 解密获取房间信息

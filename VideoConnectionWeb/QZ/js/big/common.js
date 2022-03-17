@@ -38,15 +38,21 @@ async function viewsHandle() {
 }
 
 // 取消、修改主讲人的处理
-function change() {
+async function change() {
   // 此处的ZJRID_代表上一个主讲人
   // 此处的newZJRID代表新的主讲人ID，没有的话设定主持人为主讲人视角
   var newZJRID = roomDetail_.SpeakerID || ZCRID_;
+  if (newZJRID == ZJRID_) return;
   // 先停止上一个主持人的播放
   rePlay(rtc.members_.get(ZJRID_), ZJRID_);
-  function rePlay(stream, ID) {
+  async function rePlay(stream, ID) {
     $("#img_" + ID).hide();
     stream?.stop();
+    // 如果是主讲人模式，则取消订阅
+    if (display_layout.mode == 1) {
+      await rtc.client_.unsubscribe(stream);
+      return;
+    }
     if (hasMe(ID)) {
       stream?.play("box_" + ID, { objectFit: "cover" });
       // 如果远程流不存在，不在线，显示遮罩
@@ -69,7 +75,12 @@ function change() {
   // 判断是否为手机设备
   var objectFit = objectFitHandle(newZJRID);
 
-  zjr_streams?.play("zjr_video", { objectFit });
+  // 如果是主讲人模式，订阅新的主讲人的流
+  if (display_layout.mode == 1) {
+    await rtc.client_.subscribe(zjr_streams);
+  } else {
+    zjr_streams?.play("zjr_video", { objectFit });
+  }
   zjr_streams ? $("#zjr_mask").hide() : $("#zjr_mask").show();
   // 为新的主讲人取帧
   zjr_streams && videoHandle(true, newZJRID);

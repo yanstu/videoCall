@@ -286,9 +286,17 @@ function videoHandle(on, userId) {
   }
 }
 
+// 设置网页标题、网页页头标题
 function setTitle(Title) {
   $("title").html(Title);
   $("#roomTitle").html(Title);
+  if (getOsType() == "desktop") {
+    var defualtSize = "1.8";
+    while ($("#roomTitle").width() / $("body").width() >= 0.82) {
+      defualtSize = defualtSize - 0.05
+      $("#roomTitle").css("font-size", defualtSize + "rem");
+    }
+  }
 }
 
 /**
@@ -451,10 +459,21 @@ function onlineOrOfline(online, userId) {
 }
 
 // 展示端切换显示模式
-function zhanshiduan_mode(state) {
+async function zhanshiduan_mode(state) {
   switch (state) {
     case 1:
       // 展示端切换到主讲人模式
+
+      for (const stream of rtc.remoteStreams_) {
+        if (
+          stream.userId_ != roomDetail_.SpeakerID ||
+          (stream.userId_ == ZCRID_ && roomDetail_.SpeakerID)
+        ) {
+          await stream?.stop();
+          await rtc.client_.unsubscribe(stream);
+        }
+      }
+
       if (location.href.toLowerCase().includes("big")) {
         $("#video-grid").fadeOut();
       } else {
@@ -471,6 +490,12 @@ function zhanshiduan_mode(state) {
       }
       break;
     case 2:
+      for (const stream of rtc.remoteStreams_) {
+        await stream?.stop();
+        await rtc.client_.unsubscribe(stream);
+        await rtc.client_.subscribe(stream);
+      }
+
       // 展示端切换到主讲人+小视频模式
       if (location.href.toLowerCase().includes("big")) {
         $("#video-grid").fadeIn();
@@ -487,7 +512,7 @@ function zhanshiduan_mode(state) {
       }
       break;
     case 3:
-      // 参会端切换到小视频模式
+      // 展示端切换到小视频模式
       if (!location.href.toLowerCase().includes("small2")) {
         location.replace(
           location.origin +

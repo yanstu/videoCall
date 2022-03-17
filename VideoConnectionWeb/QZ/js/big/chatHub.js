@@ -36,6 +36,7 @@ chatHub.on("broadcastMessage", function (message, channelss) {
         break;
       // 操作显示端切换显示模式
       case "32":
+        display_layout.mode = mess.Data.State;
         zhanshiduan_mode(mess.Data.State);
         break;
     }
@@ -62,6 +63,7 @@ function startChathub() {
         return console.error(err.toString());
       });
       huoquhuiyihuancun();
+      // huoquzhujiangren();
     })
     .catch(function (reason) {
       alert("SignalR connection failed: " + reason);
@@ -99,6 +101,7 @@ function huoquhuiyihuancunxinxi(mess) {
   display_layout.pageNo = roomDetail_.XSDModel.Page - 1;
   display_layout.cols = roomDetail_.XSDModel.XSPFormat.split("*")[0];
   display_layout.rows = roomDetail_.XSDModel.XSPFormat.split("*")[0];
+  display_layout.mode = roomDetail_.XSDModel.Model;
   zhanshiduan_mode(roomDetail_.XSDModel.Model);
   viewsHandle();
 }
@@ -111,4 +114,25 @@ function huoquhuiyihuancun() {
   ajaxMethod("RedisHandler", { Infotype: "GetCache", RoomId }, (res) => {
     huoquhuiyihuancunxinxi(res);
   });
+}
+
+/**
+ * 发布获取主讲人信息
+ */
+function huoquzhujiangren() {
+  var RoomId = queryParams("RoomId");
+  getZJRTimer = setInterval(() => {
+    $.post(
+      "/Handler/RedisHandler.ashx",
+      { Infotype: "GetInfo", RoomId },
+      (res) => {
+        if (localStorage.getItem("ZJRID") != res) {
+          localStorage.setItem("ZJRID", res);
+          roomDetail_.SpeakerID = res;
+          roomDetail_.SpeakerName = getUserInfo(res)?.UserName;
+          change();
+        }
+      }
+    );
+  }, 2000);
 }

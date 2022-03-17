@@ -99,6 +99,13 @@ class RtcClient {
       const userId = remoteStream.getUserId();
       this.members_.set(userId, remoteStream);
       console.log(`${getUserInfo(userId)?.UserName} 推送远程流`);
+
+      if (display_layout.mode == 1 && userId != roomDetail_.SpeakerID) {
+        if (userId == ZCRID_ && !roomDetail_.SpeakerID) {
+          this.client_.subscribe(remoteStream);
+        }
+        return;
+      }
       this.client_.subscribe(remoteStream);
     });
 
