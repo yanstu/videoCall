@@ -2,6 +2,7 @@
  * 对视图进行处理
  */
 async function viewsHandle() {
+  meetLayoutCompute();
   displayLayoutCompute();
   // 用于翻页、取消主讲人、更改主讲人的处理，清空用户下面再添加进去
   resetViews();

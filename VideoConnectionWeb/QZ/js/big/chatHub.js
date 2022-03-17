@@ -91,11 +91,6 @@ function huoquhuiyihuancunxinxi(mess) {
   roomDetail_.UserList.length == 0 && location.reload();
   roomDetail_.UserList = roomDetail_.UserList.sort(sortData);
   ZCRID_ = roomDetail_.UserList.find((item) => item.IsZCR == 1).ID;
-  meet_layout.rows = roomDetail_.CHRY_ShowRows;
-  meet_layout.cols = roomDetail_.CHRY_ShowCols;
-  meet_layout.pageNo = roomDetail_.CHDModel.Page - 1;
-  display_layout.pageNo = roomDetail_.XSDModel.Page - 1;
-  initZSD();
   display_layout.mode = roomDetail_.XSDModel.Model;
   zhanshiduan_mode(roomDetail_.XSDModel.Model);
   viewsHandle();

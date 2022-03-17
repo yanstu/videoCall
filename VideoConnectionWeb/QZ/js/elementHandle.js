@@ -153,6 +153,9 @@ function addMember() {
 
 // 布局计算，手机端不改变小视频区域网格布局
 function meetLayoutCompute() {
+  meet_layout.rows = roomDetail_.CHRY_ShowRows;
+  meet_layout.cols = roomDetail_.CHRY_ShowCols;
+  meet_layout.pageNo = roomDetail_.CHDModel.Page - 1;
   meet_layout.pageSize = meet_layout.rows * meet_layout.cols;
   meet_layout.percentage = 100 / meet_layout.rows;
   meet_layout.remainder = roomDetail_.UserList.length % meet_layout.pageSize;
@@ -182,13 +185,26 @@ function meetLayoutCompute() {
 
 // 展示端布局计算，手机端不改变小视频区域网格布局
 function displayLayoutCompute() {
+  display_layout.pageNo = roomDetail_.XSDModel.Page - 1;
+  var rc = 5;
+  if (roomDetail_.XSDModel.Model != 3) {
+    rc = 0;
+  } else {
+    rc = roomDetail_.XSDModel.XSPFormat.split("*")[0];
+  }
+  display_layout.cols = rc;
+  display_layout.rows = rc;
   display_layout.pageSize = display_layout.rows * display_layout.cols;
-  display_layout.percentage = 100 / display_layout.rows;
+  display_layout.percentage =
+    display_layout.rows != 0 ? 100 / display_layout.rows : 0;
   display_layout.remainder =
-    roomDetail_.UserList.length % display_layout.pageSize;
-  display_layout.pageCount = Math.ceil(
-    roomDetail_.UserList.length / display_layout.pageSize
-  );
+    roomDetail_.UserList.length != 0
+      ? roomDetail_.UserList.length % display_layout.pageSize
+      : 0;
+  display_layout.pageCount =
+    roomDetail_.UserList.length != 0
+      ? Math.ceil(roomDetail_.UserList.length / display_layout.pageSize)
+      : 0;
   display_layout.count = roomDetail_.UserList.length;
   display_layout.pageUserList = roomDetail_.UserList.slice(
     display_layout.pageNo * display_layout.pageSize,
@@ -283,6 +299,14 @@ function videoHandle(on, userId) {
     }
   } else {
     on ? $("#mask_" + userId).hide() : $("#mask_" + userId).show();
+  }
+
+  if (on && location.href.toLowerCase().includes("mobile")) {
+    if ($(`#box_${userId} [id^='player_']`).length == 0) {
+      var stream =
+        userId == oneself_.CHID ? rtc.localStream_ : rtc.members_.get(userId);
+      zjr == userId ? stream?.play("zjr_video") : stream?.play("box_" + userId);
+    }
   }
 }
 
@@ -454,6 +478,7 @@ function onlineOrOfline(online, userId) {
 
 // 展示端切换显示模式
 async function zhanshiduan_mode(state) {
+  display_layout.mode = state;
   switch (state) {
     case 1:
       // 展示端切换到主讲人模式

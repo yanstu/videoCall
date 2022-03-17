@@ -57,10 +57,6 @@ chatHub.on("broadcastMessage", function (message, channelss) {
       case "12":
         huoquhuiyihuancunxinxi(mess);
         break;
-      // 获取用户缓存
-      case "14":
-        roomDetail_.UserList = mess.Data.UserList;
-        break;
       // 用户打开/关闭自己的摄像头
       case "05":
       // 打开/关闭用户的摄像头
@@ -171,12 +167,6 @@ function huoquhuiyihuancunxinxi(mess) {
   roomDetail_.UserList.length == 0 && location.reload();
   roomDetail_.UserList = roomDetail_.UserList.sort(sortData);
   ZCRID_ = roomDetail_.UserList.find((item) => item.IsZCR == 1).ID;
-  meet_layout.rows = roomDetail_.CHRY_ShowRows;
-  meet_layout.cols = roomDetail_.CHRY_ShowCols;
-  meet_layout.pageNo = roomDetail_.CHDModel.Page - 1;
-  display_layout.pageNo = roomDetail_.XSDModel.Page - 1;
-  display_layout.cols = roomDetail_.XSDModel.XSPFormat.split("*")[0];
-  display_layout.rows = roomDetail_.XSDModel.XSPFormat.split("*")[0];
   viewsHandle();
 }
 
@@ -296,6 +286,7 @@ function dakaiguanbimaikefeng(ReUserid) {
 
 // 心跳
 function xintiaolianjie() {
+  xintiaoTimer && clearInterval(xintiaoTimer);
   xintiaoTimer = setInterval(() => {
     redisFB({
       reCode: "25",

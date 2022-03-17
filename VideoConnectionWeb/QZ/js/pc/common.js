@@ -4,6 +4,7 @@
 async function viewsHandle() {
   // 处理布局相关
   meetLayoutCompute();
+  displayLayoutCompute();
   // 用于翻页、取消主讲人、更改主讲人的处理，清空用户下面再添加进去
   resetViews();
   // 为当前页用户循环添加至网页上
@@ -76,7 +77,7 @@ async function changeViews() {
   // 判断是否为手机设备
   var objectFit = objectFitHandle(newZJRID);
 
-  zjr_streams?.play("zjr_video", { objectFit })
+  zjr_streams?.play("zjr_video", { objectFit });
 
   tuisong();
 

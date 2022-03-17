@@ -4,6 +4,7 @@
 async function viewsHandle() {
   // 处理布局相关
   meetLayoutCompute();
+  displayLayoutCompute();
   // 用于翻页、取消主讲人、更改主讲人的处理，清空用户下面再添加进去
   resetViews();
   // 如果没有设置主讲人，设定主持人为主讲人视角

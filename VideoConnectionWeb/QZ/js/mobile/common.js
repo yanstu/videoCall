@@ -2,6 +2,8 @@
  * 对视图进行处理
  */
 async function viewsHandle() {
+  meetLayoutCompute();
+  displayLayoutCompute();
   // 修改主讲人
   rtc?.isJoined_ && change();
   ZJRID_ = roomDetail_.SpeakerID || oneself_.CHID;
