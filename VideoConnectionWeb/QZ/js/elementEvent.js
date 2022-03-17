@@ -245,7 +245,9 @@
   // 工具栏显示隐藏
   $("#mean_btn").on({
     click: function () {
-      $("#toolbar").fadeToggle();
+      $("#toolbar").css("display") == "none"
+        ? $("#toolbar").show()
+        : $("#toolbar").hide();
     },
   });
 

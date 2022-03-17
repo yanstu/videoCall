@@ -41,7 +41,7 @@ console.warn = (e) => {
     if (JSON.stringify(e)?.includes("reconnect successfully")) {
       isDisconnect = false;
       layer.msg("网络连接已恢复", { icon: 6 });
-      huoquhuiyihuancun();
+      huoquhuiyihuancun(true);
     }
     if (JSON.stringify(e)?.includes("devicesRemoved")) {
       layer.msg("摄像头设备已被拔出", { icon: 5 });
@@ -53,7 +53,7 @@ console.warn = (e) => {
   window.oldWarn(e);
 };
 window.oldError = console.error;
-console.error = (e) => {
+console.error = async (e) => {
   try {
     // 网络断开后trtc SDK会输出这句，所以可以断定为网络断开
     if (JSON.stringify(e)?.includes("前一个 join() 调用正在进行中")) {
@@ -88,6 +88,10 @@ console.error = (e) => {
       )
     ) {
       huoquhuiyihuancun();
+    }
+    if (JSON.stringify(e)?.includes("cannot switch device when publishing")) {
+      await this?.leave();
+      await this?.join();
     }
     if (JSON.stringify(e)?.includes("Could not start video source")) {
       $("#mask_" + oneself_?.CHID).show();

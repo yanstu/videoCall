@@ -45,7 +45,7 @@ function videoBoxTemplate(userId, nickName) {
             ${
               location.href.toLowerCase().includes("mobile")
                 ? ""
-                : 'location.href.toLowerCase().includes("mobile")'
+                : `<img id="img_${userId}" style="display: none;z-index: 9;" class="w-full h-full" src="" alt="">`
             }
             ${userInfoTemplate(userId, nickName)}
           </div>`;

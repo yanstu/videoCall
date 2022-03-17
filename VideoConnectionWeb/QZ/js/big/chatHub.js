@@ -78,7 +78,7 @@ function redisFB(data) {
 }
 
 // 接收到获取会议缓存信息
-function huoquhuiyihuancunxinxi(mess) {
+function huoquhuiyihuancunxinxi(mess, reconnect) {
   if (mess.reCode) {
     if (!mess.ReUserid || mess.Data.VideoConferenceMess.UserList.length == 0) {
       location.reload();
@@ -103,10 +103,10 @@ function huoquhuiyihuancunxinxi(mess) {
 /**
  * 发布获取会议缓存
  */
-function huoquhuiyihuancun() {
+function huoquhuiyihuancun(reconnect) {
   var RoomId = queryParams("RoomId");
   ajaxMethod("RedisHandler", { Infotype: "GetCache", RoomId }, (res) => {
-    huoquhuiyihuancunxinxi(res);
+    huoquhuiyihuancunxinxi(res, reconnect);
   });
 }
 
