@@ -338,10 +338,10 @@ function gengxinzhuangtai() {
   for (const state of states) {
     videoHandle(!state.videoMuted, state.userId);
     audioHandle(!state.audioMuted, state.userId);
-    console.log(!state.videoMuted);
   }
   videoHandle(isCamOn, oneself_.CHID);
   audioHandle(isMicOn, oneself_.CHID);
+  console.log(isMicOn);
 }
 
 // 如果主讲人是手机端则对主讲人区域处理
@@ -369,4 +369,20 @@ function sortData(a, b) {
 function huoquchangkuanbi() {
   meet_layout.aspectRatio = $("#zjr_video").height() / $("#zjr_video").width();
   fasongchangkuanbi();
+}
+
+// 初始化赋值翻页
+function initFenye() {
+  meet_layout.rows = roomDetail_.CHRY_ShowRows;
+  meet_layout.cols = roomDetail_.CHRY_ShowCols;
+  meet_layout.pageNo = roomDetail_.CHDModel.Page - 1;
+  display_layout.pageNo = roomDetail_.XSDModel.Page - 1;
+  var rc = 5;
+  if (roomDetail_.XSDModel.Model != 3) {
+    rc = 0;
+  } else {
+    rc = roomDetail_.XSDModel.XSPFormat.split("*")[0];
+  }
+  display_layout.cols = rc;
+  display_layout.rows = rc;
 }

@@ -22,15 +22,13 @@ async function viewsHandle() {
           user.ID == oneself_.CHID
             ? rtc.localStream_
             : rtc.members_.get(user.ID);
-        stream?.stop();
-        stream?.play("box_" + user.ID);
-        stream && videoHandle(true, user.ID);
-      } else {
-        if (rtc.members_.get(ZJRID_) || ZJRID_ == oneself_.CHID) {
-          videoHandle(true, ZJRID_);
-        }
+        await stream?.stop();
+        await stream?.play("box_" + user.ID);
       }
     }
+    setTimeout(() => {
+      gengxinzhuangtai();
+    }, 700);
   }
 }
 

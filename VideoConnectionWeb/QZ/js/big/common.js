@@ -28,13 +28,11 @@ async function viewsHandle() {
             : rtc.members_.get(user.ID);
         stream?.stop();
         stream?.play("box_" + user.ID);
-        stream && videoHandle(true, user.ID);
-      } else {
-        if (rtc.members_.get(ZJRID_) || ZJRID_ == oneself_.CHID) {
-          videoHandle(true, ZJRID_);
-        }
       }
     }
+    setTimeout(() => {
+      gengxinzhuangtai();
+    }, 700);
   }
 }
 
