@@ -1,4 +1,15 @@
 (() => {
+  $(window).resize(() => {
+    if (getOsType() == "desktop") {
+      var defualtSize = "1.8";
+      $("#roomTitle").css("font-size", defualtSize + "rem");
+      while ($("#roomTitle").width() / $("body").width() >= 0.82) {
+        defualtSize = defualtSize - 0.05;
+        $("#roomTitle").css("font-size", defualtSize + "rem");
+      }
+    }
+  });
+
   window.addEventListener("online", function () {
     layer.msg("网络连接已恢复！", { icon: 6 });
     isDisconnect = false;
