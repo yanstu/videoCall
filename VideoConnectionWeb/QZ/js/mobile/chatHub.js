@@ -137,7 +137,10 @@ function startChathub() {
       xintiaolianjie();
     })
     .catch(function (reason) {
-      alert("SignalR connection failed: " + reason);
+      console.log("断开尝试重新连接！");
+  setTimeout(function () {
+    startChathub();
+  }, 3000); //3秒后重新连接.
     });
 }
 
@@ -154,7 +157,7 @@ function redisFB(data) {
 }
 
 // 接收到获取会议缓存信息
-function huoquhuiyihuancunxinxi(mess) {
+function huoquhuiyihuancunxinxi(mess, reconnect) {
   if (mess.reCode) {
     if (!mess.ReUserid || mess.Data.VideoConferenceMess.UserList.length == 0) {
       location.reload();
@@ -170,16 +173,16 @@ function huoquhuiyihuancunxinxi(mess) {
   roomDetail_.UserList.length == 0 && location.reload();
   roomDetail_.UserList = roomDetail_.UserList.sort(sortData);
   ZCRID_ = roomDetail_.UserList.find((item) => item.IsZCR == 1).ID;
-  viewsHandle();
+  viewsHandle(reconnect);
 }
 
 /**
  * 发布获取会议缓存
  */
-function huoquhuiyihuancun() {
+function huoquhuiyihuancun(reconnect) {
   var RoomId = queryParams("RoomId");
   ajaxMethod("RedisHandler", { Infotype: "GetCache", RoomId }, (res) => {
-    huoquhuiyihuancunxinxi(res);
+    huoquhuiyihuancunxinxi(res, reconnect);
   });
 }
 

@@ -5,14 +5,14 @@ let zjr_box = "w-full h-full video-box relative";
 /**
  * 对视图进行处理
  */
-async function viewsHandle() {
+async function viewsHandle(reconnect) {
   meetLayoutCompute();
   displayLayoutCompute();
   // 修改主讲人
   rtc?.isJoined_ && change();
   ZJRID_ = roomDetail_.SpeakerID || oneself_.CHID;
   // 初始化
-  (!rtc || !rtc.isJoined_) && init();
+  (!rtc || !rtc.isJoined_ || reconnect) && init(reconnect);
 }
 
 async function change() {
@@ -83,7 +83,13 @@ async function change() {
 }
 
 // 第一次进入的初始化
-async function init() {
+async function init(reconnect) {
+  if (reconnect) {
+    resetViews();
+    $("#zjr_video [id^='profile_']").remove();
+    $("#zjr_video [id^='player_']").remove();
+  }
+
   if (ZJRID_ == oneself_.CHID) {
     if (!roomDetail_.SpeakerID) {
       var zcr_streams = rtc.members_.get(ZCRID_);
@@ -106,6 +112,9 @@ async function init() {
     $("#zjr_video").append(
       userInfoTemplate(ZJRID_, getUserInfo(ZJRID_).UserName)
     );
+  }
+  if (reconnect) {
+    await rtc.leave();
   }
   await rtc.join();
 }

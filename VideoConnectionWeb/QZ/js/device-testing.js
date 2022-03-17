@@ -81,7 +81,8 @@ const isSafari =
 const isFirefox = /Firefox/i.test(navigator.userAgent);
 
 // safari和firefox浏览器上检测不到扬声器设备
-const noVoiceDevice = isSafari || isFirefox;
+const noVoiceDevice =
+  isSafari || isFirefox || deviceType == DEVICE_TYPE_ENUM.MOBILE_IOS;
 noVoiceDevice && hideVoiceTesting();
 /**
  * safari和firefox浏览器中隐藏扬声器相关检测

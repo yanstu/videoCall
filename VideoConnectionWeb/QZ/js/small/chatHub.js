@@ -127,7 +127,10 @@ function startChathub() {
       // beiyongfangan(RoomId);
     })
     .catch(function (reason) {
-      alert("SignalR connection failed: " + reason);
+      console.log("断开尝试重新连接！");
+  setTimeout(function () {
+    startChathub();
+  }, 3000); //3秒后重新连接.
     });
 }
 
