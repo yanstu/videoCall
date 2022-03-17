@@ -131,16 +131,21 @@ function startChathub() {
     });
 }
 
-
-
 /**
  * It sends a message to the redis server.
  * @param data - The data to be sent to the client.
  */
 function redisFB(data) {
   var RoomId = queryParams("RoomId");
-  chatHub.invoke("redisFB", RoomId, JSON.stringify(data));
+  chatHub.invoke("redisFB", RoomId, JSON.stringify(data)).catch(function (err) {
+    console.error(err);
+    startChathub();
+  });
 }
+
+chatHub.on("errorServer", function (name) {
+  console.error(name);
+});
 
 // 收到申请发言的请求
 function huoqushenqingfayan(mess) {
@@ -180,7 +185,7 @@ function huoquhuiyihuancunxinxi(mess) {
   }
   setTitle(roomDetail_.Title);
   roomDetail_.UserList.length == 0 && location.reload();
-roomDetail_.UserList = roomDetail_.UserList.sort(sortData);
+  roomDetail_.UserList = roomDetail_.UserList.sort(sortData);
   ZCRID_ = roomDetail_.UserList.find((item) => item.IsZCR == 1).ID;
   if (rtc.isPublished_) {
     return;

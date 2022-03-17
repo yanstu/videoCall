@@ -197,14 +197,6 @@ function displayLayoutCompute() {
   display_layout.pageSize = display_layout.rows * display_layout.cols;
   display_layout.percentage =
     display_layout.rows != 0 ? 100 / display_layout.rows : 0;
-  display_layout.remainder =
-    roomDetail_.UserList.length != 0
-      ? roomDetail_.UserList.length % display_layout.pageSize
-      : 0;
-  display_layout.pageCount =
-    roomDetail_.UserList.length != 0
-      ? Math.ceil(roomDetail_.UserList.length / display_layout.pageSize)
-      : 0;
   display_layout.count = roomDetail_.UserList.length;
   display_layout.pageUserList = roomDetail_.UserList.slice(
     display_layout.pageNo * display_layout.pageSize,
@@ -215,6 +207,14 @@ function displayLayoutCompute() {
       : display_layout.pageNo * display_layout.pageSize +
           display_layout.remainder
   );
+  display_layout.remainder =
+    display_layout.pageSize != 0
+      ? roomDetail_.UserList.length % display_layout.pageSize
+      : 0;
+  display_layout.pageCount =
+    display_layout.pageSize != 0
+      ? Math.ceil(roomDetail_.UserList.length / display_layout.pageSize)
+      : 0;
 }
 
 // 清空小视频和主讲人盒子
