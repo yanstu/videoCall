@@ -37,6 +37,7 @@
   };
 
   $("#testing_btn").on("click", (e) => {
+    deviceTestingInit();
     startDeviceConnect();
   });
 
