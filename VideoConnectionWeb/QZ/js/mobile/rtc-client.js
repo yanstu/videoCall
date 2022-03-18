@@ -110,8 +110,7 @@ class RtcClient {
         location.reload();
       }
       if (JSON.stringify(error)?.includes("publish() is ongoing")) {
-        await this.unpublish();
-        await this.publish();
+        location.reload();
       }
     }
     this.isPublished_ = true;

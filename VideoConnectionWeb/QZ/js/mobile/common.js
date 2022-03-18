@@ -5,14 +5,14 @@ let zjr_box = "w-full h-full video-box relative";
 /**
  * 对视图进行处理
  */
-async function viewsHandle(reconnect) {
+async function viewsHandle() {
   meetLayoutCompute();
   displayLayoutCompute();
   // 修改主讲人
   rtc?.isJoined_ && change();
   ZJRID_ = roomDetail_.SpeakerID || oneself_.CHID;
   // 初始化
-  (!rtc || !rtc.isJoined_ || reconnect) && init(reconnect);
+  (!rtc || !rtc.isJoined_) && init();
 }
 
 async function change() {
@@ -20,7 +20,6 @@ async function change() {
   $("#video-grid").attr("class", video_grid);
   $("#zjr_box").attr("class", zjr_box);
 
-  // 如果当前没有主讲人，将主持人作为主讲人视角，如果主持人没有在线，将自己设为主讲人视角
   var newZJRID = roomDetail_.SpeakerID || oneself_.CHID;
 
   // 先停止上一个主讲人的远程流
@@ -35,14 +34,13 @@ async function change() {
   if (newZJRID == oneself_.CHID) {
     // 如果新的主讲人是我，清空小视频区域
     resetViews();
-    if (!roomDetail_.SpeakerID) {
-      var zcr_streams = rtc.members_.get(ZCRID_);
-      zcr_streams?.stop();
-      addVideoView(ZCRID_, getUserInfo(ZCRID_).UserName);
-      $("#box_" + ZCRID_).attr("class", "w-[9rem] h-full video-box relative");
-      rtc.client_.subscribe(zcr_streams);
-      // zcr_streams?.play("box_" + ZCRID_);
-    }
+
+    var zcr_streams = rtc.members_.get(ZCRID_);
+    zcr_streams?.stop();
+    addVideoView(ZCRID_, getUserInfo(ZCRID_).UserName);
+    $("#box_" + ZCRID_).attr("class", "w-[9rem] h-full video-box relative");
+    rtc.client_.subscribe(zcr_streams);
+    zcr_streams?.play("box_" + ZCRID_);
   } else {
     if (ZJRID_ == oneself_.CHID) {
       resetViews();
@@ -64,7 +62,7 @@ async function change() {
   $("#zjr_video").append(
     userInfoTemplate(newZJRID, getUserInfo(newZJRID).UserName)
   );
-  
+
   showOrHide();
 
   if (newZJRID != oneself_.CHID) {
@@ -97,12 +95,11 @@ async function init(reconnect) {
   }
 
   if (ZJRID_ == oneself_.CHID) {
-    if (!roomDetail_.SpeakerID) {
-      var zcr_streams = rtc.members_.get(ZCRID_);
-      zcr_streams?.stop();
-      addVideoView(ZCRID_, getUserInfo(ZCRID_).UserName);
-      $("#box_" + ZCRID_).attr("class", "w-[9rem] h-full video-box relative");
-    }
+    var zcr_streams = rtc.members_.get(ZCRID_);
+    zcr_streams?.stop();
+    addVideoView(ZCRID_, getUserInfo(ZCRID_).UserName);
+    $("#box_" + ZCRID_).attr("class", "w-[9rem] h-full video-box relative");
+
     $("#zjr_video").append(
       userInfoTemplate(ZJRID_, getUserInfo(ZJRID_).UserName)
     );
@@ -119,10 +116,15 @@ async function init(reconnect) {
       userInfoTemplate(ZJRID_, getUserInfo(ZJRID_).UserName)
     );
   }
+
   if (reconnect) {
-    await rtc.leave();
+    setTimeout(async () => {
+      await rtc.leave();
+      await rtc.join();
+    }, 1000);
+  } else {
+    await rtc.join();
   }
-  await rtc.join();
 
   setTimeout(() => {
     if (roomDetail_.SpeakerID != oneself_.CHID) {

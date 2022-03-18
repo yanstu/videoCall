@@ -6,6 +6,7 @@
   window.addEventListener("online", function () {
     layer.msg("网络连接已恢复！", { icon: 6 });
     isDisconnect = false;
+    huoquhuiyihuancun(true);
   });
   window.addEventListener("offline", function () {
     layer.msg("当前网络已断开", { icon: 5 });

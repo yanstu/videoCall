@@ -12,16 +12,6 @@ function queryParams(name) {
   return !match ? "" : decodeURIComponent(match[2]);
 }
 
-// 清除缓存
-/*if (!queryParams("t")) {
-  location.replace(
-    location.href +
-      (location.href.includes("?") ? "&" : "?") +
-      "t=" +
-      Math.random()
-  );
-}*/
-
 // 重写日志输出对象，限制输出内容
 window.oldLog = console.log;
 console.log = (e) => {
@@ -88,13 +78,6 @@ console.error = async (e) => {
       )
     ) {
       huoquhuiyihuancun();
-    }
-    if (
-      JSON.stringify(e)?.includes("cannot switch device when publishing") &&
-      deviceType == DEVICE_TYPE_ENUM.MOBILE_IOS
-    ) {
-      await rtc?.leave();
-      await rtc?.join();
     }
     if (JSON.stringify(e)?.includes("Could not start video source")) {
       $("#mask_" + oneself_?.CHID).show();
