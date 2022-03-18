@@ -132,6 +132,8 @@ let breakCount = 0;
 let fanyeHandler = {
   timer: null,
   num: 5,
+  shichang: 5,
+  disabled: false
 };
 
 /**

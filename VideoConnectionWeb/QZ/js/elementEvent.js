@@ -200,59 +200,49 @@
 
   // 点击上一页
   $("#shangyiye_btn").on("click", () => {
-    if (!fanyeHandler.timer) {
-      if (oneself_.IsZCR || location.href.toLowerCase().includes("small2")) {
-        var layout = location.href.toLowerCase().includes("small2")
-          ? display_layout
-          : meet_layout;
-        if (layout.pageNo == 0) {
-          layer.msg("不能再向上翻了");
-        } else {
-          fanye(layout.pageNo - 1);
-        }
+    if (!fanyeHandler.disabled) {
+      fanyeHandler.disabled = true;
+      var layout = location.href.toLowerCase().includes("small2")
+        ? display_layout
+        : meet_layout;
+      if (layout.pageNo == 0) {
+        layer.msg("不能再向上翻了");
       } else {
-        layer.msg("无权限");
+        fanye(layout.pageNo - 1);
       }
+      fanyeHandler.timer = setInterval(doLoop, 1000);
     }
-    fanyeHandler.timer = setInterval(() => {
-      $("#shangyiye_btn span").html(`上一页(${fanyeHandler.num--})`);
-      $("#xiayiye_btn span").html(`下一页(${fanyeHandler.num--})`);
-      if (fanyeHandler.num == 0) {
-        clearInterval(fanyeHandler.timer);
-        fanyeHandler.num == 0;
-        $("#shangyiye_btn span").html(`上一页`);
-        $("#xiayiye_btn span").html(`下一页`);
-      }
-    }, 1000);
   });
 
   // 点击上一页
   $("#xiayiye_btn").on("click", () => {
-    if (!fanyeHandler.timer) {
-      if (oneself_.IsZCR || location.href.toLowerCase().includes("small2")) {
-        var layout = location.href.toLowerCase().includes("small2")
-          ? display_layout
-          : meet_layout;
-        if (layout.pageNo + 1 == layout.pageCount) {
-          layer.msg("不能再向下翻了");
-        } else {
-          fanye(layout.pageNo + 1);
-        }
+    if (!fanyeHandler.disabled) {
+      fanyeHandler.disabled = true;
+      var layout = location.href.toLowerCase().includes("small2")
+        ? display_layout
+        : meet_layout;
+      if (layout.pageNo + 1 == layout.pageCount) {
+        layer.msg("不能再向下翻了");
       } else {
-        layer.msg("无权限");
+        fanye(layout.pageNo + 1);
       }
+      fanyeHandler.timer = setInterval(doLoop, 1000);
     }
-    fanyeHandler.timer = setInterval(() => {
-      $("#shangyiye_btn span").html(`上一页(${fanyeHandler.num--})`);
-      $("#xiayiye_btn span").html(`下一页(${fanyeHandler.num--})`);
-      if (fanyeHandler.num == 0) {
-        clearInterval(fanyeHandler.timer);
-        fanyeHandler.num == 0;
-        $("#shangyiye_btn span").html(`上一页`);
-        $("#xiayiye_btn span").html(`下一页`);
-      }
-    }, 1000);
   });
+
+  function doLoop() {
+    fanyeHandler.num--;
+    if (fanyeHandler.num > 0) {
+      $("#shangyiye_btn span").html(`上一页(${fanyeHandler.num})`);
+      $("#xiayiye_btn span").html(`下一页(${fanyeHandler.num})`);
+    } else {
+      clearInterval(fanyeHandler.timer); //清除js定时器
+      fanyeHandler.disabled = false;
+      $("#shangyiye_btn span").html(`上一页`);
+      $("#xiayiye_btn span").html(`下一页`);
+      fanyeHandler.num = fanyeHandler.shichang;
+    }
+  }
 
   // 退出按钮事件
   $("#exit-btn").on({
