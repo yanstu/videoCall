@@ -32,6 +32,7 @@ console.warn = (e) => {
       isDisconnect = false;
       layer.msg("网络连接已恢复", { icon: 6 });
       huoquhuiyihuancun(true);
+      startChathub();
     }
     if (JSON.stringify(e)?.includes("devicesRemoved")) {
       layer.msg("摄像头设备已被拔出", { icon: 5 });

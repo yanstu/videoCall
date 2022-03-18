@@ -123,7 +123,7 @@ function chathubReConnect() {
   setTimeout(function () {
     startChathub();
   }, 3000);
-  if (breakCount > 10) {
+  if (breakCount > 5) {
     location.reload();
   }
 }
@@ -132,21 +132,17 @@ startChathub();
 
 // 调用服务端方法
 function startChathub() {
-  chatHub
-    .start()
-    .then(function () {
-      var RoomId = queryParams("RoomId");
-      chatHub.invoke("createRedis", RoomId).catch(function (err) {
-        return console.error(err.toString());
-      });
-      huoquchangkuanbi();
-      huoquhuiyihuancun();
-      huoquzhujiangren();
-      xintiaolianjie();
-    })
-    .catch(function () {
-      chathubReConnect();
+  chatHub.start().then(function () {
+    chathubIsBreak = false;
+    var RoomId = queryParams("RoomId");
+    chatHub.invoke("createRedis", RoomId).catch(function (err) {
+      return console.error(err.toString());
     });
+    huoquchangkuanbi();
+    huoquhuiyihuancun();
+    huoquzhujiangren();
+    xintiaolianjie();
+  });
 }
 
 /**
@@ -157,7 +153,7 @@ function redisFB(data) {
   var RoomId = queryParams("RoomId");
   chatHub.invoke("redisFB", RoomId, JSON.stringify(data)).catch(function (err) {
     console.error(err);
-    chathubReConnect();
+    // chathubReConnect();
   });
 }
 

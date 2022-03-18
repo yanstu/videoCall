@@ -7,6 +7,7 @@
     layer.msg("网络连接已恢复！", { icon: 6 });
     isDisconnect = false;
     huoquhuiyihuancun(true);
+    startChathub();
   });
   window.addEventListener("offline", function () {
     layer.msg("当前网络已断开", { icon: 5 });

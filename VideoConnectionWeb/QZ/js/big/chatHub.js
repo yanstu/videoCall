@@ -50,7 +50,7 @@ function chathubReConnect() {
   setTimeout(function () {
     startChathub();
   }, 3000);
-  if (breakCount > 10) {
+  if (breakCount > 5) {
     location.reload();
   }
 }
