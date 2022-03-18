@@ -170,13 +170,18 @@ class RtcClient {
    * 切换摄像头
    */
   changeCameraId() {
-    this.localStream_?.switchDevice("video", cameraId).then(async () => {
-      console.log("切换摄像头成功");
-      if (deviceType == DEVICE_TYPE_ENUM.MOBILE_IOS) {
-        await this?.leave();
-        await this?.join();
-      }
-    });
+    this.localStream_
+      ?.switchDevice("video", cameraId)
+      .then(async () => {
+        console.log("切换摄像头成功");
+        if (deviceType == DEVICE_TYPE_ENUM.MOBILE_IOS) {
+          await this?.leave();
+          await this?.join();
+        }
+      })
+      .catch((res) => {
+        console.log("----------------------" + res);
+      });
   }
 
   /**
