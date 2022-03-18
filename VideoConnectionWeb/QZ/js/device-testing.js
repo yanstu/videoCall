@@ -81,8 +81,7 @@ const isSafari =
 const isFirefox = /Firefox/i.test(navigator.userAgent);
 
 // safari和firefox浏览器上检测不到扬声器设备
-const noVoiceDevice =
-  isSafari || isFirefox || deviceType == DEVICE_TYPE_ENUM.MOBILE_IOS;
+const noVoiceDevice = isSafari || isFirefox;
 noVoiceDevice && hideVoiceTesting();
 /**
  * safari和firefox浏览器中隐藏扬声器相关检测
@@ -127,7 +126,9 @@ async function deviceTestingInit() {
     $("#camera-testing-body").hide();
     localStream.close();
     // safari和firefox浏览器跳过扬声器检测
-    noVoiceDevice ? startMicTesting() : startVoiceTesting();
+    noVoiceDevice || deviceType == DEVICE_TYPE_ENUM.MOBILE_IOS
+      ? startMicTesting()
+      : startVoiceTesting();
   });
   $("#reload").on("click", function () {
     location.reload();

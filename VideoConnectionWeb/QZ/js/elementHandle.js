@@ -289,17 +289,15 @@ function videoHandle(on, userId) {
     on ? $("#mask_" + userId).hide() : $("#mask_" + userId).show();
   }
 
-  /*if (on && location.href.toLowerCase().includes("mobile")) {
-    if (
-      $(`#box_${userId} [id^='player_']`).length == 0 ||
-      $(`#zjr_video [id^='player_']`).length == 0
-    ) {
-      var stream =
-        userId == oneself_.CHID ? rtc.localStream_ : rtc.members_.get(userId);
+  if (on && location.href.toLowerCase().includes("mobile")) {
+    if (userId != oneself_.CHID) {
+      var stream = rtc.members_.get(userId);
       stream?.stop();
-      zjr == userId ? stream?.play("zjr_video") : stream?.play("box_" + userId);
+      roomDetail_.SpeakerID == userId
+        ? stream?.play("zjr_video")
+        : stream?.play("box_" + userId);
     }
-  }*/
+  }
 }
 
 // 设置网页标题、网页页头标题
