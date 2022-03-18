@@ -284,7 +284,7 @@ async function getDevicesInfo() {
     }
   });
   // 如果是无法进行扬声器检测的浏览器，设置为true
-  if (noVoiceDevice) {
+  if (noVoiceDevice || deviceType == DEVICE_TYPE_ENUM.MOBILE_IOS) {
     hasVoiceDevice = true;
     hasVoiceConnect = true;
   } else {
@@ -362,9 +362,7 @@ function getDeviceConnectInfo() {
   if (!(hasCameraDevice && hasMicDevice && hasVoiceDevice)) {
     connectInfo = `未检测到${hasCameraDevice ? "" : "【摄像头】"}${
       hasVoiceDevice ? "" : "【扬声器】"
-    }${hasMicDevice ? "" : "【麦克风】"}设备，请检查设备连接${
-      !hasVoiceDevice ? "\n苹果设备请忽略" : ""
-    }`;
+    }${hasMicDevice ? "" : "【麦克风】"}设备，请检查设备连接`;
     return connectInfo;
   }
   ``;

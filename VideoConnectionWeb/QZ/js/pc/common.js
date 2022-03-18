@@ -24,6 +24,7 @@ async function viewsHandle() {
             : rtc.members_.get(user.ID);
         await stream?.stop();
         await stream?.play("box_" + user.ID);
+        $("#img_" + user.ID).hide();
       }
     }
     setTimeout(() => {

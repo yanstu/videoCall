@@ -159,11 +159,11 @@ function startChathub() {
       huoquhuiyihuancun();
       xintiaolianjie();
     })
-    .catch(function (reason) {
+    .catch(function () {
       console.log("断开尝试重新连接！");
-  setTimeout(function () {
-    startChathub();
-  }, 3000); //3秒后重新连接.
+      setTimeout(function () {
+        startChathub();
+      }, 3000); //3秒后重新连接.
     });
 }
 
@@ -219,7 +219,7 @@ function huoquhuiyihuancunxinxi(mess) {
   roomDetail_.UserList.length == 0 && location.reload();
   roomDetail_.UserList = roomDetail_.UserList.sort(sortData);
   ZCRID_ = roomDetail_.UserList.find((item) => item.IsZCR == 1).ID;
-  initFenye()
+  initFenye();
   viewsHandle();
 }
 
@@ -368,6 +368,7 @@ function dakaiguanbimaikefeng(ReUserid) {
 
 // 心跳
 function xintiaolianjie() {
+  xintiaoTimer && clearInterval(xintiaoTimer);
   xintiaoTimer = setInterval(() => {
     redisFB({
       reCode: "25",

@@ -89,9 +89,12 @@ console.error = async (e) => {
     ) {
       huoquhuiyihuancun();
     }
-    if (JSON.stringify(e)?.includes("cannot switch device when publishing")) {
-      await this?.leave();
-      await this?.join();
+    if (
+      JSON.stringify(e)?.includes("cannot switch device when publishing") &&
+      deviceType == DEVICE_TYPE_ENUM.MOBILE_IOS
+    ) {
+      await rtc?.leave();
+      await rtc?.join();
     }
     if (JSON.stringify(e)?.includes("Could not start video source")) {
       $("#mask_" + oneself_?.CHID).show();

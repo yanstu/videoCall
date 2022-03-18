@@ -341,6 +341,7 @@ function dakaiguanbimaikefeng(ReUserid) {
 
 // 心跳
 function xintiaolianjie() {
+  xintiaoTimer && clearInterval(xintiaoTimer);
   xintiaoTimer = setInterval(() => {
     redisFB({
       reCode: "25",

@@ -75,6 +75,11 @@ async function change() {
 
   new_streams ? $("#zjr_mask").hide() : $("#zjr_mask").show();
 
+  if (oneself_.CHID == newZJRID) {
+    !isMicOn && $("#mic_btn").click();
+    !isCamOn && $("#video_btn").click();
+  }
+
   tuisong();
 
   setTimeout(() => {
