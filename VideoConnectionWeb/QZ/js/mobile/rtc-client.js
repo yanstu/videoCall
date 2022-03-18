@@ -107,8 +107,7 @@ class RtcClient {
       console.error("推送本地流失败" + error);
       this.isPublished_ = false;
       if (JSON.stringify(error)?.includes("is not initialized or is")) {
-        await this?.leave();
-        await this?.join();
+        location.reload();
       }
     }
     this.isPublished_ = true;

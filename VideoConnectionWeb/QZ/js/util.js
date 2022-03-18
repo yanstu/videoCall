@@ -350,5 +350,12 @@ function getNowTime() {
   var hour = date.getHours();
   var minute = date.getMinutes();
   var second = date.getSeconds();
-  return `${year}-${formatZero(month)}-${formatZero(day)} ${formatZero(hour)}:${formatZero(minute)}:${formatZero(second)}`;
+  return `${year}-${formatZero(month)}-${formatZero(day)} ${formatZero(
+    hour
+  )}:${formatZero(minute)}:${formatZero(second)}`;
+}
+
+async function test() {
+  const stats = await rtc.client_.getRemoteVideoStats("main");
+  console.log(stats);
 }

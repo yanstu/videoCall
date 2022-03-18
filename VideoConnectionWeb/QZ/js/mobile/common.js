@@ -64,6 +64,7 @@ async function change() {
   $("#zjr_video").append(
     userInfoTemplate(newZJRID, getUserInfo(newZJRID).UserName)
   );
+  
   showOrHide();
 
   if (newZJRID != oneself_.CHID) {

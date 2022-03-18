@@ -528,6 +528,9 @@ function changeTitleFontSize() {
     while ($("#roomTitle").width() / $("body").width() >= 0.82) {
       defualtSize = defualtSize - 0.05;
       $("#roomTitle").css("font-size", defualtSize + "rem");
+      if (defualtSize <= 0.1) {
+        break;
+      }
     }
   }
 }
