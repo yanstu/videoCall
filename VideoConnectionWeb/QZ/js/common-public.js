@@ -126,6 +126,8 @@ let pageTurnTimer = null;
 let videoImgTimer = null;
 // 定时获取主讲人
 let getZJRTimer = null;
+// 心跳连接断开次数
+let breakCount = 0;
 
 /**
  * 解密获取房间信息

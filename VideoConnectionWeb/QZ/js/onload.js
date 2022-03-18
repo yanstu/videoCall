@@ -80,7 +80,7 @@ console.error = async (e) => {
         "Cannot send data if the connection is not in the"
       )
     ) {
-      startChathub();
+      chathubReConnect();
     }
     if (
       JSON.stringify(e)?.includes(

@@ -114,11 +114,19 @@ chatHub.on("broadcastMessage", function (message, channelss) {
 
 // 断开后处理
 chatHub.connection.onclose(function () {
+  chathubReConnect();
+});
+
+function chathubReConnect() {
+  breakCount++;
   console.log("断开尝试重新连接！");
   setTimeout(function () {
     startChathub();
-  }, 3000); //3秒后重新连接.
-});
+  }, 3000);
+  if (breakCount > 10) {
+    location.reload();
+  }
+}
 
 startChathub();
 
@@ -136,11 +144,8 @@ function startChathub() {
       huoquzhujiangren();
       xintiaolianjie();
     })
-    .catch(function (reason) {
-      console.log("断开尝试重新连接！");
-  setTimeout(function () {
-    startChathub();
-  }, 3000); //3秒后重新连接.
+    .catch(function () {
+      chathubReConnect();
     });
 }
 
@@ -152,7 +157,7 @@ function redisFB(data) {
   var RoomId = queryParams("RoomId");
   chatHub.invoke("redisFB", RoomId, JSON.stringify(data)).catch(function (err) {
     console.error(err);
-    startChathub();
+    chathubReConnect();
   });
 }
 
