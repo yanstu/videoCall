@@ -197,9 +197,8 @@
   );
 
   // 点击上一页
-  $("#shangyiye_btn").on(
-    "click",
-    clickProof(() => {
+  $("#shangyiye_btn").on("click", () => {
+    if (!fanyeHandler.timer) {
       if (oneself_.IsZCR || location.href.toLowerCase().includes("small2")) {
         var layout = location.href.toLowerCase().includes("small2")
           ? display_layout
@@ -212,13 +211,22 @@
       } else {
         layer.msg("无权限");
       }
-    })
-  );
+    }
+    fanyeHandler.timer = setInterval(() => {
+      $("#shangyiye_btn span").html(`上一页(${fanyeHandler.num--})`);
+      $("#xiayiye_btn span").html(`下一页(${fanyeHandler.num--})`);
+      if (fanyeHandler.num == 0) {
+        clearInterval(fanyeHandler.timer);
+        fanyeHandler.num == 0;
+        $("#shangyiye_btn span").html(`上一页`);
+        $("#xiayiye_btn span").html(`下一页`);
+      }
+    }, 1000);
+  });
 
   // 点击上一页
-  $("#xiayiye_btn").on(
-    "click",
-    clickProof(() => {
+  $("#xiayiye_btn").on("click", () => {
+    if (!fanyeHandler.timer) {
       if (oneself_.IsZCR || location.href.toLowerCase().includes("small2")) {
         var layout = location.href.toLowerCase().includes("small2")
           ? display_layout
@@ -231,8 +239,18 @@
       } else {
         layer.msg("无权限");
       }
-    })
-  );
+    }
+    fanyeHandler.timer = setInterval(() => {
+      $("#shangyiye_btn span").html(`上一页(${fanyeHandler.num--})`);
+      $("#xiayiye_btn span").html(`下一页(${fanyeHandler.num--})`);
+      if (fanyeHandler.num == 0) {
+        clearInterval(fanyeHandler.timer);
+        fanyeHandler.num == 0;
+        $("#shangyiye_btn span").html(`上一页`);
+        $("#xiayiye_btn span").html(`下一页`);
+      }
+    }, 1000);
+  });
 
   // 退出按钮事件
   $("#exit-btn").on({

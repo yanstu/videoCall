@@ -109,6 +109,10 @@ class RtcClient {
       if (JSON.stringify(error)?.includes("is not initialized or is")) {
         location.reload();
       }
+      if (JSON.stringify(error)?.includes("publish() is ongoing")) {
+        await this.unpublish();
+        await this.publish();
+      }
     }
     this.isPublished_ = true;
   }

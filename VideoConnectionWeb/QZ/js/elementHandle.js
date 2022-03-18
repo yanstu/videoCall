@@ -260,6 +260,10 @@ function videoHandle(on, userId) {
       function getImg() {
         setTimeout(() => {
           img = stream?.getVideoFrame();
+          if (!img) {
+            $("#mask_" + userId).show();
+            return;
+          }
           if (img != "data:,") {
             $("#mask_" + userId).hide();
             $("#img_" + userId)
@@ -286,6 +290,7 @@ function videoHandle(on, userId) {
       $("#mask_" + userId).show();
     }
   } else {
+    $("#img_" + userId).hide();
     on ? $("#mask_" + userId).hide() : $("#mask_" + userId).show();
   }
 }

@@ -313,7 +313,7 @@ function xintiaolianjie() {
         MicState: isMicOn ? "1" : "0",
       },
     });
-  }, 2 * 1000);
+  }, 1500);
 }
 
 function fasongchangkuanbi() {

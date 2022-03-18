@@ -128,6 +128,11 @@ let videoImgTimer = null;
 let getZJRTimer = null;
 // 心跳连接断开次数
 let breakCount = 0;
+// 翻页控制器
+let fanyeHandler = {
+  timer: null,
+  num: 5,
+};
 
 /**
  * 解密获取房间信息
