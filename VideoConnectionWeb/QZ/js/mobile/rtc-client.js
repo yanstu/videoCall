@@ -166,8 +166,10 @@ class RtcClient {
   changeCameraId() {
     this.localStream_?.switchDevice("video", cameraId).then(async () => {
       console.log("切换摄像头成功");
-      await this?.leave();
-      await this?.join();
+      if (deviceType == DEVICE_TYPE_ENUM.MOBILE_IOS) {
+        await this?.leave();
+        await this?.join();
+      }
     });
   }
 
@@ -298,19 +300,6 @@ class RtcClient {
       this.remoteStreams_ = this.remoteStreams_.filter((stream) => {
         return stream.getId() !== id;
       });
-    });
-
-    /* The above code is listening for a stream-updated event. When a stream-updated event is received,
-    the code checks to see if the stream has video. If the stream does not have video, the code sets
-    the src attribute of the video button to "img/camera-off.png". */
-    this.client_.on("stream-updated", (evt) => {
-      const remoteStream = evt.stream;
-      /*let uid = this.getUidByStreamId(remoteStream.getId());
-      if (!remoteStream.hasVideo()) {
-        $("#" + uid)
-          .find(".member-video_btn")
-          .attr("src", "img/camera-off.png");
-      }*/
     });
 
     /* This code is listening for a mute-audio event from the client. When it receives the event, it

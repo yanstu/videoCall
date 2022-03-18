@@ -117,6 +117,18 @@ async function init(reconnect) {
     await rtc.leave();
   }
   await rtc.join();
+
+  setTimeout(() => {
+    if (roomDetail_.SpeakerID != oneself_.CHID) {
+      var stream = rtc.members_.get(roomDetail_.SpeakerID);
+      stream?.stop();
+      stream?.play("zjr_video");
+    } else {
+      var stream = rtc.members_.get(ZCRID_);
+      stream?.stop();
+      stream?.play("box_" + ZCRID_);
+    }
+  }, 1000);
 }
 
 // 点击小视频切换大视频
