@@ -82,7 +82,7 @@ function chathubReConnect() {
   console.log("断开尝试重新连接！");
   setTimeout(function () {
     startChathub();
-  }, 3000);
+  }, 2000);
   if (breakCount > 5) {
     location.reload();
   }
@@ -113,7 +113,6 @@ function startChathub() {
 function redisFB(data) {
   var RoomId = queryParams("RoomId");
   chatHub.invoke("redisFB", RoomId, JSON.stringify(data)).catch(function (err) {
-    console.error(err);
     chathubReConnect;
   });
 }
