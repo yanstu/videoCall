@@ -81,19 +81,15 @@ async function change() {
 
   tuisong();
 
+  beiyongfangan();
+
   setTimeout(() => {
     gengxinzhuangtai();
   }, 1000);
 }
 
 // 第一次进入的初始化
-async function init(reconnect) {
-  if (reconnect) {
-    resetViews();
-    $("#zjr_video [id^='profile_']").remove();
-    $("#zjr_video [id^='player_']").remove();
-  }
-
+async function init() {
   if (ZJRID_ == oneself_.CHID) {
     var zcr_streams = rtc.members_.get(ZCRID_);
     zcr_streams?.stop();
@@ -117,19 +113,18 @@ async function init(reconnect) {
     );
   }
 
-  if (reconnect) {
-    setTimeout(async () => {
-      await rtc.leave();
-      await rtc.join();
-    }, 1000);
-  } else {
-    await rtc.join();
-  }
+  await rtc.join();
 
+  beiyongfangan();
+}
+
+// 针对手机端的备用方案
+function beiyongfangan() {
   setTimeout(() => {
     if (roomDetail_.SpeakerID != oneself_.CHID) {
       var stream = rtc.members_.get(roomDetail_.SpeakerID);
       stream?.stop();
+      fasongchangkuanbi;
       stream?.play("zjr_video");
     } else {
       var stream = rtc.members_.get(ZCRID_);
