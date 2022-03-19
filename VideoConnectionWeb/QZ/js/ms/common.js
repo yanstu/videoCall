@@ -7,7 +7,6 @@ async function viewsHandle() {
   resetViews();
   // 为当前页用户循环添加至网页上
   addView();
-  showOrHide();
   if (rtc?.isJoined_) {
     fanye();
   } else {
@@ -43,7 +42,7 @@ async function addView() {
     $("#video-grid").append(videoBoxTemplate(ID, UserName));
     $("#box_" + ID).attr(
       "class",
-      "w-full h-full video-box relative box-border border-[2px] border-[#5451]"
+      "w-full h-full video-box relative box-border border-[1px] border-[#5451]"
     );
     $("#video_" + ID).on("click", async () => {
       var stream = rtc.members_.get(ID);

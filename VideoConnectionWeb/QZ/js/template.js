@@ -54,7 +54,7 @@ function videoBoxTemplate(userId, nickName) {
               userId != oneself_.CHID
                 ? `
                 <!-- 控制是否订阅视频播放的按钮 -->
-                <div id="video_${userId}" class="absolute bottom-0 right-0 h-[3rem] z-[8]">
+                <div id="video_${userId}" class="absolute bottom-0 right-2 h-[1.7rem] z-[8]">
                   <img src="./img/shipingkongzhi.png" class="h-full w-auto" />
                 </div>
                 `

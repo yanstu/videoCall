@@ -188,6 +188,7 @@ class RtcClient {
     // videoHandle(true, userId);
     stream?.stop();
     stream?.play("box_" + userId);
+    userId == oneself_.CHID && $("#box_" + userId).hide();
   }
 
   /**
@@ -242,16 +243,14 @@ class RtcClient {
       const userId = remoteStream.getUserId();
       this.members_.set(userId, remoteStream);
       console.log(`${getUserInfo(userId)?.UserName} 推送远程流`);
-      this.client_
-        .subscribe(remoteStream, {
-          audio: true,
-          video: !!getUserInfoByMeet(userId), // 在当前页的才订阅视频
-        })
+      this.client_.subscribe(remoteStream, {
+        audio: true,
+        video: !!getUserInfoByMeet(userId), // 在当前页的才订阅视频
+      });
     });
 
     // 在订阅远程流时触发
     this.client_.on("stream-subscribed", (evt) => {
-      console.log(3211123);
       const remoteStream = evt.stream;
       const userId = remoteStream.getUserId();
       this.remoteStreams_.push(remoteStream);

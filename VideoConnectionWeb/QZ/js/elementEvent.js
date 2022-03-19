@@ -258,15 +258,15 @@
     if (fanyeHandler.num > 0) {
       $("#shangyiye_btn span").html(`上一页(${fanyeHandler.num})`);
       $("#xiayiye_btn span").html(`下一页(${fanyeHandler.num})`);
-      $("#shangyiye_ms_btn span").html(`上一页(${fanyeHandler.num})`);
-      $("#xiayiye_ms_btn span").html(`下一页(${fanyeHandler.num})`);
+      $("#shangyiye_ms_btn span").html(`上页(${fanyeHandler.num})`);
+      $("#xiayiye_ms_btn span").html(`下页(${fanyeHandler.num})`);
     } else {
       clearInterval(fanyeHandler.timer); //清除js定时器
       fanyeHandler.disabled = false;
       $("#shangyiye_btn span").html(`上一页`);
       $("#xiayiye_btn span").html(`下一页`);
-      $("#shangyiye_ms_btn span").html(`上一页`);
-      $("#xiayiye_ms_btn span").html(`下一页`);
+      $("#shangyiye_ms_btn span").html(`上页`);
+      $("#xiayiye_ms_btn span").html(`下页`);
       fanyeHandler.num = fanyeHandler.shichang;
     }
   }
