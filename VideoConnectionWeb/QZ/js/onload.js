@@ -30,11 +30,7 @@ console.warn = (e) => {
     }
     if (JSON.stringify(e)?.includes("reconnect successfully")) {
       isDisconnect = false;
-      if (getOsType() == "desktop") {
-        layer.msg("网络连接已恢复，正在恢复房间状态", { icon: 6 });
-        huoquhuiyihuancun(true);
-        startChathub();
-      }
+      this.location.reload();
     }
     if (JSON.stringify(e)?.includes("devicesRemoved")) {
       layer.msg("摄像头设备已被拔出", { icon: 5 });

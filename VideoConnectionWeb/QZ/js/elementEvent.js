@@ -5,11 +5,7 @@
 
   window.addEventListener("online", function () {
     layer.msg("网络连接已恢复，正在恢复房间状态", { icon: 6 });
-    if (getOsType() != "desktop") {
-      isDisconnect = false;
-      huoquhuiyihuancun(true);
-      startChathub();
-    }
+    this.location.reload()
   });
   window.addEventListener("offline", function () {
     layer.msg("当前网络已断开", { icon: 5 });
@@ -99,10 +95,12 @@
 
   // 参会端切换到小视频模式
   $("#qiehuanxiaoshipin_btn").on("click", () => {
-    if (roomDetail_.UserList.length > 25) {
-      layer.msg("当前房间用户超过25人，不能使用此模式");
-    } else {
-      tiaozhuandao("small");
+    if (!location.href.toLowerCase().includes("small")) {
+      if (roomDetail_.UserList.length > 25) {
+        layer.msg("当前房间用户超过25人，不能使用此模式");
+      } else {
+        tiaozhuandao("small");
+      }
     }
   });
 

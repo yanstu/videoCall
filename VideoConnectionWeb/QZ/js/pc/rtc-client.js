@@ -65,7 +65,8 @@ class RtcClient {
       if (
         hasMe(oneself_.CHID) ||
         roomDetail_.SpeakerID == oneself_.CHID ||
-        oneself_.IsZCR
+        oneself_.IsZCR ||
+        roomDetail_.UserList.length <= 25
       ) {
         await this.publish();
       }

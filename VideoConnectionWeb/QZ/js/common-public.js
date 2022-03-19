@@ -171,7 +171,8 @@ async function tuisong() {
   if (
     hasMe(oneself_.CHID) ||
     oneself_.CHID == roomDetail_.SpeakerID ||
-    oneself_.IsZCR
+    oneself_.IsZCR ||
+    roomDetail_.UserList.length <= 25
   ) {
     await rtc.publish();
   } else {
