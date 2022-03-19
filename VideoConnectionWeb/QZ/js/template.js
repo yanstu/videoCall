@@ -43,9 +43,22 @@ function videoBoxTemplate(userId, nickName) {
               <img class="h-[40%]" src="./img/camera-gray.png" alt="" />
             </div>
             ${
-              location.href.toLowerCase().includes("mobile")
+              location.href.toLowerCase().includes("mobile") ||
+              location.href.toLowerCase().includes("ms")
                 ? ""
                 : `<img id="img_${userId}" style="display: none;z-index: 9;" class="w-full h-full" src="" alt="">`
+            }
+
+            ${
+              location.href.toLowerCase().includes("ms") &&
+              userId != oneself_.CHID
+                ? `
+                <!-- 控制是否订阅视频播放的按钮 -->
+                <div id="video_${userId}" class="absolute bottom-0 right-0 h-[3rem] z-[8]">
+                  <img src="./img/shipingkongzhi.png" class="h-full w-auto" />
+                </div>
+                `
+                : ""
             }
             ${userInfoTemplate(userId, nickName)}
           </div>`;

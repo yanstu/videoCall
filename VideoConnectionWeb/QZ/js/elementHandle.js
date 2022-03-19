@@ -169,7 +169,8 @@ function meetLayoutCompute() {
   );
   if (
     location.href.toLowerCase().includes("index") ||
-    location.href.toLowerCase().includes("big")
+    location.href.toLowerCase().includes("big") ||
+    location.href.toLowerCase().includes("ms")
   ) {
     $("#video-grid")
       .css("grid-template-columns", "repeat(" + meet_layout.cols + ", 1fr)")
@@ -479,16 +480,7 @@ async function zhanshiduan_mode(state) {
           }
         }
       } else {
-        location.replace(
-          location.origin +
-            location.pathname.substring(
-              0,
-              location.pathname.lastIndexOf("/") + 1
-            ) +
-            "big.html" +
-            location.href.substring(location.href.indexOf("?")) +
-            "&h=1"
-        );
+        tiaozhuandao("big", true);
       }
       break;
     case 2:
@@ -498,29 +490,13 @@ async function zhanshiduan_mode(state) {
         await rtc.join();
         $("#video-grid").fadeIn();
       } else {
-        location.replace(
-          location.origin +
-            location.pathname.substring(
-              0,
-              location.pathname.lastIndexOf("/") + 1
-            ) +
-            "big.html" +
-            location.href.substring(location.href.indexOf("?"))
-        );
+        tiaozhuandao("big");
       }
       break;
     case 3:
       // 展示端切换到小视频模式
       if (!location.href.toLowerCase().includes("small2")) {
-        location.replace(
-          location.origin +
-            location.pathname.substring(
-              0,
-              location.pathname.lastIndexOf("/") + 1
-            ) +
-            "small2.html" +
-            location.href.substring(location.href.indexOf("?"))
-        );
+        tiaozhuandao("small2");
       }
       break;
   }

@@ -131,9 +131,9 @@ let breakCount = 0;
 // 翻页控制器
 let fanyeHandler = {
   timer: null,
-  num: 5,
-  shichang: 5,
-  disabled: false
+  num: 3,
+  shichang: 3,
+  disabled: false,
 };
 
 /**
@@ -393,4 +393,16 @@ function initFenye() {
   }
   display_layout.cols = rc;
   display_layout.rows = rc;
+}
+
+// 跳转封装
+function tiaozhuandao(url, h) {
+  location.replace(
+    location.origin +
+      location.pathname.substring(0, location.pathname.lastIndexOf("/") + 1) +
+      url +
+      ".html" +
+      location.href.substring(location.href.indexOf("?")) +
+      (h ? "&h=1" : "")
+  );
 }

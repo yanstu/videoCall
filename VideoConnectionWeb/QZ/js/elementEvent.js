@@ -61,20 +61,30 @@
     $("#qiehuanshitu_mianban").fadeToggle();
   });
 
+  // 手机端切换到主讲人模式
+  $("#qiehuanzhujiangrenshipin_btn").on("click", () => {
+    if (!location.href.toLowerCase().includes("mobile")) {
+      tiaozhuandao("mobile");
+    }
+  });
+
+  // 手机端切换到小视频模式
+  $("#qiehuanxiaoshipin_sm_btn").on("click", () => {
+    if (!location.href.toLowerCase().includes("ms")) {
+      if (roomDetail_.UserList.length > 25) {
+        layer.msg("当前房间用户超过25人，不能使用此模式");
+      } else {
+        tiaozhuandao("ms");
+      }
+    }
+  });
+
   // 参会端切换到主讲人+小视频模式
   $("#qiehuanchangguishipin_btn").on("click", () => {
     if (location.href.toLowerCase().includes("index")) {
       $("#video-grid").fadeIn();
     } else {
-      location.replace(
-        location.origin +
-          location.pathname.substring(
-            0,
-            location.pathname.lastIndexOf("/") + 1
-          ) +
-          "index.html" +
-          location.href.substring(location.href.indexOf("?"))
-      );
+      tiaozhuandao("index");
     }
   });
 
@@ -83,16 +93,7 @@
     if (location.href.toLowerCase().includes("index")) {
       $("#video-grid").fadeOut();
     } else {
-      location.replace(
-        location.origin +
-          location.pathname.substring(
-            0,
-            location.pathname.lastIndexOf("/") + 1
-          ) +
-          "index.html" +
-          location.href.substring(location.href.indexOf("?")) +
-          "&h=1"
-      );
+      tiaozhuandao("index", true);
     }
   });
 
@@ -101,15 +102,7 @@
     if (roomDetail_.UserList.length > 25) {
       layer.msg("当前房间用户超过25人，不能使用此模式");
     } else {
-      location.replace(
-        location.origin +
-          location.pathname.substring(
-            0,
-            location.pathname.lastIndexOf("/") + 1
-          ) +
-          "small.html" +
-          location.href.substring(location.href.indexOf("?"))
-      );
+      tiaozhuandao("small");
     }
   });
 
@@ -232,16 +225,48 @@
     }
   });
 
+  // 手机端小视频点击上一页
+  $("#shangyiye_ms_btn").on("click", () => {
+    if (!fanyeHandler.disabled) {
+      fanyeHandler.disabled = true;
+      if (meet_layout.pageNo == 0) {
+        layer.msg("不能再向上翻了");
+      } else {
+        meet_layout.pageNo--;
+        viewsHandle();
+      }
+      fanyeHandler.timer = setInterval(doLoop, 1000);
+    }
+  });
+
+  // 手机端小视频点击上一页
+  $("#xiayiye_ms_btn").on("click", () => {
+    if (!fanyeHandler.disabled) {
+      fanyeHandler.disabled = true;
+      if (meet_layout.pageNo + 1 == meet_layout.pageCount) {
+        layer.msg("不能再向下翻了");
+      } else {
+        meet_layout.pageNo++;
+        viewsHandle();
+      }
+      fanyeHandler.timer = setInterval(doLoop, 1000);
+    }
+  });
+
   function doLoop() {
     fanyeHandler.num--;
     if (fanyeHandler.num > 0) {
       $("#shangyiye_btn span").html(`上一页(${fanyeHandler.num})`);
       $("#xiayiye_btn span").html(`下一页(${fanyeHandler.num})`);
+      $("#shangyiye_ms_btn span").html(`上一页(${fanyeHandler.num})`);
+      $("#xiayiye_ms_btn span").html(`下一页(${fanyeHandler.num})`);
     } else {
       clearInterval(fanyeHandler.timer); //清除js定时器
       fanyeHandler.disabled = false;
       $("#shangyiye_btn span").html(`上一页`);
       $("#xiayiye_btn span").html(`下一页`);
+      $("#shangyiye_ms_btn span").html(`上一页`);
+      $("#xiayiye_ms_btn span").html(`下一页`);
       fanyeHandler.num = fanyeHandler.shichang;
     }
   }

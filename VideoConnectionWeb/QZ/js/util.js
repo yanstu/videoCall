@@ -356,6 +356,10 @@ function getNowTime() {
 }
 
 async function test() {
-  const stats = await rtc.client_.getRemoteVideoStats("main");
-  console.log(stats);
+  const video = await rtc.client_.getRemoteVideoStats("main");
+  console.log("视频：");
+  console.log(video);
+  const audio = await rtc.client_.getRemoteAudioStats();
+  console.log("音频：");
+  console.log(audio);
 }
