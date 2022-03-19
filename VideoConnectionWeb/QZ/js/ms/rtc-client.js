@@ -188,7 +188,7 @@ class RtcClient {
     // videoHandle(true, userId);
     stream?.stop();
     stream?.play("box_" + userId);
-    userId == oneself_.CHID && $("#box_" + userId).hide();
+    userId == oneself_.CHID && $("#mask_" + userId).hide();
   }
 
   /**

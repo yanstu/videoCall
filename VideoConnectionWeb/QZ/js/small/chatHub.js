@@ -97,6 +97,10 @@ chatHub.on("broadcastMessage", function (message, channelss) {
           leave();
         }, 1000);
         break;
+      case "35":
+        meet_layout.mode = mess.Data.State;
+        chanhuiduan_mode(meet_layout.mode);
+        break;
     }
   }
 });
@@ -189,6 +193,10 @@ function huoquhuiyihuancunxinxi(mess) {
   roomDetail_.UserList.length == 0 && location.reload();
   roomDetail_.UserList = roomDetail_.UserList.sort(sortData);
   ZCRID_ = roomDetail_.UserList.find((item) => item.IsZCR == 1).ID;
+  meet_layout.mode = roomDetail_.CHDModel.Model;
+  if (meet_layout.mode != 4) {
+    chanhuiduan_mode(meet_layout.mode);
+  }
   if (rtc.isPublished_) {
     return;
   }

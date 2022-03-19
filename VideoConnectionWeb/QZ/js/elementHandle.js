@@ -502,6 +502,7 @@ async function zhanshiduan_mode(state) {
   }
 }
 
+// 修改标题字体大小
 function changeTitleFontSize() {
   if (getOsType() == "desktop") {
     var defualtSize = "1.8";
@@ -513,5 +514,20 @@ function changeTitleFontSize() {
         break;
       }
     }
+  }
+}
+
+// 参会端切换显示模式
+function chanhuiduan_mode(State) {
+  switch (State) {
+    case 1:
+      $("#qiehuandashipin_btn").click();
+      break;
+    case 2:
+      $("#qiehuanchangguishipin_btn").click();
+      break;
+    case 3:
+      $("#qiehuanxiaoshipin_btn").click();
+      break;
   }
 }
