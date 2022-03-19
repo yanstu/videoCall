@@ -5,9 +5,11 @@
 
   window.addEventListener("online", function () {
     layer.msg("网络连接已恢复，正在恢复房间状态", { icon: 6 });
-    isDisconnect = false;
-    huoquhuiyihuancun(true);
-    startChathub();
+    if (getOsType() != "desktop") {
+      isDisconnect = false;
+      huoquhuiyihuancun(true);
+      startChathub();
+    }
   });
   window.addEventListener("offline", function () {
     layer.msg("当前网络已断开", { icon: 5 });
