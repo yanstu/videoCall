@@ -299,19 +299,17 @@ function dakaiguanbimaikefeng(ReUserid) {
 function xintiaolianjie() {
   xintiaoTimer && clearInterval(xintiaoTimer);
   xintiaoTimer = setInterval(() => {
-    redisFB({
-      reCode: "25",
-      ReUserid: oneself_.CHID,
-      ReUserQYBH: oneself_.QYBH,
-      ReUserName: oneself_.UserName,
-      SendUserID: oneself_.CHID,
-      SendUserName: oneself_.XM,
-      Content: "",
-      Data: {
-        State: "0",
-        CameraState: isCamOn ? "1" : 0,
-        MicState: isMicOn ? "1" : "0",
-      },
+    huoqudingyueshu().then((Data) => {
+      redisFB({
+        reCode: "25",
+        ReUserid: oneself_.CHID,
+        ReUserQYBH: oneself_.QYBH,
+        ReUserName: oneself_.UserName,
+        SendUserID: oneself_.CHID,
+        SendUserName: oneself_.XM,
+        Content: "",
+        Data,
+      });
     });
   }, 1500);
 }

@@ -468,6 +468,8 @@ async function zhanshiduan_mode(state) {
   switch (state) {
     case 1:
       // 展示端切换到主讲人模式
+      display_layout.rows = roomDetail_.CHRY_ShowRows;
+      display_layout.cols = roomDetail_.CHRY_ShowCols;
       if (location.href.toLowerCase().includes("big")) {
         $("#video-grid").fadeOut();
         for (const stream of rtc.remoteStreams_) {
@@ -485,6 +487,8 @@ async function zhanshiduan_mode(state) {
       break;
     case 2:
       // 展示端切换到主讲人+小视频模式
+      display_layout.rows = roomDetail_.CHRY_ShowRows;
+      display_layout.cols = roomDetail_.CHRY_ShowCols;
       if (location.href.toLowerCase().includes("big")) {
         await rtc.leave();
         await rtc.join();

@@ -407,3 +407,63 @@ function tiaozhuandao(url, h) {
       (h ? "&h=1" : "")
   );
 }
+
+async function huoqudingyueshu() {
+  // 视频连线前端心跳增加参数：订阅音频数（Audio）、订阅标清视频数（SD）、订阅高清视频数（HD）、订阅全高清视频数（FullHD）
+  let Data = {
+    State: "0",
+    CameraState: isCamOn ? "1" : 0,
+    MicState: isMicOn ? "1" : "0",
+    Audio: 0,
+    SD: 0,
+    HD: 0,
+    FullHD: 0,
+  };
+  let video = await rtc.client_.getRemoteVideoStats("main");
+  Object.getOwnPropertyNames(video).forEach(function (key) {
+    if (video[key].bytesReceived != 0) {
+      var fbl = video[key].frameWidth * video[key].frameHeight;
+      if (fbl > 1280 * 720) {
+        Data.FullHD++;
+      } else if (fbl > 640 * 480) {
+        Data.HD++;
+      } else {
+        Data.SD++;
+      }
+    }
+  });
+  let audio = await rtc.client_.getRemoteAudioStats();
+  Object.getOwnPropertyNames(audio).forEach(function (key) {
+    if (audio[key].bytesReceived != 0) {
+      Data.Audio++;
+    }
+  });
+  rtc.client_.getLocalAudioStats().then((stats) => {
+    for (let userId in stats) {
+      if (stats[userId].bytesSent != 0) {
+        Data.Audio++;
+      }
+    }
+  });
+  rtc.client_.getLocalVideoStats().then((stats) => {
+    for (let userId in stats) {
+      if (stats[userId].bytesSent != 0) {
+        var fbl = stats[userId].frameWidth * stats[userId].frameHeight;
+        if (fbl > 1280 * 720) {
+          Data.FullHD++;
+        } else if (fbl > 640 * 480) {
+          Data.HD++;
+        } else {
+          Data.SD++;
+        }
+      }
+    }
+  });
+  /*console.log("--------------");
+  console.log("Audio：" + Data.Audio);
+  console.log("SD：" + Data.SD);
+  console.log("HD：" + Data.HD);
+  console.log("FullHD：" + Data.FullHD);
+  console.log("--------------");*/
+  return Data;
+}

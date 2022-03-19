@@ -10,7 +10,7 @@ async function viewsHandle() {
   // 如果没有设置主讲人，设定主持人为主讲人视角
   ZJRID_ = roomDetail_.SpeakerID || ZCRID_;
   // 为当前页用户循环添加至网页上
-  for (let user_ of meet_layout.pageUserList) {
+  for (let user_ of display_layout.pageUserList) {
     const { ID, UserName } = user_;
     addVideoView(ID, UserName);
   }
@@ -20,7 +20,7 @@ async function viewsHandle() {
   if (!rtc.isJoined_) {
     await rtc.join();
   } else {
-    for (const user of meet_layout.pageUserList) {
+    for (const user of display_layout.pageUserList) {
       if (ZJRID_ != user.ID) {
         var stream =
           user.ID == oneself_.CHID

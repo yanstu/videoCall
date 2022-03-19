@@ -354,36 +354,3 @@ function getNowTime() {
     hour
   )}:${formatZero(minute)}:${formatZero(second)}`;
 }
-
-async function test() {
-  // 视频连线前端心跳增加参数：订阅音频数（Audio）、订阅标清视频数（SD）、订阅高清视频数（HD）、订阅全高清视频数（FullHD）
-  var Audio = 0,
-    SD = 0,
-    HD = 0,
-    FullHD = 0;
-  const video = await rtc.client_.getRemoteVideoStats("main");
-  for (const v of video) {
-    if (v.bytesReceived != 0) {
-      var fbl = v.frameWidth * v.frameHeight;
-      if (fbl > 1280 * 720) {
-        FullHD++;
-      } else if (fbl > 640 * 480) {
-        HD++;
-      } else {
-        SD++;
-      }
-    }
-  }
-  const audio = await rtc.client_.getRemoteAudioStats();
-  for (const a of audio) {
-    if (a.bytesReceived != 0) {
-      Audio++;
-    }
-  }
-  console.log("--------------");
-  console.log("Audio：" + Audio);
-  console.log("SD：" + SD);
-  console.log("HD：" + HD);
-  console.log("FullHD：" + FullHD);
-  console.log("--------------");
-}

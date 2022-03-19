@@ -28,6 +28,11 @@ chatHub.on("broadcastMessage", function (message, channelss) {
       case "37":
         var pageNo = mess.Data.State;
         meet_layout.pageNo = pageNo - 1;
+        break;
+      // 改变当前分页
+      case "34":
+        var pageNo = mess.Data.State;
+        display_layout.pageNo = pageNo - 1;
         viewsHandle();
         break;
       // 操作显示端切换显示模式
@@ -133,4 +138,17 @@ function huoquzhujiangren() {
       }
     );
   }, 2000);
+}
+
+function fanye(no) {
+  redisFB({
+    reCode: "34",
+    ReUserid: "",
+    ReUserQYBH: "",
+    ReUserName: "",
+    SendUserID: oneself_.CHID,
+    SendUserName: oneself_.UserName,
+    Content: "",
+    Data: { State: no + 1 },
+  });
 }
