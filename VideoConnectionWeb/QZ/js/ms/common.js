@@ -42,7 +42,7 @@ async function addView() {
     $("#video-grid").append(videoBoxTemplate(ID, UserName));
     $("#box_" + ID).attr(
       "class",
-      "w-full h-full video-box relative box-border border-[1px] border-[#5451]"
+      "w-full h-full video-box relative box-border border-[1px] border-[#393e4b]"
     );
     $("#video_" + ID).on("click", async () => {
       var stream = rtc.members_.get(ID);

@@ -20,7 +20,7 @@
     <style type="text/tailwindcss">
       @layer utilities {
         .toolbar_btn {
-          @apply h-[85%] flex-1 flex flex-col items-center justify-center w-[3.5rem];
+          @apply h-[90%] flex flex-col items-center justify-center w-[4rem];
         }
         .modalbox {
           @apply bg-[#393e4b] hidden drop-shadow-md fixed top-[10%] left-[0.5%] z-40 w-[25%] h-[80%] flex flex-col items-center;
@@ -42,7 +42,7 @@
   </head>
   <body class="w-screen h-screen">
     <header
-      class="flex !flex-row whitespace-nowrap h-[7%] bg-[#262626] w-full justify-between"
+      class="flex !flex-row whitespace-nowrap h-[6%] bg-[#262626] w-full justify-between"
     >
       <div class="w-[15%] flex items-center justify-start">
         <img
@@ -95,11 +95,11 @@
         </div>
       </div>
     </header>
-    <section class="h-[93%] flex flex-row w-full bg-[#24292e]">
+    <section class="h-[88%] flex flex-row w-full bg-[#24292e]">
       <!-- 群众区 -->
       <div
         id="video-grid"
-        class="box-border grid w-full h-full items-center justify-center z-10 p-[1px]"
+        class="box-border grid w-full h-full items-center justify-center z-10 p-[2px]"
       ></div>
 
       <!-- 展示不支持webRTC的提示 -->
@@ -387,7 +387,7 @@
       <!-- 切换视图遮罩 -->
       <div id="qiehuanshitu_mianban" style="display: none">
         <!-- 切换视图卡片 -->
-        <div class="device-testing-card w-[98%]">
+        <div class="device-testing-card w-[98%] h-[40%]">
           <!-- 切换视图面板 -->
           <div
             id="qiehuanshitu_content"
@@ -401,7 +401,7 @@
             <div class="flex justify-center items-center h-[85%] w-full">
               <div class="shitubox" id="qiehuanzhujiangrenshipin_btn">
                 <img
-                  class="w-[150px]"
+                  class="h-[150px]"
                   src="./img/views/zhujiangren.png"
                   alt=""
                 />
@@ -409,7 +409,7 @@
               </div>
               <div class="shitubox" id="qiehuanxiaoshipin_sm_btn">
                 <img
-                  class="w-[150px]"
+                  class="h-[150px]"
                   src="./img/views/xiaoshiping.png"
                   alt=""
                 />
@@ -452,51 +452,43 @@
       </div>
     </section>
     <footer
-      class="w-full h-[8%] drop-shadow-md flex items-center justify-center absolute bottom-[5%] z-50 mx-auto"
+      class="w-full h-[6%] drop-shadow-md flex bg-[#262626] text-white items-center justify-center z-50 mx-auto"
     >
-      <div
-        id="toolbar"
-        class="h-full w-auto flex text-center text-white items-center justify-center mx-auto relative"
-      >
-        <div
-          class="absolute w-full h-full top-0 left-0 shadow bg-[#047439] opacity-20 pointer-events-none"
-        ></div>
-        <div class="toolbar_btn" id="mic_btn">
-          <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
-            <use xlink:href="#icon-maikefeng"></use>
-          </svg>
-          <span class="mt-1 text-[14px]">静音</span>
-        </div>
-        <div class="toolbar_btn" id="video_btn">
-          <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
-            <use xlink:href="#icon-xiangji"></use>
-          </svg>
-          <span class="mt-1 text-[14px]">摄像头</span>
-        </div>
-        <div class="toolbar_btn" style="display: none" id="fanzhuan_btn">
-          <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
-            <use xlink:href="#icon-fanzhuan"></use>
-          </svg>
-          <span class="mt-1 text-[14px]">翻转</span>
-        </div>
-        <div class="toolbar_btn" id="shenqingfayan_btn">
-          <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
-            <use xlink:href="#icon-shenqingfayan"></use>
-          </svg>
-          <span class="mt-1 text-[14px]">申请发言</span>
-        </div>
-        <div class="toolbar_btn" id="shangyiye_ms_btn">
-          <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
-            <use xlink:href="#icon-shangyiye"></use>
-          </svg>
-          <span class="mt-1 text-[14px]">上页</span>
-        </div>
-        <div class="toolbar_btn" id="xiayiye_ms_btn">
-          <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
-            <use xlink:href="#icon-xiayiye"></use>
-          </svg>
-          <span class="mt-1 text-[14px]">下页</span>
-        </div>
+      <div class="toolbar_btn" id="mic_btn">
+        <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
+          <use xlink:href="#icon-maikefeng"></use>
+        </svg>
+        <span class="mt-1 text-[14px]">静音</span>
+      </div>
+      <div class="toolbar_btn" id="video_btn">
+        <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
+          <use xlink:href="#icon-xiangji"></use>
+        </svg>
+        <span class="mt-1 text-[14px]">摄像头</span>
+      </div>
+      <div class="toolbar_btn" style="display: none" id="fanzhuan_btn">
+        <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
+          <use xlink:href="#icon-fanzhuan"></use>
+        </svg>
+        <span class="mt-1 text-[14px]">翻转</span>
+      </div>
+      <div class="toolbar_btn" id="shenqingfayan_btn">
+        <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
+          <use xlink:href="#icon-shenqingfayan"></use>
+        </svg>
+        <span class="mt-1 text-[14px]">申请发言</span>
+      </div>
+      <div class="toolbar_btn" id="shangyiye_ms_btn">
+        <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
+          <use xlink:href="#icon-shangyiye"></use>
+        </svg>
+        <span class="mt-1 text-[14px]">上页</span>
+      </div>
+      <div class="toolbar_btn" id="xiayiye_ms_btn">
+        <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
+          <use xlink:href="#icon-xiayiye"></use>
+        </svg>
+        <span class="mt-1 text-[14px]">下页</span>
       </div>
     </footer>
     <script src="https://cdn.staticfile.org/vConsole/3.5.1/vconsole.min.js"></script>
