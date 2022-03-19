@@ -44,24 +44,27 @@ async function addView() {
       "class",
       "w-full h-full video-box relative box-border border-[1px] border-[#393e4b]"
     );
-    $("#video_" + ID).on("click", async () => {
-      var stream = rtc.members_.get(ID);
-      if (stream) {
-        var isbofang = $(`#box_${ID} video`).length == 0;
-        await stream?.stop();
-        await rtc.client_.unsubscribe(stream);
-        await rtc.client_.subscribe(stream, {
-          audio: true,
-          video: isbofang,
-        });
-        setTimeout(() => {
-          // isbofang ? $(`#mask_${ID}`).hide() : $(`#mask_${ID}`).show();
-          videoHandle(isbofang, ID);
-        }, 700);
-      } else {
-        layer.msg("用户不在线，无法控制");
-      }
-    });
+    $("#video_" + ID).on(
+      "click",
+      clickProof(async () => {
+        var stream = rtc.members_.get(ID);
+        if (stream) {
+          var isbofang = $(`#box_${ID} video`).length == 0;
+          await stream?.stop();
+          await rtc.client_.unsubscribe(stream);
+          await rtc.client_.subscribe(stream, {
+            audio: true,
+            video: isbofang,
+          });
+          setTimeout(() => {
+            // isbofang ? $(`#mask_${ID}`).hide() : $(`#mask_${ID}`).show();
+            videoHandle(isbofang, ID);
+          }, 700);
+        } else {
+          layer.msg("用户不在线，无法控制");
+        }
+      }, 2000)
+    );
     if (!getUserInfoByMeet(ID)) {
       $("#box_" + ID).hide();
     }

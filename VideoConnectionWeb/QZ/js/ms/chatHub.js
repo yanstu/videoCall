@@ -49,6 +49,7 @@ chatHub.on("broadcastMessage", function (message, channelss) {
           !isMicOn && $("#mic_btn").click();
           !isCamOn && $("#video_btn").click();
         }
+        gengxinzhuangtai();
         break;
       // 关闭发言申请
       case "15":

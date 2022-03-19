@@ -185,7 +185,7 @@ class RtcClient {
    */
   handleEvents() {
     this.client_.on("error", (err) => {
-      console.error(err);
+      location.reload();
     });
 
     this.client_.on("client-banned", () => {

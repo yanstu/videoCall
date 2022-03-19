@@ -46,6 +46,8 @@ function showOrHide() {
     $("#mic_btn").hide();
     $("#shenqingfayan_btn").hide();
   }
+
+  $("#toolbar").show();
 }
 
 // 添加当前页用户到页面
