@@ -101,6 +101,11 @@ chatHub.on("broadcastMessage", function (message, channelss) {
           leave();
         }, 1000);
         break;
+      // 操作所有用户切换显示模式
+      case "35":
+        meet_layout.mode = mess.Data.State;
+        chanhuiduan_mode(meet_layout.mode);
+        break;
     }
   }
 });
@@ -211,6 +216,10 @@ function huoquhuiyihuancunxinxi(mess) {
   meet_layout.rows = 3;
   meet_layout.cols = 2;
   meet_layout.pageNo = 0;
+  meet_layout.mode = roomDetail_.CHDModel.Model;
+  if (meet_layout.mode != 4) {
+    chanhuiduan_mode(meet_layout.mode);
+  }
   viewsHandle();
 }
 

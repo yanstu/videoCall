@@ -5,7 +5,7 @@
 
   window.addEventListener("online", function () {
     layer.msg("网络连接已恢复，正在恢复房间状态", { icon: 6 });
-    this.location.reload()
+    this.location.reload();
   });
   window.addEventListener("offline", function () {
     layer.msg("当前网络已断开", { icon: 5 });
@@ -195,9 +195,11 @@
   $("#shangyiye_btn").on("click", () => {
     if (!fanyeHandler.disabled) {
       fanyeHandler.disabled = true;
-      var layout = location.href.toLowerCase().includes("small2")
-        ? display_layout
-        : meet_layout;
+      var layout =
+        location.href.toLowerCase().includes("small2") ||
+        location.href.toLowerCase().includes("big")
+          ? display_layout
+          : meet_layout;
       if (layout.pageNo == 0) {
         layer.msg("不能再向上翻了");
       } else {
@@ -211,9 +213,11 @@
   $("#xiayiye_btn").on("click", () => {
     if (!fanyeHandler.disabled) {
       fanyeHandler.disabled = true;
-      var layout = location.href.toLowerCase().includes("small2")
-        ? display_layout
-        : meet_layout;
+      var layout =
+        location.href.toLowerCase().includes("small2") ||
+        location.href.toLowerCase().includes("big")
+          ? display_layout
+          : meet_layout;
       if (layout.pageNo + 1 == layout.pageCount) {
         layer.msg("不能再向下翻了");
       } else {

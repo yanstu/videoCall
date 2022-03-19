@@ -108,6 +108,11 @@ chatHub.on("broadcastMessage", function (message, channelss) {
         meet_layout.pageNo = pageNo - 1;
         viewsHandle();
         break;
+      // 操作所有用户切换显示模式
+      case "35":
+        meet_layout.mode = mess.Data.State;
+        chanhuiduan_mode(meet_layout.mode);
+        break;
     }
   }
 });
@@ -174,9 +179,9 @@ function huoquhuiyihuancunxinxi(mess, reconnect) {
   roomDetail_.UserList.length == 0 && location.reload();
   roomDetail_.UserList = roomDetail_.UserList.sort(sortData);
   ZCRID_ = roomDetail_.UserList.find((item) => item.IsZCR == 1).ID;
-  if (reconnect) {
-    init(reconnect);
-    return;
+  meet_layout.mode = roomDetail_.CHDModel.Model;
+  if (meet_layout.mode != 4) {
+    chanhuiduan_mode(meet_layout.mode);
   }
   viewsHandle();
 }

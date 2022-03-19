@@ -526,12 +526,15 @@ function chanhuiduan_mode(State) {
   switch (State) {
     case 1:
       $("#qiehuandashipin_btn").click();
+      $("#qiehuanzhujiangrenshipin_btn").click();
       break;
     case 2:
       $("#qiehuanchangguishipin_btn").click();
+      $("#qiehuanzhujiangrenshipin_btn").click();
       break;
     case 3:
       $("#qiehuanxiaoshipin_btn").click();
+      $("#qiehuanxiaoshipin_sm_btn").click();
       break;
   }
 }
