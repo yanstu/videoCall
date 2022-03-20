@@ -34,7 +34,7 @@ class RtcClient {
     });
     this.isJoined_ = true;
     // 关闭加载中
-    layer.close(loadIndex);
+    
   }
 
   /**

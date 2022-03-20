@@ -12,6 +12,8 @@ async function viewsHandle() {
   } else {
     await rtc.join();
   }
+
+  beiyongfangan();
 }
 
 async function fanye() {
@@ -34,6 +36,10 @@ async function fanye() {
       });
     }
   }
+
+  setTimeout(() => {
+    gengxinzhuangtai();
+  }, 100);
 }
 
 async function addView() {
@@ -44,6 +50,7 @@ async function addView() {
       "class",
       "w-full h-full video-box relative box-border border-[1px] border-[#393e4b]"
     );
+
     $("#video_" + ID).on(
       "click",
       clickProof(async () => {
@@ -52,27 +59,89 @@ async function addView() {
           var isbofang = $(`#box_${ID} video`).length == 0;
           await stream?.stop();
           await rtc.client_.unsubscribe(stream);
-          await rtc.client_.subscribe(stream, {
-            audio: true,
-            video: isbofang,
-          });
+          await rtc.client_
+            .subscribe(stream, {
+              audio: true,
+              video: isbofang,
+            })
+            .then(() => {
+              gengxinzhuangtai();
+            });
           setTimeout(() => {
-            // isbofang ? $(`#mask_${ID}`).hide() : $(`#mask_${ID}`).show();
             videoHandle(isbofang, ID);
-          }, 700);
+          }, 100);
         } else {
           layer.msg("用户不在线，无法控制");
         }
       }, 2000)
     );
+
     if (!getUserInfoByMeet(ID)) {
       $("#box_" + ID).hide();
     }
   }
 }
 
+// 针对手机端的备用方案
+function beiyongfangan() {
+  setTimeout(() => {
+    for (const user of meet_layout.pageUserList) {
+      if (user.ID != oneself_.CHID) {
+        var stream = rtc.members_.get(roomDetail_.SpeakerID);
+        if (stream) {
+          stream?.stop();
+          stream?.play("box_" + user.ID);
+        }
+      }
+    }
+  }, 1000);
+}
+
 // 查询房间是否包含该用户
 function hasMe(userId) {
   var exits = roomDetail_.UserList.find((user) => user.ID == userId);
   return !!exits;
+}
+
+var startX = 0;
+var startY = 0;
+
+$("#mic_drag").on("touchstart", function (event) {
+  var element = event.targetTouches[0];
+  // 初始化位置
+  startX = element.pageX - this.offsetLeft;
+  startY = element.pageY - this.offsetTop;
+  return false;
+});
+
+function touchMove(event) {
+  var element = event.targetTouches[0];
+  var x = element.clientX - startX;
+  var y = element.clientY - startY;
+  var dragWidth = $("#mic_drag").width();
+  var dragHeight = $("#mic_drag").height();
+  parentWidth = $("section").innerWidth();
+  parentHeight = $("section").innerHeight();
+  if (y <= 0) {
+    y = 1;
+  }
+  if (y >= parentHeight - dragHeight) {
+    y = parentHeight - dragHeight;
+  }
+  if (x <= 0) {
+    x = 1;
+  }
+  if (x >= parentWidth - dragWidth) {
+    x = parentWidth - dragWidth - 1;
+  }
+  $("#mic_drag").css({
+    left: x + "px",
+    top: y + "px",
+  });
+  return false;
+}
+
+function touchEnd(event) {
+  $("section").unbind("mousemove");
+  $("section").unbind("mouseup");
 }

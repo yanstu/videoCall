@@ -48,6 +48,11 @@ function showOrHide() {
   }
 
   $("#toolbar").show();
+  $("#mic_drag").show();
+
+  if (roomDetail_.SpeakerID != oneself_.CHID && rtc.localStream_) {
+    isCamOn && $("#mic_btn").click();
+  }
 }
 
 // 添加当前页用户到页面

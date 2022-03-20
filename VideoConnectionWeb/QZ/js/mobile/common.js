@@ -90,6 +90,7 @@ async function change() {
 
 // 第一次进入的初始化
 async function init() {
+  resetViews()
   if (ZJRID_ == oneself_.CHID) {
     var zcr_streams = rtc.members_.get(ZCRID_);
     zcr_streams?.stop();
@@ -124,7 +125,6 @@ function beiyongfangan() {
     if (roomDetail_.SpeakerID != oneself_.CHID) {
       var stream = rtc.members_.get(roomDetail_.SpeakerID);
       stream?.stop();
-      fasongchangkuanbi;
       stream?.play("zjr_video");
     } else {
       var stream = rtc.members_.get(ZCRID_);

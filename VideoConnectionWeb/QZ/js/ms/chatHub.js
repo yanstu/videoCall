@@ -50,6 +50,7 @@ chatHub.on("broadcastMessage", function (message, channelss) {
           !isCamOn && $("#video_btn").click();
         }
         gengxinzhuangtai();
+        showOrHide();
         break;
       // 关闭发言申请
       case "15":

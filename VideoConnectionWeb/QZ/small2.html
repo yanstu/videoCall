@@ -59,9 +59,7 @@
       <div
         id="roomTitle"
         class="text-[1.8rem] text-white flex items-center justify-center whitespace-nowrap"
-      >
-        视频连线测试2
-      </div>
+      ></div>
       <div class="flex items-center justify-end">
         <div
           class="flex items-center justify-content-center relative h-[50%] mr-4"
@@ -403,7 +401,8 @@
       </div>
 
       <!-- 预加载所有网络图片资源，防止断网后加载不出断网图标图片 -->
-      <div style="display: none"><img src="./img/network/up/network_0.png" alt="" />
+      <div style="display: none">
+        <img src="./img/network/up/network_0.png" alt="" />
         <img src="./img/network/up/network_1.png" alt="" />
         <img src="./img/network/up/network_2.png" alt="" />
         <img src="./img/network/up/network_3.png" alt="" />
@@ -427,7 +426,7 @@
     >
       <div
         id="toolbar"
-        style="display: none;"
+        style="display: none"
         class="h-full w-auto flex text-center text-white items-center justify-center mx-auto relative"
       >
         <div
@@ -449,29 +448,14 @@
     </footer>
 
     <script src="./lib/jquery/jquery-3.2.1.min.js"></script>
-    <script src="./lib/jquery/jquery.signalR.min.js"></script>
-    <script src="./lib/layui/layui.js"></script>
-    <script src="https://testvideo.gzshifang.com:9031/lib/aspnet/signalr/dist/browser/signalr.min.js"></script>
-    <script src="./lib/trtc/lib-generate-test-usersig.min.js"></script>
-    <script src="./lib/trtc/GenerateTestUserSig.js"></script>
-    <script src="./js/iconfont.js"></script>
     <script src="./lib/trtc/trtc.js"></script>
     <script src="./js/util.js"></script>
-    <script src="./js/template.js"></script>
     <script src="./js/device-testing.js"></script>
     <script src="./js/rtc-detection.js"></script>
-    <script src="./js/elementHandle.js"></script>
     <script src="./js/common-public.js"></script>
     <script src="./js/small2/common.js"></script>
-    <script src="./js/small2/chatHub.js"></script>
     <script src="./js/small2/rtc-client.js"></script>
-    <script src="./js/prohibit.js"></script>
-    <script src="./js/elementEvent.js"></script>
     <script>
-      const loadIndex = layer.load(1);
-
-      window.WeixinJSBridge && window.WeixinJSBridge.call("hideToolbar");
-
       if (queryParams("p") && queryParams("RoomId")) {
         login(queryParams("p"));
       } else {
@@ -479,5 +463,15 @@
         leave();
       }
     </script>
+    <script defer src="./lib/jquery/signalr.min.js"></script>
+    <script defer src="./js/small2/chatHub.js"></script>
+    <script defer src="./lib/layui/layui.js"></script>
+    <script defer src="./lib/trtc/lib-generate-test-usersig.min.js"></script>
+    <script defer src="./lib/trtc/GenerateTestUserSig.js"></script>
+    <script defer src="./js/template.js"></script>
+    <script defer src="./js/elementHandle.js"></script>
+    <script defer src="./js/elementEvent.js"></script>
+    <script defer src="./js/iconfont.js"></script>
+    <script defer src="./js/prohibit.js"></script>
   </body>
 </html>

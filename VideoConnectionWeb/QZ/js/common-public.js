@@ -21,7 +21,7 @@ let oneself_ = {
   // 房间id
   RoomId: "7",
   SDKAppID: "1400575117",
-  Title: "视频连线测试2",
+  Title: "",
   UserSig:
     "eJwtjM0KgkAYRd9ltoXO5-yZ0CaiDCwINWipzkwMqehkoUXvnpjLe*4994OSKHZeyqIAeQ5GyykbqerOaDNhoiRAkUshSUGl4CudcQVCaF*zHBM6Ow95z5rGyNEAijETDEDMneobYxUKOKY*xn-WmWokwOm4JJyz*cXcxoPLgiehddtzFQ-hsbV9WZMyja7es3Pf6VZEG*WeLrDbD4c1*v4AXaU4QQ__",
   XM: "严鑫",
@@ -44,7 +44,7 @@ let roomDetail_ = {
   // 主讲人姓名
   SpeakerName: "刘世荣",
   // 房间名
-  Title: "视频连线测试2",
+  Title: "",
   // 参加会议人员列表
   UserList: [],
   // 展示端配置

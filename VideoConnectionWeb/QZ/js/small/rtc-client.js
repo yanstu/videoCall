@@ -64,7 +64,7 @@ class RtcClient {
     // 权限判断按钮显示或隐藏
     showOrHide();
     // 关闭加载中
-    layer.close(loadIndex);
+    
     // 开始获取音量
     this.startGetAudioLevel();
   }
@@ -336,6 +336,25 @@ class RtcClient {
             .css("height", `${audioVolume * 4}%`);
         } else {
           $(`#mic_main_${userId}`).find(".volume-level").css("height", `0%`);
+        }
+
+        $(`#mic_drag`)
+          .find(".nickname")
+          .html(
+            roomDetail_.SpeakerID
+              ? getUserInfo(roomDetail_.SpeakerID).UserName
+              : getUserInfo(userId).UserName
+          );
+        if (roomDetail_.SpeakerID) {
+          if (userId == roomDetail_.SpeakerID) {
+            $("#mic_drag_icon")
+              .find(".volume-level")
+              .css("height", `${audioVolume >= 10 ? audioVolume * 4 : 0}%`);
+          }
+        } else {
+          $("#mic_drag_icon")
+            .find(".volume-level")
+            .css("height", `${audioVolume >= 10 ? audioVolume * 4 : 0}%`);
         }
       });
     });

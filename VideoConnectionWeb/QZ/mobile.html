@@ -60,7 +60,7 @@
         class="text-white w-[50%] pl-3 h-full flex items-center justify-center text-center text-[16px]"
       >
         <div id="roomTitle" class="overflow-hidden text-ellipsis whitespace-nowrap w-full">
-          视频连线测试2
+          
         </div>
       </div>
       <div class="!w-[35%] flex flex-row items-center justify-end text-right">
@@ -490,36 +490,19 @@
         </div>
       </div>
     </footer>
-    <script src="https://cdn.staticfile.org/vConsole/3.5.1/vconsole.min.js"></script>
+    <!-- <script src="https://cdn.staticfile.org/vConsole/3.5.1/vconsole.min.js"></script>
     <script>
       window.myVConsole = new window.VConsole();
-    </script>
+    </script> -->
     <script src="./lib/jquery/jquery-3.2.1.min.js"></script>
-    <script src="./lib/jquery/jquery.signalR.min.js"></script>
-    <script src="./lib/layui/layui.js"></script>
-    <script src="https://testvideo.gzshifang.com:9031/lib/aspnet/signalr/dist/browser/signalr.min.js"></script>
-    <script src="./lib/trtc/lib-generate-test-usersig.min.js"></script>
-    <script src="./lib/trtc/GenerateTestUserSig.js"></script>
-    <script src="./js/iconfont.js"></script>
     <script src="./lib/trtc/trtc.js"></script>
     <script src="./js/util.js"></script>
     <script src="./js/common-public.js"></script>
     <script src="./js/mobile/common.js"></script>
     <script src="./js/rtc-detection.js"></script>
-    <script src="./js/elementHandle.js"></script>
-    <script src="./js/elementEvent.js"></script>
-    <script src="./js/template.js"></script>
-    <script src="./js/mobile/chatHub.js"></script>
     <script src="./js/mobile/rtc-client.js"></script>
     <script src="./js/device-testing.js"></script>
-    <script src="./js/prohibit.js"></script>
-    <script src="./js/noHorizontal.js"></script>
-    <script src="https://res2.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
     <script>
-      const loadIndex = layer.load(1);
-
-      window.WeixinJSBridge && window.WeixinJSBridge.call("hideToolbar");
-
       if (queryParams("p") && queryParams("RoomId")) {
         login(queryParams("p"));
       } else {
@@ -527,5 +510,16 @@
         leave();
       }
     </script>
+    <script defer src="./lib/jquery/signalr.min.js"></script>
+    <script defer src="./js/mobile/chatHub.js"></script>
+    <script defer src="./lib/layui/layui.js"></script>
+    <script defer src="./lib/trtc/lib-generate-test-usersig.min.js"></script>
+    <script defer src="./lib/trtc/GenerateTestUserSig.js"></script>
+    <script defer src="./js/template.js"></script>
+    <script defer src="./js/elementHandle.js"></script>
+    <script defer src="./js/elementEvent.js"></script>
+    <script defer src="./js/iconfont.js"></script>
+    <script defer src="./js/prohibit.js"></script>
+    <script defer src="./js/noHorizontal.js"></script>
   </body>
 </html>
