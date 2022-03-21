@@ -76,10 +76,11 @@ class RtcClient {
 
     this.playVideo(this.localStream_, oneself_.CHID);
 
-    // 权限判断按钮显示或隐藏
-    showOrHide();
-    // 关闭加载中
-    
+    setTimeout(() => {
+      // 权限判断按钮显示或隐藏
+      showOrHide();
+    }, 700);
+
     // 开始获取音量
     this.startGetAudioLevel();
   }

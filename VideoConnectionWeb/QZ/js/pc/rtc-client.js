@@ -78,7 +78,6 @@ class RtcClient {
 
     // 权限判断按钮显示或隐藏
     showOrHide();
-    // 关闭加载中
     
     // 开始获取音量
     this.startGetAudioLevel();

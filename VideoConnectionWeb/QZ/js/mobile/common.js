@@ -85,7 +85,9 @@ async function change() {
 
 // 第一次进入的初始化
 async function init() {
+  
   resetViews();
+
   if (ZJRID_ == oneself_.CHID) {
     var zcr_streams = rtc.members_.get(ZCRID_);
     zcr_streams?.stop();
@@ -111,7 +113,7 @@ async function init() {
 
   await rtc.join();
 
-  beiyongfangan();
+  // beiyongfangan();
 }
 
 // 针对手机端的备用方案

@@ -32,7 +32,6 @@ class RtcClient {
       roomId: parseInt(this.roomId_),
     });
     this.isJoined_ = true;
-    // 关闭加载中
     
   }
 
