@@ -465,5 +465,6 @@ async function huoqudingyueshu() {
   console.log("HD：" + Data.HD);
   console.log("FullHD：" + Data.FullHD);
   console.log("--------------");*/
+  // console.log(Data);
   return Data;
 }
