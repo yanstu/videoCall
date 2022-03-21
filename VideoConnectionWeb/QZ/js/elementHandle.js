@@ -246,6 +246,8 @@ function audioHandle(on, userId) {
 
 // 视频开关状态控制
 function videoHandle(on, userId) {
+  on && rtc.resumeStreams();
+
   var zjr =
     roomDetail_.SpeakerID ||
     (location.href.toLowerCase().includes("big.html") ? ZCRID_ : oneself_.CHID);
@@ -456,7 +458,7 @@ function onlineOrOfline(online, userId) {
       online ? $("#mask_" + userId).hide() : $("#mask_" + userId).show();
     }
   }
-  
+
   // 改变遮罩摄像头图片颜色
   online
     ? $(`#mask_${userId} img`).attr("src", "./img/camera-green.png")

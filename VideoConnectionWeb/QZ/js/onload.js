@@ -32,6 +32,13 @@ console.warn = (e) => {
       isDisconnect = false;
       this.location.reload();
     }
+    if (
+      JSON.stringify(e)?.includes(
+        "The request is not allowed by the user agent or the platform in"
+      )
+    ) {
+      rtc.resumeStreams();
+    }
     if (JSON.stringify(e)?.includes("devicesRemoved")) {
       layer.msg("摄像头设备已被拔出", { icon: 5 });
     }
