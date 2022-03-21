@@ -104,6 +104,13 @@ class RtcClient {
     } catch (error) {
       console.error("推送本地流失败" + error);
       this.isPublished_ = false;
+      if (
+        JSON.stringify(error)?.includes("is not initialized or is") ||
+        JSON.stringify(error)?.includes("publish() is ongoing") ||
+        JSON.stringify(error)?.includes("timeout")
+      ) {
+        location.reload();
+      }
     }
     this.isPublished_ = true;
   }

@@ -119,7 +119,8 @@ async function init() {
 function beiyongfangan() {
   if (deviceType == DEVICE_TYPE_ENUM.MOBILE_IOS) {
     setTimeout(() => {
-      if (roomDetail_.SpeakerID != oneself_.CHID) {
+      rtc.resumeStreams();
+      /*if (roomDetail_.SpeakerID != oneself_.CHID) {
         var stream = rtc.members_.get(roomDetail_.SpeakerID);
         stream?.stop();
         stream?.play("zjr_video");
@@ -127,7 +128,7 @@ function beiyongfangan() {
         var stream = rtc.members_.get(ZCRID_);
         stream?.stop();
         stream?.play("box_" + ZCRID_);
-      }
+      }*/
     }, 1000);
   }
 }

@@ -32,13 +32,13 @@ console.warn = (e) => {
       isDisconnect = false;
       this.location.reload();
     }
-    if (
+    /*if (
       JSON.stringify(e)?.includes(
         "The request is not allowed by the user agent or the platform in"
       )
     ) {
       rtc.resumeStreams();
-    }
+    }*/
     if (JSON.stringify(e)?.includes("devicesRemoved")) {
       layer.msg("摄像头设备已被拔出", { icon: 5 });
     }
@@ -74,7 +74,8 @@ console.error = async (e) => {
     if (
       JSON.stringify(e)?.includes(
         "Cannot send data if the connection is not in the"
-      )
+      ) ||
+      JSON.stringify(e)?.includes("Websocket closed with status code: 1006")
     ) {
       chathubReConnect();
     }

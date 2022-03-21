@@ -246,7 +246,7 @@ function audioHandle(on, userId) {
 
 // 视频开关状态控制
 function videoHandle(on, userId) {
-  on && rtc.resumeStreams();
+  // on && rtc.resumeStreams();
 
   var zjr =
     roomDetail_.SpeakerID ||
