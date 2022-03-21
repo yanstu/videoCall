@@ -429,7 +429,7 @@ function onlineOrOfline(online, userId) {
   var zjr = roomDetail_.SpeakerID || oneself_.CHID;
   // 针对主讲人在线或离线时的状态改变
   if (userId == zjr) {
-    if (rtc.members_.get(userId) && online) {
+    if (rtc.members_.get(userId) || (oneself_.CHID == userId && online)) {
       $("#zjr_mask").hide();
     } else {
       $("#zjr_mask").show();
@@ -437,9 +437,15 @@ function onlineOrOfline(online, userId) {
     if (oneself_.CHID == userId) {
       online ? $("#zjr_mask").hide() : $("#zjr_mask").show();
     }
-    online
-      ? $(`#zjr_mask img`).attr("src", "./img/camera-green.png")
-      : $(`#zjr_mask img`).attr("src", "./img/camera-gray.png");
+
+    online && $(`#zjr_mask img`).attr("src", "./img/camera-green.png");
+
+    if (!online) {
+      videoImgTimer && clearInterval(videoImgTimer);
+      $("#img_" + userId).hide();
+      $("#mask_" + userId).show();
+      $(`#zjr_mask img`).attr("src", "./img/camera-gray.png");
+    }
   } else {
     if (rtc.members_.get(userId) && online) {
       $("#mask_" + userId).hide();
@@ -450,14 +456,17 @@ function onlineOrOfline(online, userId) {
       online ? $("#mask_" + userId).hide() : $("#mask_" + userId).show();
     }
   }
+  
   // 改变遮罩摄像头图片颜色
   online
     ? $(`#mask_${userId} img`).attr("src", "./img/camera-green.png")
     : $(`#mask_${userId} img`).attr("src", "./img/camera-gray.png");
+
   // 改变用户列表用户在线状态颜色
   $("#member_" + userId)
     .find(".member-id")
     .attr("style", `color: ${online ? "#ffffff;" : "#7c7f85;"};`);
+
   // 只针对离线的改变
   if (!online) {
     $(`#mic_main_${userId} .member-audio-btn`).attr("src", "img/mic-on.png");
@@ -465,7 +474,6 @@ function onlineOrOfline(online, userId) {
     $("#member_" + userId)
       .find(".member-video_btn")
       .attr("src", "img/camera-on.png");
-    // $(`#mask_${userId} img`).attr("src", "./img/camera-gray.png");
     $(`#mic_main_${userId} .volume-level`).css("height", "0%");
     $(`#fayan_${userId}`).remove();
     if ($("#speakerList > div").length == 1) {
