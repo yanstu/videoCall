@@ -12,10 +12,9 @@ async function viewsHandle() {
   } else {
     await rtc.join();
     videoHandle(isCamOn, oneself_.CHID);
-  }
-
-  if (deviceType == DEVICE_TYPE_ENUM.MOBILE_IOS) {
-    beiyongfangan();
+    if (deviceType == DEVICE_TYPE_ENUM.MOBILE_IOS) {
+      beiyongfangan();
+    }
   }
 }
 
@@ -30,18 +29,19 @@ async function fanye() {
   }
 
   for (const user of roomDetail_.UserList) {
-    if (user.ID == oneself_.CHID) {
+    const { ID } = user;
+    if (ID == oneself_.CHID) {
       continue;
     }
     var shangyiyederen = $(`#box_${ID} video`).length > 0;
-    if (getUserInfoByMeet(user.ID) || shangyiyederen) {
-      var stream = rtc.members_.get(user.ID);
+    if (getUserInfoByMeet(ID) || shangyiyederen) {
+      var stream = rtc.members_.get(ID);
       if (stream) {
         await stream?.stop();
         await rtc.client_.unsubscribe(stream);
         await rtc.client_.subscribe(stream, {
           audio: true,
-          video: !!getUserInfoByMeet(user.ID), // 在当前页的才订阅视频
+          video: !!getUserInfoByMeet(ID), // 在当前页的才订阅视频
         });
       }
     }

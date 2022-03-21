@@ -329,7 +329,7 @@ class RtcClient {
   startGetAudioLevel() {
     this.client_.on("audio-volume", ({ result }) => {
       result.forEach(({ userId, audioVolume, stream }) => {
-        if (audioVolume >= 10) {
+        if (audioVolume >= 5) {
           $(`#mic_main_${userId}`)
             .find(".volume-level")
             .css("height", `${audioVolume * 4}%`);
@@ -337,7 +337,7 @@ class RtcClient {
           $(`#mic_main_${userId}`).find(".volume-level").css("height", `0%`);
         }
 
-        if (audioVolume >= 10) {
+        if (audioVolume >= 5) {
           $(`#mic_drag`)
             .find(".nickname")
             .html(
@@ -347,7 +347,6 @@ class RtcClient {
             );
 
           if (!roomDetail_.SpeakerID || userId == roomDetail_.SpeakerID) {
-            
             $("#mic_drag_icon")
               .find(".volume-level")
               .css("height", `${audioVolume * 4}%`);
