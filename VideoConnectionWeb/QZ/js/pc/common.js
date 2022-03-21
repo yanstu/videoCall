@@ -94,12 +94,9 @@ async function changeViews() {
 
   // 重新添加至参与者列表，并进行排序
   addMember();
-  if (oneself_.CHID == newZJRID) {
-    !isMicOn && $("#mic_btn").click();
-    !isCamOn && $("#video_btn").click();
-  }
 
   ZJRID_ = newZJRID;
+  
   // 权限判断按钮显示或隐藏
   showOrHide();
 

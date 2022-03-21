@@ -62,6 +62,7 @@
     if (!location.href.toLowerCase().includes("mobile")) {
       tiaozhuandao("mobile");
     }
+    $("#qiehuanshitu_mianban").fadeOut();
   });
 
   // 手机端切换到小视频模式
@@ -73,6 +74,7 @@
         tiaozhuandao("ms");
       }
     }
+    $("#qiehuanshitu_mianban").fadeOut();
   });
 
   // 参会端切换到主讲人+小视频模式
@@ -82,6 +84,7 @@
     } else {
       tiaozhuandao("index");
     }
+    $("#qiehuanshitu_mianban").fadeOut();
   });
 
   // 参会端切换到主讲人模式
@@ -91,6 +94,7 @@
     } else {
       tiaozhuandao("index", true);
     }
+    $("#qiehuanshitu_mianban").fadeOut();
   });
 
   // 参会端切换到小视频模式
@@ -102,6 +106,7 @@
         tiaozhuandao("small");
       }
     }
+    $("#qiehuanshitu_mianban").fadeOut();
   });
 
   // 切换视图关闭按钮点击事件

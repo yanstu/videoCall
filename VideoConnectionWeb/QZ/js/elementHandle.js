@@ -51,7 +51,13 @@ function showOrHide() {
   $("#mic_drag").show();
 
   if (roomDetail_.SpeakerID != oneself_.CHID && rtc.localStream_) {
-    isCamOn && $("#mic_btn").click();
+    console.log(isCamOn);
+    isMicOn && $("#mic_btn").click();
+  }
+
+  if (roomDetail_.SpeakerID == oneself_.CHID && rtc.localStream_) {
+    !isMicOn && $("#mic_btn").click();
+    !isCamOn && $("#video_btn").click();
   }
 }
 

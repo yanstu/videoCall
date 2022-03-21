@@ -63,8 +63,6 @@ async function change() {
     userInfoTemplate(newZJRID, getUserInfo(newZJRID).UserName)
   );
 
-  showOrHide();
-
   if (newZJRID != oneself_.CHID) {
     rtc.client_.subscribe(new_streams);
   } else {
@@ -74,10 +72,7 @@ async function change() {
 
   new_streams ? $("#zjr_mask").hide() : $("#zjr_mask").show();
 
-  if (oneself_.CHID == newZJRID) {
-    !isMicOn && $("#mic_btn").click();
-    !isCamOn && $("#video_btn").click();
-  }
+  showOrHide();
 
   tuisong();
 
@@ -90,7 +85,7 @@ async function change() {
 
 // 第一次进入的初始化
 async function init() {
-  resetViews()
+  resetViews();
   if (ZJRID_ == oneself_.CHID) {
     var zcr_streams = rtc.members_.get(ZCRID_);
     zcr_streams?.stop();

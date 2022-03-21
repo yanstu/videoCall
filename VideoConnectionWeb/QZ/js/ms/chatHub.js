@@ -45,12 +45,8 @@ chatHub.on("broadcastMessage", function (message, channelss) {
       case "29":
         roomDetail_.SpeakerID = mess.ReUserid;
         roomDetail_.SpeakerName = mess.ReUserName;
-        if (roomDetail_.SpeakerID == oneself_.CHID) {
-          !isMicOn && $("#mic_btn").click();
-          !isCamOn && $("#video_btn").click();
-        }
-        gengxinzhuangtai();
         showOrHide();
+        gengxinzhuangtai();
         break;
       // 关闭发言申请
       case "15":
