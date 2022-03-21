@@ -94,8 +94,8 @@ async function addView() {
 function beiyongfangan() {
   if (deviceType == DEVICE_TYPE_ENUM.MOBILE_IOS) {
     setTimeout(() => {
-      rtc.resumeStreams();
-      /*for (const user of meet_layout.pageUserList) {
+      // rtc.resumeStreams();
+      for (const user of meet_layout.pageUserList) {
         if (user.ID != oneself_.CHID) {
           var stream = rtc.members_.get(roomDetail_.SpeakerID);
           if (stream) {
@@ -103,7 +103,7 @@ function beiyongfangan() {
             stream?.play("box_" + user.ID);
           }
         }
-      }*/
+      }
     }, 1000);
   }
 }

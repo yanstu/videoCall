@@ -246,7 +246,10 @@ function audioHandle(on, userId) {
 
 // 视频开关状态控制
 function videoHandle(on, userId) {
-  // on && rtc.resumeStreams();
+  if (on && deviceType == DEVICE_TYPE_ENUM.MOBILE_IOS) {
+    var stream = rtc.members_.get(userId);
+    stream?.resume();
+  }
 
   var zjr =
     roomDetail_.SpeakerID ||
