@@ -51,7 +51,6 @@ function showOrHide() {
   $("#mic_drag").show();
 
   if (roomDetail_.SpeakerID != oneself_.CHID && rtc.localStream_) {
-    console.log(isCamOn);
     isMicOn && $("#mic_btn").click();
   }
 

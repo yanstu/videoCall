@@ -122,6 +122,7 @@ async function deviceTestingInit() {
   });
   // 摄像头检测失败/成功
   $("#camera-fail, #camera-success").on("click", function () {
+    cameraSwitchError && location.reload();
     cameraTestingResult.statusResult = $(this).attr("id") === "camera-success";
     $("#camera-testing-body").hide();
     localStream.close();
@@ -209,7 +210,12 @@ async function deviceTestingInit() {
     await updateMicDeviceList();
   });
   $("#camera-refresh").on("click", async () => {
+    cameraSwitchError && location.reload();
     await updateCameraDeviceList();
+  });
+  $("#camera-select").click(function (e) {
+    e?.preventDefault();
+    cameraSwitchError && location.reload();
   });
   // 摄像头设备切换
   $("#camera-select").change(async function () {

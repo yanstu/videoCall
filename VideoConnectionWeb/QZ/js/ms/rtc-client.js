@@ -347,7 +347,7 @@ class RtcClient {
             );
 
           if (!roomDetail_.SpeakerID || userId == roomDetail_.SpeakerID) {
-            console.log(audioVolume * 4);
+            
             $("#mic_drag_icon")
               .find(".volume-level")
               .css("height", `${audioVolume * 4}%`);
