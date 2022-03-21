@@ -13,7 +13,9 @@ async function viewsHandle() {
     await rtc.join();
   }
 
-  beiyongfangan();
+  setTimeout(() => {
+    beiyongfangan();
+  }, 700);
 }
 
 async function fanye() {

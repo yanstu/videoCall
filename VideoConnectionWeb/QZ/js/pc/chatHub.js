@@ -123,6 +123,17 @@ chatHub.on("broadcastMessage", function (message, channelss) {
         meet_layout.pageNo = pageNo - 1;
         viewsHandle();
         break;
+      // 更新用户的长宽比
+      case "30":
+        var AspectRatio = mess.Data.AspectRatio;
+        var SendUserID = mess.Data.SendUserID;
+        if (AspectRatio) {
+          var user = roomDetail_.UserList.find((item) => item.ID == SendUserID);
+          if (user) {
+            user.AspectRatio = AspectRatio;
+          }
+        }
+        break;
     }
   }
 });

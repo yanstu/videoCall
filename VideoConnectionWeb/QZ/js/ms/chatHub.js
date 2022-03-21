@@ -104,6 +104,17 @@ chatHub.on("broadcastMessage", function (message, channelss) {
         meet_layout.mode = mess.Data.State;
         chanhuiduan_mode(meet_layout.mode);
         break;
+      // 更新用户的长宽比
+      case "30":
+        var AspectRatio = mess.Data.AspectRatio;
+        var SendUserID = mess.Data.SendUserID;
+        if (AspectRatio) {
+          var user = roomDetail_.UserList.find((item) => item.ID == SendUserID);
+          if (user) {
+            user.AspectRatio = AspectRatio;
+          }
+        }
+        break;
     }
   }
 });

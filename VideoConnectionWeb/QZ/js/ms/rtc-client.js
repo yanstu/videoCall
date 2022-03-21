@@ -73,7 +73,7 @@ class RtcClient {
     // 权限判断按钮显示或隐藏
     showOrHide();
     // 关闭加载中
-    
+
     // 开始获取音量
     this.startGetAudioLevel();
   }
@@ -337,23 +337,27 @@ class RtcClient {
           $(`#mic_main_${userId}`).find(".volume-level").css("height", `0%`);
         }
 
-        $(`#mic_drag`)
-          .find(".nickname")
-          .html(
-            roomDetail_.SpeakerID
-              ? getUserInfo(roomDetail_.SpeakerID).UserName
-              : getUserInfo(userId).UserName
-          );
-        if (roomDetail_.SpeakerID) {
-          if (userId == roomDetail_.SpeakerID) {
+        if (audioVolume >= 10) {
+          $(`#mic_drag`)
+            .find(".nickname")
+            .html(
+              roomDetail_.SpeakerID
+                ? getUserInfo(roomDetail_.SpeakerID).UserName
+                : getUserInfo(userId).UserName
+            );
+
+          if (!roomDetail_.SpeakerID || userId == roomDetail_.SpeakerID) {
+            console.log(audioVolume * 4);
             $("#mic_drag_icon")
               .find(".volume-level")
-              .css("height", `${audioVolume >= 10 ? audioVolume * 4 : 0}%`);
+              .css("height", `${audioVolume * 4}%`);
           }
         } else {
-          $("#mic_drag_icon")
-            .find(".volume-level")
-            .css("height", `${audioVolume >= 10 ? audioVolume * 4 : 0}%`);
+          roomDetail_.SpeakerID &&
+            $(`#mic_drag`)
+              .find(".nickname")
+              .html(getUserInfo(roomDetail_.SpeakerID).UserName);
+          $("#mic_drag_icon").find(".volume-level").css("height", `${0}%`);
         }
       });
     });
