@@ -59,20 +59,32 @@
 
   // 手机端切换到主讲人模式
   $("#qiehuanzhujiangrenshipin_btn").on("click", () => {
-    if (!location.href.toLowerCase().includes("mobile")) {
-      tiaozhuandao("mobile");
+    if (
+      meet_layout.mode == 1 ||
+      meet_layout.mode == 2 ||
+      meet_layout.mode == 4
+    ) {
+      if (!location.href.toLowerCase().includes("mobile")) {
+        tiaozhuandao("mobile");
+      }
+    } else {
+      layer.msg("非自由模式，不能随意切换");
     }
     $("#qiehuanshitu_mianban").fadeOut();
   });
 
   // 手机端切换到小视频模式
   $("#qiehuanxiaoshipin_sm_btn").on("click", () => {
-    if (!location.href.toLowerCase().includes("ms")) {
-      if (roomDetail_.UserList.length > 25) {
-        layer.msg("当前房间用户超过25人，不能使用此模式");
-      } else {
-        tiaozhuandao("ms");
+    if (meet_layout.mode == 3 || meet_layout.mode == 4) {
+      if (!location.href.toLowerCase().includes("ms")) {
+        if (roomDetail_.UserList.length > 25) {
+          layer.msg("当前房间用户超过25人，不能使用此模式");
+        } else {
+          tiaozhuandao("ms");
+        }
       }
+    } else {
+      layer.msg("非自由模式，不能随意切换");
     }
     $("#qiehuanshitu_mianban").fadeOut();
   });
