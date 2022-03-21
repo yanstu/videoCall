@@ -11,11 +11,12 @@ async function viewsHandle() {
     fanye();
   } else {
     await rtc.join();
+    videoHandle(isCamOn, oneself_.CHID);
   }
 
-  setTimeout(() => {
+  if (deviceType == DEVICE_TYPE_ENUM.MOBILE_IOS) {
     beiyongfangan();
-  }, 700);
+  }
 }
 
 async function fanye() {
