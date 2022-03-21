@@ -85,7 +85,6 @@ async function change() {
 
 // 第一次进入的初始化
 async function init() {
-  
   resetViews();
 
   if (ZJRID_ == oneself_.CHID) {
@@ -113,22 +112,24 @@ async function init() {
 
   await rtc.join();
 
-  // beiyongfangan();
+  beiyongfangan();
 }
 
-// 针对手机端的备用方案
+// 针对苹果端的备用方案
 function beiyongfangan() {
-  setTimeout(() => {
-    if (roomDetail_.SpeakerID != oneself_.CHID) {
-      var stream = rtc.members_.get(roomDetail_.SpeakerID);
-      stream?.stop();
-      stream?.play("zjr_video");
-    } else {
-      var stream = rtc.members_.get(ZCRID_);
-      stream?.stop();
-      stream?.play("box_" + ZCRID_);
-    }
-  }, 1000);
+  if (deviceType == DEVICE_TYPE_ENUM.MOBILE_IOS) {
+    setTimeout(() => {
+      if (roomDetail_.SpeakerID != oneself_.CHID) {
+        var stream = rtc.members_.get(roomDetail_.SpeakerID);
+        stream?.stop();
+        stream?.play("zjr_video");
+      } else {
+        var stream = rtc.members_.get(ZCRID_);
+        stream?.stop();
+        stream?.play("box_" + ZCRID_);
+      }
+    }, 1000);
+  }
 }
 
 // 点击小视频切换大视频

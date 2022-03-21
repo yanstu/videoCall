@@ -152,9 +152,13 @@ class RtcClient {
    * Resumes the local and remote streams
    */
   resumeStreams() {
-    this.localStream_.resume();
-    for (let stream of this.remoteStreams_) {
-      stream.resume();
+    this.localStream_?.resume();
+    for (const user of meet_layout.pageUserList) {
+      const { ID } = user;
+      var stream = this.members_.get(ID);
+      if (stream) {
+        stream.resume();
+      }
     }
   }
 

@@ -12,9 +12,7 @@ async function viewsHandle() {
   } else {
     await rtc.join();
     videoHandle(isCamOn, oneself_.CHID);
-    if (deviceType == DEVICE_TYPE_ENUM.MOBILE_IOS) {
-      beiyongfangan();
-    }
+    beiyongfangan();
   }
 }
 
@@ -92,19 +90,21 @@ async function addView() {
   }
 }
 
-// 针对手机端的备用方案
+// 针对苹果端的备用方案
 function beiyongfangan() {
-  setTimeout(() => {
-    for (const user of meet_layout.pageUserList) {
-      if (user.ID != oneself_.CHID) {
-        var stream = rtc.members_.get(roomDetail_.SpeakerID);
-        if (stream) {
-          stream?.stop();
-          stream?.play("box_" + user.ID);
+  if (deviceType == DEVICE_TYPE_ENUM.MOBILE_IOS) {
+    setTimeout(() => {
+      for (const user of meet_layout.pageUserList) {
+        if (user.ID != oneself_.CHID) {
+          var stream = rtc.members_.get(roomDetail_.SpeakerID);
+          if (stream) {
+            stream?.stop();
+            stream?.play("box_" + user.ID);
+          }
         }
       }
-    }
-  }, 1000);
+    }, 1000);
+  }
 }
 
 // 查询房间是否包含该用户

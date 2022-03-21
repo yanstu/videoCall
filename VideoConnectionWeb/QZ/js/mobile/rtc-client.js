@@ -166,9 +166,8 @@ class RtcClient {
    */
   resumeStreams() {
     this.localStream_?.resume();
-    for (let stream of this.remoteStreams_) {
-      stream.resume();
-    }
+    this.members_.get(ZCRID_)?.resume();
+    this.members_.get(roomDetail_.SpeakerID)?.resume();
   }
 
   /**
