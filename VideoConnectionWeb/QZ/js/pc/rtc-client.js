@@ -301,7 +301,7 @@ class RtcClient {
         if (event.state == "PLAYING") {
           isDisconnect = false;
         }
-        videoHandle(event.state == "PLAYING", userId);
+        // videoHandle(event.state == "PLAYING", userId);
         try {
           event.state === "PAUSED" && this.resumeStreams();
         } catch (error) {}
