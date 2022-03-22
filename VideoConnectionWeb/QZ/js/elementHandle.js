@@ -301,7 +301,7 @@ function videoHandle(on, userId) {
         $("#img_" + userId)
           .attr("src", stream?.getVideoFrame())
           .show();
-      }, 60 * 1000);
+      }, 30 * 1000);
     } else {
       videoImgTimer && clearInterval(videoImgTimer);
       $("#img_" + userId).hide();

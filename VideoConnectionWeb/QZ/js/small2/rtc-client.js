@@ -32,7 +32,6 @@ class RtcClient {
       roomId: parseInt(this.roomId_),
     });
     this.isJoined_ = true;
-    
   }
 
   /**
@@ -54,9 +53,9 @@ class RtcClient {
    * 客户端监听服务
    */
   handleEvents() {
-    this.client_.on("error", (err) => {
+    /*this.client_.on("error", (err) => {
       location.reload();
-    });
+    });*/
 
     this.client_.on("client-banned", () => {
       if (!isHidden()) {
@@ -111,7 +110,7 @@ class RtcClient {
       const userId = remoteStream.getUserId();
       this.remoteStreams_.push(remoteStream);
 
-      hasMe(userId) && this.playVideo(remoteStream, userId);
+      this.playVideo(remoteStream, userId);
 
       remoteStream.on("player-state-changed", (event) => {
         console.log(
@@ -167,6 +166,12 @@ class RtcClient {
     this.client_.on("unmute-video", ({ userId }) => {
       videoHandle(true, userId);
     });
+  }
+
+  resumeStreams() {
+    for (let stream of this.remoteStreams_) {
+      stream.resume();
+    }
   }
 
   getUidByStreamId(streamId) {

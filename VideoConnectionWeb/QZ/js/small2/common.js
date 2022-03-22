@@ -16,13 +16,14 @@ async function viewsHandle() {
 }
 
 function addView() {
-  for (let user_ of display_layout.pageUserList) {
+  for (let user_ of roomDetail_.UserList) {
     const { ID, UserName } = user_;
     $("#video-grid").append(videoBoxTemplate(ID, UserName));
     $("#box_" + ID).attr(
       "class",
       "w-full h-full video-box relative box-border border-[2px] border-[#5451]"
     );
+    !getUserInfoByDisplay(ID) && $("#box_" + ID).hide();
   }
 }
 

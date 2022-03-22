@@ -225,9 +225,9 @@ class RtcClient {
    * 客户端监听服务
    */
   handleEvents() {
-    this.client_.on("error", (err) => {
+    /*this.client_.on("error", (err) => {
       location.reload();
-    });
+    });*/
 
     this.client_.on("client-banned", () => {
       if (!isHidden()) {
@@ -418,7 +418,7 @@ class RtcClient {
         if (!roomDetail_.SpeakerID) {
           this.localStream_?.setVideoProfile("480p");
         } else if (roomDetail_.SpeakerID == oneself_.CHID) {
-          this.localStream_?.setVideoProfile("1080p");
+          this.localStream_?.setVideoProfile("720p");
         } else {
           var renshu = [6, 4, 2, 0];
           var fenbianlv = ["120p", "360p", "480p", "720p"];

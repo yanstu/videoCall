@@ -50,9 +50,9 @@ class RtcClient {
    * 客户端监听服务
    */
   handleEvents() {
-    this.client_.on("error", (err) => {
+    /*this.client_.on("error", (err) => {
       location.reload();
-    });
+    });*/
 
     this.client_.on("client-banned", () => {
       if (!isHidden()) {
