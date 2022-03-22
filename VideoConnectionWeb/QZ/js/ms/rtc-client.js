@@ -352,22 +352,15 @@ class RtcClient {
           $(`#mic_drag`)
             .find(".nickname")
             .html(
-              roomDetail_.SpeakerID
+              (roomDetail_.SpeakerID
                 ? getUserInfo(roomDetail_.SpeakerID).UserName
-                : getUserInfo(userId).UserName
+                : getUserInfo(userId).UserName) + " 正在讲话"
             );
-
-          if (!roomDetail_.SpeakerID || userId == roomDetail_.SpeakerID) {
-            $("#mic_drag_icon")
-              .find(".volume-level")
-              .css("height", `${audioVolume * 4}%`);
-          }
         } else {
           roomDetail_.SpeakerID &&
             $(`#mic_drag`)
               .find(".nickname")
-              .html(getUserInfo(roomDetail_.SpeakerID).UserName);
-          $("#mic_drag_icon").find(".volume-level").css("height", `${0}%`);
+              .html(getUserInfo(roomDetail_.SpeakerID).UserName + " 正在讲话");
         }
       });
     });

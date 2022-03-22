@@ -430,28 +430,12 @@
         style="display: none"
         ontouchmove="touchMove(event)"
         ontouchend="touchEnd()"
-        class="absolute top-[45%] text-[13px] text-white bottom-0 shadow-md left-1 w-auto h-[40px] bg-[#565d71] z-[888] flex justify-center items-center pl-1 pr-1"
+        class="absolute top-[45%] text-[13px] text-white bottom-0 shadow-md left-1 w-auto h-[35px] bg-[#337c33] z-[888] flex  正在讲话justify-center items-center pl-2 pr-2"
       >
-        <div class="mic mr-1">
-          <!-- 声音显示 -->
-          <div id="mic_drag_icon">
-            <div class="flex items-center justify-content-center relative h-5">
-              <img class="member-audio-btn h-full" src="./img/mic-on.png" />
-              <!-- 音量级别显示 -->
-              <div
-                class="volume-level absolute bottom-0 left-0 w-full"
-                style="
-                  height: 0%;
-                  overflow: hidden;
-                  transition: height 0.1s ease;
-                "
-              >
-                <img class="absolute bottom-0" src="./img/mic-green.png" />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="nickname"></div>
+        <svg class="icon text-[0.9rem] text-[#ffa500]" aria-hidden="true">
+          <use xlink:href="#icon-zhujiangren"></use>
+        </svg>
+        <div class="nickname ml-1"></div>
       </div>
 
       <!-- 预加载所有网络图片资源，防止断网后加载不出断网图标图片 -->
