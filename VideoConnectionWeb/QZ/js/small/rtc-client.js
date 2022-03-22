@@ -16,6 +16,7 @@ class RtcClient {
       sdkAppId: this.sdkAppId_,
       userId: this.userId_,
       userSig: this.userSig_,
+      enableAutoPlayDialog: false,
     });
 
     this.startGetNetworkevel();
@@ -178,6 +179,12 @@ class RtcClient {
     videoHandle(true, userId);
     var objectFit = getUserInfo(userId).AspectRatio > 1 ? "contain" : "cover";
     stream?.play("box_" + userId, { objectFit, mirror: false });
+    stream?.on("error", (error) => {
+      if (error.getCode() === 0x4043) {
+        deviceTestingInit();
+        startDeviceConnect();
+      }
+    });
   }
 
   /**

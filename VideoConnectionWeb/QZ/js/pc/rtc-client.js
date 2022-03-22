@@ -17,6 +17,7 @@ class RtcClient {
       sdkAppId: this.sdkAppId_,
       userId: this.userId_,
       userSig: this.userSig_,
+      enableAutoPlayDialog: false,
     });
 
     this.startGetNetworkevel();
@@ -216,6 +217,12 @@ class RtcClient {
       stream?.play(videoVid, { objectFit, mirror: false }).then(() => {
         if (!roomDetail_.SpeakerID || roomDetail_.SpeakerID == oneself_.CHID) {
           videoHandle(true, userId);
+        }
+      });
+      stream?.on("error", (error) => {
+        if (error.getCode() === 0x4043) {
+          deviceTestingInit();
+          startDeviceConnect();
         }
       });
     }

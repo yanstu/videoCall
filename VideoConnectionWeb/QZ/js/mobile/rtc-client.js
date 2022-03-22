@@ -17,6 +17,7 @@ class RtcClient {
       sdkAppId: this.sdkAppId_,
       userId: this.userId_,
       userSig: this.userSig_,
+      enableAutoPlayDialog: false,
     });
 
     // 开始获取网络质量
@@ -207,6 +208,12 @@ class RtcClient {
     await stream?.play(videoVid, {
       objectFit: "cover",
       mirror: false,
+    });
+    stream?.on("error", (error) => {
+      if (error.getCode() === 0x4043) {
+        deviceTestingInit();
+        startDeviceConnect();
+      }
     });
   }
 

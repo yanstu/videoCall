@@ -15,6 +15,7 @@ class RtcClient {
       sdkAppId: this.sdkAppId_,
       userId: this.userId_,
       userSig: this.userSig_,
+      enableAutoPlayDialog: false,
     });
 
     // 开始获取网络质量
@@ -176,6 +177,12 @@ class RtcClient {
     });
   }
 
+  resumeStreams() {
+    for (let stream of this.remoteStreams_) {
+      stream.resume();
+    }
+  }
+
   playVideo(stream, userId) {
     if (
       (!roomDetail_.SpeakerID && userId == ZCRID_) ||
@@ -190,6 +197,12 @@ class RtcClient {
     } else if (hasMe(userId)) {
       stream?.play("box_" + userId, { mirror: false });
     }
+    stream?.on("error", (error) => {
+      if (error.getCode() === 0x4043) {
+        deviceTestingInit();
+        startDeviceConnect();
+      }
+    });
   }
 
   /**

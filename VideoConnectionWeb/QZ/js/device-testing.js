@@ -115,6 +115,7 @@ async function deviceTestingInit() {
   });
   // 【开始检测】开始设备检测按钮
   $("#start-test-btn").on("click", function () {
+    rtc.resumeStreams();
     if ($(this).hasClass("start-gray")) return;
     $("#device-testing-prepare").hide();
     $("#device-testing").show();
@@ -179,6 +180,7 @@ async function deviceTestingInit() {
   $(
     "#testing-finish, #device-testing-close-btn, #testing-close-btn, #start-test-btn-tc"
   ).on("click", () => {
+    rtc.resumeStreams();
     finishDeviceTesting();
   });
   // 测试tab页切换
