@@ -213,7 +213,7 @@ class RtcClient {
       var videoVid = "box_" + userId;
       if (ZJRID_ == userId || roomDetail_.SpeakerID == userId)
         videoVid = "zjr_video";
-      stream?.play(videoVid, { objectFit }).then(() => {
+      stream?.play(videoVid, { objectFit, mirror: false }).then(() => {
         if (!roomDetail_.SpeakerID || roomDetail_.SpeakerID == oneself_.CHID) {
           videoHandle(true, userId);
         }
@@ -405,15 +405,12 @@ class RtcClient {
 
       isDisconnect = event.uplinkNetworkQuality == 6;
       if (event.uplinkNetworkQuality == 4 || event.uplinkNetworkQuality == 5) {
-        layer.msg("当前网络极差，请注意保持良好的网络连接", { icon: 5 });
+        // layer.msg("当前网络极差，请注意保持良好的网络连接", { icon: 5 });
       }
 
       // 如果网络极差，不管是不是主讲人也将分辨率调到极低
       if (event.uplinkNetworkQuality >= 4) {
-        this.localStream_?.setVideoProfile("180p");
-        if (event.uplinkNetworkQuality >= 4) {
-          this.localStream_?.setVideoProfile("120p");
-        }
+        this.localStream_?.setVideoProfile("120p");
       } else {
         if (!roomDetail_.SpeakerID) {
           this.localStream_?.setVideoProfile("480p");

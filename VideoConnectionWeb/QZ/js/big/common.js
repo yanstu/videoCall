@@ -54,7 +54,7 @@ async function change() {
       return;
     }
     if (hasMe(ID)) {
-      stream?.play("box_" + ID, { objectFit: "cover" });
+      stream?.play("box_" + ID, { objectFit: "cover", mirror: false });
       // 如果远程流不存在，不在线，显示遮罩
       stream ? $("#mask_" + ID).hide() : $("#mask_" + ID).show();
     }
@@ -79,7 +79,7 @@ async function change() {
   if (display_layout.mode == 1) {
     await rtc.client_.subscribe(zjr_streams);
   } else {
-    zjr_streams?.play("zjr_video", { objectFit });
+    zjr_streams?.play("zjr_video", { objectFit, mirror: false });
   }
   zjr_streams ? $("#zjr_mask").hide() : $("#zjr_mask").show();
   // 为新的主讲人取帧

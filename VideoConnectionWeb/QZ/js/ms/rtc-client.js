@@ -197,7 +197,7 @@ class RtcClient {
   playVideo(stream, userId) {
     onlineOrOfline(true, oneself_.CHID);
     stream?.stop();
-    stream?.play("box_" + userId);
+    stream?.play("box_" + userId, { mirror: false });
   }
 
   /**
@@ -408,7 +408,7 @@ class RtcClient {
 
       isDisconnect = event.uplinkNetworkQuality == 6;
       if (event.uplinkNetworkQuality == 4 || event.uplinkNetworkQuality == 5) {
-        layer.msg("当前网络极差，请注意保持良好的网络连接", { icon: 5 });
+        // layer.msg("当前网络极差，请注意保持良好的网络连接", { icon: 5 });
       }
 
       // 如果网络极差，不管是不是主讲人也将分辨率调到极低

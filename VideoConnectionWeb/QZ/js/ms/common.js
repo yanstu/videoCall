@@ -21,7 +21,7 @@ async function fanye() {
     await rtc.localStream_.stop();
   } else {
     await rtc.localStream_.stop();
-    await rtc.localStream_.play("box_" + oneself_.CHID);
+    await rtc.localStream_.play("box_" + oneself_.CHID, { mirror: false });
     // $("#mask_" + oneself_.CHID).hide();
     videoHandle(isCamOn, oneself_.CHID);
   }
@@ -98,7 +98,7 @@ function beiyongfangan() {
           var stream = rtc.members_.get(roomDetail_.SpeakerID);
           if (stream) {
             stream?.stop();
-            stream?.play("box_" + user.ID);
+            stream?.play("box_" + user.ID, { mirror: false });
           }
         }
       }

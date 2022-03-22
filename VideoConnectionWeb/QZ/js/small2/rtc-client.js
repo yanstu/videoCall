@@ -46,7 +46,7 @@ class RtcClient {
 
   playVideo(stream, userId) {
     var objectFit = getUserInfo(userId).AspectRatio > 1 ? "contain" : "cover";
-    stream?.play("box_" + userId, { objectFit });
+    stream?.play("box_" + userId, { objectFit, mirror: false });
   }
 
   /**
@@ -243,7 +243,7 @@ class RtcClient {
         event.downlinkNetworkQuality == 4 ||
         event.downlinkNetworkQuality == 5
       ) {
-        layer.msg("当前网络极差，请注意保持良好的网络连接", { icon: 5 });
+        // layer.msg("当前网络极差，请注意保持良好的网络连接", { icon: 5 });
       }
     });
   }

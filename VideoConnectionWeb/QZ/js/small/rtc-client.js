@@ -177,7 +177,7 @@ class RtcClient {
   playVideo(stream, userId) {
     videoHandle(true, userId);
     var objectFit = getUserInfo(userId).AspectRatio > 1 ? "contain" : "cover";
-    stream?.play("box_" + userId, { objectFit });
+    stream?.play("box_" + userId, { objectFit, mirror: false });
   }
 
   /**
@@ -398,7 +398,7 @@ class RtcClient {
 
       isDisconnect = event.uplinkNetworkQuality == 6;
       if (event.uplinkNetworkQuality == 4 || event.uplinkNetworkQuality == 5) {
-        layer.msg("当前网络极差，请注意保持良好的网络连接", { icon: 5 });
+        // layer.msg("当前网络极差，请注意保持良好的网络连接", { icon: 5 });
       }
 
       // 如果网络极差，不管是不是主讲人也将分辨率调到极低

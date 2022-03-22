@@ -40,7 +40,7 @@ async function change() {
     addVideoView(ZCRID_, getUserInfo(ZCRID_).UserName);
     $("#box_" + ZCRID_).attr("class", "w-[9rem] h-full video-box relative");
     rtc.client_.subscribe(zcr_streams);
-    zcr_streams?.play("box_" + ZCRID_);
+    zcr_streams?.play("box_" + ZCRID_, { mirror: false });
   } else {
     if (ZJRID_ == oneself_.CHID) {
       resetViews();
@@ -51,7 +51,7 @@ async function change() {
         "w-[9rem] h-full video-box relative"
       );
       $("#video-grid [id^='player_']").remove();
-      rtc.localStream_.play("box_" + oneself_.CHID);
+      rtc.localStream_.play("box_" + oneself_.CHID, { mirror: false });
       $("#mask_" + oneself_.CHID).hide();
     }
   }
@@ -67,7 +67,7 @@ async function change() {
     rtc.client_.subscribe(new_streams);
   } else {
     // 将新主讲人播放到主讲人容器
-    new_streams?.play("zjr_video");
+    new_streams?.play("zjr_video", { mirror: false });
   }
 
   new_streams ? $("#zjr_mask").hide() : $("#zjr_mask").show();
@@ -123,11 +123,11 @@ function beiyongfangan() {
       if (roomDetail_.SpeakerID != oneself_.CHID) {
         var stream = rtc.members_.get(roomDetail_.SpeakerID);
         stream?.stop();
-        stream?.play("zjr_video");
+        stream?.play("zjr_video", { mirror: false });
       } else {
         var stream = rtc.members_.get(ZCRID_);
         stream?.stop();
-        stream?.play("box_" + ZCRID_);
+        stream?.play("box_" + ZCRID_, { mirror: false });
       }
     }, 1000);
   }

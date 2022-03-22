@@ -23,7 +23,7 @@ async function viewsHandle() {
             ? rtc.localStream_
             : rtc.members_.get(user.ID);
         await stream?.stop();
-        await stream?.play("box_" + user.ID);
+        await stream?.play("box_" + user.ID, { mirror: false });
         $("#img_" + user.ID).hide();
       }
     }
@@ -52,7 +52,7 @@ async function changeViews() {
     $("#img_" + ID).hide();
     stream?.stop();
     if (hasMe(ID)) {
-      stream?.play("box_" + ID, { objectFit: "cover" });
+      stream?.play("box_" + ID, { objectFit: "cover", mirror: false });
       // 如果远程流不存在，不在线，显示遮罩
       stream ? $("#mask_" + ID).hide() : $("#mask_" + ID).show();
     }
@@ -76,7 +76,7 @@ async function changeViews() {
   // 判断是否为手机设备
   var objectFit = objectFitHandle(newZJRID);
 
-  zjr_streams?.play("zjr_video", { objectFit });
+  zjr_streams?.play("zjr_video", { objectFit, mirror: false });
 
   tuisong();
 
@@ -96,7 +96,7 @@ async function changeViews() {
   addMember();
 
   ZJRID_ = newZJRID;
-  
+
   // 权限判断按钮显示或隐藏
   showOrHide();
 

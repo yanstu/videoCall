@@ -185,10 +185,10 @@ class RtcClient {
         getUserInfo(userId).AspectRatio > 1 && userId == ZJRID_
           ? "contain"
           : "cover";
-      stream?.play("zjr_video", { objectFit });
+      stream?.play("zjr_video", { objectFit, mirror: false });
       videoHandle(true, userId);
     } else if (hasMe(userId)) {
-      stream?.play("box_" + userId);
+      stream?.play("box_" + userId, { mirror: false });
     }
   }
 
@@ -254,7 +254,7 @@ class RtcClient {
         event.downlinkNetworkQuality == 4 ||
         event.downlinkNetworkQuality == 5
       ) {
-        layer.msg("当前网络极差，请注意保持良好的网络连接", { icon: 5 });
+        // layer.msg("当前网络极差，请注意保持良好的网络连接", { icon: 5 });
       }
     });
   }
