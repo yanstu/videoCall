@@ -10,9 +10,10 @@ async function viewsHandle() {
   // 如果没有设置主讲人，设定主持人为主讲人视角
   ZJRID_ = roomDetail_.SpeakerID || ZCRID_;
   // 为当前页用户循环添加至网页上
-  for (let user_ of display_layout.pageUserList) {
-    const { ID, UserName } = user_;
+  for (let user of roomDetail_.UserList) {
+    const { ID, UserName } = user;
     addVideoView(ID, UserName);
+    !getUserInfoByDisplay(ID) && $("#box_" + ID).hide();
   }
   $("#zjr_video").append(
     userInfoTemplate(ZJRID_, getUserInfo(ZJRID_).UserName)

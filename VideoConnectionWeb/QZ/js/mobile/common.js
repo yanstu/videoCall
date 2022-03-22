@@ -76,7 +76,7 @@ async function change() {
 
   tuisong();
 
-  beiyongfangan();
+  // beiyongfangan();
 
   setTimeout(() => {
     gengxinzhuangtai();
@@ -112,7 +112,7 @@ async function init() {
 
   await rtc.join();
 
-  beiyongfangan();
+  // beiyongfangan();
 }
 
 // 针对苹果端的备用方案

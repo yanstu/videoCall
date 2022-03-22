@@ -12,7 +12,7 @@ async function viewsHandle() {
   } else {
     await rtc.join();
     videoHandle(isCamOn, oneself_.CHID);
-    beiyongfangan();
+    // beiyongfangan();
   }
 }
 
@@ -84,9 +84,7 @@ async function addView() {
       }, 2000)
     );
 
-    if (!getUserInfoByMeet(ID)) {
-      $("#box_" + ID).hide();
-    }
+    !getUserInfoByMeet(ID) && $("#box_" + ID).hide();
   }
 }
 

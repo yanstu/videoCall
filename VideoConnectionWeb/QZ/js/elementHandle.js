@@ -62,9 +62,10 @@ function showOrHide() {
 
 // 添加当前页用户到页面
 function addViews() {
-  for (let user_ of meet_layout.pageUserList) {
+  for (let user_ of roomDetail_.UserList) {
     const { ID, UserName } = user_;
     addVideoView(ID, UserName);
+    !getUserInfoByMeet(ID) && $("#box_" + ID).hide();
   }
   // 添加用户到参与者列表
   addMember();
@@ -184,12 +185,27 @@ function meetLayoutCompute() {
     location.href.toLowerCase().includes("big") ||
     location.href.toLowerCase().includes("ms")
   ) {
+    
     $("#video-grid")
       .css("grid-template-columns", "repeat(" + meet_layout.cols + ", 1fr)")
       .css(
         "grid-template-rows",
         "repeat(" + meet_layout.rows + ", " + meet_layout.percentage + "%)"
       );
+
+    var yushu = meet_layout.count % meet_layout.cols;
+    var yi =
+      meet_layout.rows -
+      Math.floor(
+        (meet_layout.pageSize - meet_layout.remainder) / meet_layout.cols
+      );
+    var er = meet_layout.cols;
+    var si = meet_layout.cols;
+    for (let index = 1; index <= yushu; index++) {
+      var document = $("#video-grid > div")[meet_layout.count - index];
+      $(document).css("grid-area", `${yi}/${er--}/${yi}/${si--}`);
+      console.log(`${yi}/${er}/${yi}/${si}`);
+    }
   }
 }
 
