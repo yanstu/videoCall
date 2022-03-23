@@ -30,6 +30,14 @@ function addView() {
 function sortView() {
   $("#video-grid").attr(
     "class",
-    `box-border grid w-full h-full items-center justify-center z-10 grid-cols-${display_layout.cols} grid-rows-${display_layout.rows}`
+    `box-border grid w-full h-full items-center justify-center z-10`
+  );
+  $("#video-grid").css(
+    "grid-template-columns",
+    `repeat(${display_layout.cols}, minmax(0, 1fr));`
+  );
+  $("#video-grid").css(
+    "grid-template-rows",
+    `repeat(${display_layout.rows}, minmax(0, 1fr));`
   );
 }

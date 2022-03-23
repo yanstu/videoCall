@@ -25,11 +25,23 @@ function addView() {
 function sortView() {
   for (let index = 4; index >= 0; index--) {
     if (roomDetail_.UserList.length > index * index) {
+      console.log(
+        $("#video-grid").css(
+          "grid-template-columns",
+          `repeat(${index + 1}, minmax(0, 1fr));`
+        )
+      );
       $("#video-grid").attr(
         "class",
-        `box-border grid w-full h-full items-center justify-center z-10 grid-cols-${
+        `box-border grid w-full h-full items-center justify-center z-10`
+      );
+      $("#video-grid").attr(
+        "style",
+        `grid-template-columns: repeat(${
           index + 1
-        } grid-rows-${index + 1}`
+        }, minmax(0, 1fr));grid-template-rows: repeat(${
+          index + 1
+        }, minmax(0, 1fr));`
       );
       break;
     }

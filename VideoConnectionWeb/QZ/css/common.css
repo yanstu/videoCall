@@ -281,10 +281,6 @@
 .border-\[1px\] {
   border-width: 1px;
 }
-.border-\[\#5f6d7a\] {
-  --tw-border-opacity: 1;
-  border-color: rgb(95 109 122 / var(--tw-border-opacity));
-}
 .p-\[2px\] {
   padding: 2px;
 }
