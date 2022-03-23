@@ -76,7 +76,7 @@ async function change() {
 
   tuisong();
 
-  // beiyongfangan();
+  beiyongfangan();
 
   setTimeout(() => {
     gengxinzhuangtai();
@@ -112,14 +112,13 @@ async function init() {
 
   await rtc.join();
 
-  // beiyongfangan();
+  beiyongfangan();
 }
 
 // 针对苹果端的备用方案
 function beiyongfangan() {
   if (deviceType == DEVICE_TYPE_ENUM.MOBILE_IOS) {
     setTimeout(() => {
-      // rtc.resumeStreams();
       if (roomDetail_.SpeakerID != oneself_.CHID) {
         var stream = rtc.members_.get(roomDetail_.SpeakerID);
         stream?.stop();
