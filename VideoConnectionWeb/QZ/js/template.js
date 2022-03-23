@@ -11,14 +11,14 @@ function userInfoTemplate(userId, nickName) {
               isMobile ? "rounded-br-lg" : "rounded-tr-lg"
             } h-full bg-[#000000] opacity-10"></div>
             <!-- 声音显示 -->
-            <div id="mic_main_${userId}">
+            <div id="mic_main_${userId}" style="margin-left: 5px">
                 <div class="flex items-center justify-content-center relative ${
                   isMobile ? "h-5" : "h-4"
                 }">
                   <img class="member-audio-btn h-full" src="./img/mic-on.png">
                   <!-- 音量级别显示 -->
                   <div class="volume-level absolute bottom-0 left-0 w-full" style="height: 0%; overflow: hidden; transition: height .1s ease;">
-                      <img class="absolute bottom-0" src="./img/mic-green.png">
+                      <img class="absolute bottom-0 h-full w-full" src="./img/mic-green.png">
                   </div>
                 </div>
             </div>

@@ -12,7 +12,7 @@ async function viewsHandle() {
   } else {
     await rtc.join();
     videoHandle(isCamOn, oneself_.CHID);
-    beiyongfangan();
+    // beiyongfangan();
   }
 }
 
@@ -89,9 +89,10 @@ async function addView() {
 function beiyongfangan() {
   if (deviceType == DEVICE_TYPE_ENUM.MOBILE_IOS) {
     setTimeout(() => {
-      // rtc.resumeStreams();
-      rtc.localStream_.stop();
-      rtc.localStream_.play("box_" + user.ID, { mirror: false });
+      if (rtc.localStream_) {
+        rtc.localStream_.stop();
+        rtc.localStream_.play("box_" + oneself_.CHID, { mirror: false });
+      }
       for (const user of meet_layout.pageUserList) {
         if (user.ID != oneself_.CHID) {
           var stream = rtc.members_.get(roomDetail_.SpeakerID);
