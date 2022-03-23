@@ -11,7 +11,7 @@ function userInfoTemplate(userId, nickName) {
               isMobile ? "rounded-br-lg" : "rounded-tr-lg"
             } h-full bg-[#000000] opacity-10"></div>
             <!-- 声音显示 -->
-            <div id="mic_main_${userId}" style="margin-left: 3px;">
+            <div id="mic_main_${userId}">
                 <div class="flex items-center justify-content-center relative ${
                   isMobile ? "h-5" : "h-4"
                 }">
