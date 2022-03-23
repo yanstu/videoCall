@@ -14,31 +14,8 @@
   <link rel="stylesheet" href="./lib/layui/css/layui.css" />
   <link rel="stylesheet" href="./css/index.css" />
   <link rel="stylesheet" href="./css/common.css" />
-  <!-- <script src="./lib/tailwindcss/tailwindcss-3.0.18.min.js"></script> -->
   <script src="./js/api.js"></script>
   <script src="./js/onload.js"></script>
-  <style type="text/tailwindcss">
-    @layer utilities {
-        .toolbar_btn {
-          @apply h-full flex-1 flex flex-col items-center justify-center w-[5rem];
-        }
-        .modalbox {
-          @apply bg-[#393e4b] hidden drop-shadow-md fixed top-[10%] left-[0.5%] z-40 w-[25%] h-[80%] flex flex-col items-center;
-        }
-        .modalbox-title {
-          @apply w-full h-[7%] flex justify-center items-center  font-bold text-[1.3rem] biaotibeijing;
-        }
-        .biaotibeijing {
-          @apply bg-[#262626] text-[#bfbfbf]
-        }
-        .anniubeijing {
-          @apply bg-[#2d3549] hover:bg-[#31363f]
-        }
-        .shitubox {
-          @apply flex h-[50%] w-[32%] p-2 flex-col justify-center items-center hover:bg-[#b1b8c5]
-        }
-      }
-    </style>
 </head>
 
 <body class="w-screen h-screen">
@@ -381,12 +358,12 @@
       <div class="modalbox-title">
         申请发言列表
       </div>
-      <div id="speakerList" class="flex flex-col h-[93%] overflow-y-scroll overscroll-contain">
+      <div id="speakerList" class="flex flex-col h-[93%] overflow-y-scroll overscroll-contain w-full">
         <!-- 发言人模板 -->
         <div id="fayan_muban" style="display: none;"
-          class="border-b-283240 border-b-[1px] flex justify-between w-full h-[3.5rem] items-center pl-2 pr-2 text-[0.875rem]">
-          <div class="fayanrenxingming text-white">发言人姓名</div>
-          <div class="flex h-full justify-center items-center">
+          class="border-b-283240 border-b-[1px] flex justify-between w-full h-[3.5rem] items-center text-[0.875rem]">
+          <div class="fayanrenxingming text-white" style="margin-left: 1rem;">发言人姓名</div>
+          <div class="flex h-full justify-center items-center" style="margin-right: 1rem;">
             <div
               class="yunxufayan pl-[1rem] pr-[1rem] anniubeijing h-[50%] flex justify-center items-center text-white mr-3">
               允许发言</div>
@@ -411,7 +388,7 @@
           </div>
           <div class="message_info h-[70%] flex flex-row w-full justify-end items-center">
             <div
-              class="message_neirong text-white text-[0.875rem] mt-1 mr-2 mb-1 bg-[#2d3549] pl-1 pr-1 min-h-[5.7rem] w-[80%]">
+              class="message_neirong text-white text-[0.875rem] mt-1 ml-2 mr-2 mb-1 bg-[#2d3549] pl-2 pr-2 min-h-[5.7rem] w-[80%]">
               这个是内这个是内这个是内内这个
             </div>
             <div class="message_touxiang bg-[#2d3549] flex items-center justify-center w-[20%] flex-col h-full">

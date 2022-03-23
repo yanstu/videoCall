@@ -118,16 +118,16 @@ function huoquhuiyihuancunxinxi(mess, reconnect) {
   display_layout.mode = roomDetail_.XSDModel.Model;
   initFenye();
   zhanshiduan_mode(roomDetail_.XSDModel.Model);
-  viewsHandle(reconnect);
+  viewsHandle();
 }
 
 /**
  * 发布获取会议缓存
  */
-function huoquhuiyihuancun(reconnect) {
+function huoquhuiyihuancun() {
   var RoomId = queryParams("RoomId");
   ajaxMethod("RedisHandler", { Infotype: "GetCache", RoomId }, (res) => {
-    huoquhuiyihuancunxinxi(res, reconnect);
+    huoquhuiyihuancunxinxi(res);
   });
 }
 

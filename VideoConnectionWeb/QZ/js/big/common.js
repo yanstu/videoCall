@@ -35,6 +35,8 @@ async function viewsHandle() {
       gengxinzhuangtai();
     }, 700);
   }
+
+  meetLayoutCompute();
 }
 
 // 取消、修改主讲人的处理
