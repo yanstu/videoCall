@@ -32,12 +32,8 @@ function sortView() {
     "class",
     `box-border grid w-full h-full items-center justify-center z-10`
   );
-  $("#video-grid").css(
-    "grid-template-columns",
-    `repeat(${display_layout.cols}, minmax(0, 1fr));`
-  );
-  $("#video-grid").css(
-    "grid-template-rows",
-    `repeat(${display_layout.rows}, minmax(0, 1fr));`
+  $("#video-grid").attr(
+    "style",
+    `grid-template-columns: repeat(${display_layout.cols}, minmax(0, 1fr));grid-template-rows: repeat(${display_layout.rows}, minmax(0, 1fr));`
   );
 }

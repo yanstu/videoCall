@@ -101,8 +101,8 @@ chatHub.on("broadcastMessage", function (message, channelss) {
         break;
       // 操作所有用户切换显示模式
       case "35":
-        meet_layout.mode = mess.Data.State;
-        chanhuiduan_mode(meet_layout.mode);
+        /*meet_layout.mode = mess.Data.State;
+        chanhuiduan_mode(meet_layout.mode);*/
         break;
       // 更新用户的长宽比
       case "30":
@@ -233,6 +233,8 @@ function huoquhuiyihuancunxinxi(mess) {
   if (meet_layout.mode != 4) {
     chanhuiduan_mode(meet_layout.mode);
   }
+  /*meet_layout.mode = 3;
+  chanhuiduan_mode(3);*/
   viewsHandle();
 }
 
