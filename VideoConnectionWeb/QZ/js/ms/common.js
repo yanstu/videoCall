@@ -31,7 +31,6 @@ async function fanye() {
     if (ID == oneself_.CHID) {
       continue;
     }
-    
     var stream = rtc.members_.get(ID);
     if (stream) {
       await stream?.stop();
