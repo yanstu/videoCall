@@ -31,17 +31,15 @@ async function fanye() {
     if (ID == oneself_.CHID) {
       continue;
     }
-    var shangyiyederen = $(`#box_${ID} video`).length > 0;
-    if (getUserInfoByMeet(ID) || shangyiyederen) {
-      var stream = rtc.members_.get(ID);
-      if (stream) {
-        await stream?.stop();
-        await rtc.client_.unsubscribe(stream);
-        await rtc.client_.subscribe(stream, {
-          audio: true,
-          video: !!getUserInfoByMeet(ID), // 在当前页的才订阅视频
-        });
-      }
+    
+    var stream = rtc.members_.get(ID);
+    if (stream) {
+      await stream?.stop();
+      await rtc.client_.unsubscribe(stream);
+      await rtc.client_.subscribe(stream, {
+        audio: true,
+        video: !!getUserInfoByMeet(ID), // 在当前页的才订阅视频
+      });
     }
   }
 

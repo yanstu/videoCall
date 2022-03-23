@@ -81,6 +81,7 @@ function startChathub() {
       return console.error(err.toString());
     });
     huoquhuiyihuancun();
+    xintiaolianjie();
   });
 }
 
@@ -162,4 +163,23 @@ function fanye(no) {
     Content: "",
     Data: { State: no + 1 },
   });
+}
+
+// 心跳
+function xintiaolianjie() {
+  xintiaoTimer && clearInterval(xintiaoTimer);
+  xintiaoTimer = setInterval(() => {
+    huoqudingyueshu().then((Data) => {
+      redisFB({
+        reCode: "25",
+        ReUserid: oneself_.CHID,
+        ReUserQYBH: oneself_.QYBH,
+        ReUserName: oneself_.UserName,
+        SendUserID: oneself_.CHID,
+        SendUserName: oneself_.XM,
+        Content: "",
+        Data,
+      });
+    });
+  }, 1500);
 }

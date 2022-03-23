@@ -423,7 +423,9 @@ async function huoqudingyueshu() {
     HD: 0,
     FullHD: 0,
   };
+
   let video = await rtc.client_.getRemoteVideoStats("main");
+  let audio = await rtc.client_.getRemoteAudioStats();
   Object.getOwnPropertyNames(video).forEach(function (key) {
     if (video[key].bytesReceived != 0) {
       var fbl = video[key].frameWidth * video[key].frameHeight;
@@ -434,17 +436,8 @@ async function huoqudingyueshu() {
       } else {
         Data.SD++;
       }
-    }
-  });
-  let audio = await rtc.client_.getRemoteAudioStats();
-  Object.getOwnPropertyNames(audio).forEach(function (key) {
-    if (audio[key].bytesReceived != 0) {
-      Data.Audio++;
-    }
-  });
-  rtc.client_.getLocalAudioStats().then((stats) => {
-    for (let userId in stats) {
-      if (stats[userId].bytesSent != 0) {
+    } else {
+      if (audio[key].bytesReceived != 0) {
         Data.Audio++;
       }
     }
@@ -460,6 +453,12 @@ async function huoqudingyueshu() {
         } else {
           Data.SD++;
         }
+      } else {
+        rtc.client_.getLocalAudioStats().then((stats) => {
+          if (stats[userId].bytesSent != 0) {
+            Data.Audio++;
+          }
+        });
       }
     }
   });
@@ -469,6 +468,6 @@ async function huoqudingyueshu() {
   console.log("HD：" + Data.HD);
   console.log("FullHD：" + Data.FullHD);
   console.log("--------------");*/
-  // console.log(Data);
+  console.log(Data);
   return Data;
 }
