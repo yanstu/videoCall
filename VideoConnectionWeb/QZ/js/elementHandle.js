@@ -50,14 +50,33 @@ function showOrHide() {
   $("#toolbar").show();
   $("#mic_drag").show();
 
-  if (roomDetail_.SpeakerID != oneself_.CHID && rtc.localStream_) {
-    isMicOn && $("#mic_btn").click();
+  if (roomDetail_.AllowOpenMic == 0) {
+    if (roomDetail_.SpeakerID != oneself_.CHID) {
+      isMicOn && micClick();
+    }
+  } else {
+    if (isFrist) {
+      isMicOn && $("#mic_btn").click();
+      isFrist = false;
+    }
   }
 
   if (roomDetail_.SpeakerID == oneself_.CHID && rtc.localStream_) {
     !isMicOn && $("#mic_btn").click();
     !isCamOn && $("#video_btn").click();
   }
+}
+
+function micClick() {
+  audioHandle(!isMicOn, oneself_.CHID);
+  if (isMicOn) {
+    $("#mic_btn svg").html(`<use xlink:href="#icon-jingyin"></use>`);
+    muteAudio();
+  } else {
+    $("#mic_btn svg").html(`<use xlink:href="#icon-maikefeng"></use>`);
+    unmuteAudio();
+  }
+  isMicOn = !isMicOn;
 }
 
 // 添加当前页用户到页面
@@ -185,7 +204,6 @@ function meetLayoutCompute() {
     location.href.toLowerCase().includes("big") ||
     location.href.toLowerCase().includes("ms")
   ) {
-    
     $("#video-grid")
       .css("grid-template-columns", "repeat(" + meet_layout.cols + ", 1fr)")
       .css(
@@ -204,7 +222,6 @@ function meetLayoutCompute() {
     for (let index = 1; index <= yushu; index++) {
       var document = $("#video-grid > div")[meet_layout.count - index];
       $(document).css("grid-area", `${yi}/${er--}/${yi}/${si--}`);
-      console.log(`${yi}/${er}/${yi}/${si}`);
     }
   }
 }

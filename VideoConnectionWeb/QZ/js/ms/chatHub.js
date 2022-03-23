@@ -115,6 +115,10 @@ chatHub.on("broadcastMessage", function (message, channelss) {
           }
         }
         break;
+      // 是否允许非主持人主讲人控制麦克风
+      case "38":
+        roomDetail_.AllowOpenMic = mess.Data.State;
+        break;
     }
   }
 });

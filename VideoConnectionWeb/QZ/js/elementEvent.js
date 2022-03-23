@@ -388,15 +388,15 @@
   $("#mic_btn").click(
     "click",
     clickProof(() => {
-      audioHandle(!isMicOn, oneself_.CHID);
-      if (isMicOn) {
-        $("#mic_btn svg").html(`<use xlink:href="#icon-jingyin"></use>`);
-        muteAudio();
+      if (
+        roomDetail_.AllowOpenMic == 1 ||
+        oneself_.IsZCR ||
+        roomDetail_.SpeakerID == oneself_.CHID
+      ) {
+        micClick();
       } else {
-        $("#mic_btn svg").html(`<use xlink:href="#icon-maikefeng"></use>`);
-        unmuteAudio();
+        layer.msg("会场已设置不允许控制麦克风");
       }
-      isMicOn = !isMicOn;
     })
   );
 })();

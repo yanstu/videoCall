@@ -27,7 +27,9 @@ let oneself_ = {
   XM: "严鑫",
 };
 let roomDetail_ = {
-  // 需要申请发言 0否/1是
+  // 允许控制麦克风
+  AllowOpenMic: 1,
+  // 允许申请发言 0否/1是
   AllowProposer: 1,
   // 允许录制 0否/1是
   AllowREC: 0,
@@ -135,6 +137,8 @@ let fanyeHandler = {
   shichang: 3,
   disabled: false,
 };
+// 是否第一次进入
+let isFrist = true;
 
 /**
  * 解密获取房间信息
