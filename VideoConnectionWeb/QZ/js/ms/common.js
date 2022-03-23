@@ -90,6 +90,8 @@ function beiyongfangan() {
   if (deviceType == DEVICE_TYPE_ENUM.MOBILE_IOS) {
     setTimeout(() => {
       // rtc.resumeStreams();
+      rtc.localStream_.stop();
+      rtc.localStream_.play("box_" + user.ID, { mirror: false });
       for (const user of meet_layout.pageUserList) {
         if (user.ID != oneself_.CHID) {
           var stream = rtc.members_.get(roomDetail_.SpeakerID);
