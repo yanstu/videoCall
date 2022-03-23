@@ -1,12 +1,12 @@
 const apiBaseUrl = {
   zhengshi: "https://wsllzapptest.gzshifang.com:8091/api/",
   ceshi: "https://testvideoapi.gzshifang.com:9011/api/",
-}.zhengshi;
+}.ceshi;
 
 const hubBaseUrl = {
   zhengshi: "https://splxweb.gzshifang.com:8092/",
   ceshi: "https://testvideo.gzshifang.com:9031/",
-}.zhengshi;
+}.ceshi;
 const hubsUrl = hubBaseUrl + "chatHub";
 const signalrUrl =
   hubBaseUrl + "lib/aspnet/signalr/dist/browser/signalr.min.js";

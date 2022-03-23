@@ -170,6 +170,7 @@ class RtcClient {
     this.localStream_?.resume();
     this.members_.get(ZCRID_)?.resume();
     this.members_.get(roomDetail_.SpeakerID)?.resume();
+    beiyongfangan;
   }
 
   /**
