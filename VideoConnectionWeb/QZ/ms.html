@@ -19,10 +19,12 @@
 </head>
 
 <body class="w-screen h-screen">
-  <header class="flex !flex-row whitespace-nowrap h-[6%] bg-[#262626] w-full justify-between">
+  <header class="flex flex-row whitespace-nowrap h-[6%] bg-[#262626] w-full justify-between">
     <div class="w-[15%] flex items-center justify-start">
-      <img id="testing_btn" title="设备、网络检测" class="ml-2 mr-2 invert-[100%] h-[50%]" src="./img/check-mic.png" />
-      <img id="qiehuanshitu_btn" title="切换视图" class="invert-[100%] h-[50%]" src="./img/shitu.png" />
+      <img id="testing_btn" title="设备、网络检测" class="ml-2 mr-2 invert-[100%] h-[50%]" style="width: 25px;"
+        src="./img/check-mic.png" />
+      <img id="qiehuanshitu_btn" title="切换视图" class="invert-[100%] h-[50%]" src="./img/shitu.png"
+        style="width: 25px;" />
     </div>
     <div class="text-white w-[50%] pl-3 h-full flex items-center justify-center text-center text-[16px]">
       <div id="roomTitle" class="overflow-hidden text-ellipsis whitespace-nowrap w-full"></div>
@@ -364,9 +366,9 @@
     </div>
   </footer>
   <script src="https://cdn.staticfile.org/vConsole/3.5.1/vconsole.min.js"></script>
-    <script>
-      window.myVConsole = new window.VConsole();
-    </script>
+  <script>
+    window.myVConsole = new window.VConsole();
+  </script>
   <script src="./lib/jquery/jquery-3.2.1.min.js"></script>
   <script src="./lib/trtc/trtc.js"></script>
   <script src="./js/util.js"></script>

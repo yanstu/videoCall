@@ -71,6 +71,9 @@
 .h-\[8\%\] {
   height: 8%;
 }
+.top-\[8\%\] {
+  top: 8%;
+}
 .drop-shadow-md {
   --tw-drop-shadow: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07))
     drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
@@ -244,7 +247,7 @@
 .text-\[30px\] {
   font-size: 30px;
 }
-.mt-2{
+.mt-2 {
   margin-top: 10px;
 }
 .text-\[20px\] {
