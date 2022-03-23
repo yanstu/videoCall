@@ -12,7 +12,7 @@ async function viewsHandle() {
   } else {
     await rtc.join();
     videoHandle(isCamOn, oneself_.CHID);
-    // beiyongfangan();
+    beiyongfangan();
   }
 }
 

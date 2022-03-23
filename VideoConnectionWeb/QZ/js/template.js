@@ -11,7 +11,7 @@ function userInfoTemplate(userId, nickName) {
               isMobile ? "rounded-br-lg" : "rounded-tr-lg"
             } h-full bg-[#000000] opacity-10"></div>
             <!-- 声音显示 -->
-            <div id="mic_main_${userId}">
+            <div id="mic_main_${userId}" style="margin-left: 3px;">
                 <div class="flex items-center justify-content-center relative ${
                   isMobile ? "h-5" : "h-4"
                 }">
@@ -36,7 +36,7 @@ function videoBoxTemplate(userId, nickName) {
   return `<div id="box_${userId}" class="${
     location.href.toLowerCase().includes("mobile")
       ? "w-[9rem] h-full video-box relative"
-      : "w-[99%] h-[99%] video-box relative border-[1px] border-[#5f6d7a] p-[2px]"
+      : "w-[97%] h-[95%] video-box relative border-[1px] border-[#5f6d7a] p-[2px]"
   }">
             <!-- “摄像头未开启”遮罩模板 -->
             <div id="mask_${userId}" style="z-index: 8" class="mask top-0 left-0 justify-center col-div flex w-full h-full bg-[#24292e] items-center justify-items-center absolute flex-col">

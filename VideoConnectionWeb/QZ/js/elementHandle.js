@@ -55,7 +55,7 @@ function showOrHide() {
       isMicOn && micClick();
     }
   } else {
-    if (isFrist) {
+    if (isFrist && roomDetail_.SpeakerID != oneself_.CHID) {
       isMicOn && $("#mic_btn").click();
       isFrist = false;
     }
@@ -303,38 +303,47 @@ function videoHandle(on, userId) {
       on ? $("#mask_" + userId).hide() : $("#mask_" + userId).show();
     }
     if (on) {
-      videoImgTimer && clearInterval(videoImgTimer);
-      var stream =
-        userId == oneself_.CHID ? rtc?.localStream_ : rtc.members_.get(userId);
-      $("#mask_" + userId).hide();
-      var img = "";
-      function getImg() {
-        setTimeout(() => {
-          img = stream?.getVideoFrame();
-          if (!img) {
+      if (
+        location.href.toLowerCase().indexOf("index") > -1 ||
+        location.href.toLowerCase().indexOf("big") > -1
+      ) {
+        videoImgTimer && clearInterval(videoImgTimer);
+        var stream =
+          userId == oneself_.CHID
+            ? rtc?.localStream_
+            : rtc.members_.get(userId);
+        $("#mask_" + userId).hide();
+        var img = "";
+        function getImg() {
+          setTimeout(() => {
+            img = stream?.getVideoFrame();
+            /*if (!img) {
             $("#mask_" + userId).show();
             return;
-          }
-          if (img != "data:,") {
-            $("#mask_" + userId).hide();
-            $("#img_" + userId)
-              .attr("src", img)
-              .show();
-          } else {
-            $("#mask_" + userId).show();
-            setTimeout(() => {
-              getImg();
-            }, 1000);
-          }
-        }, 100);
-      }
-      stream && getImg();
+          }*/
+            if (img && img != "data:,") {
+              $("#mask_" + userId).hide();
+              $("#img_" + userId)
+                .attr("src", img)
+                .show();
+            } else {
+              $("#mask_" + userId).show();
+              setTimeout(() => {
+                getImg();
+              }, 1000);
+            }
+          }, 100);
+        }
+        stream && getImg();
 
-      videoImgTimer = setInterval(() => {
-        $("#img_" + userId)
-          .attr("src", stream?.getVideoFrame())
-          .show();
-      }, 30 * 1000);
+        videoImgTimer = setInterval(() => {
+          $("#img_" + userId)
+            .attr("src", stream?.getVideoFrame())
+            .show();
+        }, 30 * 1000);
+      } else {
+        $("#mask_" + userId).hide();
+      }
     } else {
       videoImgTimer && clearInterval(videoImgTimer);
       $("#img_" + userId).hide();
@@ -528,7 +537,7 @@ async function zhanshiduan_mode(state) {
       // 展示端切换到主讲人模式
       display_layout.rows = roomDetail_.CHRY_ShowRows;
       display_layout.cols = roomDetail_.CHRY_ShowCols;
-      if (location.href.toLowerCase().includes("big")) {
+      if (location.href.toLowerCase().indexOf("big") > -1) {
         $("#video-grid").fadeOut();
         for (const stream of rtc.remoteStreams_) {
           if (

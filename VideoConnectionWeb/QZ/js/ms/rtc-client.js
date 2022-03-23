@@ -17,7 +17,7 @@ class RtcClient {
       sdkAppId: this.sdkAppId_,
       userId: this.userId_,
       userSig: this.userSig_,
-      // enableAutoPlayDialog: false,
+      enableAutoPlayDialog: false,
     });
 
     this.startGetNetworkevel();
