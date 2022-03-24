@@ -52,6 +52,26 @@ namespace VideoConnectionWeb.Helper
             }
         }
         /// <summary>
+        /// ApiUrl
+        /// </summary>
+        public static string ApiBaseUrl
+        {
+            get
+            {
+                return ConfigurationManager.ConnectionStrings["apiBaseUrl"].ConnectionString;
+            }
+        }
+        /// <summary>
+        /// ApiUrl
+        /// </summary>
+        public static string HubBaseUrl
+        {
+            get
+            {
+                return ConfigurationManager.ConnectionStrings["hubBaseUrl"].ConnectionString;
+            }
+        }
+        /// <summary>
         /// 根据房间号，返回Redis房间名称
         /// </summary>
         /// <param name="RoomId">房间号</param>

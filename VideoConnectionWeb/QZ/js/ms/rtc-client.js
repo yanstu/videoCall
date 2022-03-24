@@ -416,18 +416,61 @@ class RtcClient {
 
       // 如果网络极差，不管是不是主讲人也将分辨率调到极低
       if (event.uplinkNetworkQuality >= 4) {
-        this.localStream_.setVideoProfile("180p");
-        if (event.uplinkNetworkQuality >= 4) {
-          this.localStream_.setVideoProfile("120p");
-        }
+        this.localStream_.setVideoProfile({
+          width: 256, // 视频宽度
+          height: 144, // 视频高度
+          frameRate: 10, // 帧率
+          bitrate: 200, // 比特率 kbps
+        });
       } else {
         if (!roomDetail_.SpeakerID) {
-          this.localStream_.setVideoProfile("360p");
+          this.localStream_.setVideoProfile({
+            width: 640, // 视频宽度
+            height: 360, // 视频高度
+            frameRate: 15, // 帧率
+            bitrate: 550, // 比特率 kbps
+          });
         } else if (roomDetail_.SpeakerID == oneself_.CHID) {
-          this.localStream_.setVideoProfile("720p");
+          this.localStream_.setVideoProfile({
+            width: 1280, // 视频宽度
+            height: 720, // 视频高度
+            frameRate: 15, // 帧率
+            bitrate: 1250, // 比特率 kbps
+          });
         } else {
-          var renshu = [6, 4, 2, 0];
-          var fenbianlv = ["120p", "360p", "480p", "720p"];
+          var renshu = [9, 6, 4, 2, 0];
+          var fenbianlv = [
+            {
+              width: 256, // 视频宽度
+              height: 144, // 视频高度
+              frameRate: 10, // 帧率
+              bitrate: 250, // 比特率 kbps
+            },
+            {
+              width: 320, // 视频宽度
+              height: 180, // 视频高度
+              frameRate: 15, // 帧率
+              bitrate: 300, // 比特率 kbps
+            },
+            {
+              width: 640, // 视频宽度
+              height: 360, // 视频高度
+              frameRate: 15, // 帧率
+              bitrate: 550, // 比特率 kbps
+            },
+            {
+              width: 960, // 视频宽度
+              height: 540, // 视频高度
+              frameRate: 15, // 帧率
+              bitrate: 900, // 比特率 kbps
+            },
+            {
+              width: 1280, // 视频宽度
+              height: 720, // 视频高度
+              frameRate: 15, // 帧率
+              bitrate: 1250, // 比特率 kbps
+            },
+          ];
           for (var i = 0; i < renshu.length; i++) {
             if (roomDetail_.UserList.length >= renshu[i]) {
               this.localStream_.setVideoProfile(fenbianlv[i]);

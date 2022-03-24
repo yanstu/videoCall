@@ -304,6 +304,11 @@
     <Content Include="QZ\.vs\ProjectSettings.json" />
     <Content Include="QZ\.vs\slnx.sqlite" />
     <Content Include="QZ\.vs\VSWorkspaceState.json" />
+    <Content Include="QZ\mobile.aspx" />
+    <Content Include="QZ\ms.aspx" />
+    <Content Include="QZ\big.aspx" />
+    <Content Include="QZ\small2.aspx" />
+    <Content Include="QZ\small.aspx" />
     <Content Include="QZ\jsconfig.json" />
     <Content Include="QZ\lib\layui\font\iconfont.eot" />
     <Content Include="QZ\lib\layui\font\iconfont.ttf" />
@@ -407,7 +412,6 @@
     <Content Include="QZ\mobile.html" />
     <Content Include="QZ\small.html" />
     <Content Include="QZ\small2.html" />
-    <Content Include="QZ\tailwind.config.js" />
     <Content Include="QZ\index.aspx" />
     <Content Include="Scripts\jquery-1.6.4.js" />
     <Content Include="Scripts\jquery-1.6.4.min.js" />
@@ -429,6 +433,41 @@
     <Compile Include="Helper\StaticEntity.cs" />
     <Compile Include="MyHub\ChatHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QZ\mobile.aspx.cs">
+      <DependentUpon>mobile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QZ\mobile.aspx.designer.cs">
+      <DependentUpon>mobile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QZ\ms.aspx.cs">
+      <DependentUpon>ms.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QZ\ms.aspx.designer.cs">
+      <DependentUpon>ms.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QZ\big.aspx.cs">
+      <DependentUpon>big.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QZ\big.aspx.designer.cs">
+      <DependentUpon>big.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QZ\small2.aspx.cs">
+      <DependentUpon>small2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QZ\small2.aspx.designer.cs">
+      <DependentUpon>small2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QZ\small.aspx.cs">
+      <DependentUpon>small.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QZ\small.aspx.designer.cs">
+      <DependentUpon>small.aspx</DependentUpon>
+    </Compile>
     <Compile Include="QZ\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -1,16 +1,3 @@
-const apiBaseUrl = {
-  zhengshi: "https://wsllzapptest.gzshifang.com:8091/api/",
-  ceshi: "https://testvideoapi.gzshifang.com:9011/api/",
-}.ceshi;
-
-const hubBaseUrl = {
-  zhengshi: "https://splxweb.gzshifang.com:8092/",
-  ceshi: "https://testvideo.gzshifang.com:9031/",
-}.ceshi;
-const hubsUrl = hubBaseUrl + "chatHub";
-const signalrUrl =
-  hubBaseUrl + "lib/aspnet/signalr/dist/browser/signalr.min.js";
-
 /**
  * A router function that maps the key to the URL.
  * @param key - The key of the URL.

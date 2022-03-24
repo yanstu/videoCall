@@ -15,8 +15,13 @@
   <link rel="stylesheet" href="./lib/layui/css/layui.css" />
   <link rel="stylesheet" href="./css/index.css" />
   <link rel="stylesheet" href="./css/common.css" />
-  <script src="./js/api.js"></script>
   <script src="./js/onload.js"></script>
+  <script src="./js/api.js"></script>
+  <script>
+    const apiBaseUrl = "<%=ApiBaseUrl%>";
+    const hubBaseUrl = "<%=HubBaseUrl%>";
+    const hubsUrl = hubBaseUrl + "chatHub";
+  </script>
 </head>
 
 <body class="w-screen h-screen">
