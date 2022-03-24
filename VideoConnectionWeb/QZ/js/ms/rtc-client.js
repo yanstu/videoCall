@@ -17,7 +17,7 @@ class RtcClient {
       sdkAppId: this.sdkAppId_,
       userId: this.userId_,
       userSig: this.userSig_,
-      enableAutoPlayDialog: false,
+      // enableAutoPlayDialog: false,
     });
 
     this.startGetNetworkevel();
@@ -164,7 +164,6 @@ class RtcClient {
     for (let stream of this.remoteStreams_) {
       stream.resume();
     }
-    beiyongfangan();
   }
 
   /**
@@ -196,12 +195,12 @@ class RtcClient {
     onlineOrOfline(true, oneself_.CHID);
     stream?.stop();
     stream?.play("box_" + userId, { mirror: false });
-    stream?.on("error", (error) => {
+    /*stream?.on("error", (error) => {
       if (error.getCode() === 0x4043) {
         deviceTestingInit();
         startDeviceConnect();
       }
-    });
+    });*/
   }
 
   /**

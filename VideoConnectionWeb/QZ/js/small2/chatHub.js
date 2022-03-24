@@ -125,7 +125,8 @@ function startChathub() {
 function redisFB(data) {
   var RoomId = queryParams("RoomId");
   chatHub.invoke("redisFB", RoomId, JSON.stringify(data)).catch(function (err) {
-    chathubReConnect;
+    // redisFB(data);
+    startChathub();
   });
 }
 
