@@ -20,26 +20,23 @@ console.log = (e) => {
   } catch (error) {}
   window.oldLog(e);
 };
+
 window.oldWarn = console.warn;
 console.warn = (e) => {
-  window.oldWarn(e);
   try {
     // 网络断开后trtc SDK会输出这句，所以可以断定为网络断开
-    if (JSON.stringify(e).includes("close current websocket and schedule")) {
+    if (JSON.stringify(e).indexOf("websocket and schedule") > -1) {
       layer.msg("当前网络已断开", { icon: 5 });
       isDisconnect = true;
     }
-    if (JSON.stringify(e).includes("reconnect successfully")) {
-      isDisconnect = false;
-      this.location.reload();
+    if (JSON.stringify(e).indexOf("reconnect success") > -1) {
+      /*isDisconnect = false;
+      this.location.reload();*/
+      layer.msg("网络连接已恢复，正在恢复房间状态", { icon: 6 });
+      setTimeout(() => {
+        this.location.reload();
+      }, 1000);
     }
-    /*if (
-      JSON.stringify(e).includes(
-        "The request is not allowed by the user agent or the platform in"
-      )
-    ) {
-      rtc.resumeStreams();
-    }*/
     if (JSON.stringify(e).includes("devicesRemoved")) {
       layer.msg("摄像头设备已被拔出", { icon: 5 });
     }
@@ -47,10 +44,11 @@ console.warn = (e) => {
       layer.msg("摄像头设备已插入，正在恢复", { icon: 6 });
     }
   } catch (error) {}
+  window.oldWarn(e);
 };
-/*window.oldError = console.error;
+
+window.oldError = console.error;
 console.error = async (e) => {
-  window.oldError(e);
   try {
     // 网络断开后trtc SDK会输出这句，所以可以断定为网络断开
     if (JSON.stringify(e).includes("前一个 join() 调用正在进行中")) {
@@ -59,10 +57,7 @@ console.error = async (e) => {
     if (JSON.stringify(e).includes("无法初始化共享流")) {
       cameraInitError = true;
       setTimeout(() => {
-        if (
-          oneself_.CHID == roomDetail_.SpeakerID ||
-          !roomDetail_.SpeakerID
-        ) {
+        if (oneself_.CHID == roomDetail_.SpeakerID || !roomDetail_.SpeakerID) {
           $("#zjr_mask").show();
         } else {
           $("#mask_" + oneself_.CHID).show();
@@ -78,6 +73,7 @@ console.error = async (e) => {
       ) ||
       JSON.stringify(e).includes("Websocket closed with status code: 1006")
     ) {
+      console.log("1006---------------------------------");
       chathubReConnect();
     }
     if (
@@ -95,4 +91,5 @@ console.error = async (e) => {
       cameraSwitchError = true;
     }
   } catch (error) {}
-};*/
+  window.oldError(e);
+};
