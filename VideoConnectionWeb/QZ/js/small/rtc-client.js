@@ -146,7 +146,7 @@ class RtcClient {
   resumeStreams() {
     this.localStream_.resume();
     for (let stream of this.remoteStreams_) {
-      stream.resume();
+      stream && stream.resume();
     }
   }
 
@@ -222,7 +222,7 @@ class RtcClient {
       const { userId } = evt;
       this.members_.set(userId, null);
       onlineOrOfline(true, userId);
-      console.log(getUserInfo(userId).UserName + " 加入了房间");
+      console.log(getUserInfo(userId) ? getUserInfo(userId).UserName : 'null' + " 加入了房间");
     });
 
     // 当远程连接端离开房间时触发

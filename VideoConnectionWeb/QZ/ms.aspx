@@ -314,6 +314,50 @@
         <div class="nickname ml-1"></div>
       </div>
 
+
+      <!-- 消息列表 -->
+      <div id="xiaoxiliebiao" style="display: none;width: 90%;margin-left: 5%;" class="modalbox">
+        <div class="modalbox-title">
+          消息列表
+        </div>
+        <div id="messageList" class="h-[86%] w-full overflow-y-scroll pb-3">
+          <!-- 消息模板 -->
+          <div id="message_muban" style="display: none;" class="flex flex-col h-auto pl-2 pr-2 pt-2 text-[0.875rem]">
+            <div class="message_time mb-2 mt-1 h-[20%] text-white flex justify-center items-center">
+              2022-02-27 09:18:12
+            </div>
+            <div class="message_info h-[70%] flex flex-row w-full justify-end items-center">
+              <div
+                class="message_neirong text-white text-[0.875rem] mt-1 ml-2 mr-2 mb-1 bg-[#2d3549] pl-2 pr-2 min-h-[5.7rem] w-[80%]">
+                这个是内这个是内这个是内内这个
+              </div>
+              <div class="message_touxiang bg-[#2d3549] flex items-center justify-center w-[20%] flex-col h-full">
+                <svg class="icon text-[4.5rem] text-white" aria-hidden="true">
+                  <use xlink:href="#icon-touxiang"></use>
+                </svg>
+                <div class="message_xingming h-[27%] mb-[3%] w-auto text-white overflow-auto text-[0.675rem]">
+                  贵州省人大
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="h-[7%] flex w-full justify-between items-center bg-[#262626] text-[0.875rem]">
+          <div id="fasong_tip"
+            class="mr-2 ml-2 min-w-[15%] text-white flex-1 flex justify-center items-center whitespace-nowrap overflow-hidden text-ellipsis">
+            发向管理员
+          </div>
+          <input id="xiaoxineirong" class="mr-3 h-[50%] pl-2 pr-2 flex-[1.1]" maxlength="200" />
+          <div id="fasongxiaoxi"
+            class="min-w-[15%] anniubeijing h-[50%] mr-2 flex-1 flex justify-center items-center text-white">
+            发送</div>
+        </div>
+      </div>
+
+      <div class="gundongxiaoxi" style="display: none;z-index: 19;">
+        <marquee id="tipsContent"></marquee>
+      </div>
+
       <!-- 预加载所有网络图片资源，防止断网后加载不出断网图标图片 -->
       <div style="display: none">
         <img src="./img/network/up/network_0.png" alt="" />
@@ -341,41 +385,51 @@
     </section>
     <footer style="height: 9%;"
       class="w-full shadow-md flex bg-[#262626] text-white items-center justify-center z-50 mx-auto">
-      <div style="height: 100%;" class="toolbar_btn" id="mic_btn">
+      <div style="height: 100%;width:2rem" class="toolbar_btn" id="mic_btn">
         <svg style="font-size:25px" class="icon text-white" aria-hidden="true">
           <use xlink:href="#icon-maikefeng"></use>
         </svg>
-        <span class="mt-1 text-[12px]">静音</span>
+        <span class="mt-1 text-[14px]">静音</span>
       </div>
-      <div style="height: 100%;" class="toolbar_btn" id="video_btn">
+      <div style="height: 100%;width:2rem" class="toolbar_btn" id="video_btn">
         <svg style="font-size:25px" class="icon text-white" aria-hidden="true">
           <use xlink:href="#icon-xiangji"></use>
         </svg>
-        <span class="mt-1 text-[12px]">摄像头</span>
+        <span class="mt-1 text-[14px]">摄像头</span>
       </div>
-      <div style="height: 100%;" class="toolbar_btn" style="display: none" id="fanzhuan_btn">
+      <div style="height: 100%;width:2rem" class="toolbar_btn" style="display: none" id="fanzhuan_btn">
         <svg style="font-size:25px" class="icon text-white" aria-hidden="true">
           <use xlink:href="#icon-fanzhuan"></use>
         </svg>
-        <span class="mt-1 text-[12px]">翻转</span>
+        <span class="mt-1 text-[14px]">翻转</span>
       </div>
-      <div style="height: 100%;" class="toolbar_btn" id="shenqingfayan_btn">
+      <div style="height: 100%;width:2rem" class="toolbar_btn" id="shenqingfayan_btn">
         <svg style="font-size:25px" class="icon text-white" aria-hidden="true">
           <use xlink:href="#icon-shenqingfayan"></use>
         </svg>
-        <span class="mt-1 text-[12px]">申请发言</span>
+        <span class="mt-1 text-[14px]">申请发言</span>
       </div>
-      <div style="height: 100%;" class="toolbar_btn" id="shangyiye_ms_btn">
+      <div style="height: 100%;width:2rem" class="toolbar_btn" id="xiaoxi_btn">
+        <div class="relative">
+          <svg class="icon text-[1.7rem] text-white " aria-hidden="true">
+            <use xlink:href="#icon-xiaoxi"></use>
+          </svg>
+          <div id="xiaoxi_jiaobiao" style="display: none;"
+            class="w-[10px] h-[10px] rounded-full bg-red-600 absolute right-0 top-0"></div>
+        </div>
+        <span class="mt-1 text-[14px]">消息</span>
+      </div>
+      <div style="height: 100%;width:2rem" class="toolbar_btn" id="shangyiye_ms_btn">
         <svg style="font-size:25px" class="icon text-white" aria-hidden="true">
           <use xlink:href="#icon-shangyiye"></use>
         </svg>
-        <span class="mt-1 text-[12px]">上页</span>
+        <span class="mt-1 text-[14px]">上页</span>
       </div>
-      <div style="height: 100%;" class="toolbar_btn" id="xiayiye_ms_btn">
+      <div style="height: 100%;width:2rem" class="toolbar_btn" id="xiayiye_ms_btn">
         <svg style="font-size:25px" class="icon text-white" aria-hidden="true">
           <use xlink:href="#icon-xiayiye"></use>
         </svg>
-        <span class="mt-1 text-[12px]">下页</span>
+        <span class="mt-1 text-[14px]">下页</span>
       </div>
     </footer>
     <!-- <script src="https://cdn.staticfile.org/vConsole/3.5.1/vconsole.min.js"></script>

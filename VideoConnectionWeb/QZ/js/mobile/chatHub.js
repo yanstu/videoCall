@@ -128,6 +128,12 @@ chatHub.on("broadcastMessage", function (message, channelss) {
       case "38":
         roomDetail_.AllowOpenMic = mess.Data.State;
         break;
+      //获取消息 所有人接收
+      case "08":
+      //获取消息 指定接收用户
+      case "09":
+        huoquxiaoxi(mess);
+        break;
     }
   }
 });
@@ -154,12 +160,23 @@ startChathub();
 function startChathub() {
   chatHub.start().then(function () {
     var RoomId = queryParams("RoomId");
-    chatHub.invoke("createRedis", RoomId)
+    chatHub.invoke("createRedis", RoomId);
     huoquchangkuanbi();
     huoquhuiyihuancun();
     huoquzhujiangren();
     xintiaolianjie();
   });
+}
+
+// 收到别人发送的消息
+function huoquxiaoxi(mess) {
+  if (
+    mess.ReUserid &&
+    mess.ReUserid != oneself_.CHID &&
+    mess.SendUserID != oneself_.CHID
+  )
+    return;
+  addMessage(mess.SendUserID, mess.ReUserid, mess.Content);
 }
 
 /**
@@ -366,4 +383,19 @@ function huoquzhujiangren() {
       }
     );
   }, 2000);
+}
+
+// 发送消息
+function fasongxiaoxi() {
+  redisFB({
+    reCode: oneself_.IsZCR ? "08" : "09",
+    ReUserid: oneself_.IsZCR ? fasonggeishei || "" : ZCRID_,
+    ReUserQYBH: "",
+    ReUserName: "",
+    SendUserID: oneself_.CHID,
+    SendUserName: oneself_.XM,
+    Content: $("#xiaoxineirong").val(),
+    Data: {},
+  });
+  $("#xiaoxineirong").val("");
 }

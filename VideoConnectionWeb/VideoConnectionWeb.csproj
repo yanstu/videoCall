@@ -300,6 +300,8 @@
     <Content Include="js\layui\font\iconfont.woff2" />
     <Content Include="QZ\css\common.css" />
     <Content Include="QZ\img\shipingkongzhi.png" />
+    <Content Include="QZ\img\views\xiaoshiping.png" />
+    <Content Include="QZ\img\views\zhujiangren.png" />
     <Content Include="QZ\js\ms\chatHub.js" />
     <Content Include="QZ\js\ms\common.js" />
     <Content Include="QZ\js\ms\rtc-client.js" />
