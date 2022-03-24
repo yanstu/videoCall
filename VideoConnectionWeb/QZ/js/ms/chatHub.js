@@ -145,9 +145,7 @@ startChathub();
 function startChathub() {
   chatHub.start().then(function () {
     var RoomId = queryParams("RoomId");
-    chatHub.invoke("createRedis", RoomId).catch(function (err) {
-      return console.error(err.toString());
-    });
+    chatHub.invoke("createRedis", RoomId)
     huoquchangkuanbi();
     huoquhuiyihuancun();
     xintiaolianjie();
