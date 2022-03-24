@@ -314,11 +314,9 @@
     <Content Include="QZ\lib\layui\font\iconfont.ttf" />
     <Content Include="QZ\lib\layui\font\iconfont.woff" />
     <Content Include="QZ\lib\layui\font\iconfont.woff2" />
-    <Content Include="QZ\QZ.zip" />
     <Content Include="QZ\README.md" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="QZ\.gitignore" />
-    <Content Include="QZ\big.html" />
     <Content Include="QZ\css\index.css" />
     <Content Include="QZ\img\camera-gray.png" />
     <Content Include="QZ\img\camera-green.png" />
@@ -362,7 +360,6 @@
     <Content Include="QZ\img\views\changgui.png" />
     <Content Include="QZ\img\views\da.png" />
     <Content Include="QZ\img\views\xiao.png" />
-    <Content Include="QZ\index.html" />
     <Content Include="QZ\js\api.js" />
     <Content Include="QZ\js\big\chatHub.js" />
     <Content Include="QZ\js\big\common.js" />
@@ -372,7 +369,6 @@
     <Content Include="QZ\js\elementEvent.js" />
     <Content Include="QZ\js\elementHandle.js" />
     <Content Include="QZ\js\iconfont.js" />
-    <Content Include="QZ\js\import.js" />
     <Content Include="QZ\js\mobile\chatHub.js" />
     <Content Include="QZ\js\mobile\common.js" />
     <Content Include="QZ\js\mobile\rtc-client.js" />
@@ -391,9 +387,7 @@
     <Content Include="QZ\js\small\rtc-client.js" />
     <Content Include="QZ\js\template.js" />
     <Content Include="QZ\js\util.js" />
-    <Content Include="QZ\lib\jquery\hubs.js" />
     <Content Include="QZ\lib\jquery\jquery-3.2.1.min.js" />
-    <Content Include="QZ\lib\jquery\jquery.signalR.min.js" />
     <Content Include="QZ\lib\layui\css\layui.css" />
     <Content Include="QZ\lib\layui\css\modules\code.css" />
     <Content Include="QZ\lib\layui\css\modules\laydate\default\laydate.css" />
@@ -405,13 +399,9 @@
     <Content Include="QZ\lib\layui\css\modules\layer\default\loading-2.gif" />
     <Content Include="QZ\lib\layui\font\iconfont.svg" />
     <Content Include="QZ\lib\layui\layui.js" />
-    <Content Include="QZ\lib\tailwindcss\tailwindcss-3.0.18.min.js" />
     <Content Include="QZ\lib\trtc\GenerateTestUserSig.js" />
     <Content Include="QZ\lib\trtc\lib-generate-test-usersig.min.js" />
     <Content Include="QZ\lib\trtc\trtc.js" />
-    <Content Include="QZ\mobile.html" />
-    <Content Include="QZ\small.html" />
-    <Content Include="QZ\small2.html" />
     <Content Include="QZ\index.aspx" />
     <Content Include="Scripts\jquery-1.6.4.js" />
     <Content Include="Scripts\jquery-1.6.4.min.js" />

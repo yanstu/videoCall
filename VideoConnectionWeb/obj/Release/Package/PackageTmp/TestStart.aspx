@@ -510,7 +510,7 @@
     <div style="margin-top: 10px;">
         <div>每个用户创建一个Iframe，每个用户用一个Signal连接ID</div>
         &nbsp;&nbsp;&nbsp;&nbsp;打开Iframe用户开始下标：<input id="txtIframeUserStartNum" type="number" class="layui-input" style="width: 60px; display: inline-block;" value="0" />
-        &nbsp;&nbsp;&nbsp;&nbsp;打开Iframe用户截至下标：<input id="txtIframeCount" type="number" class="layui-input" style="width: 60px; display: inline-block;" value="300" />
+        &nbsp;&nbsp;&nbsp;&nbsp;打开Iframe用户截至下标：<input id="txtIframeCount" type="number" class="layui-input" style="width: 60px; display: inline-block;" value="199" />
         Signalr版本：
         <select id="selSignalrVersion"  class="layui-input"  style="width: 180px; display: inline-block;">
               <option value="Core">ASP.NET Core SignalR</option>

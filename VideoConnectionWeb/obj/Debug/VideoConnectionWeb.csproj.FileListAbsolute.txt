@@ -790,7 +790,6 @@ S:\Workspaces\web\netMeeting-public\VideoConnectionWeb\bin\System.Text.Encodings
 S:\Workspaces\web\netMeeting-public\VideoConnectionWeb\bin\System.Threading.Channels.xml
 S:\Workspaces\web\netMeeting-public\VideoConnectionWeb\bin\System.Threading.Tasks.Extensions.xml
 S:\Workspaces\web\netMeeting-public\VideoConnectionWeb\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-S:\Workspaces\web\netMeeting-public\VideoConnectionWeb\obj\Debug\VideoConnectionWeb.csproj.AssemblyReference.cache
 S:\Workspaces\web\netMeeting-public\VideoConnectionWeb\obj\Debug\VideoConnectionWeb.csproj.CoreCompileInputs.cache
 S:\Workspaces\web\netMeeting-public\VideoConnectionWeb\obj\Debug\VideoConnectionWeb.csproj.CopyComplete
 S:\Workspaces\web\netMeeting-public\VideoConnectionWeb\obj\Debug\VideoConnectionWeb.dll

@@ -185,43 +185,67 @@
 
             //断开后处理
             connection.connection.onclose(function () {
-                debugger
+                JSSignalrExceptionLog(UserName + "：Signalr连接断开！");
                 Reconnect();
             });
 
             var hubP = {
                 transport: ['webSockets', 'serverSentEvents', 'longPolling', 'foreverFrame']
             };
-            HubStart();
+
+            for (var i = 0; i < 5; i++) {
+                HubStart();
+            }
         })
 
         //掉线重连
         function Reconnect() {
-            
             if (HeartBeatTime != "") {
                 clearInterval(HeartBeatTime);
             }
-            setTimeout(function () {
+            if (HubStartTime != "") {
+                clearTimeout(HubStartTime);
+            }
+            HubStartTime = setTimeout(function () {
                 JSSignalrExceptionLog(UserName + "：Signalr断开尝试重新连接！");
                 HubStart();
             }, 3000); //3秒后重新连接. 
         }
 
+        var isStrat = false;
+        var HubStartTime = "";
         function HubStart() {
+            if (isStrat == true) {
+                return;
+            }
+            isStrat = true;
+            if (HubStartTime != "") {
+                clearTimeout(HubStartTime);
+            }
+            Log(UserName + "：开始连接Signalr！");
             connection.start().then(function () {
+                if (HubStartTime != "") {
+                    clearTimeout(HubStartTime);
+                }
+                isStrat = false;
+
+                Log(UserName + "：Signalr连接成功！");
                 connection.invoke("createRedis", RoomId).catch(function (err) {
                     return console.error(err.toString());
                 });
                 if (HeartBeatTime != "") {
                     clearInterval(HeartBeatTime);
                 }
-                HeartBeat();
                 HeartBeatTime = setInterval(HeartBeat, 1400);
                 GetHYCache();
 
             }).catch(function (err) {
+                isStrat = false;
                 JSSignalrExceptionLog(UserName + "：Signalr连接失败！" + err.toString());
-                setTimeout(HubStart, 3000); //3秒后重新连接.
+                if (HubStartTime != "") {
+                    clearTimeout(HubStartTime);
+                }
+                HubStartTime = setTimeout(HubStart, 3000); //3秒后重新连接.
             });
         }
 
@@ -338,7 +362,7 @@
                 if (HeartBeatTime != "") {
                     clearInterval(HeartBeatTime);
                 }
-                JSSignalrExceptionLog("【JS调用Hub的redisFB方法出错】"+err.toString());
+                JSSignalrExceptionLog("【JS调用Hub的redisFB方法出错】" + "发布Json:【" + jsonStr+"】"+err.toString());
                 if (fn) {
                     fn();
                 }
@@ -363,7 +387,7 @@
             //$("#tabServerException").append(htmlStr);
 
             if (window.WSLLZWinFromJSHelper) {
-                WSLLZWinFromJSHelper.LogErr(UserIndex + UserName, name + err);
+                WSLLZWinFromJSHelper.LogErr(UserIndex + UserName, "网页时间"+getTime() +"：" + name + err);
             }
         }
 
@@ -380,11 +404,18 @@
             //htmlStr += "</tr>";
             //$("#tabSignalrError").append(htmlStr);
             if (window.WSLLZWinFromJSHelper) {
-                WSLLZWinFromJSHelper.LogErr(UserIndex + UserName, err);
+                WSLLZWinFromJSHelper.LogErr(UserIndex + UserName,"网页时间" + getTime() + "：" +  err);
             }
 
         }
 
+        function Log(str) {
+            if (window.WSLLZWinFromJSHelper) {
+                WSLLZWinFromJSHelper.LogErr(UserIndex + UserName, "网页时间" + getTime() + "：" + str);
+            } else {
+                console.log(UserIndex + UserName, "网页时间" + getTime() + "：" + str);
+            }
+        }
         //获取会议缓存
         function GetHYCache() {
             //var data1 = {
