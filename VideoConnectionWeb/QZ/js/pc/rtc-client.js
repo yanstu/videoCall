@@ -420,7 +420,7 @@ class RtcClient {
         this.localStream_.setVideoProfile("120p");
       } else {
         if (!roomDetail_.SpeakerID) {
-          this.localStream_.setVideoProfile("480p");
+          this.localStream_.setVideoProfile("360p");
         } else if (roomDetail_.SpeakerID == oneself_.CHID) {
           this.localStream_.setVideoProfile("720p");
         } else {

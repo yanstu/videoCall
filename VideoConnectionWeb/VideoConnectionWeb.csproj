@@ -408,6 +408,7 @@
     <Content Include="QZ\small.html" />
     <Content Include="QZ\small2.html" />
     <Content Include="QZ\tailwind.config.js" />
+    <Content Include="QZ\index.aspx" />
     <Content Include="Scripts\jquery-1.6.4.js" />
     <Content Include="Scripts\jquery-1.6.4.min.js" />
     <Content Include="Scripts\jquery.signalR-2.4.2.js" />
@@ -428,6 +429,13 @@
     <Compile Include="Helper\StaticEntity.cs" />
     <Compile Include="MyHub\ChatHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QZ\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QZ\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="TestItem.aspx.cs">
       <DependentUpon>TestItem.aspx</DependentUpon>

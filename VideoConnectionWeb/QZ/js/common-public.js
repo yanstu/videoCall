@@ -406,7 +406,7 @@ function tiaozhuandao(url, h) {
     location.origin +
       location.pathname.substring(0, location.pathname.lastIndexOf("/") + 1) +
       url +
-      ".html" +
+      ".aspx" +
       location.href.substring(location.href.indexOf("?")) +
       (h ? "&h=1" : "")
   );

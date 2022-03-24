@@ -286,7 +286,7 @@ function videoHandle(on, userId) {
 
   var zjr =
     roomDetail_.SpeakerID ||
-    (location.href.toLowerCase().includes("big.html") ? ZCRID_ : oneself_.CHID);
+    (location.href.toLowerCase().includes("big.aspx") ? ZCRID_ : oneself_.CHID);
   console.log(
     `${getUserInfo(userId).UserName} ${on ? "打开" : "关闭"}了摄像头`
   );

@@ -1,3 +1,4 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ms.aspx.cs" Inherits="VideoConnectionWeb.TestItem" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -384,12 +385,12 @@
   <script src="./js/ms/rtc-client.js"></script>
   <script src="./js/device-testing.js"></script>
   <script>
-    if (queryParams("p") && queryParams("RoomId")) {
-      login(queryParams("p"));
-    } else {
-      alert("参数错误");
-      leave();
-    }
+      if (queryParams("p") && queryParams("RoomId")) {
+          login(queryParams("p"));
+      } else {
+          alert("参数错误");
+          leave();
+      }
   </script>
   <script defer src="./lib/jquery/signalr.min.js"></script>
   <script defer src="./js/ms/chatHub.js"></script>
