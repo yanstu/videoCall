@@ -56,7 +56,7 @@ class RtcClient {
 
     try {
       // 初始化本地流
-      await this.localStream_?.initialize();
+      await this.localStream_.initialize();
     } catch (error) {
       console.error("无法初始化共享流 - ", error);
     }
@@ -93,8 +93,8 @@ class RtcClient {
     // 离开房间
     await this.client_.leave();
     this.isJoined_ = false;
-    this.localStream_?.stop();
-    this.localStream_?.close();
+    this.localStream_.stop();
+    this.localStream_.close();
     this.localStream_ = null;
     // 停止获取音量
     this.stopGetAudioLevel();
@@ -130,35 +130,35 @@ class RtcClient {
    * Mute the local audio
    */
   muteLocalAudio() {
-    this.localStream_?.muteAudio();
+    this.localStream_.muteAudio();
   }
 
   /**
    * Unmute the local audio
    */
   unmuteLocalAudio() {
-    this.localStream_?.unmuteAudio();
+    this.localStream_.unmuteAudio();
   }
 
   /**
    * Mute the local video
    */
   muteLocalVideo() {
-    this.localStream_?.muteVideo();
+    this.localStream_.muteVideo();
   }
 
   /**
    * *Unmutes the local video.*
    */
   unmuteLocalVideo() {
-    this.localStream_?.unmuteVideo();
+    this.localStream_.unmuteVideo();
   }
 
   /**
    * Resumes the local and remote streams
    */
   resumeStreams() {
-    this.localStream_?.resume();
+    this.localStream_.resume();
     for (let stream of this.remoteStreams_) {
       stream.resume();
     }
@@ -169,11 +169,11 @@ class RtcClient {
    */
   changeCameraId() {
     try {
-      this.localStream_?.switchDevice("video", cameraId).then(() => {
+      this.localStream_.switchDevice("video", cameraId).then(() => {
         console.log("切换摄像头成功");
       });
     } catch (error) {
-      if (JSON.stringify(error)?.includes("Cannot read properties of null"))
+      if (JSON.stringify(error).includes("Cannot read properties of null"))
         layer.msg(
           "暂时无法访问摄像头/麦克风，请确保系统授予当前浏览器摄像头/麦克风权限，并且没有其他应用占用摄像头/麦克风。"
         );
@@ -184,7 +184,7 @@ class RtcClient {
    * 切换麦克风
    */
   changeMicId() {
-    this.localStream_?.switchDevice("audio", micId).then(() => {
+    this.localStream_.switchDevice("audio", micId).then(() => {
       console.log("切换麦克风成功");
     });
   }
@@ -214,12 +214,12 @@ class RtcClient {
       var videoVid = "box_" + userId;
       if (ZJRID_ == userId || roomDetail_.SpeakerID == userId)
         videoVid = "zjr_video";
-      stream?.play(videoVid, { objectFit, mirror: false }).then(() => {
+      stream.play(videoVid, { objectFit, mirror: false }).then(() => {
         if (!roomDetail_.SpeakerID || roomDetail_.SpeakerID == oneself_.CHID) {
           videoHandle(true, userId);
         }
       });
-      stream?.on("error", (error) => {
+      stream.on("error", (error) => {
         if (error.getCode() === 0x4043) {
           deviceTestingInit();
           startDeviceConnect();
@@ -263,7 +263,7 @@ class RtcClient {
       const { userId } = evt;
       this.members_.set(userId, null);
       onlineOrOfline(true, userId);
-      console.log(getUserInfo(userId)?.UserName + " 加入了房间");
+      console.log(getUserInfo(userId).UserName + " 加入了房间");
     });
 
     // 当远程连接端离开房间时触发
@@ -271,7 +271,7 @@ class RtcClient {
       const { userId } = evt;
       this.members_.delete(userId);
       onlineOrOfline(false, userId);
-      console.log(getUserInfo(userId)?.UserName + " 离开了房间，或者掉线");
+      console.log(getUserInfo(userId).UserName + " 离开了房间，或者掉线");
     });
 
     // 推送远程流时触发
@@ -279,7 +279,7 @@ class RtcClient {
       const remoteStream = evt.stream;
       const userId = remoteStream.getUserId();
       this.members_.set(userId, remoteStream);
-      console.log(`${getUserInfo(userId)?.UserName} 推送远程流`);
+      console.log(`${getUserInfo(userId).UserName} 推送远程流`);
       this.client_.subscribe(remoteStream);
     });
 
@@ -319,11 +319,11 @@ class RtcClient {
     and removes the stream from the list of remote streams. */
     this.client_.on("stream-removed", (evt) => {
       const remoteStream = evt.stream;
-      const userId = remoteStream?.getUserId();
-      const id = remoteStream?.getId();
-      remoteStream?.stop();
+      const userId = remoteStream.getUserId();
+      const id = remoteStream.getId();
+      remoteStream.stop();
       this.members_.set(userId, null);
-      console.log(`${getUserInfo(userId)?.UserName} 取消推送远程流`);
+      console.log(`${getUserInfo(userId).UserName} 取消推送远程流`);
       this.remoteStreams_ = this.remoteStreams_.filter((stream) => {
         return stream.getId() !== id;
       });
@@ -417,18 +417,18 @@ class RtcClient {
 
       // 如果网络极差，不管是不是主讲人也将分辨率调到极低
       if (event.uplinkNetworkQuality >= 4) {
-        this.localStream_?.setVideoProfile("120p");
+        this.localStream_.setVideoProfile("120p");
       } else {
         if (!roomDetail_.SpeakerID) {
-          this.localStream_?.setVideoProfile("480p");
+          this.localStream_.setVideoProfile("480p");
         } else if (roomDetail_.SpeakerID == oneself_.CHID) {
-          this.localStream_?.setVideoProfile("720p");
+          this.localStream_.setVideoProfile("720p");
         } else {
           var renshu = [6, 4, 2, 0];
           var fenbianlv = ["120p", "360p", "480p", "720p"];
           for (var i = 0; i < renshu.length; i++) {
             if (roomDetail_.UserList.length >= renshu[i]) {
-              this.localStream_?.setVideoProfile(fenbianlv[i]);
+              this.localStream_.setVideoProfile(fenbianlv[i]);
               break;
             }
           }
@@ -438,7 +438,7 @@ class RtcClient {
   }
 
   fbl() {
-    const videoTrack = this.localStream_?.getVideoTrack();
+    const videoTrack = this.localStream_.getVideoTrack();
     if (videoTrack) {
       var s = videoTrack.getSettings();
       console.log(`分辨率：${s.width} * ${s.height}, 帧率：${s.frameRate}`);

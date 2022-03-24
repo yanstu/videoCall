@@ -57,7 +57,7 @@ class RtcClient {
 
     try {
       // 初始化本地流
-      await this.localStream_?.initialize();
+      await this.localStream_.initialize();
     } catch (error) {
       console.error("无法初始化共享流 - ", error);
     }
@@ -95,8 +95,8 @@ class RtcClient {
     // 离开房间
     await this.client_.leave();
     this.isJoined_ = false;
-    this.localStream_?.stop();
-    this.localStream_?.close();
+    this.localStream_.stop();
+    this.localStream_.close();
     this.localStream_ = null;
     // 停止获取音量
     this.stopGetAudioLevel();
@@ -113,9 +113,9 @@ class RtcClient {
       console.error("推送本地流失败" + error);
       this.isPublished_ = false;
       if (
-        JSON.stringify(error)?.includes("is not initialized or is") ||
-        JSON.stringify(error)?.includes("publish() is ongoing") ||
-        JSON.stringify(error)?.includes("timeout")
+        JSON.stringify(error).includes("is not initialized or is") ||
+        JSON.stringify(error).includes("publish() is ongoing") ||
+        JSON.stringify(error).includes("timeout")
       ) {
         location.reload();
       }
@@ -139,37 +139,37 @@ class RtcClient {
    * Mute the local audio
    */
   muteLocalAudio() {
-    this.localStream_?.muteAudio();
+    this.localStream_.muteAudio();
   }
 
   /**
    * Unmute the local audio
    */
   unmuteLocalAudio() {
-    this.localStream_?.unmuteAudio();
+    this.localStream_.unmuteAudio();
   }
 
   /**
    * Mute the local video
    */
   muteLocalVideo() {
-    this.localStream_?.muteVideo();
+    this.localStream_.muteVideo();
   }
 
   /**
    * *Unmutes the local video.*
    */
   unmuteLocalVideo() {
-    this.localStream_?.unmuteVideo();
+    this.localStream_.unmuteVideo();
   }
 
   /**
    * Resumes the local and remote streams
    */
   resumeStreams() {
-    this.localStream_?.resume();
-    this.members_.get(ZCRID_)?.resume();
-    this.members_.get(roomDetail_.SpeakerID)?.resume();
+    this.localStream_.resume();
+    this.members_.get(ZCRID_).resume();
+    this.members_.get(roomDetail_.SpeakerID).resume();
     beiyongfangan;
   }
 
@@ -178,12 +178,12 @@ class RtcClient {
    */
   changeCameraId() {
     this.localStream_
-      ?.switchDevice("video", cameraId)
+      .switchDevice("video", cameraId)
       .then(async () => {
         console.log("切换摄像头成功");
         if (deviceType == DEVICE_TYPE_ENUM.MOBILE_IOS) {
-          await this?.leave();
-          await this?.join();
+          await this.leave();
+          await this.join();
         }
       })
       .catch((res) => {
@@ -195,7 +195,7 @@ class RtcClient {
    * 切换麦克风
    */
   changeMicId() {
-    this.localStream_?.switchDevice("audio", micId).then(() => {
+    this.localStream_.switchDevice("audio", micId).then(() => {
       console.log("切换麦克风成功");
     });
   }
@@ -205,12 +205,12 @@ class RtcClient {
     onlineOrOfline(true, userId);
     var videoVid = "box_" + userId;
     if (ZJRID_ == userId) videoVid = "zjr_video";
-    await stream?.stop();
-    await stream?.play(videoVid, {
+    await stream.stop();
+    await stream.play(videoVid, {
       objectFit: "cover",
       mirror: false,
     });
-    stream?.on("error", (error) => {
+    stream.on("error", (error) => {
       if (error.getCode() === 0x4043) {
         deviceTestingInit();
         startDeviceConnect();
@@ -252,7 +252,7 @@ class RtcClient {
       const { userId } = evt;
       this.members_.set(userId, null);
       onlineOrOfline(true, userId);
-      console.log(getUserInfo(userId)?.UserName + " 加入了房间");
+      console.log(getUserInfo(userId).UserName + " 加入了房间");
     });
 
     // 当远程连接端离开房间时触发
@@ -260,7 +260,7 @@ class RtcClient {
       const { userId } = evt;
       this.members_.delete(userId);
       onlineOrOfline(false, userId);
-      console.log(getUserInfo(userId)?.UserName + " 离开了房间，或者掉线");
+      console.log(getUserInfo(userId).UserName + " 离开了房间，或者掉线");
     });
 
     // 推送远程流时触发
@@ -268,7 +268,7 @@ class RtcClient {
       const remoteStream = evt.stream;
       const userId = remoteStream.getUserId();
       this.members_.set(userId, remoteStream);
-      console.log(`${getUserInfo(userId)?.UserName} 推送远程流`);
+      console.log(`${getUserInfo(userId).UserName} 推送远程流`);
       if (userId != roomDetail_.SpeakerID) {
         if (userId == ZCRID_ && !roomDetail_.SpeakerID) {
           this.client_.subscribe(remoteStream);
@@ -319,9 +319,9 @@ class RtcClient {
       const remoteStream = evt.stream;
       const userId = remoteStream.getUserId();
       const id = remoteStream.getId();
-      remoteStream?.stop();
+      remoteStream.stop();
       this.members_.set(userId, null);
-      console.log(`${getUserInfo(userId)?.UserName} 取消推送远程流`);
+      console.log(`${getUserInfo(userId).UserName} 取消推送远程流`);
       this.remoteStreams_ = this.remoteStreams_.filter((stream) => {
         return stream.getId() !== id;
       });
@@ -423,21 +423,21 @@ class RtcClient {
 
       // 如果网络极差，不管是不是主讲人也将分辨率调到极低
       if (event.uplinkNetworkQuality >= 4) {
-        this.localStream_?.setVideoProfile("180p");
+        this.localStream_.setVideoProfile("180p");
         if (event.uplinkNetworkQuality >= 4) {
-          this.localStream_?.setVideoProfile("120p");
+          this.localStream_.setVideoProfile("120p");
         }
       } else {
         if (!roomDetail_.SpeakerID) {
-          this.localStream_?.setVideoProfile("480p");
+          this.localStream_.setVideoProfile("480p");
         } else if (roomDetail_.SpeakerID == oneself_.CHID) {
-          this.localStream_?.setVideoProfile("720p");
+          this.localStream_.setVideoProfile("720p");
         } else {
           var renshu = [6, 4, 2, 0];
           var fenbianlv = ["120p", "360p", "480p", "720p"];
           for (var i = 0; i < renshu.length; i++) {
             if (roomDetail_.UserList.length >= renshu[i]) {
-              this.localStream_?.setVideoProfile(fenbianlv[i]);
+              this.localStream_.setVideoProfile(fenbianlv[i]);
               break;
             }
           }
@@ -447,7 +447,7 @@ class RtcClient {
   }
 
   fbl() {
-    const videoTrack = this.localStream_?.getVideoTrack();
+    const videoTrack = this.localStream_.getVideoTrack();
     if (videoTrack) {
       var s = videoTrack.getSettings();
       console.log(`分辨率：${s.width} * ${s.height}, 帧率：${s.frameRate}`);

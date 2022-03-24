@@ -7,7 +7,7 @@ async function viewsHandle() {
   resetViews();
   // 为当前页用户循环添加至网页上
   addView();
-  if (rtc?.isJoined_) {
+  if (rtc.isJoined_) {
     fanye();
   } else {
     await rtc.join();
@@ -33,7 +33,7 @@ async function fanye() {
     }
     var stream = rtc.members_.get(ID);
     if (stream) {
-      await stream?.stop();
+      await stream.stop();
       await rtc.client_.unsubscribe(stream);
       await rtc.client_.subscribe(stream, {
         audio: true,
@@ -62,7 +62,7 @@ async function addView() {
         var stream = rtc.members_.get(ID);
         if (stream) {
           var isbofang = $(`#box_${ID} video`).length == 0;
-          await stream?.stop();
+          await stream.stop();
           await rtc.client_.unsubscribe(stream);
           await rtc.client_
             .subscribe(stream, {
@@ -97,8 +97,8 @@ function beiyongfangan() {
         if (user.ID != oneself_.CHID) {
           var stream = rtc.members_.get(roomDetail_.SpeakerID);
           if (stream) {
-            stream?.stop();
-            stream?.play("box_" + user.ID, { mirror: false });
+            stream.stop();
+            stream.play("box_" + user.ID, { mirror: false });
           }
         }
       }

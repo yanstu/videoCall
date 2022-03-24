@@ -397,7 +397,7 @@
       ) {
         micClick();
       } else {
-        layer.msg("会场已设置不允许控制麦克风");
+        layer.msg("会场临时关闭麦克风");
       }
     })
   );

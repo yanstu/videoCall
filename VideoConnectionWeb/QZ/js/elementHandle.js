@@ -266,7 +266,7 @@ function resetViews() {
 // 麦克风开关状态控制
 function audioHandle(on, userId) {
   console.log(
-    `${getUserInfo(userId)?.UserName} ${on ? "打开" : "关闭"}了麦克风`
+    `${getUserInfo(userId).UserName} ${on ? "打开" : "关闭"}了麦克风`
   );
   $("#member_" + userId)
     .find(".member-audio-btn")
@@ -281,14 +281,14 @@ function audioHandle(on, userId) {
 function videoHandle(on, userId) {
   if (on && deviceType == DEVICE_TYPE_ENUM.MOBILE_IOS) {
     var stream = rtc.members_.get(userId);
-    stream?.resume();
+    stream.resume();
   }
 
   var zjr =
     roomDetail_.SpeakerID ||
     (location.href.toLowerCase().includes("big.html") ? ZCRID_ : oneself_.CHID);
   console.log(
-    `${getUserInfo(userId)?.UserName} ${on ? "打开" : "关闭"}了摄像头`
+    `${getUserInfo(userId).UserName} ${on ? "打开" : "关闭"}了摄像头`
   );
   $("#member_" + userId)
     .find(".member-video_btn")
@@ -310,13 +310,13 @@ function videoHandle(on, userId) {
         videoImgTimer && clearInterval(videoImgTimer);
         var stream =
           userId == oneself_.CHID
-            ? rtc?.localStream_
+            ? rtc.localStream_
             : rtc.members_.get(userId);
         $("#mask_" + userId).hide();
         var img = "";
         function getImg() {
           setTimeout(() => {
-            img = stream?.getVideoFrame();
+            img = stream.getVideoFrame();
             /*if (!img) {
             $("#mask_" + userId).show();
             return;
@@ -338,7 +338,7 @@ function videoHandle(on, userId) {
 
         videoImgTimer = setInterval(() => {
           $("#img_" + userId)
-            .attr("src", stream?.getVideoFrame())
+            .attr("src", stream.getVideoFrame())
             .show();
         }, 30 * 1000);
       } else {
@@ -544,7 +544,7 @@ async function zhanshiduan_mode(state) {
             stream.userId_ != roomDetail_.SpeakerID ||
             (stream.userId_ == ZCRID_ && roomDetail_.SpeakerID)
           ) {
-            await stream?.stop();
+            await stream.stop();
             await rtc.client_.unsubscribe(stream);
           }
         }

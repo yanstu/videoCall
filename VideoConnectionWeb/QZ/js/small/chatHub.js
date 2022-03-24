@@ -174,7 +174,7 @@ chatHub.on("errorServer", function (name) {
 // 收到申请发言的请求
 function huoqushenqingfayan(mess) {
   // 发言列表中不存在此用户的申请
-  if (!($("#fayan_" + mess.SendUserID)?.length > 0)) {
+  if (!($("#fayan_" + mess.SendUserID).length > 0)) {
     addSpeaker(mess.SendUserID);
   } else {
     // 重复提交发言提醒

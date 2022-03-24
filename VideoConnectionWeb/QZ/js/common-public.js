@@ -416,8 +416,8 @@ async function huoqudingyueshu() {
   // 视频连线前端心跳增加参数：订阅音频数（Audio）、订阅标清视频数（SD）、订阅高清视频数（HD）、订阅全高清视频数（FullHD）
   let Data = {
     State: "0",
-    CameraState: isCamOn && rtc?.localStream_?.hasVideo() ? "1" : 0,
-    MicState: isMicOn && rtc?.localStream_?.hasAudio() ? "1" : "0",
+    CameraState: isCamOn && rtc.localStream_.hasVideo() ? "1" : 0,
+    MicState: isMicOn && rtc.localStream_.hasAudio() ? "1" : "0",
     Audio: 0,
     SD: 0,
     HD: 0,

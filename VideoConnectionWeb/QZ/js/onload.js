@@ -16,51 +16,52 @@ function queryParams(name) {
 window.oldLog = console.log;
 console.log = (e) => {
   try {
-    if (JSON.stringify(e)?.includes("<INFO>")) return;
+    if (JSON.stringify(e).includes("<INFO>")) return;
   } catch (error) {}
   window.oldLog(e);
 };
 window.oldWarn = console.warn;
 console.warn = (e) => {
+  window.oldWarn(e);
   try {
     // 网络断开后trtc SDK会输出这句，所以可以断定为网络断开
-    if (JSON.stringify(e)?.includes("close current websocket and schedule")) {
+    if (JSON.stringify(e).includes("close current websocket and schedule")) {
       layer.msg("当前网络已断开", { icon: 5 });
       isDisconnect = true;
     }
-    if (JSON.stringify(e)?.includes("reconnect successfully")) {
+    if (JSON.stringify(e).includes("reconnect successfully")) {
       isDisconnect = false;
       this.location.reload();
     }
     /*if (
-      JSON.stringify(e)?.includes(
+      JSON.stringify(e).includes(
         "The request is not allowed by the user agent or the platform in"
       )
     ) {
       rtc.resumeStreams();
     }*/
-    if (JSON.stringify(e)?.includes("devicesRemoved")) {
+    if (JSON.stringify(e).includes("devicesRemoved")) {
       layer.msg("摄像头设备已被拔出", { icon: 5 });
     }
-    if (JSON.stringify(e)?.includes("devicesAdded")) {
+    if (JSON.stringify(e).includes("devicesAdded")) {
       layer.msg("摄像头设备已插入，正在恢复", { icon: 6 });
     }
   } catch (error) {}
-  window.oldWarn(e);
 };
-window.oldError = console.error;
+/*window.oldError = console.error;
 console.error = async (e) => {
+  window.oldError(e);
   try {
     // 网络断开后trtc SDK会输出这句，所以可以断定为网络断开
-    if (JSON.stringify(e)?.includes("前一个 join() 调用正在进行中")) {
+    if (JSON.stringify(e).includes("前一个 join() 调用正在进行中")) {
       location.reload();
     }
-    if (JSON.stringify(e)?.includes("无法初始化共享流")) {
+    if (JSON.stringify(e).includes("无法初始化共享流")) {
       cameraInitError = true;
       setTimeout(() => {
         if (
-          oneself_?.CHID == roomDetail_?.SpeakerID ||
-          !roomDetail_?.SpeakerID
+          oneself_.CHID == roomDetail_.SpeakerID ||
+          !roomDetail_.SpeakerID
         ) {
           $("#zjr_mask").show();
         } else {
@@ -68,31 +69,30 @@ console.error = async (e) => {
         }
       }, 500);
     }
-    if (JSON.stringify(e)?.includes("'elementId' is not found in the")) {
+    if (JSON.stringify(e).includes("'elementId' is not found in the")) {
       return;
     }
     if (
-      JSON.stringify(e)?.includes(
+      JSON.stringify(e).includes(
         "Cannot send data if the connection is not in the"
       ) ||
-      JSON.stringify(e)?.includes("Websocket closed with status code: 1006")
+      JSON.stringify(e).includes("Websocket closed with status code: 1006")
     ) {
       chathubReConnect();
     }
     if (
-      JSON.stringify(e)?.includes(
+      JSON.stringify(e).includes(
         "failed to subscribe stream, reason: because the remote"
       )
     ) {
       huoquhuiyihuancun();
     }
-    if (JSON.stringify(e)?.includes("Could not start video source")) {
-      $("#mask_" + oneself_?.CHID).show();
-      if (oneself_?.CHID == roomDetail_?.SpeakerID) {
+    if (JSON.stringify(e).includes("Could not start video source")) {
+      $("#mask_" + oneself_.CHID).show();
+      if (oneself_.CHID == roomDetail_.SpeakerID) {
         $("#zjr_mask_").show();
       }
       cameraSwitchError = true;
     }
   } catch (error) {}
-  window.oldError(e);
-};
+};*/

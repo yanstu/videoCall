@@ -47,8 +47,8 @@ class RtcClient {
 
   playVideo(stream, userId) {
     var objectFit = getUserInfo(userId).AspectRatio > 1 ? "contain" : "cover";
-    stream?.play("box_" + userId, { objectFit, mirror: false });
-    stream?.on("error", (error) => {
+    stream.play("box_" + userId, { objectFit, mirror: false });
+    stream.on("error", (error) => {
       if (error.getCode() === 0x4043) {
         deviceTestingInit();
         startDeviceConnect();
@@ -91,7 +91,7 @@ class RtcClient {
       const { userId } = evt;
       this.members_.set(userId, null);
       onlineOrOfline(true, userId);
-      console.log(getUserInfo(userId)?.UserName + " 加入了房间");
+      console.log(getUserInfo(userId).UserName + " 加入了房间");
     });
 
     // 当远程连接端离开房间时触发
@@ -99,7 +99,7 @@ class RtcClient {
       const { userId } = evt;
       this.members_.delete(userId);
       onlineOrOfline(false, userId);
-      console.log(getUserInfo(userId)?.UserName + " 离开了房间，或者掉线");
+      console.log(getUserInfo(userId).UserName + " 离开了房间，或者掉线");
     });
 
     // 推送远程流时触发
@@ -107,7 +107,7 @@ class RtcClient {
       const remoteStream = evt.stream;
       const userId = remoteStream.getUserId();
       this.members_.set(userId, remoteStream);
-      console.log(`${getUserInfo(userId)?.UserName} 推送远程流`);
+      console.log(`${getUserInfo(userId).UserName} 推送远程流`);
       this.client_.subscribe(remoteStream);
     });
 
@@ -141,11 +141,11 @@ class RtcClient {
     and removes the stream from the list of remote streams. */
     this.client_.on("stream-removed", (evt) => {
       const remoteStream = evt.stream;
-      const userId = remoteStream?.getUserId();
-      const id = remoteStream?.getId();
-      remoteStream?.stop();
+      const userId = remoteStream.getUserId();
+      const id = remoteStream.getId();
+      remoteStream.stop();
       this.members_.set(userId, null);
-      console.log(`${getUserInfo(userId)?.UserName} 取消推送远程流`);
+      console.log(`${getUserInfo(userId).UserName} 取消推送远程流`);
       this.remoteStreams_ = this.remoteStreams_.filter((stream) => {
         return stream.getId() !== id;
       });

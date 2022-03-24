@@ -216,7 +216,7 @@ async function deviceTestingInit() {
     await updateCameraDeviceList();
   });
   $("#camera-select").click(function (e) {
-    e?.preventDefault();
+    e.preventDefault();
     cameraSwitchError && location.reload();
   });
   // 摄像头设备切换

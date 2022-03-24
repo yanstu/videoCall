@@ -9,7 +9,7 @@ async function viewsHandle() {
   meetLayoutCompute();
   displayLayoutCompute();
   // 修改主讲人
-  rtc?.isJoined_ && change();
+  rtc.isJoined_ && change();
   ZJRID_ = roomDetail_.SpeakerID || oneself_.CHID;
   // 初始化
   (!rtc || !rtc.isJoined_) && init();
@@ -24,23 +24,23 @@ async function change() {
 
   // 先停止上一个主讲人的远程流
   var old_streams = rtc.members_.get(ZJRID_);
-  old_streams?.stop();
+  old_streams.stop();
 
   // 再停止新的主讲人的远程流
   var new_streams =
     newZJRID == oneself_.CHID ? rtc.localStream_ : rtc.members_.get(newZJRID);
-  new_streams?.stop();
+  new_streams.stop();
 
   if (newZJRID == oneself_.CHID) {
     // 如果新的主讲人是我，清空小视频区域
     resetViews();
 
     var zcr_streams = rtc.members_.get(ZCRID_);
-    zcr_streams?.stop();
+    zcr_streams.stop();
     addVideoView(ZCRID_, getUserInfo(ZCRID_).UserName);
     $("#box_" + ZCRID_).attr("class", "w-[9rem] h-full video-box relative");
     rtc.client_.subscribe(zcr_streams);
-    zcr_streams?.play("box_" + ZCRID_, { mirror: false });
+    zcr_streams.play("box_" + ZCRID_, { mirror: false });
   } else {
     if (ZJRID_ == oneself_.CHID) {
       resetViews();
@@ -67,7 +67,7 @@ async function change() {
     rtc.client_.subscribe(new_streams);
   } else {
     // 将新主讲人播放到主讲人容器
-    new_streams?.play("zjr_video", { mirror: false });
+    new_streams.play("zjr_video", { mirror: false });
   }
 
   new_streams ? $("#zjr_mask").hide() : $("#zjr_mask").show();
@@ -89,7 +89,7 @@ async function init() {
 
   if (ZJRID_ == oneself_.CHID) {
     var zcr_streams = rtc.members_.get(ZCRID_);
-    zcr_streams?.stop();
+    zcr_streams.stop();
     addVideoView(ZCRID_, getUserInfo(ZCRID_).UserName);
     $("#box_" + ZCRID_).attr("class", "w-[9rem] h-full video-box relative");
 
@@ -121,12 +121,12 @@ function beiyongfangan() {
     setTimeout(() => {
       if (roomDetail_.SpeakerID != oneself_.CHID) {
         var stream = rtc.members_.get(roomDetail_.SpeakerID);
-        stream?.stop();
-        stream?.play("zjr_video", { mirror: false });
+        stream.stop();
+        stream.play("zjr_video", { mirror: false });
       } else {
         var stream = rtc.members_.get(ZCRID_);
-        stream?.stop();
-        stream?.play("box_" + ZCRID_, { mirror: false });
+        stream.stop();
+        stream.play("box_" + ZCRID_, { mirror: false });
       }
     }, 1000);
   }
