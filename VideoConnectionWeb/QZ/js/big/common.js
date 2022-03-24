@@ -27,8 +27,8 @@ async function viewsHandle() {
           user.ID == oneself_.CHID
             ? rtc.localStream_
             : rtc.members_.get(user.ID);
-        stream.stop();
-        stream.play("box_" + user.ID);
+        stream && stream.stop();
+        stream && stream.play("box_" + user.ID);
       }
     }
     setTimeout(() => {
@@ -56,14 +56,14 @@ async function change() {
       return;
     }
     if (hasMe(ID)) {
-      stream.play("box_" + ID, { objectFit: "cover", mirror: false });
+      stream && stream.play("box_" + ID, { objectFit: "cover", mirror: false });
       // 如果远程流不存在，不在线，显示遮罩
       stream ? $("#mask_" + ID).hide() : $("#mask_" + ID).show();
     }
   }
   // 获取将要成为主讲人的那个远程流
   var zjr_streams = rtc.members_.get(newZJRID);
-  zjr_streams.stop();
+  zjr_streams && zjr_streams.stop();
 
   // 移除原主持人的相关信息
   $(`#box_${newZJRID} .volume-level`).css("height", "0%");

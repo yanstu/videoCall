@@ -22,8 +22,10 @@ async function viewsHandle() {
           user.ID == oneself_.CHID
             ? rtc.localStream_
             : rtc.members_.get(user.ID);
-        await stream.stop();
-        await stream.play("box_" + user.ID, { mirror: false });
+        if (stream) {
+          await stream.stop();
+          await stream.play("box_" + user.ID, { mirror: false });
+        }
         $("#img_" + user.ID).hide();
       }
     }
@@ -52,7 +54,7 @@ async function changeViews() {
     $("#img_" + ID).hide();
     stream.stop();
     if (hasMe(ID)) {
-      stream.play("box_" + ID, { objectFit: "cover", mirror: false });
+      stream && stream.play("box_" + ID, { objectFit: "cover", mirror: false });
       // 如果远程流不存在，不在线，显示遮罩
       stream ? $("#mask_" + ID).hide() : $("#mask_" + ID).show();
     }
@@ -60,7 +62,7 @@ async function changeViews() {
   // 获取将要成为主讲人的那个远程流
   var zjr_streams =
     newZJRID == oneself_.CHID ? rtc.localStream_ : rtc.members_.get(newZJRID);
-  zjr_streams.stop();
+  zjr_streams && zjr_streams.stop();
 
   // 移除原主持人的相关信息
   $(`#box_${newZJRID} .volume-level`).css("height", "0%");
@@ -76,12 +78,14 @@ async function changeViews() {
   // 判断是否为手机设备
   var objectFit = objectFitHandle(newZJRID);
 
-  zjr_streams.play("zjr_video", { objectFit, mirror: false });
+  zjr_streams && zjr_streams.play("zjr_video", { objectFit, mirror: false });
 
   tuisong();
 
   // 主讲人的未推送远程流的话显示遮罩
-  zjr_streams ? $("#zjr_mask").hide() : $("#zjr_mask").show();
+  zjr_streams && zjr_streams.hasVideo()
+    ? $("#zjr_mask").hide()
+    : $("#zjr_mask").show();
   // 为新的主讲人取帧
   zjr_streams && videoHandle(true, newZJRID);
 
