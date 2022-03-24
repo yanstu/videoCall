@@ -462,14 +462,17 @@
 .h-\[52\%\] {
   height: 52%;
 }
-.border-\[\#5f6d7a\] {
-  border: 2px #5451 solid;
+.border-\[\#393e4b\] {
+  border: 2px #393e4b solid;
 }
 .border-\[1px\] {
   border-width: 1px;
 }
 .p-\[2px\] {
   padding: 2px;
+}
+.text-\[1\.1rem\] {
+  font-size: 1.1rem;
 }
 .border-none {
   border-style: none;
@@ -634,6 +637,9 @@
 }
 .text-\[14px\] {
   font-size: 14px;
+}
+.text-\[16px\] {
+  font-size: 16px;
 }
 .h-\[30px\] {
   height: 30px;

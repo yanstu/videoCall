@@ -12,9 +12,7 @@ function userInfoTemplate(userId, nickName) {
             } h-full bg-[#000000] opacity-10"></div>
             <!-- 声音显示 -->
             <div id="mic_main_${userId}" style="margin-left: 5px">
-                <div class="flex items-center justify-content-center relative ${
-                  isMobile ? "h-5" : "h-4"
-                }">
+                <div class="flex items-center justify-content-center relative h-5">
                   <img class="member-audio-btn h-full" src="./img/mic-on.png">
                   <!-- 音量级别显示 -->
                   <div class="volume-level absolute bottom-0 left-0 w-full" style="height: 0%; overflow: hidden; transition: height .1s ease;">
@@ -23,7 +21,7 @@ function userInfoTemplate(userId, nickName) {
                 </div>
             </div>
             <!-- 昵称显示 -->
-            <span class="ml-1 mr-1 nicknamespan text-[0.975rem]" style="color: white">
+            <span class="ml-1 mr-1 nicknamespan text-[1.1rem]" style="color: white">
             ${nickName}
             </span>
           </div>`;
@@ -36,7 +34,7 @@ function videoBoxTemplate(userId, nickName) {
   return `<div id="box_${userId}" class="${
     location.href.toLowerCase().includes("mobile")
       ? "w-[9rem] h-full video-box relative"
-      : "w-[97%] h-[95%] video-box relative border-[1px] border-[#5f6d7a] p-[2px]"
+      : "w-[97%] h-[95%] video-box relative border-[1px] border-[#393e4b] p-[2px]"
   }">
             <!-- “摄像头未开启”遮罩模板 -->
             <div id="mask_${userId}" style="z-index: 8" class="mask top-0 left-0 justify-center col-div flex w-full h-full bg-[#24292e] items-center justify-items-center absolute flex-col">

@@ -16,6 +16,11 @@
   <link rel="stylesheet" href="./css/common.css" />
   <script src="./js/api.js"></script>
   <script src="./js/onload.js"></script>
+  <style>
+    #video-grid>div {
+      border: 1px solid #393e4b;
+    }
+  </style>
 </head>
 
 <body class="w-screen h-screen">
@@ -44,7 +49,7 @@
   </header>
   <section class="h-[87%] flex flex-row w-full bg-[#24292e] relative">
     <!-- 群众区 -->
-    <div id="video-grid"
+    <div id="video-grid" style="border: 1px solid #393e4b;"
       class="box-border grid w-full h-full items-center justify-center z-10 border-[1px] border-[#393e4b]"></div>
 
     <!-- 展示不支持webRTC的提示 -->
@@ -328,38 +333,38 @@
     </div>
   </section>
   <footer class="w-full h-[7%] shadow-md flex bg-[#262626] text-white items-center justify-center z-50 mx-auto">
-    <div class="toolbar_btn" id="mic_btn">
-      <svg class="icon text-[2rem] text-white" aria-hidden="true">
+    <div style="height: 100%;" class="toolbar_btn" id="mic_btn">
+      <svg style="font-size:25px" class="icon text-white" aria-hidden="true">
         <use xlink:href="#icon-maikefeng"></use>
       </svg>
       <span class="mt-1 text-[12px]">静音</span>
     </div>
-    <div class="toolbar_btn" id="video_btn">
-      <svg class="icon text-[2rem] text-white" aria-hidden="true">
+    <div style="height: 100%;" class="toolbar_btn" id="video_btn">
+      <svg style="font-size:25px" class="icon text-white" aria-hidden="true">
         <use xlink:href="#icon-xiangji"></use>
       </svg>
       <span class="mt-1 text-[12px]">摄像头</span>
     </div>
-    <div class="toolbar_btn" style="display: none" id="fanzhuan_btn">
-      <svg class="icon text-[2rem] text-white" aria-hidden="true">
+    <div style="height: 100%;" class="toolbar_btn" style="display: none" id="fanzhuan_btn">
+      <svg style="font-size:25px" class="icon text-white" aria-hidden="true">
         <use xlink:href="#icon-fanzhuan"></use>
       </svg>
       <span class="mt-1 text-[12px]">翻转</span>
     </div>
-    <div class="toolbar_btn" id="shenqingfayan_btn">
-      <svg class="icon text-[2rem] text-white" aria-hidden="true">
+    <div style="height: 100%;" class="toolbar_btn" id="shenqingfayan_btn">
+      <svg style="font-size:25px" class="icon text-white" aria-hidden="true">
         <use xlink:href="#icon-shenqingfayan"></use>
       </svg>
       <span class="mt-1 text-[12px]">申请发言</span>
     </div>
-    <div class="toolbar_btn" id="shangyiye_ms_btn">
-      <svg class="icon text-[2rem] text-white" aria-hidden="true">
+    <div style="height: 100%;" class="toolbar_btn" id="shangyiye_ms_btn">
+      <svg style="font-size:25px" class="icon text-white" aria-hidden="true">
         <use xlink:href="#icon-shangyiye"></use>
       </svg>
       <span class="mt-1 text-[12px]">上页</span>
     </div>
-    <div class="toolbar_btn" id="xiayiye_ms_btn">
-      <svg class="icon text-[2rem] text-white" aria-hidden="true">
+    <div style="height: 100%;" class="toolbar_btn" id="xiayiye_ms_btn">
+      <svg style="font-size:25px" class="icon text-white" aria-hidden="true">
         <use xlink:href="#icon-xiayiye"></use>
       </svg>
       <span class="mt-1 text-[12px]">下页</span>
@@ -370,9 +375,9 @@
     window.myVConsole = new window.VConsole();
   </script> -->
   <script src="./lib/jquery/jquery-3.2.1.min.js"></script>
+  <script src="./lib/trtc/trtc.js"></script>
   <script src="./js/util.js"></script>
   <script src="./js/rtc-detection.js"></script>
-  <script src="./lib/trtc/trtc.js"></script>
   <script src="./js/common-public.js"></script>
   <script src="./js/ms/common.js"></script>
   <script src="./js/ms/rtc-client.js"></script>

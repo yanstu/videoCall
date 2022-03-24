@@ -18,7 +18,9 @@
     {
       menuHideTimer.count++;
       if (menuHideTimer.count == menuHideTimer.time) {
-        $("#toolbar").hide();
+        !location.href.toLowerCase().includes("ms") &&
+          !location.href.toLowerCase().includes("mobile") &&
+          $("#toolbar").hide();
         menuHideTimer.count = 0;
       }
     }

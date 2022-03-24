@@ -16,7 +16,7 @@ function addView() {
     $("#video-grid").append(videoBoxTemplate(ID, UserName));
     $("#box_" + ID).attr(
       "class",
-      "w-full h-full video-box relative box-border border-[2px] border-[#5f6d7a]"
+      "w-full h-full video-box relative box-border border-[2px] border-[#393e4b]"
     );
   }
   addMember();
