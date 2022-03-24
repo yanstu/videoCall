@@ -324,6 +324,7 @@ class RtcClient {
       remoteStream.stop();
       this.members_.set(userId, null);
       console.log(`${getUserInfo(userId).UserName} 取消推送远程流`);
+      videoHandle(false, userId);
       this.remoteStreams_ = this.remoteStreams_.filter((stream) => {
         return stream.getId() !== id;
       });

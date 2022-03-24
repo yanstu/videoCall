@@ -5,8 +5,8 @@ class RtcClient {
     this.userSig_ = options.userSig;
     this.roomId_ = options.roomId;
 
-    this.isPublished_ = false;
     this.isJoined_ = false;
+    this.isPublished_ = false;
     this.localStream_ = null;
     this.remoteStreams_ = [];
     this.members_ = new Map();
@@ -17,10 +17,9 @@ class RtcClient {
       sdkAppId: this.sdkAppId_,
       userId: this.userId_,
       userSig: this.userSig_,
-      enableAutoPlayDialog: false,
+      // enableAutoPlayDialog: false,
     });
 
-    // 开始获取网络质量
     this.startGetNetworkevel();
 
     // 客户端监听服务
@@ -34,6 +33,7 @@ class RtcClient {
     await this.client_.join({
       roomId: parseInt(this.roomId_),
     });
+
     this.isJoined_ = true;
 
     if (getCameraId() && getMicrophoneId()) {
@@ -64,23 +64,16 @@ class RtcClient {
 
     try {
       // 推送本地流
-      if (
-        hasMe(oneself_.CHID) ||
-        roomDetail_.SpeakerID == oneself_.CHID ||
-        roomDetail_.UserList.length <= 25
-      ) {
-        await this.publish();
-      }
+      await this.publish();
     } catch (error) {
       console.error("推送本地流失败 - ", error);
     }
 
     this.playVideo(this.localStream_, oneself_.CHID);
 
-    setTimeout(() => {
-      // 权限判断按钮显示或隐藏
-      showOrHide();
-    }, 500);
+    // 权限判断按钮显示或隐藏
+    showOrHide();
+    // 关闭加载中
 
     // 开始获取音量
     this.startGetAudioLevel();
@@ -128,7 +121,7 @@ class RtcClient {
    */
   async unpublish() {
     if (!this.isPublished_) {
-      console.warn("还没有推送过");
+      console.warn("RtcClient.unpublish() 已经调用但未推送");
       return;
     }
     await this.client_.unpublish(this.localStream_);
@@ -168,27 +161,25 @@ class RtcClient {
    */
   resumeStreams() {
     this.localStream_.resume();
-    this.members_.get(ZCRID_).resume();
-    this.members_.get(roomDetail_.SpeakerID).resume();
-    beiyongfangan;
+    for (let stream of this.remoteStreams_) {
+      stream.resume();
+    }
   }
 
   /**
    * 切换摄像头
    */
   changeCameraId() {
-    this.localStream_
-      .switchDevice("video", cameraId)
-      .then(async () => {
+    try {
+      this.localStream_.switchDevice("video", cameraId).then(() => {
         console.log("切换摄像头成功");
-        if (deviceType == DEVICE_TYPE_ENUM.MOBILE_IOS) {
-          await this.leave();
-          await this.join();
-        }
-      })
-      .catch((res) => {
-        console.log("----------------------" + res);
       });
+    } catch (error) {
+      if (JSON.stringify(error).includes("Cannot read properties of null"))
+        layer.msg(
+          "暂时无法访问摄像头/麦克风，请确保系统授予当前浏览器摄像头/麦克风权限，并且没有其他应用占用摄像头/麦克风。"
+        );
+    }
   }
 
   /**
@@ -200,22 +191,16 @@ class RtcClient {
     });
   }
 
-  // 将用户播放到指定div容器
-  async playVideo(stream, userId) {
-    onlineOrOfline(true, userId);
-    var videoVid = "box_" + userId;
-    if (ZJRID_ == userId) videoVid = "zjr_video";
-    await stream.stop();
-    await stream.play(videoVid, {
-      objectFit: "cover",
-      mirror: false,
-    });
-    stream.on("error", (error) => {
+  playVideo(stream, userId) {
+    onlineOrOfline(true, oneself_.CHID);
+    stream.stop();
+    stream.play("box_" + userId, { mirror: false });
+    /*stream.on("error", (error) => {
       if (error.getCode() === 0x4043) {
         deviceTestingInit();
         startDeviceConnect();
       }
-    });
+    });*/
   }
 
   /**
@@ -225,6 +210,7 @@ class RtcClient {
     /*this.client_.on("error", (err) => {
       location.reload();
     });*/
+
     this.client_.on("client-banned", () => {
       if (!isHidden()) {
         layer.msg("您已被挤下线", { icon: 2 });
@@ -269,13 +255,10 @@ class RtcClient {
       const userId = remoteStream.getUserId();
       this.members_.set(userId, remoteStream);
       console.log(`${getUserInfo(userId).UserName} 推送远程流`);
-      if (userId != roomDetail_.SpeakerID) {
-        if (userId == ZCRID_ && !roomDetail_.SpeakerID) {
-          this.client_.subscribe(remoteStream);
-        }
-        return;
-      }
-      this.client_.subscribe(remoteStream);
+      this.client_.subscribe(remoteStream, {
+        audio: true,
+        video: !!getUserInfoByMeet(userId), // 在当前页的才订阅视频
+      });
     });
 
     // 在订阅远程流时触发
@@ -284,15 +267,10 @@ class RtcClient {
       const userId = remoteStream.getUserId();
       this.remoteStreams_.push(remoteStream);
 
-      if (userId == roomDetail_.SpeakerID) {
-        this.playVideo(remoteStream, userId);
-      } else if (!roomDetail_.SpeakerID && userId == ZCRID_) {
-        this.playVideo(remoteStream, userId);
-      }
+      this.playVideo(remoteStream, userId);
 
       if (!remoteStream) {
         $("#mask_" + userId).show();
-        userId == ZJRID_ && $("#zjr_mask").show();
       }
 
       remoteStream.on("player-state-changed", (event) => {
@@ -322,7 +300,6 @@ class RtcClient {
       remoteStream.stop();
       this.members_.set(userId, null);
       console.log(`${getUserInfo(userId).UserName} 取消推送远程流`);
-      videoHandle(false, userId);
       this.remoteStreams_ = this.remoteStreams_.filter((stream) => {
         return stream.getId() !== id;
       });
@@ -366,12 +343,27 @@ class RtcClient {
   startGetAudioLevel() {
     this.client_.on("audio-volume", ({ result }) => {
       result.forEach(({ userId, audioVolume, stream }) => {
-        if (audioVolume >= 10) {
+        if (audioVolume >= 5) {
           $(`#mic_main_${userId}`)
             .find(".volume-level")
             .css("height", `${audioVolume * 4}%`);
         } else {
           $(`#mic_main_${userId}`).find(".volume-level").css("height", `0%`);
+        }
+
+        if (audioVolume >= 5) {
+          $(`#mic_drag`)
+            .find(".nickname")
+            .html(
+              (roomDetail_.SpeakerID
+                ? getUserInfo(roomDetail_.SpeakerID).UserName
+                : getUserInfo(userId).UserName) + " 正在讲话"
+            );
+        } else {
+          roomDetail_.SpeakerID &&
+            $(`#mic_drag`)
+              .find(".nickname")
+              .html(getUserInfo(roomDetail_.SpeakerID).UserName + " 正在讲话");
         }
       });
     });
@@ -415,13 +407,14 @@ class RtcClient {
               : event.uplinkNetworkQuality
           }.png`
         )
-        .attr("title", title[event.uplinkNetworkQuality]);
+        .attr("title", "上行速度：" + title[event.uplinkNetworkQuality]);
 
       isDisconnect = event.uplinkNetworkQuality == 6;
       if (event.uplinkNetworkQuality == 4 || event.uplinkNetworkQuality == 5) {
         // layer.msg("当前网络极差，请注意保持良好的网络连接", { icon: 5 });
       }
 
+      // 如果网络极差，不管是不是主讲人也将分辨率调到极低
       if (event.uplinkNetworkQuality >= 4) {
         this.localStream_.setVideoProfile({
           width: 256, // 视频宽度

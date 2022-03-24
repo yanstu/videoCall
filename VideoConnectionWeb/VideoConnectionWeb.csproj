@@ -298,12 +298,12 @@
     <Content Include="js\layui\font\iconfont.ttf" />
     <Content Include="js\layui\font\iconfont.woff" />
     <Content Include="js\layui\font\iconfont.woff2" />
-    <Content Include="QZ\.vscode\settings.json" />
-    <Content Include="QZ\.vs\base-js\project-colors.json" />
-    <Content Include="QZ\.vs\base-js\v17\.suo" />
-    <Content Include="QZ\.vs\ProjectSettings.json" />
-    <Content Include="QZ\.vs\slnx.sqlite" />
-    <Content Include="QZ\.vs\VSWorkspaceState.json" />
+    <Content Include="QZ\css\common.css" />
+    <Content Include="QZ\img\shipingkongzhi.png" />
+    <Content Include="QZ\js\ms\chatHub.js" />
+    <Content Include="QZ\js\ms\common.js" />
+    <Content Include="QZ\js\ms\rtc-client.js" />
+    <Content Include="QZ\lib\jquery\signalr.min.js" />
     <Content Include="QZ\mobile.aspx" />
     <Content Include="QZ\ms.aspx" />
     <Content Include="QZ\big.aspx" />
@@ -407,9 +407,6 @@
     <Content Include="Scripts\jquery-1.6.4.min.js" />
     <Content Include="Scripts\jquery.signalR-2.4.2.js" />
     <Content Include="Scripts\jquery.signalR-2.4.2.min.js" />
-    <Content Include="TestItem.aspx" />
-    <Content Include="TestItemCore.aspx" />
-    <Content Include="TestStart.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -466,27 +463,6 @@
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
-    <Compile Include="TestItem.aspx.cs">
-      <DependentUpon>TestItem.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="TestItem.aspx.designer.cs">
-      <DependentUpon>TestItem.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="TestItemCore.aspx.cs">
-      <DependentUpon>TestItemCore.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="TestItemCore.aspx.designer.cs">
-      <DependentUpon>TestItemCore.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="TestStart.aspx.cs">
-      <DependentUpon>TestStart.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="TestStart.aspx.designer.cs">
-      <DependentUpon>TestStart.aspx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="font\iconfont.ttf" />

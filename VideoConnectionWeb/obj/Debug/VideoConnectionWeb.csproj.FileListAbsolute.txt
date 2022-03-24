@@ -794,3 +794,4 @@ S:\Workspaces\web\netMeeting-public\VideoConnectionWeb\obj\Debug\VideoConnection
 S:\Workspaces\web\netMeeting-public\VideoConnectionWeb\obj\Debug\VideoConnectionWeb.csproj.CopyComplete
 S:\Workspaces\web\netMeeting-public\VideoConnectionWeb\obj\Debug\VideoConnectionWeb.dll
 S:\Workspaces\web\netMeeting-public\VideoConnectionWeb\obj\Debug\VideoConnectionWeb.pdb
+S:\Workspaces\web\netMeeting-public\VideoConnectionWeb\obj\Debug\VideoConnectionWeb.csproj.AssemblyReference.cache
