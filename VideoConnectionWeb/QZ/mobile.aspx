@@ -34,12 +34,13 @@
   </head>
 
   <body class="w-screen h-screen">
-    <header class="flex flex-row whitespace-nowrap h-[7%] bg-[#262626] w-full justify-between">
+    <header style="box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.07), 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;"
+      class="flex flex-row whitespace-nowrap h-[7%] bg-[#262626] w-full justify-between">
       <div style="width: 15%;" class="flex items-center justify-start">
         <img id="testing_btn" title="设备、网络检测" class="ml-2 mr-2 invert-[100%] h-[50%]" style="width: auto;"
           src="./img/check-mic.png" />
-        <img id="qiehuanshitu_btn" title="切换视图" class="invert-[100%] h-[50%]" src="./img/shitu.png"
-          style="width: auto;" />
+        <img id="qiehuanshitu_btn" title="切换视图" class="invert-[100%]" src="./img/shitu.png"
+          style="width: auto;height: 55%;" />
       </div>
       <div style="text-align: center;"
         class="text-white w-[50%] pl-3 h-full flex items-center justify-center text-center text-[16px]">
@@ -402,26 +403,26 @@
         class="h-full w-auto flex text-center text-white items-center justify-center mx-auto relative">
         <div class="absolute w-full h-full top-0 left-0 shadow bg-black opacity-10 pointer-events-none"></div>
         <div style="width: 4rem;" class="toolbar_btn" id="mic_btn">
-          <svg style="font-size:26px" class="icon text-white" aria-hidden="true">
+          <svg style="font-size:30px" class="icon text-white" aria-hidden="true">
             <use xlink:href="#icon-maikefeng"></use>
           </svg>
           <span class="mt-1 text-[16px]">静音</span>
         </div>
         <div style="width: 4rem;" class="toolbar_btn" id="video_btn">
-          <svg style="font-size:26px" class="icon text-white" aria-hidden="true">
+          <svg style="font-size:30px" class="icon text-white" aria-hidden="true">
             <use xlink:href="#icon-xiangji"></use>
           </svg>
           <span class="mt-1 text-[16px]">摄像头</span>
         </div>
         <div style="width: 4rem;" class="toolbar_btn" style="display: none;" id="fanzhuan_btn">
-          <svg style="font-size:25px" class="icon text-white" aria-hidden="true">
+          <svg style="font-size:29px" class="icon text-white" aria-hidden="true">
             <use xlink:href="#icon-fanzhuan"></use>
           </svg>
           <span class="mt-1 text-[16px]">翻转</span>
         </div>
         <div style="width: 4rem;" class="toolbar_btn" id="xiaoxi_btn">
           <div class="relative">
-            <svg style="font-size:27px" class="icon text-white " aria-hidden="true">
+            <svg style="font-size:31px" class="icon text-white " aria-hidden="true">
               <use xlink:href="#icon-xiaoxi"></use>
             </svg>
             <div id="xiaoxi_jiaobiao" style="display: none;"
@@ -430,7 +431,7 @@
           <span class="mt-1 text-[16px]">消息</span>
         </div>
         <div style="width: 4rem;" class="toolbar_btn" id="shenqingfayan_btn">
-          <svg style="font-size:23px" class="icon text-white" aria-hidden="true">
+          <svg style="font-size:27px" class="icon text-white" aria-hidden="true">
             <use xlink:href="#icon-shenqingfayan"></use>
           </svg>
           <span class="mt-1 text-[16px]">申请发言</span>

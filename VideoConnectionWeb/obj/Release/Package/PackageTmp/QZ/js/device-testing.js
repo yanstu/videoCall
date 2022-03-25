@@ -180,7 +180,7 @@ async function deviceTestingInit() {
   $(
     "#testing-finish, #device-testing-close-btn, #testing-close-btn, #start-test-btn-tc"
   ).on("click", () => {
-    rtc.resumeStreams();
+    rtc && rtc.resumeStreams();
     finishDeviceTesting();
   });
   // 测试tab页切换

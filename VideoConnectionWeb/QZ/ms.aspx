@@ -30,7 +30,8 @@
   </head>
 
   <body class="w-screen h-screen">
-    <header class="flex flex-row whitespace-nowrap h-[6%] bg-[#262626] w-full justify-between">
+    <header style="box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.07), 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;"
+      class="flex flex-row whitespace-nowrap h-[6%] bg-[#262626] w-full justify-between">
       <div style="width: 15%;" class="flex items-center justify-start">
         <img id="testing_btn" title="设备、网络检测" class="ml-2 mr-2 invert-[100%] h-[50%]" style="width: auto;"
           src="./img/check-mic.png" />

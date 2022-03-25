@@ -168,10 +168,10 @@ class RtcClient {
    * Resumes the local and remote streams
    */
   resumeStreams() {
-    this.localStream_.resume();
-    this.members_.get(ZCRID_).resume();
-    this.members_.get(roomDetail_.SpeakerID).resume();
-    beiyongfangan;
+    this.localStream_ && this.localStream_.resume();
+    this.members_.get(ZCRID_) && this.members_.get(ZCRID_).resume();
+    this.members_.get(roomDetail_.SpeakerID) &&
+      this.members_.get(roomDetail_.SpeakerID).resume();
   }
 
   /**
