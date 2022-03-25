@@ -34,9 +34,6 @@ function showOrHide() {
     }
   }
 
-  // winform打开的视频连线不显示消息按钮
-  window.WSLLZWinFrom && $("#xiaoxi_btn").hide();
-
   // 手机端没有授权摄像头的不能控制摄像头和翻转按钮
   if (!rtc || !rtc.localStream_) {
     $("#video_btn").hide();
@@ -65,6 +62,17 @@ function showOrHide() {
   if (roomDetail_.SpeakerID == oneself_.CHID && rtc.localStream_) {
     !isMicOn && $("#mic_btn").click();
     !isCamOn && $("#video_btn").click();
+  }
+
+  if (window.WSLLZWinFrom) {
+    $("#xiaoxi_btn").hide();
+    $("#shangyiye_btn").hide();
+    $("#xiayiye_btn").hide();
+    $("#quxiaozhujiangren_btn").hide();
+    $("#guanbimaikefeng_btn").hide();
+    $("#shenqingfayan_btn").hide();
+    $("#fayanliebiao_btn").hide();
+    $("#fanzhuan_btn").hide();
   }
 }
 

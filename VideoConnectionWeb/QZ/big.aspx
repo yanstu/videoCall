@@ -20,7 +20,7 @@
     <style>
       #video-grid>div {
         height: 95%;
-        width: 95%;
+        width: 97%;
         box-shadow: 0 2px 5px 0 rgb(0 0 0 / 20%), 0 2px 10px 0 rgb(0 0 0 / 10%);
       }
     </style>
@@ -40,10 +40,10 @@
 
       </div>
       <div class="flex items-center justify-end">
-        <div style="width: 2rem;" class="flex items-center justify-content-center relative h-[43%] mr-4">
+        <div style="width: 2rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
           <img id="network-up" class="h-full" src="./img/network/up/network_4.png">
         </div>
-        <div style="width: 2rem;" class="flex items-center justify-content-center relative h-[43%] mr-4">
+        <div style="width: 2rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
           <img id="network-down" class="h-full" src="./img/network/down/network_4.png">
         </div>
         <div id="exit-btn"
@@ -70,7 +70,7 @@
       </div>
 
       <!-- 群众区 -->
-      <div id="video-grid" style="height: 100%;top: 0;"
+      <div id="video-grid" style="height: 99.2%;top: 0.38%;"
         class="box-border grid w-[20%] h-[92.35%] absolute bottom-[0.35%] right-[0.1%] items-center justify-center z-10">
       </div>
 

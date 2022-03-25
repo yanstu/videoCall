@@ -15,6 +15,11 @@
     <link rel="stylesheet" href="./lib/layui/css/layui.css" />
     <link rel="stylesheet" href="./css/index.css" />
     <link rel="stylesheet" href="./css/common.css" />
+    <style>
+      #video-grid>div {
+        box-shadow: 0 2px 5px 0 rgb(0 0 0 / 20%), 0 2px 10px 0 rgb(0 0 0 / 10%);
+      }
+    </style>
     <script src="./js/onload.js"></script>
     <script src="./js/api.js"></script>
     <script>
