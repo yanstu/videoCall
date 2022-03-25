@@ -322,6 +322,25 @@
   }
 
   // 退出按钮事件
+  $("#roomTitle").on({
+    click: function () {
+      var currentTime = new Date().getTime();
+      // 计算两次相连的点击时间间隔
+      enableVconsole.count =
+        currentTime - enableVconsole.lastTime < enableVconsole.waitTime
+          ? enableVconsole.count + 1
+          : 1;
+      enableVconsole.lastTime = new Date().getTime();
+      clearTimeout(enableVconsole.timer);
+      enableVconsole.timer = setTimeout(function () {
+        clearTimeout(enableVconsole.timer);
+        if (enableVconsole.count > 4) {
+          enableVconsole.vconsole = new window.VConsole();
+        }
+      }, enableVconsole.waitTime + 10);
+    },
+  });
+  // 退出按钮事件
   $("#exit-btn").on({
     click: function () {
       leave();

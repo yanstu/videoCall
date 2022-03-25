@@ -139,6 +139,14 @@ let fanyeHandler = {
 };
 // 是否第一次进入
 let isFrist = true;
+// 启用vconsole
+let enableVconsole = {
+  timer: null,
+  count: 0, // 连续点击次数
+  lastTime: new Date().getTime(), // 上次点击时间
+  waitTime: 200, // 该时间间隔内点击才算连续点击（单位：ms）
+  vconsole: null,
+};
 
 /**
  * 解密获取房间信息
