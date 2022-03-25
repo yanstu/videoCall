@@ -74,4 +74,12 @@
     },
     false
   );
+  //js禁止鼠标右键打开及复制
+  document.oncontextmenu = new Function("event.returnValue=false");
+  document.onselectstart = new Function("event.returnValue=false");
+  document.onselectstart = function () {
+    if (event.button == 2) {
+      return false;
+    }
+  };
 })();
