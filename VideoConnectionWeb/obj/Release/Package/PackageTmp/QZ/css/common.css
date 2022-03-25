@@ -774,3 +774,6 @@ body {
 #__vconsole {
   z-index: 1999 !important;
 }
+.shezhizhujiangren_btn {
+  box-shadow: none;
+}

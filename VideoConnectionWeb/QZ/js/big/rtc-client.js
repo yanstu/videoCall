@@ -216,7 +216,7 @@ class RtcClient {
   startGetAudioLevel() {
     this.client_.on("audio-volume", ({ result }) => {
       result.forEach(({ userId, audioVolume, stream }) => {
-        if (audioVolume >= 10) {
+        if (audioVolume >= 5) {
           $(`#mic_main_${userId}`)
             .find(".volume-level")
             .css("height", `${audioVolume * 4}%`);

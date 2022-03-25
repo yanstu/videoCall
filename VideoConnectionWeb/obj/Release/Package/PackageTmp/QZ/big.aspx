@@ -34,17 +34,18 @@
   <body class="w-screen h-screen">
     <header style="box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.07), 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;"
       class="flex flex-row h-[7%] bg-[#262626] w-full justify-between">
-      <div class="flex items-center justify-start">
+      <div style="width: 7%;" class="flex items-center justify-start">
         <img id="testing_btn" title="设备、网络检测" class="hover:invert-[50%] h-[50%] ml-4" src="./img/check-mic.png" />
       </div>
-      <div id="roomTitle" class="text-[1.8rem] text-white flex items-center justify-center whitespace-nowrap">
 
+      <div id="roomTitle" class="text-[1.8rem] text-white flex items-center justify-center whitespace-nowrap">
       </div>
+      
       <div class="flex items-center justify-end">
-        <div style="width: 2rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
+        <div style="width: 3rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
           <img id="network-up" class="h-full" src="./img/network/up/network_4.png">
         </div>
-        <div style="width: 2rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
+        <div style="width: 3rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
           <img id="network-down" class="h-full" src="./img/network/down/network_4.png">
         </div>
         <div id="exit-btn"

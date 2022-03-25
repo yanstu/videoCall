@@ -39,10 +39,10 @@
       </div>
       <div id="roomTitle" class="text-[1.8rem] text-white flex items-center justify-center whitespace-nowrap"></div>
       <div class="flex items-center justify-end">
-        <div style="width: 2rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
+        <div style="width: 3rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
           <img id="network-up" class="h-full" src="./img/network/up/network_4.png" />
         </div>
-        <div style="width: 2rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
+        <div style="width: 3rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
           <img id="network-down" class="h-full" src="./img/network/down/network_4.png" />
         </div>
         <div id="exit-btn"

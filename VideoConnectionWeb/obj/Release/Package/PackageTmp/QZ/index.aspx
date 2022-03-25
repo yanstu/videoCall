@@ -36,7 +36,7 @@
   <body class="w-screen h-screen">
     <header style="box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.07), 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;"
       class="flex flex-row h-[7%] bg-[#262626] w-full justify-between">
-      <div style="width: 5%;" class="flex items-center justify-start">
+      <div style="width: 7%;" class="flex items-center justify-start">
         <img style="height: 60%;" id="mean_btn" title="显示/隐藏菜单" class="ml-4 mr-4 invert-[100%]"
           src="./img/sf_ic_menu.png" />
         <img id="testing_btn" title="设备、网络检测" class="invert-[100%] h-[50%]" src="./img/check-mic.png" />
@@ -46,13 +46,13 @@
       </div>
 
       <div class="flex items-center justify-end">
-        <div style="width: 2rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
+        <div style="width: 3rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
           <img id="network-up" class="h-full" src="./img/network/up/network_4.png">
         </div>
-        <div style="width: 2rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
+        <div style="width: 3rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
           <img id="network-down" class="h-full" src="./img/network/down/network_4.png">
         </div>
-        <div style="width: 2rem;height: 64%;" class="flex items-center justify-content-center relative mr-4">
+        <div style="width: 3rem;height: 64%;" class="flex items-center justify-content-center relative mr-4">
           <img id="qiehuanshitu_btn" title="切换布局模式" class="h-full" src="./img/shitu.png">
         </div>
         <div id="exit-btn"

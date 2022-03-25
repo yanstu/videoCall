@@ -92,6 +92,7 @@ class RtcClient {
   async publish() {
     if (this.isPublished_) return;
     try {
+      this.shezhifenbianlv();
       await this.client_.publish(this.localStream_);
       this.playVideo(this.localStream_, oneself_.CHID);
     } catch (error) {
@@ -343,7 +344,7 @@ class RtcClient {
   startGetAudioLevel() {
     this.client_.on("audio-volume", ({ result }) => {
       result.forEach(({ userId, audioVolume, stream }) => {
-        if (audioVolume >= 10) {
+        if (audioVolume >= 5) {
           $(`#mic_main_${userId}`)
             .find(".volume-level")
             .css("height", `${audioVolume * 4}%`);
@@ -354,16 +355,7 @@ class RtcClient {
         if (audioVolume >= 5) {
           $(`#mic_drag`)
             .find(".nickname")
-            .html(
-              (roomDetail_.SpeakerID
-                ? getUserInfo(roomDetail_.SpeakerID).UserName
-                : getUserInfo(userId).UserName) + " 正在讲话"
-            );
-        } else {
-          roomDetail_.SpeakerID &&
-            $(`#mic_drag`)
-              .find(".nickname")
-              .html(getUserInfo(roomDetail_.SpeakerID).UserName + " 正在讲话");
+            .html(getUserInfo(userId).UserName + " 正在讲话");
         }
       });
     });
@@ -410,76 +402,77 @@ class RtcClient {
         .attr("title", "上行速度：" + title[event.uplinkNetworkQuality]);
 
       isDisconnect = event.uplinkNetworkQuality == 6;
-      if (event.uplinkNetworkQuality == 4 || event.uplinkNetworkQuality == 5) {
-        // layer.msg("当前网络极差，请注意保持良好的网络连接", { icon: 5 });
-      }
 
-      // 如果网络极差，不管是不是主讲人也将分辨率调到极低
-      if (event.uplinkNetworkQuality >= 4) {
+      this.shezhifenbianlv(event.uplinkNetworkQuality);
+    });
+  }
+
+  shezhifenbianlv(uplinkNetworkQuality = 2) {
+    // 如果网络极差，不管是不是主讲人也将分辨率调到极低
+    if (uplinkNetworkQuality >= 4) {
+      this.localStream_.setVideoProfile({
+        width: 256, // 视频宽度
+        height: 144, // 视频高度
+        frameRate: 10, // 帧率
+        bitrate: 200, // 比特率 kbps
+      });
+    } else {
+      if (!roomDetail_.SpeakerID) {
         this.localStream_.setVideoProfile({
-          width: 256, // 视频宽度
-          height: 144, // 视频高度
-          frameRate: 10, // 帧率
-          bitrate: 200, // 比特率 kbps
+          width: 640, // 视频宽度
+          height: 360, // 视频高度
+          frameRate: 15, // 帧率
+          bitrate: 550, // 比特率 kbps
+        });
+      } else if (roomDetail_.SpeakerID == oneself_.CHID) {
+        this.localStream_.setVideoProfile({
+          width: 1280, // 视频宽度
+          height: 720, // 视频高度
+          frameRate: 15, // 帧率
+          bitrate: 1250, // 比特率 kbps
         });
       } else {
-        if (!roomDetail_.SpeakerID) {
-          this.localStream_.setVideoProfile({
+        var renshu = [9, 6, 4, 2, 0];
+        var fenbianlv = [
+          {
+            width: 256, // 视频宽度
+            height: 144, // 视频高度
+            frameRate: 10, // 帧率
+            bitrate: 250, // 比特率 kbps
+          },
+          {
+            width: 320, // 视频宽度
+            height: 180, // 视频高度
+            frameRate: 15, // 帧率
+            bitrate: 300, // 比特率 kbps
+          },
+          {
             width: 640, // 视频宽度
             height: 360, // 视频高度
             frameRate: 15, // 帧率
             bitrate: 550, // 比特率 kbps
-          });
-        } else if (roomDetail_.SpeakerID == oneself_.CHID) {
-          this.localStream_.setVideoProfile({
+          },
+          {
+            width: 960, // 视频宽度
+            height: 540, // 视频高度
+            frameRate: 15, // 帧率
+            bitrate: 900, // 比特率 kbps
+          },
+          {
             width: 1280, // 视频宽度
             height: 720, // 视频高度
             frameRate: 15, // 帧率
             bitrate: 1250, // 比特率 kbps
-          });
-        } else {
-          var renshu = [9, 6, 4, 2, 0];
-          var fenbianlv = [
-            {
-              width: 256, // 视频宽度
-              height: 144, // 视频高度
-              frameRate: 10, // 帧率
-              bitrate: 250, // 比特率 kbps
-            },
-            {
-              width: 320, // 视频宽度
-              height: 180, // 视频高度
-              frameRate: 15, // 帧率
-              bitrate: 300, // 比特率 kbps
-            },
-            {
-              width: 640, // 视频宽度
-              height: 360, // 视频高度
-              frameRate: 15, // 帧率
-              bitrate: 550, // 比特率 kbps
-            },
-            {
-              width: 960, // 视频宽度
-              height: 540, // 视频高度
-              frameRate: 15, // 帧率
-              bitrate: 900, // 比特率 kbps
-            },
-            {
-              width: 1280, // 视频宽度
-              height: 720, // 视频高度
-              frameRate: 15, // 帧率
-              bitrate: 1250, // 比特率 kbps
-            },
-          ];
-          for (var i = 0; i < renshu.length; i++) {
-            if (roomDetail_.UserList.length >= renshu[i]) {
-              this.localStream_.setVideoProfile(fenbianlv[i]);
-              break;
-            }
+          },
+        ];
+        for (var i = 0; i < renshu.length; i++) {
+          if (roomDetail_.UserList.length >= renshu[i]) {
+            this.localStream_.setVideoProfile(fenbianlv[i]);
+            break;
           }
         }
       }
-    });
+    }
   }
 
   fbl() {
