@@ -426,7 +426,7 @@
             发向管理员
           </div>
           <input id="xiaoxineirong" class="mr-3 h-[50%] pl-2 pr-2 flex-[1.1]" maxlength="200" />
-          <div id="fasongxiaoxi"
+          <div id="fasongxiaoxi" style="height: 60%;"
             class="min-w-[15%] anniubeijing h-[50%] mr-2 flex-1 flex justify-center items-center text-white">
             发送</div>
         </div>

@@ -595,7 +595,7 @@ async function zhanshiduan_mode(state) {
 // 修改标题字体大小
 function changeTitleFontSize() {
   if (getOsType() == "desktop") {
-    var defualtSize = "1.8";
+    var defualtSize = "1.9";
     $("#roomTitle").css("font-size", defualtSize + "rem");
     while ($("#roomTitle").width() / $("body").width() >= 0.82) {
       defualtSize = defualtSize - 0.05;

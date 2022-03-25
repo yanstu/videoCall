@@ -310,15 +310,16 @@
               2022-02-27 09:18:12
             </div>
             <div class="message_info h-[70%] flex flex-row w-full justify-end items-center">
-              <div
-                class="message_neirong text-white text-[0.875rem] mt-1 ml-2 mr-2 mb-1 bg-[#2d3549] pl-2 pr-2 min-h-[5.7rem] w-[80%]">
+              <div style="min-height: 4.6rem;padding: 0.5rem;"
+                class="message_neirong text-white text-[0.875rem] mt-1 ml-2 mr-2 mb-1 bg-[#2d3549] w-[80%]">
                 这个是内这个是内这个是内内这个
               </div>
               <div class="message_touxiang bg-[#2d3549] flex items-center justify-center w-[20%] flex-col h-full">
                 <svg class="icon text-[4.5rem] text-white" aria-hidden="true">
                   <use xlink:href="#icon-touxiang"></use>
                 </svg>
-                <div class="message_xingming h-[27%] mb-[3%] w-auto text-white overflow-auto text-[0.675rem]">
+                <div style="width: 100%;text-align: center;"
+                  class="message_xingming h-[27%] mb-[3%] text-white text-center overflow-auto text-[0.675rem] overflow-hidden text-ellipsis whitespace-nowrap">
                   贵州省人大
                 </div>
               </div>
@@ -326,12 +327,12 @@
           </div>
         </div>
         <div class="h-[7%] flex w-full justify-between items-center bg-[#262626] text-[0.875rem]">
-          <div id="fasong_tip"
+          <div id="fasong_tip" style="font-size: 12px;"
             class="mr-2 ml-2 min-w-[15%] text-white flex-1 flex justify-center items-center whitespace-nowrap overflow-hidden text-ellipsis">
             发向管理员
           </div>
           <input id="xiaoxineirong" class="mr-3 h-[50%] pl-2 pr-2 flex-[1.1]" maxlength="200" />
-          <div id="fasongxiaoxi"
+          <div id="fasongxiaoxi" style="height: 60%;"
             class="min-w-[15%] anniubeijing h-[50%] mr-2 flex-1 flex justify-center items-center text-white">
             发送</div>
         </div>
