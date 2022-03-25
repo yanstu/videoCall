@@ -165,7 +165,8 @@
       ? $("#fasong_tip").html("发向所有人")
       : $("#fasong_tip").html("发向管理员");
     $("#xiaoxiliebiao").toggle();
-    $("#xiaoxi_jiaobiao").hide();
+    $("#xiaoxi_jiaobiao").fadeOut();
+    $(".gundongxiaoxi").fadeOut();
     if ($("#xiaoxiliebiao").css("display") == "none") {
       fasonggeishei = "";
       $("#xiaoxiliebiao").find(".modalbox-title").html("消息列表");

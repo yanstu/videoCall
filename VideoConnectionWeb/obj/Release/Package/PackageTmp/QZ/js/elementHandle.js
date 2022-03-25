@@ -147,9 +147,17 @@ function addMessage(fasongren, jieshouren, neirong) {
       .removeClass("justify-end")
       .addClass("justify-start");
   }
-  message.show();
+  message.fadeIn();
   $("#messageList").scrollTop(99999999);
-  $("#xiaoxiliebiao").css("display") == "none" && $("#xiaoxi_jiaobiao").show();
+  if ($("#xiaoxiliebiao").css("display") == "none") {
+    $("#xiaoxi_jiaobiao").fadeIn();
+    $("#tipsContent").html("您有一条新消息：" + neirong);
+    $(".gundongxiaoxi").fadeIn();
+    document.getElementById("tipsContent").start();
+    setTimeout(() => {
+      $(".gundongxiaoxi").fadeOut();
+    }, 5 * 1000);
+  }
 }
 
 // 其他地方会复用 所以独立出来
@@ -281,7 +289,7 @@ function audioHandle(on, userId) {
 function videoHandle(on, userId) {
   if (on && deviceType == DEVICE_TYPE_ENUM.MOBILE_IOS) {
     var stream = rtc.members_.get(userId);
-    stream.resume();
+    stream && stream.resume();
   }
 
   var zjr =
@@ -309,9 +317,7 @@ function videoHandle(on, userId) {
       ) {
         videoImgTimer && clearInterval(videoImgTimer);
         var stream =
-          userId == oneself_.CHID
-            ? rtc.localStream_
-            : rtc.members_.get(userId);
+          userId == oneself_.CHID ? rtc.localStream_ : rtc.members_.get(userId);
         $("#mask_" + userId).hide();
         var img = "";
         function getImg() {

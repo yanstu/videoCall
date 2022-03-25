@@ -166,11 +166,10 @@ startChathub();
 function startChathub() {
   chatHub.start().then(function () {
     var RoomId = queryParams("RoomId");
-    chatHub.invoke("createRedis", RoomId).catch(function (err) {
-      return console.error(err.toString());
-    });
+    chatHub.invoke("createRedis", RoomId)
     huoquchangkuanbi();
     huoquhuiyihuancun();
+    huoquzhujiangren();
     xintiaolianjie();
   });
 }
@@ -427,4 +426,22 @@ function fanye(no) {
     Content: "",
     Data: { State: no + 1 },
   });
+}
+
+function huoquzhujiangren() {
+  var RoomId = queryParams("RoomId");
+  getZJRTimer = setInterval(() => {
+    $.post(
+      "/Handler/RedisHandler.ashx",
+      { Infotype: "GetInfo", RoomId },
+      (res) => {
+        if (localStorage.getItem("ZJRID") != res) {
+          localStorage.setItem("ZJRID", res);
+          roomDetail_.SpeakerID = res;
+          roomDetail_.SpeakerName = getUserInfo(res).UserName;
+          changeViews();
+        }
+      }
+    );
+  }, 2000);
 }

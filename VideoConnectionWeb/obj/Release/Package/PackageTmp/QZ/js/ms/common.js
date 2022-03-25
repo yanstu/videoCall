@@ -70,7 +70,7 @@ async function addView() {
               video: isbofang,
             })
             .then(() => {
-              gengxinzhuangtai();
+              // gengxinzhuangtai();
             });
           setTimeout(() => {
             videoHandle(isbofang, ID);
