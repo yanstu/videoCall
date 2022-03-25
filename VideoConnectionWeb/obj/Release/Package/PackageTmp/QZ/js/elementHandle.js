@@ -324,7 +324,7 @@ function videoHandle(on, userId) {
       on ? $("#mask_" + userId).hide() : $("#mask_" + userId).show();
     }
     if (on) {
-      /*if (
+      if (
         location.href.toLowerCase().indexOf("index") > -1 ||
         location.href.toLowerCase().indexOf("big") > -1
       ) {
@@ -355,10 +355,10 @@ function videoHandle(on, userId) {
           $("#img_" + userId)
             .attr("src", stream.getVideoFrame())
             .show();
-        }, 30 * 1000);
+        }, 20 * 1000);
       } else {
         $("#mask_" + userId).hide();
-      }*/
+      }
     } else {
       videoImgTimer && clearInterval(videoImgTimer);
       $("#img_" + userId).hide();
