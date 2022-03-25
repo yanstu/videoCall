@@ -58,7 +58,8 @@ class RtcClient {
       // 初始化本地流
       await this.localStream_.initialize();
     } catch (error) {
-      console.error("无法初始化共享流 - ", error);
+      console.error("无法初始化本地流 - ", error);
+      videoHandle(false, oneself_.CHID);
     }
 
     try {
@@ -263,7 +264,11 @@ class RtcClient {
       const { userId } = evt;
       this.members_.set(userId, null);
       onlineOrOfline(true, userId);
-      console.log(getUserInfo(userId) ? getUserInfo(userId).UserName : 'null' + " 加入了房间");
+      console.log(
+        getUserInfo(userId)
+          ? getUserInfo(userId).UserName
+          : "null" + " 加入了房间"
+      );
     });
 
     // 当远程连接端离开房间时触发

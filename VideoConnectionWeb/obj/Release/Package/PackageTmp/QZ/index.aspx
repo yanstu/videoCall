@@ -20,7 +20,8 @@
     <style>
       #video-grid>div {
         height: 95%;
-        width: 95%;
+        width: 97%;
+        box-shadow: 0 2px 5px 0 rgb(0 0 0 / 20%), 0 2px 10px 0 rgb(0 0 0 / 10%);
       }
     </style>
     <script src="./js/onload.js"></script>
@@ -35,7 +36,7 @@
   <body class="w-screen h-screen">
     <header class="flex flex-row h-[7%] bg-[#262626] w-full justify-between">
       <div class="flex items-center justify-start">
-        <img id="mean_btn" title="显示/隐藏菜单" class="ml-4 mr-4 invert-[100%] h-[50%]" src="./img/sf_ic_menu.png" />
+        <img style="height: 60%;" id="mean_btn" title="显示/隐藏菜单" class="ml-4 mr-4 invert-[100%]" src="./img/sf_ic_menu.png" />
         <img id="testing_btn" title="设备、网络检测" class="invert-[100%] h-[50%]" src="./img/check-mic.png" />
       </div>
 
@@ -43,13 +44,13 @@
       </div>
 
       <div class="flex items-center justify-end">
-        <div style="width: 2rem;" class="flex items-center justify-content-center relative h-[43%] mr-4">
+        <div style="width: 2rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
           <img id="network-up" class="h-full" src="./img/network/up/network_4.png">
         </div>
-        <div style="width: 2rem;" class="flex items-center justify-content-center relative h-[43%] mr-4">
+        <div style="width: 2rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
           <img id="network-down" class="h-full" src="./img/network/down/network_4.png">
         </div>
-        <div style="width: 2rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
+        <div style="width: 2rem;height: 64%;" class="flex items-center justify-content-center relative mr-4">
           <img id="qiehuanshitu_btn" title="切换布局模式" class="h-full" src="./img/shitu.png">
         </div>
         <div id="exit-btn"
@@ -76,7 +77,7 @@
       </div>
 
       <!-- 群众区 -->
-      <div id="video-grid" style="height: 100%;top: 0;"
+      <div id="video-grid" style="height: 99.2%;top: 0.38%;"
         class="box-border grid w-[20%] absolute right-[0.1%] items-center justify-center z-10">
       </div>
 
@@ -534,9 +535,9 @@
     <script src="./js/util.js"></script>
     <script src="./js/device-testing.js"></script>
     <script src="./js/rtc-detection.js"></script>
-    <script src="./js/common-public.js"></script>
-    <script src="./js/pc/common.js"></script>
-    <script src="./js/pc/rtc-client.js"></script>
+    <script src="./js/common-public.js?t=202203251114"></script>
+    <script src="./js/pc/common.js?t=202203251114"></script>
+    <script src="./js/pc/rtc-client.js?t=202203251114"></script>
     <script>
       if (queryParams("p") && queryParams("RoomId")) {
         login(queryParams("p"));
@@ -547,13 +548,13 @@
       }
     </script>
     <script defer src="./lib/jquery/signalr.min.js"></script>
-    <script defer src="./js/pc/chatHub.js"></script>
+    <script defer src="./js/pc/chatHub.js?t=202203251114"></script>
     <script async src="./lib/layui/layui.js"></script>
     <script defer src="./lib/trtc/lib-generate-test-usersig.min.js"></script>
     <script defer src="./lib/trtc/GenerateTestUserSig.js"></script>
-    <script defer src="./js/template.js"></script>
-    <script defer src="./js/elementHandle.js"></script>
-    <script defer src="./js/elementEvent.js"></script>
+    <script defer src="./js/template.js?t=202203251114"></script>
+    <script defer src="./js/elementHandle.js?t=202203251114"></script>
+    <script defer src="./js/elementEvent.js?t=202203251114"></script>
     <script defer src="./js/iconfont.js"></script>
     <script defer src="./js/prohibit.js"></script>
   </body>

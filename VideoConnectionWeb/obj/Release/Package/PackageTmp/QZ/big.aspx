@@ -20,7 +20,8 @@
     <style>
       #video-grid>div {
         height: 95%;
-        width: 95%;
+        width: 97%;
+        box-shadow: 0 2px 5px 0 rgb(0 0 0 / 20%), 0 2px 10px 0 rgb(0 0 0 / 10%);
       }
     </style>
     <script>
@@ -39,10 +40,10 @@
 
       </div>
       <div class="flex items-center justify-end">
-        <div style="width: 2rem;" class="flex items-center justify-content-center relative h-[43%] mr-4">
+        <div style="width: 2rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
           <img id="network-up" class="h-full" src="./img/network/up/network_4.png">
         </div>
-        <div style="width: 2rem;" class="flex items-center justify-content-center relative h-[43%] mr-4">
+        <div style="width: 2rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
           <img id="network-down" class="h-full" src="./img/network/down/network_4.png">
         </div>
         <div id="exit-btn"
@@ -69,7 +70,7 @@
       </div>
 
       <!-- 群众区 -->
-      <div id="video-grid" style="height: 100%;top: 0;"
+      <div id="video-grid" style="height: 99.2%;top: 0.38%;"
         class="box-border grid w-[20%] h-[92.35%] absolute bottom-[0.35%] right-[0.1%] items-center justify-center z-10">
       </div>
 
@@ -339,9 +340,9 @@
     <script src="./js/util.js"></script>
     <script src="./js/device-testing.js"></script>
     <script src="./js/rtc-detection.js"></script>
-    <script src="./js/common-public.js"></script>
-    <script src="./js/big/common.js"></script>
-    <script src="./js/big/rtc-client.js"></script>
+    <script src="./js/common-public.js?t=202203251114"></script>
+    <script src="./js/big/common.js?t=202203251114"></script>
+    <script src="./js/big/rtc-client.js?t=202203251114"></script>
     <script>
       if (queryParams("p") && queryParams("RoomId")) {
         login(queryParams("p"));
@@ -352,13 +353,13 @@
       }
     </script>
     <script defer src="./lib/jquery/signalr.min.js"></script>
-    <script defer src="./js/big/chatHub.js"></script>
+    <script defer src="./js/big/chatHub.js?t=202203251114"></script>
     <script defer src="./lib/layui/layui.js"></script>
     <script defer src="./lib/trtc/lib-generate-test-usersig.min.js"></script>
     <script defer src="./lib/trtc/GenerateTestUserSig.js"></script>
-    <script defer src="./js/template.js"></script>
-    <script defer src="./js/elementHandle.js"></script>
-    <script defer src="./js/elementEvent.js"></script>
+    <script defer src="./js/template.js?t=202203251114"></script>
+    <script defer src="./js/elementHandle.js?t=202203251114"></script>
+    <script defer src="./js/elementEvent.js?t=202203251114"></script>
     <script defer src="./js/iconfont.js"></script>
     <script defer src="./js/prohibit.js"></script>
   </body>
