@@ -52,11 +52,14 @@ async function changeViews() {
 
   function rePlay(stream, ID) {
     $("#img_" + ID).hide();
-    stream.stop();
-    if (hasMe(ID)) {
-      stream && stream.play("box_" + ID, { objectFit: "cover", mirror: false });
-      // 如果远程流不存在，不在线，显示遮罩
-      stream ? $("#mask_" + ID).hide() : $("#mask_" + ID).show();
+    if (stream) {
+      stream.stop();
+      if (hasMe(ID)) {
+        stream.play("box_" + ID, { objectFit: "cover", mirror: false });
+        $("#mask_" + ID).hide();
+      }
+    } else {
+      $("#mask_" + ID).show();
     }
   }
   // 获取将要成为主讲人的那个远程流

@@ -39,7 +39,7 @@ async function change() {
     zcr_streams && zcr_streams.stop();
     addVideoView(ZCRID_, getUserInfo(ZCRID_).UserName);
     $("#box_" + ZCRID_).attr("class", "w-[9rem] h-full video-box relative");
-    rtc.client_.subscribe(zcr_streams);
+    await rtc.client_.subscribe(zcr_streams);
     zcr_streams && zcr_streams.play("box_" + ZCRID_, { mirror: false });
   } else {
     if (ZJRID_ == oneself_.CHID) {
@@ -64,7 +64,7 @@ async function change() {
   );
 
   if (newZJRID != oneself_.CHID) {
-    rtc.client_.subscribe(new_streams);
+    await rtc.client_.subscribe(new_streams);
   } else {
     // 将新主讲人播放到主讲人容器
     new_streams.play("zjr_video", { mirror: false });
