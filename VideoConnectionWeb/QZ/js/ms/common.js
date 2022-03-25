@@ -70,7 +70,10 @@ async function addView() {
               video: isbofang,
             })
             .then(() => {
-              // gengxinzhuangtai();
+              $(`#video_${ID} > img`).attr(
+                "src",
+                `./img/video-${isbofang ? "on" : "off"}.png`
+              );
             });
           setTimeout(() => {
             videoHandle(isbofang, ID);

@@ -435,10 +435,10 @@
     <script src="./lib/jquery/jquery-3.2.1.min.js"></script>
     <script src="./lib/trtc/trtc.js"></script>
     <script src="./js/util.js"></script>
-    <script src="./js/common-public.js"></script>
-    <script src="./js/mobile/common.js"></script>
+    <script src="./js/common-public.js?t=202203251114"></script>
+    <script src="./js/mobile/common.js?t=202203251114"></script>
     <script src="./js/rtc-detection.js"></script>
-    <script src="./js/mobile/rtc-client.js"></script>
+    <script src="./js/mobile/rtc-client.js?t=202203251114"></script>
     <script src="./js/device-testing.js"></script>
     <script>
       if (queryParams("p") && queryParams("RoomId")) {
@@ -449,13 +449,13 @@
       }
     </script>
     <script defer src="./lib/jquery/signalr.min.js"></script>
-    <script defer src="./js/mobile/chatHub.js"></script>
+    <script defer src="./js/mobile/chatHub.js?t=202203251114"></script>
     <script defer src="./lib/layui/layui.js"></script>
     <script defer src="./lib/trtc/lib-generate-test-usersig.min.js"></script>
     <script defer src="./lib/trtc/GenerateTestUserSig.js"></script>
-    <script defer src="./js/template.js"></script>
-    <script defer src="./js/elementHandle.js"></script>
-    <script defer src="./js/elementEvent.js"></script>
+    <script defer src="./js/template.js?t=202203251114"></script>
+    <script defer src="./js/elementHandle.js?t=202203251114"></script>
+    <script defer src="./js/elementEvent.js?t=202203251114"></script>
     <script defer src="./js/iconfont.js"></script>
     <script defer src="./js/prohibit.js"></script>
     <script defer src="./js/noHorizontal.js"></script>

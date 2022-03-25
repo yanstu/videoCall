@@ -202,10 +202,12 @@ class RtcClient {
 
   // 将用户播放到指定div容器
   async playVideo(stream, userId) {
+    var zjr = roomDetail_.SpeakerID || oneself_.CHID;
     onlineOrOfline(true, userId);
     var videoVid = "box_" + userId;
-    if (ZJRID_ == userId) videoVid = "zjr_video";
+    if (zjr == userId) videoVid = "zjr_video";
     await stream.stop();
+    console.log(videoVid);
     await stream.play(videoVid, {
       objectFit: "cover",
       mirror: false,
@@ -252,7 +254,11 @@ class RtcClient {
       const { userId } = evt;
       this.members_.set(userId, null);
       onlineOrOfline(true, userId);
-      console.log(getUserInfo(userId) ? getUserInfo(userId).UserName : 'null' + " 加入了房间");
+      console.log(
+        getUserInfo(userId)
+          ? getUserInfo(userId).UserName
+          : "null" + " 加入了房间"
+      );
     });
 
     // 当远程连接端离开房间时触发
@@ -269,10 +275,7 @@ class RtcClient {
       const userId = remoteStream.getUserId();
       this.members_.set(userId, remoteStream);
       console.log(`${getUserInfo(userId).UserName} 推送远程流`);
-      if (userId != roomDetail_.SpeakerID) {
-        if (userId == ZCRID_ && !roomDetail_.SpeakerID) {
-          this.client_.subscribe(remoteStream);
-        }
+      if (userId != roomDetail_.SpeakerID && userId != ZCRID_) {
         return;
       }
       this.client_.subscribe(remoteStream);
@@ -284,9 +287,7 @@ class RtcClient {
       const userId = remoteStream.getUserId();
       this.remoteStreams_.push(remoteStream);
 
-      if (userId == roomDetail_.SpeakerID) {
-        this.playVideo(remoteStream, userId);
-      } else if (!roomDetail_.SpeakerID && userId == ZCRID_) {
+      if (userId == roomDetail_.SpeakerID || userId == ZCRID_) {
         this.playVideo(remoteStream, userId);
       }
 

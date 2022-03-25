@@ -377,8 +377,10 @@ function huoquzhujiangren() {
         if (localStorage.getItem("ZJRID") != res) {
           localStorage.setItem("ZJRID", res);
           roomDetail_.SpeakerID = res;
-          roomDetail_.SpeakerName = getUserInfo(res).UserName;
-          viewsHandle();
+          roomDetail_.SpeakerName = getUserInfo(res)
+            ? getUserInfo(res).UserName
+            : "";
+          // viewsHandle();
         }
       }
     );

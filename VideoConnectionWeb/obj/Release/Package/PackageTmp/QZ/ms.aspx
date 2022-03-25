@@ -385,33 +385,33 @@
     </section>
     <footer style="height: 9%;"
       class="w-full shadow-md flex bg-[#262626] text-white items-center justify-center z-50 mx-auto">
-      <div style="height: 100%;width:2rem" class="toolbar_btn" id="mic_btn">
-        <svg style="font-size:25px" class="icon text-white" aria-hidden="true">
+      <div style="height: 100%;" class="toolbar_btn" id="mic_btn">
+        <svg style="font-size:26px" class="icon text-white" aria-hidden="true">
           <use xlink:href="#icon-maikefeng"></use>
         </svg>
         <span class="mt-1 text-[14px]">静音</span>
       </div>
-      <div style="height: 100%;width:2rem" class="toolbar_btn" id="video_btn">
-        <svg style="font-size:25px" class="icon text-white" aria-hidden="true">
+      <div style="height: 100%;" class="toolbar_btn" id="video_btn">
+        <svg style="font-size:26px" class="icon text-white" aria-hidden="true">
           <use xlink:href="#icon-xiangji"></use>
         </svg>
         <span class="mt-1 text-[14px]">摄像头</span>
       </div>
-      <div style="height: 100%;width:2rem" class="toolbar_btn" style="display: none" id="fanzhuan_btn">
+      <div style="height: 100%;" class="toolbar_btn" id="fanzhuan_btn">
         <svg style="font-size:25px" class="icon text-white" aria-hidden="true">
           <use xlink:href="#icon-fanzhuan"></use>
         </svg>
         <span class="mt-1 text-[14px]">翻转</span>
       </div>
-      <div style="height: 100%;width:2rem" class="toolbar_btn" id="shenqingfayan_btn">
-        <svg style="font-size:25px" class="icon text-white" aria-hidden="true">
+      <div style="height: 100%;" class="toolbar_btn" id="shenqingfayan_btn">
+        <svg style="font-size:23px" class="icon text-white" aria-hidden="true">
           <use xlink:href="#icon-shenqingfayan"></use>
         </svg>
         <span class="mt-1 text-[14px]">申请发言</span>
       </div>
-      <div style="height: 100%;width:2rem" class="toolbar_btn" id="xiaoxi_btn">
+      <div style="height: 100%;" class="toolbar_btn" id="xiaoxi_btn">
         <div class="relative">
-          <svg class="icon text-[1.7rem] text-white " aria-hidden="true">
+          <svg style="font-size:27px" class="icon text-white " aria-hidden="true">
             <use xlink:href="#icon-xiaoxi"></use>
           </svg>
           <div id="xiaoxi_jiaobiao" style="display: none;"
@@ -419,13 +419,13 @@
         </div>
         <span class="mt-1 text-[14px]">消息</span>
       </div>
-      <div style="height: 100%;width:2rem" class="toolbar_btn" id="shangyiye_ms_btn">
+      <div style="height: 100%;" class="toolbar_btn" id="shangyiye_ms_btn">
         <svg style="font-size:25px" class="icon text-white" aria-hidden="true">
           <use xlink:href="#icon-shangyiye"></use>
         </svg>
         <span class="mt-1 text-[14px]">上页</span>
       </div>
-      <div style="height: 100%;width:2rem" class="toolbar_btn" id="xiayiye_ms_btn">
+      <div style="height: 100%;" class="toolbar_btn" id="xiayiye_ms_btn">
         <svg style="font-size:25px" class="icon text-white" aria-hidden="true">
           <use xlink:href="#icon-xiayiye"></use>
         </svg>
