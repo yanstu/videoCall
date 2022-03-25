@@ -12,7 +12,8 @@ function showOrHide() {
   }
 
   // 非安卓端不需要显示翻转相机按钮
-  deviceType == DEVICE_TYPE_ENUM.MOBILE_ANDROID && $("#fanzhuan_btn").show();
+  deviceType == DEVICE_TYPE_ENUM.MOBILE_ANDROID &&
+    $("#fanzhuan_btn").css("display", "flex");
 
   // 如果是主持人的话主持人相关权限按钮显示
   if (oneself_.IsZCR) {
@@ -274,7 +275,9 @@ function resetViews() {
 // 麦克风开关状态控制
 function audioHandle(on, userId) {
   console.log(
-    `${getUserInfo(userId).UserName} ${on ? "打开" : "关闭"}了麦克风`
+    `${getUserInfo(userId) ? getUserInfo(userId).UserName : "null"} ${
+      on ? "打开" : "关闭"
+    }了麦克风`
   );
   $("#member_" + userId)
     .find(".member-audio-btn")
@@ -296,7 +299,9 @@ function videoHandle(on, userId) {
     roomDetail_.SpeakerID ||
     (location.href.toLowerCase().includes("big.aspx") ? ZCRID_ : oneself_.CHID);
   console.log(
-    `${getUserInfo(userId).UserName} ${on ? "打开" : "关闭"}了摄像头`
+    `${getUserInfo(userId) ? getUserInfo(userId).UserName : "null"} ${
+      on ? "打开" : "关闭"
+    }了摄像头`
   );
   $("#member_" + userId)
     .find(".member-video_btn")
