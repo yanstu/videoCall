@@ -59,7 +59,8 @@ class RtcClient {
       await this.publish();
       onlineOrOfline(true, oneself_.CHID);
     } catch (error) {
-      console.error("无法初始化共享流或推送本地流失败 - ", error);
+      console.error("无法初始化本地流或推送失败 - ", error);
+      videoHandle(false, oneself_.CHID);
     }
 
     // 权限判断按钮显示或隐藏
@@ -222,7 +223,11 @@ class RtcClient {
       const { userId } = evt;
       this.members_.set(userId, null);
       onlineOrOfline(true, userId);
-      console.log(getUserInfo(userId) ? getUserInfo(userId).UserName : 'null' + " 加入了房间");
+      console.log(
+        getUserInfo(userId)
+          ? getUserInfo(userId).UserName
+          : "null" + " 加入了房间"
+      );
     });
 
     // 当远程连接端离开房间时触发

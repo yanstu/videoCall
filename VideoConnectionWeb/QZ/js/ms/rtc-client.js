@@ -59,7 +59,8 @@ class RtcClient {
       // 初始化本地流
       await this.localStream_.initialize();
     } catch (error) {
-      console.error("无法初始化共享流 - ", error);
+      console.error("无法初始化本地流 - ", error);
+      videoHandle(false, oneself_.CHID);
     }
 
     try {
