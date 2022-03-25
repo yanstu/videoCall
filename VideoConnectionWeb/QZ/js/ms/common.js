@@ -75,8 +75,13 @@ async function addView() {
                 `./img/video-${isbofang ? "on" : "off"}.png`
               );
             });
-          setTimeout(() => {
-            videoHandle(isbofang, ID);
+          setTimeout(async () => {
+            let video = await rtc.client_.getRemoteVideoStats("main");
+            Object.getOwnPropertyNames(video).forEach(function (key) {
+              if (key == ID) {
+                videoHandle(isbofang && video[key].bytesReceived != 0, ID);
+              }
+            });
           }, 100);
         } else {
           layer.msg("用户不在线，无法控制");

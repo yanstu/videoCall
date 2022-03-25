@@ -34,7 +34,8 @@
   </head>
 
   <body class="w-screen h-screen">
-    <header class="flex flex-row whitespace-nowrap h-[7%] bg-[#262626] w-full justify-between">
+    <header style="box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.07), 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;"
+      class="flex flex-row whitespace-nowrap h-[7%] bg-[#262626] w-full justify-between">
       <div style="width: 15%;" class="flex items-center justify-start">
         <img id="testing_btn" title="设备、网络检测" class="ml-2 mr-2 invert-[100%] h-[50%]" style="width: auto;"
           src="./img/check-mic.png" />
@@ -437,17 +438,13 @@
         </div>
       </div>
     </footer>
-    <!-- <script src="https://cdn.staticfile.org/vConsole/3.5.1/vconsole.min.js"></script>
-    <script>
-      window.myVConsole = new window.VConsole();
-    </script> -->
     <script src="./lib/jquery/jquery-3.2.1.min.js"></script>
     <script src="./lib/trtc/trtc.js"></script>
     <script src="./js/util.js"></script>
-    <script src="./js/common-public.js?t=202203251114"></script>
-    <script src="./js/mobile/common.js?t=202203251114"></script>
+    <script src="./js/common-public.js?t=202203251115"></script>
+    <script src="./js/mobile/common.js?t=202203251115"></script>
     <script src="./js/rtc-detection.js"></script>
-    <script src="./js/mobile/rtc-client.js?t=202203251114"></script>
+    <script src="./js/mobile/rtc-client.js?t=202203251115"></script>
     <script src="./js/device-testing.js"></script>
     <script>
       if (queryParams("p") && queryParams("RoomId")) {
@@ -458,16 +455,17 @@
       }
     </script>
     <script defer src="./lib/jquery/signalr.min.js"></script>
-    <script defer src="./js/mobile/chatHub.js?t=202203251114"></script>
+    <script defer src="./js/mobile/chatHub.js?t=202203251115"></script>
     <script defer src="./lib/layui/layui.js"></script>
     <script defer src="./lib/trtc/lib-generate-test-usersig.min.js"></script>
     <script defer src="./lib/trtc/GenerateTestUserSig.js"></script>
-    <script defer src="./js/template.js?t=202203251114"></script>
-    <script defer src="./js/elementHandle.js?t=202203251114"></script>
-    <script defer src="./js/elementEvent.js?t=202203251114"></script>
+    <script defer src="./js/template.js?t=202203251115"></script>
+    <script defer src="./js/elementHandle.js?t=202203251115"></script>
+    <script defer src="./js/elementEvent.js?t=202203251115"></script>
     <script defer src="./js/iconfont.js"></script>
     <script defer src="./js/prohibit.js"></script>
     <script defer src="./js/noHorizontal.js"></script>
+    <script defer src="https://cdn.staticfile.org/vConsole/3.5.1/vconsole.min.js"></script>
   </body>
 
   </html>
