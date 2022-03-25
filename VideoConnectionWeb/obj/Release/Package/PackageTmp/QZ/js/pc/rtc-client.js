@@ -58,22 +58,18 @@ class RtcClient {
       // 初始化本地流
       await this.localStream_.initialize();
     } catch (error) {
-      console.error("无法初始化本地流 - ", error);
+      console.error("无法初始化本地流initialize() ", error);
       videoHandle(false, oneself_.CHID);
     }
 
-    try {
-      // 推送本地流
-      if (
-        hasMe(oneself_.CHID) ||
-        roomDetail_.SpeakerID == oneself_.CHID ||
-        oneself_.IsZCR ||
-        roomDetail_.UserList.length <= 25
-      ) {
-        await this.publish();
-      }
-    } catch (error) {
-      console.error("推送本地流失败 - ", error);
+    // 推送本地流
+    if (
+      hasMe(oneself_.CHID) ||
+      roomDetail_.SpeakerID == oneself_.CHID ||
+      oneself_.IsZCR ||
+      roomDetail_.UserList.length <= 25
+    ) {
+      await this.publish();
     }
 
     this.playVideo(this.localStream_, oneself_.CHID);
@@ -109,8 +105,18 @@ class RtcClient {
     try {
       await this.client_.publish(this.localStream_);
     } catch (error) {
-      console.error("推送本地流失败" + error);
+      console.error("推送本地流失败publish()" + error);
       this.isPublished_ = false;
+      if (
+        JSON.stringify(error).includes("initiali") ||
+        JSON.stringify(error).includes("timeout")
+      ) {
+        location.reload();
+      }
+      setTimeout(() => {
+        console.log("重新尝试推送");
+        this.publish();
+      }, 500);
     }
     this.isPublished_ = true;
   }

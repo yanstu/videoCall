@@ -358,6 +358,7 @@
   $("#shenqingfayan_btn").on(
     "click",
     clickProof(() => {
+      layer.msg("已提交申请发言");
       shenqingfayan();
     })
   );

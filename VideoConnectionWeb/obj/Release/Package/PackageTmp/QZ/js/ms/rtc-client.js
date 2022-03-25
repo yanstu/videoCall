@@ -59,16 +59,12 @@ class RtcClient {
       // 初始化本地流
       await this.localStream_.initialize();
     } catch (error) {
-      console.error("无法初始化本地流 - ", error);
+      console.error("无法初始化本地流initialize() ", error);
       videoHandle(false, oneself_.CHID);
     }
 
-    try {
-      // 推送本地流
-      await this.publish();
-    } catch (error) {
-      console.error("推送本地流失败 - ", error);
-    }
+    // 推送本地流
+    await this.publish();
 
     this.playVideo(this.localStream_, oneself_.CHID);
 
@@ -104,7 +100,7 @@ class RtcClient {
     try {
       await this.client_.publish(this.localStream_);
     } catch (error) {
-      console.error("推送本地流失败" + error);
+      console.error("推送本地流失败publish()" + error);
       this.isPublished_ = false;
       if (
         JSON.stringify(error).includes("is not initialized or is") ||
@@ -239,7 +235,11 @@ class RtcClient {
       const { userId } = evt;
       this.members_.set(userId, null);
       onlineOrOfline(true, userId);
-      console.log(getUserInfo(userId) ? getUserInfo(userId).UserName : 'null' + " 加入了房间");
+      console.log(
+        getUserInfo(userId)
+          ? getUserInfo(userId).UserName
+          : "null" + " 加入了房间"
+      );
     });
 
     // 当远程连接端离开房间时触发
