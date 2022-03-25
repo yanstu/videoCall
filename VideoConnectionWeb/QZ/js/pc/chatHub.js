@@ -166,7 +166,7 @@ startChathub();
 function startChathub() {
   chatHub.start().then(function () {
     var RoomId = queryParams("RoomId");
-    chatHub.invoke("createRedis", RoomId)
+    chatHub.invoke("createRedis", RoomId);
     huoquchangkuanbi();
     huoquhuiyihuancun();
     huoquzhujiangren();
@@ -438,7 +438,9 @@ function huoquzhujiangren() {
         if (localStorage.getItem("ZJRID") != res) {
           localStorage.setItem("ZJRID", res);
           roomDetail_.SpeakerID = res;
-          roomDetail_.SpeakerName = getUserInfo(res).UserName;
+          roomDetail_.SpeakerName = getUserInfo(res)
+            ? getUserInfo(res).UserName
+            : "";
           changeViews();
         }
       }
