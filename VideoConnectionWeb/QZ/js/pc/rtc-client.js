@@ -58,22 +58,18 @@ class RtcClient {
       // 初始化本地流
       await this.localStream_.initialize();
     } catch (error) {
-      console.error("无法初始化本地流 - ", error);
+      console.error("无法初始化本地流initialize() ", error);
       videoHandle(false, oneself_.CHID);
     }
 
-    try {
-      // 推送本地流
-      if (
-        hasMe(oneself_.CHID) ||
-        roomDetail_.SpeakerID == oneself_.CHID ||
-        oneself_.IsZCR ||
-        roomDetail_.UserList.length <= 25
-      ) {
-        await this.publish();
-      }
-    } catch (error) {
-      console.error("推送本地流失败 - ", error);
+    // 推送本地流
+    if (
+      hasMe(oneself_.CHID) ||
+      roomDetail_.SpeakerID == oneself_.CHID ||
+      oneself_.IsZCR ||
+      roomDetail_.UserList.length <= 25
+    ) {
+      await this.publish();
     }
 
     this.playVideo(this.localStream_, oneself_.CHID);

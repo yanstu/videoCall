@@ -95,7 +95,7 @@ class RtcClient {
       await this.client_.publish(this.localStream_);
       this.playVideo(this.localStream_, oneself_.CHID);
     } catch (error) {
-      console.error("推送本地流失败" + error);
+      console.error("推送本地流失败publish()" + error);
       this.isPublished_ = false;
     }
     this.isPublished_ = true;
