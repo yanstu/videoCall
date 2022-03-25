@@ -19,8 +19,8 @@
     <link rel="stylesheet" href="./css/common.css" />
     <style>
       #video-grid>div {
-        height: 95%;
-        width: 96%;
+        height: 96%;
+        width: 97%;
         box-shadow: 0 2px 5px 0 rgb(0 0 0 / 20%), 0 2px 10px 0 rgb(0 0 0 / 10%);
       }
     </style>
@@ -36,7 +36,7 @@
   <body class="w-screen h-screen">
     <header style="box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.07), 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;"
       class="flex flex-row h-[7%] bg-[#262626] w-full justify-between">
-      <div class="flex items-center justify-start">
+      <div style="width: 5%;" class="flex items-center justify-start">
         <img style="height: 60%;" id="mean_btn" title="显示/隐藏菜单" class="ml-4 mr-4 invert-[100%]"
           src="./img/sf_ic_menu.png" />
         <img id="testing_btn" title="设备、网络检测" class="invert-[100%] h-[50%]" src="./img/check-mic.png" />
@@ -79,7 +79,7 @@
       </div>
 
       <!-- 群众区 -->
-      <div id="video-grid" style="height: 99.2%;top: 0.38%;"
+      <div id="video-grid" style="height: 99.4%;top: 0.3%;"
         class="box-border grid w-[20%] absolute right-[0.1%] items-center justify-center z-10">
       </div>
 
@@ -112,7 +112,7 @@
           <div id="device-testing-prepare" class="device-testing-prepare">
             <div class="testing-title">设备连接</div>
             <div class="testing-prepare-info">
-              设备检测前请务必给当前页面开放摄像头，麦克风权限
+              设备检测前请务必开放摄像头，麦克风权限
             </div>
             <div class="device-display flex">
               <div id="device-camera" class="device icon-normal connect-success">
@@ -227,7 +227,7 @@
               </div>
               <div class="audio-control">
                 <div class="audio-control-info">
-                  请调高设备音量, 点击播放下面的音频试试～
+                  请调高设备音量, 点击播放下面的音频
                 </div>
                 <audio id="audio-player" src="https://web.sdk.qcloud.com/trtc/webrtc/assets/bgm-test.mp3"
                   controls=""></audio>
@@ -254,7 +254,7 @@
                 </div>
               </div>
               <div class="mic-testing-container">
-                <div class="mic-testing-info">对着麦克风说'哈喽'试试～</div>
+                <div class="mic-testing-info">对着麦克风说话</div>
                 <div id="mic-bar-container" class="mic-bar-container"></div>
                 <div id="audio-container"></div>
               </div>
@@ -277,18 +277,8 @@
                   <div class="testing-index">浏览器版本</div>
                   <div id="browser"></div>
                 </div>
-                <div class="testing-index-group">
-                  <div class="testing-index">网络延迟</div>
-                  <div id="network-rtt" class="network-loading"></div>
-                </div>
-                <div class="testing-index-group">
-                  <div class="testing-index">上行网络质量</div>
-                  <div id="uplink-network" class="network-loading"></div>
-                </div>
-                <div class="testing-index-group">
-                  <div class="testing-index">下行网络质量</div>
-                  <div id="downlink-network" class="network-loading"></div>
-                </div>
+
+
               </div>
               <div class="testing-footer">
                 <!-- <div id="testing-report-btn" class="test-btn">查看检测报告</div> -->
@@ -550,12 +540,10 @@
       }
     </script>
     <script defer src="./lib/jquery/signalr.min.js"></script>
+    <script defer src="./js/elementHandle.js?t=202203251115"></script>
     <script defer src="./js/pc/chatHub.js?t=202203251115"></script>
     <script async src="./lib/layui/layui.js"></script>
-    <script defer src="./lib/trtc/lib-generate-test-usersig.min.js"></script>
-    <script defer src="./lib/trtc/GenerateTestUserSig.js"></script>
     <script defer src="./js/template.js?t=202203251115"></script>
-    <script defer src="./js/elementHandle.js?t=202203251115"></script>
     <script defer src="./js/elementEvent.js?t=202203251115"></script>
     <script defer src="./js/iconfont.js"></script>
     <script defer src="./js/prohibit.js"></script>

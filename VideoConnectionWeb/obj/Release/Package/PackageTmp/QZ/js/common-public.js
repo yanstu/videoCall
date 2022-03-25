@@ -10,9 +10,9 @@ var micData = new Array();
 // 自定义变量
 let oneself_ = {
   // userid
-  CHID: "3ed11cbd7d3c4d769fa6e177f8f5b034",
+  CHID: "",
   // 房间id
-  ID: "3c646b7421f84fe5811b295df5f5a1c2",
+  ID: "",
   IsLZ: false,
   // 是否主持人
   IsZCR: false,
@@ -20,11 +20,10 @@ let oneself_ = {
   QYBH: "00",
   // 房间id
   RoomId: "7",
-  SDKAppID: "1400575117",
+  SDKAppID: "",
   Title: "",
-  UserSig:
-    "eJwtjM0KgkAYRd9ltoXO5-yZ0CaiDCwINWipzkwMqehkoUXvnpjLe*4994OSKHZeyqIAeQ5GyykbqerOaDNhoiRAkUshSUGl4CudcQVCaF*zHBM6Ow95z5rGyNEAijETDEDMneobYxUKOKY*xn-WmWokwOm4JJyz*cXcxoPLgiehddtzFQ-hsbV9WZMyja7es3Pf6VZEG*WeLrDbD4c1*v4AXaU4QQ__",
-  XM: "严鑫",
+  UserSig: "",
+  XM: "",
 };
 let roomDetail_ = {
   // 允许控制麦克风
@@ -42,9 +41,9 @@ let roomDetail_ = {
   // 发言列表
   ProposerList: [],
   // 主讲人UD
-  SpeakerID: "fe130caac11a4d60b4357713c7d03415",
+  SpeakerID: "",
   // 主讲人姓名
-  SpeakerName: "刘世荣",
+  SpeakerName: "",
   // 房间名
   Title: "",
   // 参加会议人员列表

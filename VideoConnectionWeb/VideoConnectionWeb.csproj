@@ -388,8 +388,6 @@
     <Content Include="QZ\lib\layui\css\modules\layer\default\loading-2.gif" />
     <Content Include="QZ\lib\layui\font\iconfont.svg" />
     <Content Include="QZ\lib\layui\layui.js" />
-    <Content Include="QZ\lib\trtc\GenerateTestUserSig.js" />
-    <Content Include="QZ\lib\trtc\lib-generate-test-usersig.min.js" />
     <Content Include="QZ\lib\trtc\trtc.js" />
     <Content Include="QZ\index.aspx" />
     <Content Include="Web.config" />
