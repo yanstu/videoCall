@@ -510,7 +510,7 @@ function fenbianlvcanshu(params) {
         width: 480, // 视频宽度
         height: 270, // 视频高度
         frameRate: 10, // 帧率
-        bitrate: 300, // 比特率 kbps
+        bitrate: 200, // 比特率 kbps
       };
     case 360:
       return {

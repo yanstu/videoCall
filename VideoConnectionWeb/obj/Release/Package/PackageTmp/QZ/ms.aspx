@@ -347,7 +347,6 @@
       </div>
 
       <div class="gundongxiaoxi" style="display: none;z-index: 19;">
-        <marquee id="tipsContent"></marquee>
       </div>
 
       <!-- 预加载所有网络图片资源，防止断网后加载不出断网图标图片 -->

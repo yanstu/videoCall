@@ -160,9 +160,8 @@ function addMessage(fasongren, jieshouren, neirong) {
   $("#messageList").scrollTop(99999999);
   if ($("#xiaoxiliebiao").css("display") == "none") {
     $("#xiaoxi_jiaobiao").fadeIn();
-    $("#tipsContent").html("您有一条新消息：" + neirong);
+    $(".gundongxiaoxi").html(neirong);
     $(".gundongxiaoxi").fadeIn();
-    document.getElementById("tipsContent").start();
     setTimeout(() => {
       $(".gundongxiaoxi").fadeOut();
     }, 5 * 1000);
@@ -324,7 +323,7 @@ function videoHandle(on, userId) {
       on ? $("#mask_" + userId).hide() : $("#mask_" + userId).show();
     }
     if (on) {
-      if (
+      /*if (
         location.href.toLowerCase().indexOf("index") > -1 ||
         location.href.toLowerCase().indexOf("big") > -1
       ) {
@@ -358,7 +357,7 @@ function videoHandle(on, userId) {
         }, 20 * 1000);
       } else {
         $("#mask_" + userId).hide();
-      }
+      }*/
     } else {
       videoImgTimer && clearInterval(videoImgTimer);
       $("#img_" + userId).hide();
