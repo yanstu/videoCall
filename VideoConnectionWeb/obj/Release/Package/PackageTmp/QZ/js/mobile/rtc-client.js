@@ -56,6 +56,7 @@ class RtcClient {
     }
 
     try {
+      this.shezhifenbianlv();
       // 初始化本地流
       await this.localStream_.initialize();
     } catch (error) {
@@ -105,7 +106,6 @@ class RtcClient {
   async publish() {
     if (this.isPublished_) return;
     try {
-      this.shezhifenbianlv();
       await this.client_.publish(this.localStream_);
     } catch (error) {
       console.error("推送本地流失败publish()" + error);

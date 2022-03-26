@@ -53,6 +53,7 @@ class RtcClient {
     }
 
     try {
+      this.shezhifenbianlv();
       // 初始化本地流
       await this.localStream_.initialize();
       // 推送本地流
@@ -92,7 +93,6 @@ class RtcClient {
   async publish() {
     if (this.isPublished_) return;
     try {
-      this.shezhifenbianlv();
       await this.client_.publish(this.localStream_);
       this.playVideo(this.localStream_, oneself_.CHID);
     } catch (error) {

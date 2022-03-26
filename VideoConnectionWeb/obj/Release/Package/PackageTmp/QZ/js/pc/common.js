@@ -62,6 +62,7 @@ async function changeViews() {
       $("#mask_" + ID).show();
     }
   }
+  
   // 获取将要成为主讲人的那个远程流
   var zjr_streams =
     newZJRID == oneself_.CHID ? rtc.localStream_ : rtc.members_.get(newZJRID);

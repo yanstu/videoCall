@@ -420,4 +420,80 @@
       }
     })
   );
+
+  $("#qiehuanfenbianlv").change(async function () {
+    var selected = $(this).children("option:selected").val();
+    switch (selected) {
+      case 90:
+      case "90":
+        await rtc.localStream_.setVideoProfile({
+          width: 160, // 视频宽度
+          height: 90, // 视频高度
+          frameRate: 10, // 帧率
+          bitrate: 200, // 比特率 kbps
+        });
+        rtc.fbl();
+        break;
+      case 144:
+      case "144":
+        await rtc.localStream_.setVideoProfile({
+          width: 256, // 视频宽度
+          height: 144, // 视频高度
+          frameRate: 10, // 帧率
+          bitrate: 250, // 比特率 kbps
+        });
+        rtc.fbl();
+        break;
+      case 180:
+      case "180":
+        await rtc.localStream_.setVideoProfile({
+          width: 320, // 视频宽度
+          height: 180, // 视频高度
+          frameRate: 10, // 帧率
+          bitrate: 300, // 比特率 kbps
+        });
+        rtc.fbl();
+        break;
+      case 270:
+      case "270":
+        await rtc.localStream_.setVideoProfile({
+          width: 480, // 视频宽度
+          height: 270, // 视频高度
+          frameRate: 10, // 帧率
+          bitrate: 300, // 比特率 kbps
+        });
+        rtc.fbl();
+        break;
+      case 360:
+      case "360":
+        await rtc.localStream_.setVideoProfile({
+          width: 640, // 视频宽度
+          height: 360, // 视频高度
+          frameRate: 15, // 帧率
+          bitrate: 550, // 比特率 kbps
+        });
+        rtc.fbl();
+        break;
+      case 540:
+      case "540":
+        await rtc.localStream_.setVideoProfile({
+          width: 960, // 视频宽度
+          height: 540, // 视频高度
+          frameRate: 15, // 帧率
+          bitrate: 900, // 比特率 kbps
+        });
+        rtc.fbl();
+        break;
+      case 720:
+      case "720":
+        await rtc.localStream_.setVideoProfile({
+          width: 1280, // 视频宽度
+          height: 720, // 视频高度
+          frameRate: 15, // 帧率
+          bitrate: 1250, // 比特率 kbps
+        });
+        rtc.fbl();
+        break;
+    }
+  });
 })();
