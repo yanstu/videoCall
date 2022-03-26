@@ -9,7 +9,9 @@ function userInfoTemplate(userId, nickName) {
             <!-- 背景遮罩 -->
             <div class="absolute top-0 left-0 w-full ${
               isMobile ? "rounded-br-lg" : "rounded-tr-lg"
-            } h-full bg-[#000000] opacity-10"></div>
+            } h-full bg-[#000000] ${
+    isMobile ? "opacity-20" : "opacity-10"
+  }"></div>
             <!-- 声音显示 -->
             <div id="mic_main_${userId}" style="margin-left: 5px">
                 <div class="flex items-center justify-content-center relative h-5">

@@ -376,15 +376,17 @@ function huoquzhujiangren() {
       (res) => {
         if (localStorage.getItem("ZJRID") != res) {
           localStorage.setItem("ZJRID", res);
-          roomDetail_.SpeakerID = res;
-          roomDetail_.SpeakerName = getUserInfo(res)
-            ? getUserInfo(res).UserName
-            : "";
-          // viewsHandle();
+          if (res != roomDetail_.SpeakerID) {
+            roomDetail_.SpeakerID = res;
+            roomDetail_.SpeakerName = getUserInfo(res)
+              ? getUserInfo(res).UserName
+              : "";
+            viewsHandle();
+          }
         }
       }
     );
-  }, 2000);
+  }, 5 * 1000);
 }
 
 // 发送消息
