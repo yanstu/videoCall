@@ -593,7 +593,7 @@ function changeTitleFontSize() {
   if (getOsType() == "desktop") {
     var defualtSize = "1.9";
     $("#roomTitle").css("font-size", defualtSize + "rem");
-    while ($("#roomTitle").width() / $("body").width() >= 0.82) {
+    while ($("#roomTitle").width() / $("body").width() >= 0.75) {
       defualtSize = defualtSize - 0.05;
       $("#roomTitle").css("font-size", defualtSize + "rem");
       if (defualtSize <= 0.1) {

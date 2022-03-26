@@ -46,6 +46,16 @@
       </div>
 
       <div class="flex items-center justify-end">
+        <!-- <select style="width: 10rem;" name="" id="qiehuanfenbianlv">设置分辨率
+          <option value="90">90</option>
+          <option value="144">144</option>
+          <option value="180">180</option>
+          <option value="270">270</option>
+          <option value="360">360</option>
+          <option value="540">540</option>
+          <option value="720">720</option>
+        </select> -->
+
         <div style="width: 3rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
           <img id="network-up" class="h-full" src="./img/network/up/network_4.png">
         </div>

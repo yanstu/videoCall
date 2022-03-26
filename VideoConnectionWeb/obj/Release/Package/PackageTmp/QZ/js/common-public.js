@@ -480,3 +480,58 @@ async function huoqudingyueshu() {
   // console.log(Data);
   return Data;
 }
+
+// 16:9分辨率参数列表
+function fenbianlvcanshu(params) {
+  switch (parseInt(params)) {
+    case 90:
+      return {
+        width: 160, // 视频宽度
+        height: 90, // 视频高度
+        frameRate: 10, // 帧率
+        bitrate: 200, // 比特率 kbps
+      };
+    case 144:
+      return {
+        width: 256, // 视频宽度
+        height: 144, // 视频高度
+        frameRate: 10, // 帧率
+        bitrate: 250, // 比特率 kbps
+      };
+    case 180:
+      return {
+        width: 320, // 视频宽度
+        height: 180, // 视频高度
+        frameRate: 10, // 帧率
+        bitrate: 300, // 比特率 kbps
+      };
+    case 270:
+      return {
+        width: 480, // 视频宽度
+        height: 270, // 视频高度
+        frameRate: 10, // 帧率
+        bitrate: 300, // 比特率 kbps
+      };
+    case 360:
+      return {
+        width: 640, // 视频宽度
+        height: 360, // 视频高度
+        frameRate: 15, // 帧率
+        bitrate: 550, // 比特率 kbps
+      };
+    case 540:
+      return {
+        width: 960, // 视频宽度
+        height: 540, // 视频高度
+        frameRate: 15, // 帧率
+        bitrate: 900, // 比特率 kbps
+      };
+    case 720:
+      return {
+        width: 1280, // 视频宽度
+        height: 720, // 视频高度
+        frameRate: 15, // 帧率
+        bitrate: 1250, // 比特率 kbps
+      };
+  }
+}
