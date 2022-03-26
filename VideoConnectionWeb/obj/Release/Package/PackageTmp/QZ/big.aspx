@@ -40,15 +40,15 @@
 
       <div id="roomTitle" class="text-[1.8rem] text-white flex items-center justify-center whitespace-nowrap">
       </div>
-      
+
       <div class="flex items-center justify-end">
-        <div style="width: 3rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
+        <div style="width: 2.5rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
           <img id="network-up" class="h-full" src="./img/network/up/network_4.png">
         </div>
-        <div style="width: 3rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
+        <div style="width: 2.5rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
           <img id="network-down" class="h-full" src="./img/network/down/network_4.png">
         </div>
-        <div id="exit-btn"
+        <div id="exit-btn" style="font-size: 16px;"
           class="anniubeijing mr-4 w-[5rem] h-[50%] text-[0.875rem] flex justify-center items-center text-white pl-3 pr-3">
           退出
         </div>
@@ -330,9 +330,9 @@
     <script src="./js/util.js"></script>
     <script src="./js/device-testing.js"></script>
     <script src="./js/rtc-detection.js"></script>
-    <script src="./js/common-public.js?t=202203260258"></script>
-    <script src="./js/big/common.js?t=202203260258"></script>
-    <script src="./js/big/rtc-client.js?t=202203260258"></script>
+    <script src="./js/common-public.js?t=202203260344"></script>
+    <script src="./js/big/common.js?t=202203260344"></script>
+    <script src="./js/big/rtc-client.js?t=202203260344"></script>
     <script>
       if (queryParams("p") && queryParams("RoomId")) {
         login(queryParams("p"));
@@ -343,11 +343,11 @@
       }
     </script>
     <script defer src="./lib/jquery/signalr.min.js"></script>
-    <script defer src="./js/big/chatHub.js?t=202203260258"></script>
+    <script defer src="./js/big/chatHub.js?t=202203260344"></script>
     <script defer src="./lib/layui/layui.js"></script>
-    <script defer src="./js/template.js?t=202203260258"></script>
-    <script defer src="./js/elementHandle.js?t=202203260258"></script>
-    <script defer src="./js/elementEvent.js?t=202203260258"></script>
+    <script defer src="./js/template.js?t=202203260344"></script>
+    <script defer src="./js/elementHandle.js?t=202203260344"></script>
+    <script defer src="./js/elementEvent.js?t=202203260344"></script>
     <script defer src="./js/iconfont.js"></script>
     <script defer src="./js/prohibit.js"></script>
     <script defer src="https://cdn.staticfile.org/vConsole/3.5.1/vconsole.min.js"></script>

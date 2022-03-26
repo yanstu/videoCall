@@ -263,14 +263,14 @@
 
   // 手机端小视频点击上一页
   $("#shangyiye_ms_btn").on("click", () => {
-    if (meet_layout.pageNo == 0) {
+    /*if (meet_layout.pageNo == 0) {
       layer.msg("不能再向上翻了");
     } else {
       meet_layout.pageNo--;
       viewsHandle();
-    }
+    }*/
 
-    /*if (!fanyeHandler.disabled) {
+    if (!fanyeHandler.disabled) {
       fanyeHandler.disabled = true;
       if (meet_layout.pageNo == 0) {
         layer.msg("不能再向上翻了");
@@ -279,19 +279,19 @@
         viewsHandle();
       }
       fanyeHandler.timer = setInterval(doLoop, 1000);
-    }*/
+    }
   });
 
   // 手机端小视频点击上一页
   $("#xiayiye_ms_btn").on("click", () => {
-    if (meet_layout.pageNo + 1 == meet_layout.pageCount) {
+    /*if (meet_layout.pageNo + 1 == meet_layout.pageCount) {
       layer.msg("不能再向下翻了");
     } else {
       meet_layout.pageNo++;
       viewsHandle();
-    }
+    }*/
 
-    /*if (!fanyeHandler.disabled) {
+    if (!fanyeHandler.disabled) {
       fanyeHandler.disabled = true;
       if (meet_layout.pageNo + 1 == meet_layout.pageCount) {
         layer.msg("不能再向下翻了");
@@ -300,7 +300,7 @@
         viewsHandle();
       }
       fanyeHandler.timer = setInterval(doLoop, 1000);
-    }*/
+    }
   });
 
   function doLoop() {
@@ -350,8 +350,8 @@
   // 工具栏显示隐藏
   $("#menu_btn").on("click", function () {
     $("#toolbar").css("display") == "none"
-      ? $("#toolbar").fadeIn()
-      : $("#toolbar").fadeOut();
+      ? $("#toolbar").show()
+      : $("#toolbar").hide();
   });
 
   // 申请发言按钮点击事件
