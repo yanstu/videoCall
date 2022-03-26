@@ -44,12 +44,14 @@ async function change() {
   // 此处的ZJRID_代表上一个主讲人
   // 此处的newZJRID代表新的主讲人ID，没有的话设定主持人为主讲人视角
   var newZJRID = roomDetail_.SpeakerID || ZCRID_;
+
   if (newZJRID == ZJRID_) return;
+
   // 先停止上一个主持人的播放
   rePlay(rtc.members_.get(ZJRID_), ZJRID_);
+
   async function rePlay(stream, ID) {
     $("#img_" + ID).hide();
-    stream.stop();
     // 如果是主讲人模式，则取消订阅
     if (display_layout.mode == 1) {
       await rtc.client_.unsubscribe(stream);
@@ -61,9 +63,9 @@ async function change() {
       stream ? $("#mask_" + ID).hide() : $("#mask_" + ID).show();
     }
   }
+
   // 获取将要成为主讲人的那个远程流
   var zjr_streams = rtc.members_.get(newZJRID);
-  zjr_streams && zjr_streams.stop();
 
   // 移除原主持人的相关信息
   $(`#box_${newZJRID} .volume-level`).css("height", "0%");
@@ -72,8 +74,10 @@ async function change() {
   $("#zjr_video").append(
     userInfoTemplate(newZJRID, getUserInfo(newZJRID).UserName)
   );
+
   // 如果新的主持人也存在右侧小视频区域，右侧的小视频将显示遮罩
   hasMe(newZJRID) && $("#mask_" + newZJRID).show();
+
   // 判断是否为手机设备
   var objectFit = objectFitHandle(newZJRID);
 
@@ -83,11 +87,16 @@ async function change() {
   } else {
     zjr_streams.play("zjr_video", { objectFit, mirror: false });
   }
+
   zjr_streams ? $("#zjr_mask").hide() : $("#zjr_mask").show();
+
   // 为新的主讲人取帧
   zjr_streams && videoHandle(true, newZJRID);
+
   $(`#zjr_mask img`).attr("src", `./img/camera-gray.png`);
+
   ZJRID_ = newZJRID;
+  
   // 权限判断按钮显示或隐藏
   showOrHide();
 

@@ -53,7 +53,6 @@ async function changeViews() {
   function rePlay(stream, ID) {
     $("#img_" + ID).hide();
     if (stream) {
-      stream.stop();
       if (hasMe(ID)) {
         stream.play("box_" + ID, { objectFit: "cover", mirror: false });
         $("#mask_" + ID).hide();
@@ -61,13 +60,6 @@ async function changeViews() {
     } else {
       $("#mask_" + ID).show();
     }
-  }
-
-  // 获取将要成为主讲人的那个远程流
-  var zjr_streams =
-    newZJRID == oneself_.CHID ? rtc.localStream_ : rtc.members_.get(newZJRID);
-  if (zjr_streams) {
-    await zjr_streams.stop();
   }
 
   // 移除原主持人的相关信息
@@ -84,6 +76,9 @@ async function changeViews() {
   // 判断是否为手机设备
   var objectFit = objectFitHandle(newZJRID);
 
+  // 获取将要成为主讲人的那个远程流
+  var zjr_streams =
+    newZJRID == oneself_.CHID ? rtc.localStream_ : rtc.members_.get(newZJRID);
   if (zjr_streams) {
     await zjr_streams.play("zjr_video", { objectFit, mirror: false });
   }
@@ -113,6 +108,6 @@ async function changeViews() {
   showOrHide();
 
   setTimeout(() => {
-    // gengxinzhuangtai();
+    gengxinzhuangtai();
   }, 1000);
 }

@@ -437,13 +437,15 @@ function huoquzhujiangren() {
       (res) => {
         if (localStorage.getItem("ZJRID") != res) {
           localStorage.setItem("ZJRID", res);
-          roomDetail_.SpeakerID = res;
-          roomDetail_.SpeakerName = getUserInfo(res)
-            ? getUserInfo(res).UserName
-            : "";
-          changeViews();
+          if (res != roomDetail_.SpeakerID) {
+            roomDetail_.SpeakerID = res;
+            roomDetail_.SpeakerName = getUserInfo(res)
+              ? getUserInfo(res).UserName
+              : "";
+            changeViews();
+          }
         }
       }
     );
-  }, 2000);
+  }, 5 * 1000);
 }

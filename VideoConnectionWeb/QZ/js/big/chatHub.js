@@ -143,13 +143,17 @@ function huoquzhujiangren() {
       (res) => {
         if (localStorage.getItem("ZJRID") != res) {
           localStorage.setItem("ZJRID", res);
-          roomDetail_.SpeakerID = res;
-          roomDetail_.SpeakerName = getUserInfo(res) ? getUserInfo(res).UserName : "";
-          change();
+          if (res != roomDetail_.SpeakerID) {
+            roomDetail_.SpeakerID = res;
+            roomDetail_.SpeakerName = getUserInfo(res)
+              ? getUserInfo(res).UserName
+              : "";
+            change();
+          }
         }
       }
     );
-  }, 2000);
+  }, 5 * 1000);
 }
 
 function fanye(no) {
@@ -182,22 +186,4 @@ function xintiaolianjie() {
       });
     });
   }, 1500);
-}
-
-function huoquzhujiangren() {
-  var RoomId = queryParams("RoomId");
-  getZJRTimer = setInterval(() => {
-    $.post(
-      "/Handler/RedisHandler.ashx",
-      { Infotype: "GetInfo", RoomId },
-      (res) => {
-        if (localStorage.getItem("ZJRID") != res) {
-          localStorage.setItem("ZJRID", res);
-          roomDetail_.SpeakerID = res;
-          roomDetail_.SpeakerName = getUserInfo(res) ? getUserInfo(res).UserName : "";
-          change();
-        }
-      }
-    );
-  }, 2000);
 }
