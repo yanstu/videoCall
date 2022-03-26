@@ -746,12 +746,15 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 50px;
+  width: 100vw;
   position: absolute;
-  top: 40%;
+  bottom: 12%;
   left: 0;
   color: white;
+  padding: 10px 0;
+  background-color: #283240;
+  text-indent: 2em;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.07), 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
 }
 html,
 body {
@@ -776,9 +779,6 @@ body {
 }
 .shezhizhujiangren_btn {
   box-shadow: none;
-}
-#tipsContent {
-  width: 100vw;
 }
 input {
   border-radius: 0 !important;

@@ -160,9 +160,8 @@ function addMessage(fasongren, jieshouren, neirong) {
   $("#messageList").scrollTop(99999999);
   if ($("#xiaoxiliebiao").css("display") == "none") {
     $("#xiaoxi_jiaobiao").fadeIn();
-    $("#tipsContent").html("您有一条新消息：" + neirong);
+    $(".gundongxiaoxi").html(neirong);
     $(".gundongxiaoxi").fadeIn();
-    document.getElementById("tipsContent").start();
     setTimeout(() => {
       $(".gundongxiaoxi").fadeOut();
     }, 5 * 1000);

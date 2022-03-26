@@ -269,8 +269,8 @@
                   <div class="testing-index">浏览器版本</div>
                   <div id="browser"></div>
                 </div>
-                
-                
+
+
               </div>
               <div class="testing-footer">
                 <!-- <div id="testing-report-btn" class="test-btn">查看检测报告</div> -->
@@ -359,8 +359,7 @@
         </div>
       </div>
 
-      <div class="gundongxiaoxi" style="display: none;">
-        <marquee id="tipsContent"></marquee>
+      <div class="gundongxiaoxi" style="display: none;z-index: 19;">
       </div>
 
       <!-- 预加载所有网络图片资源，防止断网后加载不出断网图标图片 -->

@@ -300,7 +300,7 @@
               2022-02-27 09:18:12
             </div>
             <div class="message_info h-[70%] flex flex-row w-full justify-end items-center">
-              <div style="min-height: 4.6rem;padding: 0.5rem;"
+              <div style="min-height: 4.3rem;padding: 0.5rem;"
                 class="message_neirong text-white text-[0.875rem] mt-1 ml-2 mr-2 mb-1 bg-[#2d3549] w-[80%]">
                 这个是内这个是内这个是内内这个
               </div>
