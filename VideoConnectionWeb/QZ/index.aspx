@@ -467,7 +467,7 @@
           </svg>
           <span class="mt-1 text-[16px]">摄像头</span>
         </div>
-        <div style="width:5rem" class="toolbar_btn" style="display: none;" id="fanzhuan_btn">
+        <div style="width:5rem;display: none;" class="toolbar_btn" id="fanzhuan_btn">
           <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
             <use xlink:href="#icon-fanzhuan"></use>
           </svg>
@@ -479,7 +479,7 @@
           </svg>
           <span class="mt-1 text-[16px]">参与者</span>
         </div>
-        <div style="width:5rem" class="toolbar_btn" style="display: none;" id="fayanliebiao_btn">
+        <div style="width:5rem;display: none;" class="toolbar_btn" id="fayanliebiao_btn">
           <div class="relative">
             <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
               <use xlink:href="#icon-fayanliebiao"></use>
@@ -505,25 +505,25 @@
           </svg>
           <span class="mt-1 text-[16px]">申请发言</span>
         </div>
-        <div style="width:5rem" class="toolbar_btn" style="display: none;" id="guanbimaikefeng_btn">
+        <div style="width:5rem;display: none;" class="toolbar_btn" id="guanbimaikefeng_btn">
           <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
             <use xlink:href="#icon-guanbimaikefeng"></use>
           </svg>
           <span class="mt-1 text-[16px]">全部静音</span>
         </div>
-        <div style="width:5rem" class="toolbar_btn" style="display: none;" id="quxiaozhujiangren_btn">
+        <div style="width:5rem;display: none;" class="toolbar_btn" id="quxiaozhujiangren_btn">
           <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
             <use xlink:href="#icon-quxiaozhujiangren"></use>
           </svg>
           <span class="mt-1 text-[16px]">无主讲人</span>
         </div>
-        <div style="width:5rem" class="toolbar_btn" style="display: none;" id="shangyiye_btn">
+        <div style="width:5rem;display: none;" class="toolbar_btn" id="shangyiye_btn">
           <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
             <use xlink:href="#icon-shangyiye"></use>
           </svg>
           <span class="mt-1 text-[16px]">上一页</span>
         </div>
-        <div style="width:5rem" class="toolbar_btn" style="display: none;" id="xiayiye_btn">
+        <div style="width:5rem;display: none;" class="toolbar_btn" id="xiayiye_btn">
           <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
             <use xlink:href="#icon-xiayiye"></use>
           </svg>

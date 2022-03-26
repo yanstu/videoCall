@@ -397,14 +397,13 @@ function initFenye() {
   meet_layout.cols = roomDetail_.CHRY_ShowCols;
   meet_layout.pageNo = roomDetail_.CHDModel.Page - 1;
   display_layout.pageNo = roomDetail_.XSDModel.Page - 1;
-  var rc = 5;
   if (roomDetail_.XSDModel.Model != 3) {
-    rc = 0;
+    display_layout.cols = roomDetail_.CHRY_ShowCols;
+    display_layout.rows = roomDetail_.CHRY_ShowRows;
   } else {
-    rc = roomDetail_.XSDModel.XSPFormat.split("*")[0];
+    display_layout.cols = roomDetail_.XSDModel.XSPFormat.split("*")[0];
+    display_layout.rows = roomDetail_.XSDModel.XSPFormat.split("*")[0];
   }
-  display_layout.cols = rc;
-  display_layout.rows = rc;
 }
 
 // 跳转封装

@@ -556,7 +556,7 @@ async function zhanshiduan_mode(state) {
         for (const stream of rtc.remoteStreams_) {
           if (
             stream.userId_ != roomDetail_.SpeakerID ||
-            (stream.userId_ == ZCRID_ && roomDetail_.SpeakerID)
+            stream.userId_ != ZCRID_
           ) {
             await stream.stop();
             await rtc.client_.unsubscribe(stream);
@@ -571,8 +571,18 @@ async function zhanshiduan_mode(state) {
       display_layout.rows = roomDetail_.CHRY_ShowRows;
       display_layout.cols = roomDetail_.CHRY_ShowCols;
       if (location.href.toLowerCase().includes("big")) {
-        await rtc.leave();
-        await rtc.join();
+        /*await rtc.leave();
+        await rtc.join();*/
+        for (const user of display_layout.pageUserList) {
+          let { ID } = user;
+          if (ID != roomDetail_.SpeakerID || ID != ZCRID_) {
+            var stream = rtc.members_.get(ID);
+            if (stream) {
+              await rtc.client_.unsubscribe(stream);
+              await rtc.client_.subscribe(stream);
+            }
+          }
+        }
         $("#video-grid").fadeIn();
       } else {
         tiaozhuandao("big");
