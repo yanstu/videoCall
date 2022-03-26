@@ -78,7 +78,7 @@
 
       <!-- 群众区 -->
       <div id="video-grid"
-        class="box-border grid w-[9rem] !h-[25%] absolute top-[8%] right-[1%] items-center justify-center z-10">
+        class="box-border grid w-[9rem] h-[13rem] overflow-hidden absolute top-[8%] right-[1%] items-center justify-center z-10">
       </div>
 
       <!-- 展示不支持webRTC的提示 -->

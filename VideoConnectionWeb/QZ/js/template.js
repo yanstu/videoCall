@@ -33,7 +33,7 @@ function userInfoTemplate(userId, nickName) {
  * 视频盒子模板
  */
 function videoBoxTemplate(userId, nickName) {
-  return `<div id="box_${userId}" d class="${
+  return `<div id="box_${userId}" class="${
     location.href.toLowerCase().includes("mobile")
       ? "w-[9rem] h-full video-box relative"
       : "video-box relative border-[#393e4b]"

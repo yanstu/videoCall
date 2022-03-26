@@ -181,6 +181,12 @@
   justify-content: center;
   width: 6rem;
 }
+.nicknamespan,
+.member-audio-btn,
+.volume-level,
+.toolbar_btn {
+  z-index: 1;
+}
 #fanzhuan_btn {
   display: none;
 }
