@@ -103,10 +103,11 @@ class RtcClient {
       this.members_.set(userId, remoteStream);
       console.log(`${getUserInfo(userId).UserName} 推送远程流`);
 
-      if (display_layout.mode == 1 && userId != roomDetail_.SpeakerID) {
-        if (userId == ZCRID_ && !roomDetail_.SpeakerID) {
-          this.client_.subscribe(remoteStream);
-        }
+      if (
+        display_layout.mode == 1 &&
+        userId != roomDetail_.SpeakerID &&
+        userId != ZCRID_
+      ) {
         return;
       }
       this.client_.subscribe(remoteStream);
@@ -189,25 +190,21 @@ class RtcClient {
   }
 
   playVideo(stream, userId) {
-    if (
-      (!roomDetail_.SpeakerID && userId == ZCRID_) ||
-      userId == roomDetail_.SpeakerID
-    ) {
-      var objectFit =
-        getUserInfo(userId).AspectRatio > 1 && userId == ZJRID_
-          ? "contain"
-          : "cover";
+    var zjr = roomDetail_.SpeakerID || ZCRID_;
+    if (userId == zjr) {
+      var objectFit = getUserInfo(userId).AspectRatio > 1 ? "contain" : "cover";
       stream.play("zjr_video", { objectFit, mirror: false });
       videoHandle(true, userId);
     } else if (hasMe(userId)) {
-      stream.play("box_" + userId, { mirror: false });
+      stream && stream.play("box_" + userId, { mirror: false });
     }
-    stream.on("error", (error) => {
-      if (error.getCode() === 0x4043) {
-        deviceTestingInit();
-        startDeviceConnect();
-      }
-    });
+    stream &&
+      stream.on("error", (error) => {
+        if (error.getCode() === 0x4043) {
+          deviceTestingInit();
+          startDeviceConnect();
+        }
+      });
   }
 
   /**

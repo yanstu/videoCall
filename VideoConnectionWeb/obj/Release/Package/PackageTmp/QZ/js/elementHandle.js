@@ -555,7 +555,7 @@ async function zhanshiduan_mode(state) {
         $("#video-grid").fadeOut();
         for (const stream of rtc.remoteStreams_) {
           if (
-            stream.userId_ != roomDetail_.SpeakerID ||
+            stream.userId_ != roomDetail_.SpeakerID &&
             stream.userId_ != ZCRID_
           ) {
             await stream.stop();
@@ -573,9 +573,13 @@ async function zhanshiduan_mode(state) {
       if (location.href.toLowerCase().includes("big")) {
         /*await rtc.leave();
         await rtc.join();*/
-        for (const user of display_layout.pageUserList) {
+        var userList =
+          roomDetail_.UserList.length > 25
+            ? display_layout.pageUserList
+            : roomDetail_.UserList;
+        for (const user of userList) {
           let { ID } = user;
-          if (ID != roomDetail_.SpeakerID || ID != ZCRID_) {
+          if (ID != roomDetail_.SpeakerID && ID != ZCRID_) {
             var stream = rtc.members_.get(ID);
             if (stream) {
               await rtc.client_.unsubscribe(stream);
