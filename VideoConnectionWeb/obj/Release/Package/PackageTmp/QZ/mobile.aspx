@@ -391,7 +391,7 @@
     <footer class="w-full h-[8%] drop-shadow-md flex items-center justify-center absolute bottom-2 z-50 mx-auto">
       <div id="toolbar" style="display: none;"
         class="h-full w-auto flex text-center text-white items-center justify-center mx-auto relative">
-        <div class="absolute w-full h-full top-0 left-0 shadow bg-black opacity-10 pointer-events-none"></div>
+        <div class="absolute w-full h-full top-0 left-0 shadow bg-black opacity-20 pointer-events-none"></div>
         <div style="width: 4rem;" class="toolbar_btn" id="mic_btn">
           <svg style="font-size:30px" class="icon text-white" aria-hidden="true">
             <use xlink:href="#icon-maikefeng"></use>
@@ -431,10 +431,10 @@
     <script src="./lib/jquery/jquery-3.2.1.min.js"></script>
     <script src="./lib/trtc/trtc.js"></script>
     <script src="./js/util.js"></script>
-    <script src="./js/common-public.js?t=202203251115"></script>
-    <script src="./js/mobile/common.js?t=202203251115"></script>
+    <script src="./js/common-public.js?t=202203261247"></script>
+    <script src="./js/mobile/common.js?t=202203261247"></script>
     <script src="./js/rtc-detection.js"></script>
-    <script src="./js/mobile/rtc-client.js?t=202203251115"></script>
+    <script src="./js/mobile/rtc-client.js?t=202203261247"></script>
     <script src="./js/device-testing.js"></script>
     <script>
       if (queryParams("p") && queryParams("RoomId")) {
@@ -445,11 +445,11 @@
       }
     </script>
     <script defer src="./lib/jquery/signalr.min.js"></script>
-    <script defer src="./js/mobile/chatHub.js?t=202203251115"></script>
+    <script defer src="./js/mobile/chatHub.js?t=202203261247"></script>
     <script defer src="./lib/layui/layui.js"></script>
-    <script defer src="./js/template.js?t=202203251115"></script>
-    <script defer src="./js/elementHandle.js?t=202203251115"></script>
-    <script defer src="./js/elementEvent.js?t=202203251115"></script>
+    <script defer src="./js/template.js?t=202203261247"></script>
+    <script defer src="./js/elementHandle.js?t=202203261247"></script>
+    <script defer src="./js/elementEvent.js?t=202203261247"></script>
     <script defer src="./js/iconfont.js"></script>
     <script defer src="./js/prohibit.js"></script>
     <script defer src="./js/noHorizontal.js"></script>
