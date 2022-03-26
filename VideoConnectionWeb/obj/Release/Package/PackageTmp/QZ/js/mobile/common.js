@@ -1,5 +1,5 @@
 let video_grid =
-  "box-border grid w-[9rem] !h-[25%] absolute top-[8%] right-[1%] items-center justify-center z-10";
+  "box-border grid w-[9rem] h-[13rem] overflow-hidden absolute top-[8%] right-[1%] items-center justify-center z-10";
 let zjr_box = "w-full h-full video-box relative";
 
 /**
@@ -141,7 +141,7 @@ $("#video-grid").on("click", () => {
     $("[id^='box_']").attr("class", zjr_box);
     $("#zjr_box").attr(
       "class",
-      "box-border grid w-[9rem] !h-[25%] absolute top-[8%] right-[1%] items-center z-10"
+      "box-border grid w-[9rem] h-[13rem] overflow-hidden absolute top-[8%] right-[1%] items-center z-10"
     );
   }
 });

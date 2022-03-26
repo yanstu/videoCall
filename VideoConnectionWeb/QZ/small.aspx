@@ -33,7 +33,7 @@
     <header style="box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.07), 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;"
       class="flex flex-row h-[7%] bg-[#262626] w-full justify-between">
       <div class="w-[8%] flex items-center justify-start">
-        <img style="height: 60%;" id="mean_btn" title="显示/隐藏菜单" class="ml-4 mr-4 hover:invert-[50%] h-[50%]"
+        <img style="height: 60%;" id="menu_btn" title="显示/隐藏菜单" class="ml-4 mr-4 hover:invert-[50%] h-[50%]"
           src="./img/sf_ic_menu.png" />
         <img id="testing_btn" title="设备、网络检测" class="hover:invert-[50%] h-[50%]" src="./img/check-mic.png" />
       </div>
