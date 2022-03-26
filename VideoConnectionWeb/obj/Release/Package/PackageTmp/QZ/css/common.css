@@ -796,3 +796,17 @@ input {
   border-radius: 0 !important;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.07), 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
 }
+.svgbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 31px;
+  width: 31px;
+}
+.svgbox2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 27px;
+  width: 27px;
+}

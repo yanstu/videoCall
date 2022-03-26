@@ -348,10 +348,10 @@
   });
 
   // 工具栏显示隐藏
-  $("#mean_btn").on({
-    click: function () {
-      $("#toolbar").toggle();
-    },
+  $("#menu_btn").on("click", function () {
+    $("#toolbar").css("display") == "none"
+      ? $("#toolbar").fadeIn()
+      : $("#toolbar").fadeOut();
   });
 
   // 申请发言按钮点击事件

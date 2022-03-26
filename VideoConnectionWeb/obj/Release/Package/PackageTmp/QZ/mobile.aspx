@@ -48,10 +48,10 @@
         </div>
       </div>
       <div style="margin-right: 10px;width: 30%;" class="flex flex-row items-center justify-end text-right">
-        <div class="flex items-center justify-content-center relative h-[43%] mr-2">
+        <div style="width: 1.5rem;" class="flex items-center justify-center relative h-[50%] mr-2">
           <img id="network-up" class="h-full w-auto" src="./img/network/up/network_4.png">
         </div>
-        <div class="flex items-center justify-content-center relative h-[43%] mr-2">
+        <div style="width: 1.5rem;" class="flex items-center justify-center relative h-[50%] mr-2">
           <img id="network-down" class="h-full w-auto" src="./img/network/down/network_4.png">
         </div>
         <div id="exit-btn"
@@ -388,30 +388,37 @@
         </div>
       </div>
     </section>
-    <footer class="w-full h-[8%] drop-shadow-md flex items-center justify-center absolute bottom-2 z-50 mx-auto">
+    <footer style="height: 9%;"
+      class="w-full drop-shadow-md flex items-center justify-center absolute bottom-2 z-50 mx-auto">
       <div id="toolbar" style="display: none;"
         class="h-full w-auto flex text-center text-white items-center justify-center mx-auto relative">
         <div class="absolute w-full h-full top-0 left-0 shadow bg-black opacity-20 pointer-events-none"></div>
         <div style="width: 4rem;" class="toolbar_btn" id="mic_btn">
-          <svg style="font-size:30px" class="icon text-white" aria-hidden="true">
-            <use xlink:href="#icon-maikefeng"></use>
-          </svg>
+          <div class="svgbox">
+            <svg style="font-size:30px" class="icon text-white" aria-hidden="true">
+              <use xlink:href="#icon-maikefeng"></use>
+            </svg>
+          </div>
           <span class="mt-1 text-[16px]">静音</span>
         </div>
         <div style="width: 4rem;" class="toolbar_btn" id="video_btn">
-          <svg style="font-size:30px" class="icon text-white" aria-hidden="true">
-            <use xlink:href="#icon-xiangji"></use>
-          </svg>
+          <div class="svgbox">
+            <svg style="font-size:30px" class="icon text-white" aria-hidden="true">
+              <use xlink:href="#icon-xiangji"></use>
+            </svg>
+          </div>
           <span class="mt-1 text-[16px]">摄像头</span>
         </div>
         <div style="width: 4rem;" class="toolbar_btn" style="display: none;" id="fanzhuan_btn">
-          <svg style="font-size:29px" class="icon text-white" aria-hidden="true">
-            <use xlink:href="#icon-fanzhuan"></use>
-          </svg>
+          <div class="svgbox">
+            <svg style="font-size:29px" class="icon text-white" aria-hidden="true">
+              <use xlink:href="#icon-fanzhuan"></use>
+            </svg>
+          </div>
           <span class="mt-1 text-[16px]">翻转</span>
         </div>
         <div style="width: 4rem;" class="toolbar_btn" id="xiaoxi_btn">
-          <div class="relative">
+          <div class="relative svgbox">
             <svg style="font-size:31px" class="icon text-white " aria-hidden="true">
               <use xlink:href="#icon-xiaoxi"></use>
             </svg>
@@ -421,9 +428,11 @@
           <span class="mt-1 text-[16px]">消息</span>
         </div>
         <div style="width: 4rem;" class="toolbar_btn" id="shenqingfayan_btn">
-          <svg style="font-size:27px" class="icon text-white" aria-hidden="true">
-            <use xlink:href="#icon-shenqingfayan"></use>
-          </svg>
+          <div class="svgbox">
+            <svg style="font-size:27px" class="icon text-white" aria-hidden="true">
+              <use xlink:href="#icon-shenqingfayan"></use>
+            </svg>
+          </div>
           <span class="mt-1 text-[16px]">申请发言</span>
         </div>
       </div>

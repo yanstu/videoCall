@@ -205,7 +205,6 @@ class RtcClient {
     var videoVid = "box_" + userId;
     if (zjr == userId) videoVid = "zjr_video";
     await stream.stop();
-    console.log(videoVid);
     await stream.play(videoVid, {
       objectFit: "cover",
       mirror: false,

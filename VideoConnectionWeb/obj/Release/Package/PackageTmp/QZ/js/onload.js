@@ -47,7 +47,7 @@ console.warn = (e) => {
   window.oldWarn(e);
 };
 
-/*window.oldError = console.error;
+window.oldError = console.error;
 console.error = async (e) => {
   try {
     // 网络断开后trtc SDK会输出这句，所以可以断定为网络断开
@@ -93,4 +93,3 @@ console.error = async (e) => {
   } catch (error) {}
   window.oldError(e);
 };
-*/
