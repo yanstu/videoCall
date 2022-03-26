@@ -164,7 +164,7 @@ function addMessage(fasongren, jieshouren, neirong) {
     $(".gundongxiaoxi").fadeIn();
     setTimeout(() => {
       $(".gundongxiaoxi").fadeOut();
-    }, 700 * 1000);
+    }, 7 * 1000);
   }
 }
 
