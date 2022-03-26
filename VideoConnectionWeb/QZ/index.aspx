@@ -37,9 +37,11 @@
     <header style="box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.07), 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;"
       class="flex flex-row h-[7%] bg-[#262626] w-full justify-between">
       <div style="width: 7%;" class="flex items-center justify-start">
-        <img style="height: 60%;" id="menu_btn" title="显示/隐藏菜单" class="ml-4 mr-4 invert-[100%]"
-          src="./img/sf_ic_menu.png" />
-        <img id="testing_btn" title="设备、网络检测" class="invert-[100%] h-[50%]" src="./img/check-mic.png" />
+        <img style="margin-left: 1rem;" id="testing_btn" title="设备、网络检测" class="invert-[100%] h-[50%]"
+          src="./img/check-mic.png" />
+        <div style="height: 50%;width: 2.5rem;" class="flex items-center justify-content-center relative ml-2">
+          <img id="qiehuanshitu_btn" title="切换布局模式" class="h-full" src="./img/shitu.png">
+        </div>
       </div>
 
       <div id="roomTitle" class="text-[1.8rem] text-white flex items-center justify-center whitespace-nowrap">
@@ -56,17 +58,14 @@
           <option value="720">720</option>
         </select> -->
 
-        <div style="width: 3rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
+        <div style="width: 2.5rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
           <img id="network-up" class="h-full" src="./img/network/up/network_4.png">
         </div>
-        <div style="width: 3rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
+        <div style="width: 2.5rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
           <img id="network-down" class="h-full" src="./img/network/down/network_4.png">
         </div>
-        <div style="width: 3rem;height: 64%;" class="flex items-center justify-content-center relative mr-4">
-          <img id="qiehuanshitu_btn" title="切换布局模式" class="h-full" src="./img/shitu.png">
-        </div>
-        <div id="exit-btn"
-          class="anniubeijing mr-4 w-[5rem] h-[50%] text-[0.875rem] flex justify-center items-center text-white pl-3 pr-3">
+        <div id="exit-btn" style="width: 4rem;font-size: 16px;"
+          class="anniubeijing mr-4 h-[50%] text-[0.875rem] flex justify-center items-center text-white pl-3 pr-3">
           退出
         </div>
       </div>
@@ -309,7 +308,7 @@
       <!-- 切换视图遮罩 -->
       <div id="qiehuanshitu_mianban" style="display: none">
         <!-- 切换视图卡片 -->
-        <div class="device-testing-card">
+        <div class="device-testing-card" style="width: 27%;height: 30%;">
           <!-- 切换视图面板 -->
           <div id="qiehuanshitu_content"
             class="device-testing-prepare p-2 h-full flex flex-col justify-center items-center">
@@ -422,10 +421,10 @@
         </div>
         <div class="h-[7%] flex w-full justify-between items-center bg-[#262626] text-[0.875rem]">
           <div id="fasong_tip"
-            class="mr-2 ml-2 min-w-[15%] text-white flex-1 flex justify-center items-center whitespace-nowrap overflow-hidden text-ellipsis">
+            class="ml-2 min-w-[15%] text-white flex-1 flex justify-center items-center whitespace-nowrap overflow-hidden text-ellipsis">
             发向管理员
           </div>
-          <input id="xiaoxineirong" class="mr-3 h-[50%] pl-2 pr-2 flex-[1.1]" maxlength="200" />
+          <input id="xiaoxineirong" class="mr-3 h-[50%] pl-2 pr-2 flex-[1.1] ml-2" maxlength="200" />
           <div id="fasongxiaoxi" style="height: 60%;"
             class="min-w-[15%] anniubeijing h-[50%] mr-2 flex-1 flex justify-center items-center text-white">
             发送</div>
@@ -456,31 +455,31 @@
       <div id="toolbar" style="display: none;"
         class="h-full w-auto flex text-center text-white items-center justify-center mx-auto relative">
         <div class="absolute w-full h-full top-0 left-0 shadow bg-black opacity-10 pointer-events-none"></div>
-        <div class="toolbar_btn" id="mic_btn">
+        <div style="width:5rem" class="toolbar_btn" id="mic_btn">
           <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
             <use xlink:href="#icon-maikefeng"></use>
           </svg>
           <span class="mt-1 text-[16px]">静音</span>
         </div>
-        <div class="toolbar_btn" id="video_btn">
+        <div style="width:5rem" class="toolbar_btn" id="video_btn">
           <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
             <use xlink:href="#icon-xiangji"></use>
           </svg>
           <span class="mt-1 text-[16px]">摄像头</span>
         </div>
-        <div class="toolbar_btn" style="display: none;" id="fanzhuan_btn">
+        <div style="width:5rem" class="toolbar_btn" style="display: none;" id="fanzhuan_btn">
           <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
             <use xlink:href="#icon-fanzhuan"></use>
           </svg>
           <span class="mt-1 text-[16px]">翻转</span>
         </div>
-        <div class="toolbar_btn" id="canyuzhe_btn">
+        <div style="width:5rem" class="toolbar_btn" id="canyuzhe_btn">
           <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
             <use xlink:href="#icon-canyuzhe"></use>
           </svg>
           <span class="mt-1 text-[16px]">参与者</span>
         </div>
-        <div class="toolbar_btn" style="display: none;" id="fayanliebiao_btn">
+        <div style="width:5rem" class="toolbar_btn" style="display: none;" id="fayanliebiao_btn">
           <div class="relative">
             <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
               <use xlink:href="#icon-fayanliebiao"></use>
@@ -490,7 +489,7 @@
           </div>
           <span class="mt-1 text-[16px]">发言列表</span>
         </div>
-        <div class="toolbar_btn" id="xiaoxi_btn">
+        <div style="width:5rem" class="toolbar_btn" id="xiaoxi_btn">
           <div class="relative">
             <svg class="icon text-[1.7rem] text-white " aria-hidden="true">
               <use xlink:href="#icon-xiaoxi"></use>
@@ -500,31 +499,31 @@
           </div>
           <span class="mt-1 text-[16px]">消息</span>
         </div>
-        <div class="toolbar_btn" id="shenqingfayan_btn">
+        <div style="width:5rem" class="toolbar_btn" id="shenqingfayan_btn">
           <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
             <use xlink:href="#icon-shenqingfayan"></use>
           </svg>
           <span class="mt-1 text-[16px]">申请发言</span>
         </div>
-        <div class="toolbar_btn" style="display: none;" id="guanbimaikefeng_btn">
+        <div style="width:5rem" class="toolbar_btn" style="display: none;" id="guanbimaikefeng_btn">
           <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
             <use xlink:href="#icon-guanbimaikefeng"></use>
           </svg>
-          <span class="mt-1 text-[16px]">关闭麦克风</span>
+          <span class="mt-1 text-[16px]">全部静音</span>
         </div>
-        <div class="toolbar_btn" style="display: none;" id="quxiaozhujiangren_btn">
+        <div style="width:5rem" class="toolbar_btn" style="display: none;" id="quxiaozhujiangren_btn">
           <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
             <use xlink:href="#icon-quxiaozhujiangren"></use>
           </svg>
-          <span class="mt-1 text-[16px]">取消主讲人</span>
+          <span class="mt-1 text-[16px]">无主讲人</span>
         </div>
-        <div class="toolbar_btn" style="display: none;" id="shangyiye_btn">
+        <div style="width:5rem" class="toolbar_btn" style="display: none;" id="shangyiye_btn">
           <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
             <use xlink:href="#icon-shangyiye"></use>
           </svg>
           <span class="mt-1 text-[16px]">上一页</span>
         </div>
-        <div class="toolbar_btn" style="display: none;" id="xiayiye_btn">
+        <div style="width:5rem" class="toolbar_btn" style="display: none;" id="xiayiye_btn">
           <svg class="icon text-[1.7rem] text-white" aria-hidden="true">
             <use xlink:href="#icon-xiayiye"></use>
           </svg>
@@ -537,9 +536,9 @@
     <script src="./js/util.js"></script>
     <script src="./js/device-testing.js"></script>
     <script src="./js/rtc-detection.js"></script>
-    <script src="./js/common-public.js?t=202203260258"></script>
-    <script src="./js/pc/common.js?t=202203260258"></script>
-    <script src="./js/pc/rtc-client.js?t=202203260258"></script>
+    <script src="./js/common-public.js?t=202203260344"></script>
+    <script src="./js/pc/common.js?t=202203260344"></script>
+    <script src="./js/pc/rtc-client.js?t=202203260344"></script>
     <script>
       if (queryParams("p") && queryParams("RoomId")) {
         login(queryParams("p"));
@@ -550,11 +549,11 @@
       }
     </script>
     <script defer src="./lib/jquery/signalr.min.js"></script>
-    <script defer src="./js/elementHandle.js?t=202203260258"></script>
-    <script defer src="./js/pc/chatHub.js?t=202203260258"></script>
+    <script defer src="./js/elementHandle.js?t=202203260344"></script>
+    <script defer src="./js/pc/chatHub.js?t=202203260344"></script>
     <script async src="./lib/layui/layui.js"></script>
-    <script defer src="./js/template.js?t=202203260258"></script>
-    <script defer src="./js/elementEvent.js?t=202203260258"></script>
+    <script defer src="./js/template.js?t=202203260344"></script>
+    <script defer src="./js/elementEvent.js?t=202203260344"></script>
     <script defer src="./js/iconfont.js"></script>
     <script defer src="./js/prohibit.js"></script>
     <script defer src="https://cdn.staticfile.org/vConsole/3.5.1/vconsole.min.js"></script>

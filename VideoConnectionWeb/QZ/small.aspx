@@ -33,23 +33,22 @@
     <header style="box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.07), 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;"
       class="flex flex-row h-[7%] bg-[#262626] w-full justify-between">
       <div class="w-[8%] flex items-center justify-start">
-        <img style="height: 60%;" id="menu_btn" title="显示/隐藏菜单" class="ml-4 mr-4 hover:invert-[50%] h-[50%]"
-          src="./img/sf_ic_menu.png" />
-        <img id="testing_btn" title="设备、网络检测" class="hover:invert-[50%] h-[50%]" src="./img/check-mic.png" />
+        <img style="margin-left: 1rem;" id="testing_btn" title="设备、网络检测" class="hover:invert-[50%] h-[50%]"
+          src="./img/check-mic.png" />
+        <div style="width: 2.5rem;height: 50%;" class="flex items-center justify-content-center relative ml-2">
+          <img id="qiehuanshitu_btn" title="切换布局模式" class="h-full" src="./img/shitu.png" />
+        </div>
       </div>
       <div id="roomTitle" class="text-[1.8rem] text-white flex items-center justify-center whitespace-nowrap"></div>
       <div class="flex items-center justify-end">
-        <div style="width: 3rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
+        <div style="width: 2.5rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
           <img id="network-up" class="h-full" src="./img/network/up/network_4.png" />
         </div>
-        <div style="width: 3rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
+        <div style="width: 2.5rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
           <img id="network-down" class="h-full" src="./img/network/down/network_4.png" />
         </div>
-        <div style="width: 3rem;height: 60%;" class="flex items-center justify-content-center relative mr-4">
-          <img id="qiehuanshitu_btn" title="切换布局模式" class="h-full" src="./img/shitu.png" />
-        </div>
-        <div id="exit-btn"
-          class="anniubeijing mr-4 w-[5rem] h-[50%] text-[0.875rem] flex justify-center items-center text-white pl-3 pr-3">
+        <div id="exit-btn" style="font-size: 16px;"
+          class="anniubeijing mr-4 w-[5rem] h-[50%] flex justify-center items-center text-white pl-3 pr-3">
           退出
         </div>
       </div>
@@ -252,8 +251,8 @@
                   <div class="testing-index">浏览器版本</div>
                   <div id="browser"></div>
                 </div>
-                
-                
+
+
               </div>
               <div class="testing-footer">
                 <!-- <div id="testing-report-btn" class="test-btn">查看检测报告</div> -->
@@ -273,7 +272,7 @@
       <!-- 切换视图遮罩 -->
       <div id="qiehuanshitu_mianban" style="display: none">
         <!-- 切换视图卡片 -->
-        <div class="device-testing-card">
+        <div class="device-testing-card" style="width: 27%;height: 30%;">
           <!-- 切换视图面板 -->
           <div id="qiehuanshitu_content"
             class="device-testing-prepare p-2 h-full flex flex-col justify-center items-center">
@@ -500,9 +499,9 @@
     <script src="./js/util.js"></script>
     <script src="./js/device-testing.js"></script>
     <script src="./js/rtc-detection.js"></script>
-    <script src="./js/common-public.js?t=202203260258"></script>
-    <script src="./js/small/common.js?t=202203260258"></script>
-    <script src="./js/small/rtc-client.js?t=202203260258"></script>
+    <script src="./js/common-public.js?t=202203260344"></script>
+    <script src="./js/small/common.js?t=202203260344"></script>
+    <script src="./js/small/rtc-client.js?t=202203260344"></script>
     <script>
       if (queryParams("p") && queryParams("RoomId")) {
         login(queryParams("p"));
@@ -521,11 +520,11 @@
       });
     </script>
     <script defer src="./lib/jquery/signalr.min.js"></script>
-    <script defer src="./js/small/chatHub.js?t=202203260258"></script>
+    <script defer src="./js/small/chatHub.js?t=202203260344"></script>
     <script defer src="./lib/layui/layui.js"></script>
-    <script defer src="./js/template.js?t=202203260258"></script>
-    <script defer src="./js/elementHandle.js?t=202203260258"></script>
-    <script defer src="./js/elementEvent.js?t=202203260258"></script>
+    <script defer src="./js/template.js?t=202203260344"></script>
+    <script defer src="./js/elementHandle.js?t=202203260344"></script>
+    <script defer src="./js/elementEvent.js?t=202203260344"></script>
     <script defer src="./js/iconfont.js"></script>
     <script defer src="./js/small/drag.js"></script>
     <script defer src="./js/prohibit.js"></script>

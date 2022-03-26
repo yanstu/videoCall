@@ -16,6 +16,8 @@ async function viewsHandle() {
 }
 
 async function change() {
+  rtc.shezhifenbianlv();
+
   // 还原主讲人与我的位置
   $("#video-grid").attr("class", video_grid);
   $("#zjr_box").attr("class", zjr_box);
