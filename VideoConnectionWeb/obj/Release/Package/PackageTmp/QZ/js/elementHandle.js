@@ -45,9 +45,6 @@ function showOrHide() {
     $("#shenqingfayan_btn").hide();
   }
 
-  $("#toolbar").show();
-  $("#mic_drag").show();
-
   if (roomDetail_.AllowOpenMic == 0) {
     if (roomDetail_.SpeakerID != oneself_.CHID) {
       isMicOn && micClick();
@@ -74,6 +71,9 @@ function showOrHide() {
     $("#fayanliebiao_btn").hide();
     $("#fanzhuan_btn").hide();
   }
+
+  $("#toolbar").show();
+  $("#mic_drag").show();
 }
 
 function micClick() {

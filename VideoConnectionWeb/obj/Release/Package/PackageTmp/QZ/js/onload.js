@@ -32,7 +32,7 @@ console.warn = (e) => {
     if (JSON.stringify(e).indexOf("reconnect success") > -1) {
       /*isDisconnect = false;
       this.location.reload();*/
-      layer.msg("网络连接已恢复，正在恢复房间状态", { icon: 6 });
+      layer.msg("网络连接已恢复，正在恢复视频连线", { icon: 6 });
       setTimeout(() => {
         this.location.reload();
       }, 1000);
