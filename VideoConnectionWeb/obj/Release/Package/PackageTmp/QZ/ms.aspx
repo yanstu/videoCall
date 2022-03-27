@@ -460,9 +460,9 @@
     <script defer src="./js/iconfont.js"></script>
     <script defer src="./js/prohibit.js"></script>
     <script defer src="./js/noHorizontal.js"></script>
-    <script src="https://cdn.staticfile.org/vConsole/3.5.1/vconsole.min.js"></script>
+    <script defer src="https://cdn.staticfile.org/vConsole/3.5.1/vconsole.min.js"></script>
     <script>
-      window.vconsole = new window.VConsole();
+      // window.vconsole = new window.VConsole();
     </script>
   </body>
 

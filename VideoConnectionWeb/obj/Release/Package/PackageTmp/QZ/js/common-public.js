@@ -269,7 +269,7 @@ function leave() {
       }
     }
   }
-  hasPre ? window.history.go(0 - window.history.length) : closeWindow();
+  hasPre ? window.history.go(0 - (window.history.length - 1)) : closeWindow();
 }
 
 /**
