@@ -42,10 +42,12 @@
       </div>
 
       <div class="flex items-center justify-end">
-        <div style="width: 2.5rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
+        <div style="width: 2.5rem;margin-right: 0.6rem;"
+          class="flex items-center justify-content-center relative h-[50%] mr-4">
           <img id="network-up" class="h-full" src="./img/network/up/network_4.png">
         </div>
-        <div style="width: 2.5rem;" class="flex items-center justify-content-center relative h-[50%] mr-4">
+        <div style="width: 2.5rem;margin-right: 0.75rem;"
+          class="flex items-center justify-content-center relative h-[50%] mr-4">
           <img id="network-down" class="h-full" src="./img/network/down/network_4.png">
         </div>
         <div id="exit-btn" style="font-size: 16px;"

@@ -57,10 +57,14 @@ async function change() {
       await rtc.client_.unsubscribe(stream);
       return;
     }
-    if (hasMe(ID)) {
-      stream && stream.play("box_" + ID, { objectFit: "cover", mirror: false });
-      // 如果远程流不存在，不在线，显示遮罩
-      stream ? $("#mask_" + ID).hide() : $("#mask_" + ID).show();
+    if (stream) {
+      stream.stop();
+      if (hasMe(ID)) {
+        stream.play("box_" + ID, { objectFit: "cover", mirror: false });
+        $("#mask_" + ID).hide();
+      }
+    } else {
+      $("#mask_" + ID).show();
     }
   }
 
@@ -96,7 +100,7 @@ async function change() {
   $(`#zjr_mask img`).attr("src", `./img/camera-gray.png`);
 
   ZJRID_ = newZJRID;
-  
+
   // 权限判断按钮显示或隐藏
   showOrHide();
 

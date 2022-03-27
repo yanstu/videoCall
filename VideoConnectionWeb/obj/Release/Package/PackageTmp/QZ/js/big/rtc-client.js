@@ -195,7 +195,7 @@ class RtcClient {
       var objectFit = getUserInfo(userId).AspectRatio > 1 ? "contain" : "cover";
       stream.play("zjr_video", { objectFit, mirror: false });
       videoHandle(true, userId);
-    } else if (hasMe(userId)) {
+    } else if (hasMe(userId) || roomDetail_.UserList.length <= 25) {
       stream && stream.play("box_" + userId, { mirror: false });
     }
     stream &&

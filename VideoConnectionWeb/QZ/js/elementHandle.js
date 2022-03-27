@@ -354,7 +354,7 @@ function videoHandle(on, userId) {
           $("#img_" + userId)
             .attr("src", stream.getVideoFrame())
             .show();
-        }, 20 * 1000);
+        }, 5 * 1000);
       } else {
         $("#mask_" + userId).hide();
       }

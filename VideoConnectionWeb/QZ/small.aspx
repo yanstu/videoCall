@@ -41,7 +41,7 @@
       </div>
       <div id="roomTitle" class="text-[1.8rem] text-white flex items-center justify-center whitespace-nowrap"></div>
       <div class="flex items-center justify-end">
-        <div style="width: 2.5rem;margin-right: 0.75rem;"
+        <div style="width: 2.5rem;margin-right: 0.60rem;"
           class="flex items-center justify-content-center relative h-[50%]">
           <img id="network-up" class="h-full" src="./img/network/up/network_4.png" />
         </div>

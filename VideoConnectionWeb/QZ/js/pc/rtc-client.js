@@ -54,8 +54,9 @@ class RtcClient {
       });
     }
 
+    this.shezhifenbianlv();
+
     try {
-      this.shezhifenbianlv();
       // 初始化本地流
       await this.localStream_.initialize();
     } catch (error) {
@@ -202,7 +203,8 @@ class RtcClient {
     if (
       hasMe(userId) ||
       !roomDetail_.SpeakerID ||
-      userId == roomDetail_.SpeakerID
+      userId == roomDetail_.SpeakerID ||
+      roomDetail_.UserList.length <= 25
     ) {
       // 将用户相关状态图标改为在线
       onlineOrOfline(true, userId);
@@ -429,29 +431,48 @@ class RtcClient {
     });
   }
 
-  shezhifenbianlv(uplinkNetworkQuality = 2) {
+  shezhifenbianlv(uplinkNetworkQuality = 2, callback) {
+    var time = 0,
+      timer = null;
+    if (callback) {
+      timer = setInterval(() => {
+        ++time;
+      }, 1);
+    }
     if (uplinkNetworkQuality >= 4) {
-      this.localStream_.setVideoProfile(fenbianlvcanshu(270));
+      setVideoProfile(270, this);
     } else {
       if (!roomDetail_.SpeakerID) {
-        this.localStream_.setVideoProfile(fenbianlvcanshu(360));
+        setVideoProfile(360, this);
       } else if (roomDetail_.SpeakerID == oneself_.CHID) {
-        this.localStream_.setVideoProfile(fenbianlvcanshu(720));
+        setVideoProfile(720, this);
       } else {
         var renshu = [6, 4, 2, 0];
-        var fenbianlv = [
-          fenbianlvcanshu(270),
-          fenbianlvcanshu(360),
-          fenbianlvcanshu(540),
-          fenbianlvcanshu(720),
-        ];
+        var fenbianlv = [270, 360, 540, 720];
         for (var i = 0; i < renshu.length; i++) {
           if (roomDetail_.UserList.length >= renshu[i]) {
-            this.localStream_.setVideoProfile(fenbianlv[i]);
-            break;
+            setVideoProfile(fenbianlv[i], this);
           }
         }
       }
+    }
+    function setVideoProfile(fbl, that) {
+      that.localStream_
+        .setVideoProfile(fenbianlvcanshu(fbl))
+        .then(() => {
+          if (callback) {
+            clearInterval(timer);
+            console.log("切换分辨率成功，耗时：" + time + "毫秒");
+          }
+          callback && callback();
+        })
+        .catch(() => {
+          if (callback) {
+            clearInterval(timer);
+            console.log("切换分辨率失败，耗时：" + time + "毫秒");
+          }
+          callback && callback();
+        });
     }
   }
 

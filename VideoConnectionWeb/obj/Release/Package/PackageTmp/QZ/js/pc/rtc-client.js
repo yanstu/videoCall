@@ -202,7 +202,8 @@ class RtcClient {
     if (
       hasMe(userId) ||
       !roomDetail_.SpeakerID ||
-      userId == roomDetail_.SpeakerID
+      userId == roomDetail_.SpeakerID ||
+      roomDetail_.UserList.length <= 25
     ) {
       // 将用户相关状态图标改为在线
       onlineOrOfline(true, userId);

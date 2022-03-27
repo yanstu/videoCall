@@ -37,7 +37,7 @@ async function viewsHandle() {
 
 // 设置取消主讲人的处理
 async function changeViews() {
-  rtc.shezhifenbianlv()
+  rtc.shezhifenbianlv();
 
   // 此处的ZJRID_代表上一个主讲人
   // 此处的newZJRID代表新的主讲人ID，没有的话设定自己为假主讲人
@@ -55,7 +55,10 @@ async function changeViews() {
   async function rePlay(stream, ID) {
     $("#img_" + ID).hide();
     if (stream) {
-      stream.stop();
+      // stream.stop();
+      if (!getUserInfoByMeet(ID)) {
+        stream.stop();
+      }
       if (hasMe(ID)) {
         stream.play("box_" + ID, { objectFit: "cover", mirror: false });
         $("#mask_" + ID).hide();
@@ -69,13 +72,14 @@ async function changeViews() {
   var zjr_streams =
     newZJRID == oneself_.CHID ? rtc.localStream_ : rtc.members_.get(newZJRID);
   if (zjr_streams) {
-    zjr_streams.stop();
+    // zjr_streams.stop();
   }
 
   // 移除原主持人的相关信息
   $(`#box_${newZJRID} .volume-level`).css("height", "0%");
   $("#zjr_video [id^='profile_']").remove();
   $("#zjr_video [id^='player_']").remove();
+  console.log($("#zjr_video").html());
   $("#zjr_video").append(
     userInfoTemplate(newZJRID, getUserInfo(newZJRID).UserName)
   );
@@ -85,6 +89,8 @@ async function changeViews() {
 
   // 判断是否为手机设备
   var objectFit = objectFitHandle(newZJRID);
+
+  console.log(213123);
 
   if (zjr_streams) {
     zjr_streams.play("zjr_video", { objectFit, mirror: false });
