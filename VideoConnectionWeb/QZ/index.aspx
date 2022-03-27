@@ -310,7 +310,7 @@
       <!-- 切换视图遮罩 -->
       <div id="qiehuanshitu_mianban" style="display: none">
         <!-- 切换视图卡片 -->
-        <div class="device-testing-card" style="width: 27%;height: 25%;">
+        <div class="device-testing-card" style="width: 35%;height: 30%;">
           <!-- 切换视图面板 -->
           <div id="qiehuanshitu_content"
             class="device-testing-prepare p-2 h-full flex flex-col justify-center items-center">

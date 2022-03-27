@@ -37,7 +37,7 @@ async function viewsHandle() {
 
 // 设置取消主讲人的处理
 async function changeViews() {
-  rtc.shezhifenbianlv()
+  rtc.shezhifenbianlv();
 
   // 此处的ZJRID_代表上一个主讲人
   // 此处的newZJRID代表新的主讲人ID，没有的话设定自己为假主讲人
