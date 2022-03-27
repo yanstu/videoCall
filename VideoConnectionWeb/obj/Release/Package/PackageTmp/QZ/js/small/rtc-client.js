@@ -348,14 +348,11 @@ class RtcClient {
           $(`#mic_main_${userId}`)
             .find(".volume-level")
             .css("height", `${audioVolume * 4}%`);
-        } else {
-          $(`#mic_main_${userId}`).find(".volume-level").css("height", `0%`);
-        }
-
-        if (audioVolume >= 5) {
           $(`#mic_drag`)
             .find(".nickname")
             .html(getUserInfo(userId).UserName + " 正在讲话");
+        } else {
+          $(`#mic_main_${userId}`).find(".volume-level").css("height", `0%`);
         }
       });
     });

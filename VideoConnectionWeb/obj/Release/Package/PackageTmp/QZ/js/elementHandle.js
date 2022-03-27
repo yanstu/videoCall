@@ -46,7 +46,7 @@ function showOrHide() {
   }
 
   if (roomDetail_.AllowOpenMic == 0) {
-    if (roomDetail_.SpeakerID != oneself_.CHID) {
+    if (roomDetail_.SpeakerID != oneself_.CHID && !oneself_.IsZCR) {
       isMicOn && micClick();
     }
   } else {

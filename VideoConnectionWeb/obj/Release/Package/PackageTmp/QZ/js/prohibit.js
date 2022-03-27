@@ -6,19 +6,6 @@
     self.welcomeShowedListener,
     false
   );
-  // 禁止页面拖拽
-  document.ondrop = function () {
-    return false;
-  };
-  document.ondragstart = function () {
-    return false;
-  };
-  document.ondragenter = function () {
-    return false;
-  };
-  document.ondragover = function () {
-    return false;
-  };
   const keyCodeMap = {
     // 91: true, // command
     61: true,
@@ -56,16 +43,6 @@
     },
     { passive: false }
   );
-  // 阻止默认的处理方式 即 下拉滑动效果
-  document.body.addEventListener(
-    "touchmove",
-    function (e) {
-      e.preventDefault();
-    },
-    {
-      passive: false,
-    }
-  );
   // 允许其他节点触发长按事件
   document.documentElement.addEventListener(
     "touchmove",
@@ -82,4 +59,29 @@
       return false;
     }
   };
+  if (!window.WSLLZWinFrom) {
+    // 阻止默认的处理方式 即 下拉滑动效果
+    document.body.addEventListener(
+      "touchmove",
+      function (e) {
+        e.preventDefault();
+      },
+      {
+        passive: false,
+      }
+    );
+    // 禁止页面拖拽
+    document.ondrop = function () {
+      return false;
+    };
+    document.ondragstart = function () {
+      return false;
+    };
+    document.ondragenter = function () {
+      return false;
+    };
+    document.ondragover = function () {
+      return false;
+    };
+  }
 })();

@@ -759,10 +759,9 @@ header {
   justify-content: center;
   align-items: center;
   max-width: 50vw;
-  text-indent: 1em;
   position: absolute;
   bottom: 22%;
-  left: 0;
+  left: 16px;
   color: white;
   padding: 10px;
   background-color: #337c33;
