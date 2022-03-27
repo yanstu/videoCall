@@ -37,90 +37,89 @@ async function viewsHandle() {
 
 // 设置取消主讲人的处理
 async function changeViews() {
-  rtc.shezhifenbianlv();
+  rtc.shezhifenbianlv(2, callback);
+  function callback() {
+    // 此处的ZJRID_代表上一个主讲人
+    // 此处的newZJRID代表新的主讲人ID，没有的话设定自己为假主讲人
+    var newZJRID = roomDetail_.SpeakerID || oneself_.CHID;
 
-  // 此处的ZJRID_代表上一个主讲人
-  // 此处的newZJRID代表新的主讲人ID，没有的话设定自己为假主讲人
-  var newZJRID = roomDetail_.SpeakerID || oneself_.CHID;
-
-  // 先停止上一个主持人的播放
-  if (ZJRID_ == oneself_.CHID) {
-    // 上一个主讲人是我，停止本地流
-    rePlay(rtc.localStream_, oneself_.CHID);
-  } else {
-    // 上一个主讲人是其他人，停止他的远程流
-    rePlay(rtc.members_.get(ZJRID_), ZJRID_);
-  }
-
-  async function rePlay(stream, ID) {
-    $("#img_" + ID).hide();
-    if (stream) {
-      // stream.stop();
-      if (!getUserInfoByMeet(ID)) {
-        stream.stop();
-      }
-      if (hasMe(ID)) {
-        stream.play("box_" + ID, { objectFit: "cover", mirror: false });
-        $("#mask_" + ID).hide();
-      }
+    // 先停止上一个主持人的播放
+    if (ZJRID_ == oneself_.CHID) {
+      // 上一个主讲人是我，停止本地流
+      rePlay(rtc.localStream_, oneself_.CHID);
     } else {
-      $("#mask_" + ID).show();
+      // 上一个主讲人是其他人，停止他的远程流
+      rePlay(rtc.members_.get(ZJRID_), ZJRID_);
     }
+
+    async function rePlay(stream, ID) {
+      $("#img_" + ID).hide();
+      if (stream) {
+        // stream.stop();
+        if (!getUserInfoByMeet(ID)) {
+          stream.stop();
+        }
+        if (hasMe(ID)) {
+          stream.play("box_" + ID, { objectFit: "cover", mirror: false });
+          $("#mask_" + ID).hide();
+        }
+      } else {
+        $("#mask_" + ID).show();
+      }
+    }
+
+    // 获取将要成为主讲人的那个远程流
+    var zjr_streams =
+      newZJRID == oneself_.CHID ? rtc.localStream_ : rtc.members_.get(newZJRID);
+    if (zjr_streams) {
+      // zjr_streams.stop();
+    }
+
+    // 移除原主持人的相关信息
+    $(`#box_${newZJRID} .volume-level`).css("height", "0%");
+    $("#zjr_video [id^='profile_']").remove();
+    $("#zjr_video [id^='player_']").remove();
+    console.log($("#zjr_video").html());
+    $("#zjr_video").append(
+      userInfoTemplate(newZJRID, getUserInfo(newZJRID).UserName)
+    );
+
+    // 如果新的主持人也存在右侧小视频区域，右侧的小视频将显示遮罩
+    hasMe(newZJRID) && $("#mask_" + newZJRID).show();
+
+    // 判断是否为手机设备
+    var objectFit = objectFitHandle(newZJRID);
+
+    if (zjr_streams) {
+      zjr_streams.play("zjr_video", { objectFit, mirror: false });
+    }
+
+    tuisong();
+
+    // 主讲人的未推送远程流的话显示遮罩
+    zjr_streams && zjr_streams.hasVideo()
+      ? $("#zjr_mask").hide()
+      : $("#zjr_mask").show();
+    // 为新的主讲人取帧
+    zjr_streams && videoHandle(true, newZJRID);
+
+    $(`#zjr_mask img`).attr("src", `./img/camera-gray.png`);
+
+    // 将参与者列表清空
+    for (let user_ of roomDetail_.UserList) {
+      $("#member_" + user_.ID).remove();
+    }
+
+    // 重新添加至参与者列表，并进行排序
+    addMember();
+
+    ZJRID_ = newZJRID;
+
+    // 权限判断按钮显示或隐藏
+    showOrHide();
+
+    setTimeout(() => {
+      gengxinzhuangtai();
+    }, 1000);
   }
-
-  // 获取将要成为主讲人的那个远程流
-  var zjr_streams =
-    newZJRID == oneself_.CHID ? rtc.localStream_ : rtc.members_.get(newZJRID);
-  if (zjr_streams) {
-    // zjr_streams.stop();
-  }
-
-  // 移除原主持人的相关信息
-  $(`#box_${newZJRID} .volume-level`).css("height", "0%");
-  $("#zjr_video [id^='profile_']").remove();
-  $("#zjr_video [id^='player_']").remove();
-  console.log($("#zjr_video").html());
-  $("#zjr_video").append(
-    userInfoTemplate(newZJRID, getUserInfo(newZJRID).UserName)
-  );
-
-  // 如果新的主持人也存在右侧小视频区域，右侧的小视频将显示遮罩
-  hasMe(newZJRID) && $("#mask_" + newZJRID).show();
-
-  // 判断是否为手机设备
-  var objectFit = objectFitHandle(newZJRID);
-
-  console.log(213123);
-
-  if (zjr_streams) {
-    zjr_streams.play("zjr_video", { objectFit, mirror: false });
-  }
-
-  tuisong();
-
-  // 主讲人的未推送远程流的话显示遮罩
-  zjr_streams && zjr_streams.hasVideo()
-    ? $("#zjr_mask").hide()
-    : $("#zjr_mask").show();
-  // 为新的主讲人取帧
-  zjr_streams && videoHandle(true, newZJRID);
-
-  $(`#zjr_mask img`).attr("src", `./img/camera-gray.png`);
-
-  // 将参与者列表清空
-  for (let user_ of roomDetail_.UserList) {
-    $("#member_" + user_.ID).remove();
-  }
-
-  // 重新添加至参与者列表，并进行排序
-  addMember();
-
-  ZJRID_ = newZJRID;
-
-  // 权限判断按钮显示或隐藏
-  showOrHide();
-
-  setTimeout(() => {
-    gengxinzhuangtai();
-  }, 1000);
 }

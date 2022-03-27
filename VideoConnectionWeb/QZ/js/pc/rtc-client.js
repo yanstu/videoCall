@@ -440,23 +440,24 @@ class RtcClient {
       }, 1);
     }
     if (uplinkNetworkQuality >= 4) {
-      setVideoProfile(270, this);
+      setVideo(270, this);
     } else {
       if (!roomDetail_.SpeakerID) {
-        setVideoProfile(360, this);
+        setVideo(360, this);
       } else if (roomDetail_.SpeakerID == oneself_.CHID) {
-        setVideoProfile(720, this);
+        setVideo(720, this);
       } else {
         var renshu = [6, 4, 2, 0];
         var fenbianlv = [270, 360, 540, 720];
         for (var i = 0; i < renshu.length; i++) {
           if (roomDetail_.UserList.length >= renshu[i]) {
-            setVideoProfile(fenbianlv[i], this);
+            setVideo(fenbianlv[i], this);
+            break;
           }
         }
       }
     }
-    function setVideoProfile(fbl, that) {
+    function setVideo(fbl, that) {
       that.localStream_
         .setVideoProfile(fenbianlvcanshu(fbl))
         .then(() => {
