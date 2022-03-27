@@ -175,6 +175,19 @@ function login(JMStr) {
 
     trtcPreliminaryDetection();
   });
+
+  setTimeout(() => {
+    ajaxMethod("FindVideoConferenceById", { ID: oneself_.ID }, (result) => {
+      var { VideoConferenceCHRY } = result.Data;
+      for (const user of VideoConferenceCHRY) {
+        if (user.HYRole == 1 && user.Type == 3) {
+          meet_layout.mode = 3;
+          chanhuiduan_mode(meet_layout.mode);
+          break;
+        }
+      }
+    });
+  }, 1000);
 }
 
 // 推送还是取消推送

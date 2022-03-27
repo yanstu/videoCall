@@ -37,7 +37,14 @@ async function viewsHandle() {
 
 // 设置取消主讲人的处理
 async function changeViews() {
-  rtc.shezhifenbianlv(2, callback);
+  if (roomDetail_.SpeakerID == oneself_.CHID || !roomDetail_.SpeakerID) {
+    rtc.shezhifenbianlv(2, callback);
+  } else {
+    setTimeout(() => {
+      rtc.shezhifenbianlv(2);
+      callback();
+    }, 1200);
+  }
   function callback() {
     // 此处的ZJRID_代表上一个主讲人
     // 此处的newZJRID代表新的主讲人ID，没有的话设定自己为假主讲人
@@ -71,9 +78,7 @@ async function changeViews() {
     // 获取将要成为主讲人的那个远程流
     var zjr_streams =
       newZJRID == oneself_.CHID ? rtc.localStream_ : rtc.members_.get(newZJRID);
-    if (zjr_streams) {
-      // zjr_streams.stop();
-    }
+    // zjr_streams && zjr_streams.stop();
 
     // 移除原主持人的相关信息
     $(`#box_${newZJRID} .volume-level`).css("height", "0%");
