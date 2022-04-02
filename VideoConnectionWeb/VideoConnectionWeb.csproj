@@ -278,6 +278,7 @@
     <Content Include="DB\lib\trtc\trtc.js" />
     <Content Include="DB\tailwind.config.js" />
     <Content Include="Handler\RedisHandler.ashx" />
+    <Content Include="QZ\login.aspx" />
     <Content Include="QZ\css\common.css" />
     <Content Include="QZ\img\shipingkongzhi.png" />
     <Content Include="QZ\img\video-off.png" />
@@ -410,6 +411,13 @@
     <Compile Include="Helper\StaticEntity.cs" />
     <Compile Include="MyHub\ChatHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QZ\login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QZ\login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="QZ\mobile.aspx.cs">
       <DependentUpon>mobile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
